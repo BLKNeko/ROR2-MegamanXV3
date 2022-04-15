@@ -558,6 +558,10 @@ namespace MegamanXV3.Modules.Survivors
             skins.Add(defaultSkin);
             #endregion
 
+            
+
+
+
             //uncomment this when you have a mastery skin
             #region MasterySkin
             /*
@@ -596,6 +600,12 @@ namespace MegamanXV3.Modules.Survivors
             #endregion
 
             skinController.skins = skins.ToArray();
+
+
         }
+
+
     }
+
+
 }
