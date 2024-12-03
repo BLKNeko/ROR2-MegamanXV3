@@ -26,6 +26,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
         private CharacterModel characterModel;
         private SkinnedMeshRenderer meshRenderer;
         private ChildLocator childLocator;
+        private Renderer objectRenderer;
 
         public override void OnEnter()
         {
@@ -51,6 +52,16 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     meshRenderer = childLocator.FindChildGameObject("XBodyMesh").GetComponent<SkinnedMeshRenderer>();
                     meshRenderer.sharedMesh = HenryAssets.GaeaBodyMesh;
                     meshRenderer.sharedMaterial = HenryAssets.MatGaea;
+
+                    characterModel.baseRendererInfos[0].defaultMaterial = HenryAssets.MatGaea;
+
+                    //objectRenderer = characterModel.GetComponent<Renderer>();
+
+                    //objectRenderer.sharedMaterial = HenryAssets.MatGaea;
+
+                    //characterModel.UpdateRendererMaterials(characterModel.mainSkinnedMeshRenderer, HenryAssets.MatGaea, true);
+
+                    //characterModel.UpdateMaterials();
                 }
             }
 

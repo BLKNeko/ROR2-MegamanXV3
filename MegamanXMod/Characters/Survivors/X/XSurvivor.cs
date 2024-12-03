@@ -30,7 +30,11 @@ namespace MegamanXMod.Survivors.X
 
         //used when registering your survivor's language tokens
         public override string survivorTokenPrefix => HENRY_PREFIX;
-        
+
+        //internal static SkillDef LightHyperModeSkillDef;
+        //internal static SkillDef GaeaHyperModeSkillDef;
+
+
         public override BodyInfo bodyInfo => new BodyInfo
         {
             bodyName = bodyName,
@@ -56,12 +60,12 @@ namespace MegamanXMod.Survivors.X
                 new CustomRendererInfo
                 {
                     childName = "XBodyMesh",
-                    material = assetBundle.LoadMaterial("matX"),
+                    //material = assetBundle.LoadMaterial("matX"),
                 },
                 new CustomRendererInfo
                 {
                     childName = "XBusterMesh",
-                    material = assetBundle.LoadMaterial("matXBuster"),
+                    //material = assetBundle.LoadMaterial("matXBuster"),
                 }
         };
 
@@ -147,12 +151,24 @@ namespace MegamanXMod.Survivors.X
         {
             //remove the genericskills from the commando body we cloned
             Skills.ClearGenericSkills(bodyPrefab);
+            Skills.CreateFirstExtraSkillFamily(bodyPrefab);
+            Skills.CreateSecondExtraSkillFamily(bodyPrefab);
+            Skills.CreateThirdExtraSkillFamily(bodyPrefab);
+            Skills.CreateFourthExtraSkillFamily(bodyPrefab);
             //add our own
             //AddPassiveSkill();
             AddPrimarySkills();
             AddSecondarySkills();
             AddUtiitySkills();
             AddSpecialSkills();
+
+            AddExtraFirstSkills();
+            AddExtraSecondSkills();
+            AddExtraThirdSkills();
+            AddExtraFourthSkills();
+
+
+
         }
 
         //skip if you don't have a passive
@@ -221,13 +237,14 @@ namespace MegamanXMod.Survivors.X
                     HENRY_PREFIX + "PRIMARY_SLASH_NAME",
                     HENRY_PREFIX + "PRIMARY_SLASH_DESCRIPTION",
                     assetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
-                    new EntityStates.SerializableEntityStateType(typeof(SkillStates.SlashCombo)),
+                    new EntityStates.SerializableEntityStateType(typeof(SkillStates.XBuster)),
                     "Weapon",
                     true
                 ));
             //custom Skilldefs can have additional fields that you can set manually
             primarySkillDef1.stepCount = 2;
             primarySkillDef1.stepGraceDuration = 0.5f;
+            primarySkillDef1.mustKeyPress = true;
 
             Skills.AddPrimarySkills(bodyPrefab, primarySkillDef1);
         }
@@ -336,7 +353,113 @@ namespace MegamanXMod.Survivors.X
             Skills.AddSpecialSkills(bodyPrefab, specialSkillDef1);
         }
         #endregion skills
-        
+
+
+
+        private void AddExtraFirstSkills()
+        {
+
+            //a basic skill. some fields are omitted and will just have default values
+            SkillDef FESSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "HenryBomb",
+                skillNameToken = HENRY_PREFIX + "SPECIAL_BOMB_NAME",
+                skillDescriptionToken = HENRY_PREFIX + "SPECIAL_BOMB_DESCRIPTION",
+                skillIcon = assetBundle.LoadAsset<Sprite>("texSpecialIcon"),
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ThrowBomb)),
+                //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
+                activationStateMachineName = "Weapon2",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+
+                isCombatSkill = true,
+                mustKeyPress = false,
+            });
+
+            Skills.AddFirstExtraSkill(bodyPrefab, FESSkillDef);
+        }
+
+        private void AddExtraSecondSkills()
+        {
+
+            //a basic skill. some fields are omitted and will just have default values
+            SkillDef SESSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "HenryBomb",
+                skillNameToken = HENRY_PREFIX + "SPECIAL_BOMB_NAME",
+                skillDescriptionToken = HENRY_PREFIX + "SPECIAL_BOMB_DESCRIPTION",
+                skillIcon = assetBundle.LoadAsset<Sprite>("texSpecialIcon"),
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.SlashCombo)),
+                //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
+                activationStateMachineName = "Weapon2",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+
+                isCombatSkill = true,
+                mustKeyPress = false,
+            });
+
+            Skills.AddSecondExtraSkill(bodyPrefab, SESSkillDef);
+        }
+
+        private void AddExtraThirdSkills()
+        {
+
+            //a basic skill. some fields are omitted and will just have default values
+            SkillDef TESSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "HenryBomb",
+                skillNameToken = HENRY_PREFIX + "SPECIAL_BOMB_NAME",
+                skillDescriptionToken = HENRY_PREFIX + "SPECIAL_BOMB_DESCRIPTION",
+                skillIcon = assetBundle.LoadAsset<Sprite>("texSpecialIcon"),
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.SlashCombo)),
+                //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
+                activationStateMachineName = "Weapon2",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+
+                isCombatSkill = true,
+                mustKeyPress = false,
+            });
+
+            Skills.AddThirdExtraSkill(bodyPrefab, TESSkillDef);
+        }
+
+        private void AddExtraFourthSkills()
+        {
+
+            //a basic skill. some fields are omitted and will just have default values
+            SkillDef FESSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "HenryBomb",
+                skillNameToken = HENRY_PREFIX + "SPECIAL_BOMB_NAME",
+                skillDescriptionToken = HENRY_PREFIX + "SPECIAL_BOMB_DESCRIPTION",
+                skillIcon = assetBundle.LoadAsset<Sprite>("texSpecialIcon"),
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ThrowBomb)),
+                //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
+                activationStateMachineName = "Weapon2",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+
+                isCombatSkill = true,
+                mustKeyPress = false,
+            });
+
+            Skills.AddFourthExtraSkill(bodyPrefab, FESSkillDef);
+        }
+
         #region skins
         public override void InitializeSkins()
         {
@@ -366,35 +489,35 @@ namespace MegamanXMod.Survivors.X
             skins.Add(defaultSkin);
             #endregion
 
-            //creating a new skindef as we did before
-            SkinDef masterySkin = Modules.Skins.CreateSkinDef(HENRY_PREFIX + "MASTERY_SKIN_NAME",
-                assetBundle.LoadAsset<Sprite>("texMasteryAchievement"),
-                defaultRendererinfos,
-                prefabCharacterModel.gameObject);
+            ////creating a new skindef as we did before
+            //SkinDef masterySkin = Modules.Skins.CreateSkinDef(HENRY_PREFIX + "MASTERY_SKIN_NAME",
+            //    assetBundle.LoadAsset<Sprite>("texMasteryAchievement"),
+            //    defaultRendererinfos,
+            //    prefabCharacterModel.gameObject);
 
-            //adding the mesh replacements as above. 
-            //if you don't want to replace the mesh (for example, you only want to replace the material), pass in null so the order is preserved
-            masterySkin.meshReplacements = Modules.Skins.getMeshReplacements(assetBundle, defaultRendererinfos,
-                "XGaeaBodyMeshF",
-                null);
+            ////adding the mesh replacements as above. 
+            ////if you don't want to replace the mesh (for example, you only want to replace the material), pass in null so the order is preserved
+            //masterySkin.meshReplacements = Modules.Skins.getMeshReplacements(assetBundle, defaultRendererinfos,
+            //    "XGaeaBodyMeshF",
+            //    null);
 
-            //masterySkin has a new set of RendererInfos (based on default rendererinfos)
-            //you can simply access the RendererInfos' materials and set them to the new materials for your skin.
-            masterySkin.rendererInfos[0].defaultMaterial = assetBundle.LoadMaterial("matGaea");
-            //masterySkin.rendererInfos[1].defaultMaterial = assetBundle.LoadMaterial("matGaea");
+            ////masterySkin has a new set of RendererInfos (based on default rendererinfos)
+            ////you can simply access the RendererInfos' materials and set them to the new materials for your skin.
+            //masterySkin.rendererInfos[0].defaultMaterial = assetBundle.LoadMaterial("matGaea");
+            ////masterySkin.rendererInfos[1].defaultMaterial = assetBundle.LoadMaterial("matGaea");
 
-            //here's a barebones example of using gameobjectactivations that could probably be streamlined or rewritten entirely, truthfully, but it works
-            masterySkin.gameObjectActivations = new SkinDef.GameObjectActivation[]
-            {
-                new SkinDef.GameObjectActivation
-                {
-                    gameObject = childLocator.FindChildGameObject("XBusterMesh"),
-                    shouldActivate = false,
-                }
-            };
-            //simply find an object on your child locator you want to activate/deactivate and set if you want to activate/deacitvate it with this skin
+            ////here's a barebones example of using gameobjectactivations that could probably be streamlined or rewritten entirely, truthfully, but it works
+            //masterySkin.gameObjectActivations = new SkinDef.GameObjectActivation[]
+            //{
+            //    new SkinDef.GameObjectActivation
+            //    {
+            //        gameObject = childLocator.FindChildGameObject("XBusterMesh"),
+            //        shouldActivate = false,
+            //    }
+            //};
+            ////simply find an object on your child locator you want to activate/deactivate and set if you want to activate/deacitvate it with this skin
 
-            //skins.Add(masterySkin);
+            ////skins.Add(masterySkin);
 
 
             //uncomment this when you have a mastery skin

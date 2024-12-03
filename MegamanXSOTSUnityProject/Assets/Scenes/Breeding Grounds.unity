@@ -603,10 +603,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 209636462523284959, guid: ba37883c117148542b9b4ebd6285b64e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 915110611135487285, guid: ba37883c117148542b9b4ebd6285b64e,
         type: 3}
       propertyPath: m_Name
       value: mdlX2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2562880211984435467, guid: ba37883c117148542b9b4ebd6285b64e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3978854697775858652, guid: ba37883c117148542b9b4ebd6285b64e,
         type: 3}

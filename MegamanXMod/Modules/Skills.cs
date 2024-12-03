@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using MegamanXMod;
 using UnityEngine;
+using ExtraSkillSlots;
 
 namespace MegamanXMod.Modules
 {
@@ -87,6 +88,130 @@ namespace MegamanXMod.Modules
             return skill;
         }
         #endregion
+
+        #region ExtraSkillSlots
+
+        internal static void CreateFirstExtraSkillFamily(GameObject targetPrefab)
+        {
+            ExtraSkillLocator skillLocator = targetPrefab.GetComponent<ExtraSkillLocator>();
+            if (!skillLocator)
+            {
+                skillLocator = targetPrefab.AddComponent<ExtraSkillLocator>();
+            }
+            skillLocator.extraFirst = targetPrefab.AddComponent<GenericSkill>();
+            SkillFamily firstExtraFamily = ScriptableObject.CreateInstance<SkillFamily>();
+            firstExtraFamily.variants = new SkillFamily.Variant[0];
+            skillLocator.extraFirst._skillFamily = firstExtraFamily;
+        }
+
+        internal static void CreateSecondExtraSkillFamily(GameObject targetPrefab)
+        {
+            ExtraSkillLocator skillLocator = targetPrefab.GetComponent<ExtraSkillLocator>();
+            if (!skillLocator)
+            {
+                skillLocator = targetPrefab.AddComponent<ExtraSkillLocator>();
+            }
+            skillLocator.extraSecond = targetPrefab.AddComponent<GenericSkill>();
+            SkillFamily secondExtraFamily = ScriptableObject.CreateInstance<SkillFamily>();
+            secondExtraFamily.variants = new SkillFamily.Variant[0];
+            skillLocator.extraSecond._skillFamily = secondExtraFamily;
+        }
+        internal static void CreateThirdExtraSkillFamily(GameObject targetPrefab)
+        {
+            ExtraSkillLocator skillLocator = targetPrefab.GetComponent<ExtraSkillLocator>();
+            if (!skillLocator)
+            {
+                skillLocator = targetPrefab.AddComponent<ExtraSkillLocator>();
+            }
+            skillLocator.extraThird = targetPrefab.AddComponent<GenericSkill>();
+            SkillFamily thirdExtraFamily = ScriptableObject.CreateInstance<SkillFamily>();
+            thirdExtraFamily.variants = new SkillFamily.Variant[0];
+            skillLocator.extraThird._skillFamily = thirdExtraFamily;
+        }
+        internal static void CreateFourthExtraSkillFamily(GameObject targetPrefab)
+        {
+            ExtraSkillLocator skillLocator = targetPrefab.GetComponent<ExtraSkillLocator>();
+            if (!skillLocator)
+            {
+                skillLocator = targetPrefab.AddComponent<ExtraSkillLocator>();
+            }
+            skillLocator.extraFourth = targetPrefab.AddComponent<GenericSkill>();
+            SkillFamily fourthExtraFamily = ScriptableObject.CreateInstance<SkillFamily>();
+            fourthExtraFamily.variants = new SkillFamily.Variant[0];
+            skillLocator.extraFourth._skillFamily = fourthExtraFamily;
+        }
+
+
+        internal static void AddFirstExtraSkill(GameObject targetPrefab, SkillDef skillDef)
+        {
+            ExtraSkillLocator skillLocator = targetPrefab.GetComponent<ExtraSkillLocator>();
+            if (skillLocator)
+            {
+                SkillFamily skillFamily = skillLocator.extraFirst.skillFamily;
+
+                Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
+                skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant
+                {
+                    skillDef = skillDef,
+                    unlockableName = "",
+                    viewableNode = new ViewablesCatalog.Node(skillDef.skillNameToken, false, null)
+                };
+            }
+        }
+
+        internal static void AddSecondExtraSkill(GameObject targetPrefab, SkillDef skillDef)
+        {
+            ExtraSkillLocator skillLocator = targetPrefab.GetComponent<ExtraSkillLocator>();
+            if (skillLocator)
+            {
+                SkillFamily skillFamily = skillLocator.extraSecond.skillFamily;
+
+                Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
+                skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant
+                {
+                    skillDef = skillDef,
+                    unlockableName = "",
+                    viewableNode = new ViewablesCatalog.Node(skillDef.skillNameToken, false, null)
+                };
+            }
+        }
+
+        internal static void AddThirdExtraSkill(GameObject targetPrefab, SkillDef skillDef)
+        {
+            ExtraSkillLocator skillLocator = targetPrefab.GetComponent<ExtraSkillLocator>();
+            if (skillLocator)
+            {
+                SkillFamily skillFamily = skillLocator.extraThird.skillFamily;
+
+                Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
+                skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant
+                {
+                    skillDef = skillDef,
+                    unlockableName = "",
+                    viewableNode = new ViewablesCatalog.Node(skillDef.skillNameToken, false, null)
+                };
+            }
+        }
+
+        internal static void AddFourthExtraSkill(GameObject targetPrefab, SkillDef skillDef)
+        {
+            ExtraSkillLocator skillLocator = targetPrefab.GetComponent<ExtraSkillLocator>();
+            if (skillLocator)
+            {
+                SkillFamily skillFamily = skillLocator.extraFourth.skillFamily;
+
+                Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
+                skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant
+                {
+                    skillDef = skillDef,
+                    unlockableName = "",
+                    viewableNode = new ViewablesCatalog.Node(skillDef.skillNameToken, false, null)
+                };
+            }
+        }
+
+        #endregion
+
 
         #region skillfamilies
 
