@@ -48,11 +48,15 @@ namespace MegamanXMod.Survivors.X
             crosshair = Asset.LoadCrosshair("Standard"),
             podPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
 
-            maxHealth = 110f,
+            maxHealth = 100f,
+            armor = 20f,
+            healthGrowth = 25f,
             healthRegen = 1.5f,
-            armor = 0f,
+            damage = 20f,
+            shieldGrowth = 0.25f,
+            jumpPowerGrowth = 0.35f,
+            jumpCount = 1
 
-            jumpCount = 1,
         };
 
         public override CustomRendererInfo[] customRendererInfos => new CustomRendererInfo[]
@@ -120,7 +124,7 @@ namespace MegamanXMod.Survivors.X
         private void AdditionalBodySetup()
         {
             AddHitboxes();
-            bodyPrefab.AddComponent<HenryWeaponComponent>();
+            bodyPrefab.AddComponent<XHealthComponent>();
             //bodyPrefab.AddComponent<HuntressTrackerComopnent>();
             //anything else here
         }

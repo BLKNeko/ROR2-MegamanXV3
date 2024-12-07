@@ -57,6 +57,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     meshRenderer = childLocator.FindChildGameObject("XBodyMesh").GetComponent<SkinnedMeshRenderer>();
                     meshRenderer.sharedMesh = HenryAssets.XBodyMesh;
                     meshRenderer.sharedMaterial = HenryAssets.MatX;
+                    characterModel.baseRendererInfos[0].defaultMaterial = HenryAssets.MatX;
                 }
             }
 

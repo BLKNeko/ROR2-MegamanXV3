@@ -14,6 +14,11 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
         public static float DamageCoefficient = 16f;
 
+        private Transform modelTransform;
+        private CharacterModel characterModel;
+        private SkinnedMeshRenderer meshRenderer;
+        private ChildLocator childLocator;
+
         public override void OnEnter()
         {
             projectilePrefab = HenryAssets.bombProjectilePrefab;
@@ -35,6 +40,27 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             recoilAmplitude = 0.1f;
             bloom = 10;
+
+
+            //TRANSFORM INTO LIGHT ARMOR
+            this.modelTransform = base.GetModelTransform();
+            if (this.modelTransform)
+            {
+                this.characterModel = this.modelTransform.GetComponent<CharacterModel>();
+                if (this.characterModel != null)
+                {
+                    childLocator = this.characterModel.GetComponent<ChildLocator>();
+
+                    childLocator.FindChildGameObject("XBusterMesh").active = false;
+                    meshRenderer = childLocator.FindChildGameObject("XBodyMesh").GetComponent<SkinnedMeshRenderer>();
+                    meshRenderer.sharedMesh = HenryAssets.LightBodyMesh;
+                    meshRenderer.sharedMaterial = HenryAssets.MatLight;
+                    characterModel.baseRendererInfos[0].defaultMaterial = HenryAssets.MatLight;
+
+                }
+            }
+
+
 
             base.OnEnter();
         }

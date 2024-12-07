@@ -14,12 +14,16 @@ namespace MegamanXMod.Survivors.X
 
         public static GameObject bombExplosionEffect;
 
-        public static Mesh GaeaBodyMesh;
+        
         public static Mesh XBodyMesh;
+        public static Mesh LightBodyMesh;
+        public static Mesh GaeaBodyMesh;
 
 
-        public static Material MatGaea;
+        
         public static Material MatX;
+        public static Material MatLight;
+        public static Material MatGaea;
 
         // networked hit sounds
         public static NetworkSoundEventDef swordHitSoundEvent;
@@ -50,9 +54,11 @@ namespace MegamanXMod.Survivors.X
             swordHitImpactEffect = _assetBundle.LoadEffect("ImpactHenrySlash");
 
             XBodyMesh = _assetBundle.LoadAsset<Mesh>("XBodyMesh");
+            LightBodyMesh = _assetBundle.LoadAsset<Mesh>("XLightBodyMesh");
             GaeaBodyMesh = _assetBundle.LoadAsset<Mesh>("XGaeaBodyMeshF");
 
             MatX = _assetBundle.LoadAsset<Material>("matX");
+            MatLight = _assetBundle.LoadAsset<Material>("matLight");
             MatGaea = _assetBundle.LoadAsset<Material>("matGaea");
 
         }

@@ -2,8 +2,11 @@
 
 namespace MegamanXMod.Survivors.X.Components
 {
+
     internal class HenryWeaponComponent : MonoBehaviour
     {
+        
+
         private void Awake()
         {
             //any funny custom behavior you want here
