@@ -23,8 +23,8 @@ namespace MegamanXMod.Survivors.X
         public override string masterName => "XMonsterMaster"; //if you do not
 
         //the names of the prefabs you set up in unity that we will use to build your character
-        public override string modelPrefabName => "mdlX2";
-        public override string displayPrefabName => "X2Display";
+        public override string modelPrefabName => "mdlX4";
+        public override string displayPrefabName => "X4Display";
 
         public const string HENRY_PREFIX = MegamanXPlugin.DEVELOPER_PREFIX + "_X_";
 
@@ -33,6 +33,11 @@ namespace MegamanXMod.Survivors.X
 
         //internal static SkillDef LightHyperModeSkillDef;
         //internal static SkillDef GaeaHyperModeSkillDef;
+
+        internal static SkillDef CoolDownXArmorSkillDef;
+        internal static SkillDef HyperModeMaxArmorSkillDef;
+
+        internal static SkillDef XFalconDashSkillDef;
 
 
         public override BodyInfo bodyInfo => new BodyInfo
@@ -64,13 +69,13 @@ namespace MegamanXMod.Survivors.X
                 new CustomRendererInfo
                 {
                     childName = "XBodyMesh",
-                    //material = assetBundle.LoadMaterial("matX"),
-                },
-                new CustomRendererInfo
-                {
-                    childName = "XBusterMesh",
-                    //material = assetBundle.LoadMaterial("matXBuster"),
+                    material = XAssets.MatX,
                 }
+                //new CustomRendererInfo
+                //{
+                //    childName = "XBusterMesh",
+                //    //material = assetBundle.LoadMaterial("matXBuster"),
+                //}
         };
 
         public override UnlockableDef characterUnlockableDef => HenryUnlockables.characterUnlockableDef;
@@ -105,10 +110,10 @@ namespace MegamanXMod.Survivors.X
             base.InitializeCharacter();
 
             HenryConfig.Init();
-            HenryStates.Init();
+            XStates.Init();
             HenryTokens.Init();
 
-            HenryAssets.Init(assetBundle);
+            XAssets.Init(assetBundle);
             HenryBuffs.Init(assetBundle);
 
             InitializeEntityStateMachines();
@@ -124,7 +129,8 @@ namespace MegamanXMod.Survivors.X
         private void AdditionalBodySetup()
         {
             AddHitboxes();
-            bodyPrefab.AddComponent<XHealthComponent>();
+            bodyPrefab.AddComponent<XBaseComponent>();
+            bodyPrefab.AddComponent<XArmorComponent>();
             //bodyPrefab.AddComponent<HuntressTrackerComopnent>();
             //anything else here
         }
@@ -160,6 +166,7 @@ namespace MegamanXMod.Survivors.X
             Skills.CreateThirdExtraSkillFamily(bodyPrefab);
             Skills.CreateFourthExtraSkillFamily(bodyPrefab);
             //add our own
+            CreateSkillDefs();
             //AddPassiveSkill();
             AddPrimarySkills();
             AddSecondarySkills();
@@ -170,6 +177,83 @@ namespace MegamanXMod.Survivors.X
             AddExtraSecondSkills();
             AddExtraThirdSkills();
             AddExtraFourthSkills();
+
+
+
+        }
+
+        private void CreateSkillDefs()
+        {
+
+            //a basic skill. some fields are omitted and will just have default values
+            CoolDownXArmorSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "CoolDownXArmor",
+                skillNameToken = HENRY_PREFIX + "SPECIAL_BOMB_NAME",
+                skillDescriptionToken = HENRY_PREFIX + "SPECIAL_BOMB_DESCRIPTION",
+                skillIcon = assetBundle.LoadAsset<Sprite>("texSpecialIcon"),
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.CooldownXArmor)),
+                //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
+                activationStateMachineName = "Weapon2",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+
+                isCombatSkill = true,
+                mustKeyPress = false,
+            });
+
+            //a basic skill. some fields are omitted and will just have default values
+            HyperModeMaxArmorSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "HyperModeMaxArmor",
+                skillNameToken = HENRY_PREFIX + "SPECIAL_BOMB_NAME",
+                skillDescriptionToken = HENRY_PREFIX + "SPECIAL_BOMB_DESCRIPTION",
+                skillIcon = assetBundle.LoadAsset<Sprite>("texSpecialIcon"),
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.HyperModeMaxArmor)),
+                //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
+                activationStateMachineName = "Weapon2",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+
+                isCombatSkill = true,
+                mustKeyPress = false,
+            });
+
+            XFalconDashSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "FalconDash",
+                skillNameToken = HENRY_PREFIX + "UTILITY_ROLL_NAME",
+                skillDescriptionToken = HENRY_PREFIX + "UTILITY_ROLL_DESCRIPTION",
+                skillIcon = assetBundle.LoadAsset<Sprite>("texUtilityIcon"),
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(FalconDash)),
+                activationStateMachineName = "Body",
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+
+                baseRechargeInterval = 10f,
+                baseMaxStock = 10,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = true,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = true,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = false,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = true,
+            });
 
 
 
@@ -305,7 +389,7 @@ namespace MegamanXMod.Survivors.X
                 skillDescriptionToken = HENRY_PREFIX + "UTILITY_ROLL_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texUtilityIcon"),
 
-                activationState = new EntityStates.SerializableEntityStateType(typeof(Roll)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(FalconDash)),
                 activationStateMachineName = "Body",
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
@@ -329,6 +413,9 @@ namespace MegamanXMod.Survivors.X
             });
 
             Skills.AddUtilitySkills(bodyPrefab, utilitySkillDef1);
+
+            Skills.AddUtilitySkills(bodyPrefab, XFalconDashSkillDef);
+
         }
 
         private void AddSpecialSkills()
@@ -369,9 +456,9 @@ namespace MegamanXMod.Survivors.X
                 skillName = "HenryBomb",
                 skillNameToken = HENRY_PREFIX + "SPECIAL_BOMB_NAME",
                 skillDescriptionToken = HENRY_PREFIX + "SPECIAL_BOMB_DESCRIPTION",
-                skillIcon = assetBundle.LoadAsset<Sprite>("texSpecialIcon"),
+                //skillIcon = assetBundle.LoadAsset<Sprite>("texSpecialIcon"),
 
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ThrowBomb)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.HyperModeLightArmor)),
                 //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
                 activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
@@ -395,9 +482,9 @@ namespace MegamanXMod.Survivors.X
                 skillName = "HenryBomb",
                 skillNameToken = HENRY_PREFIX + "SPECIAL_BOMB_NAME",
                 skillDescriptionToken = HENRY_PREFIX + "SPECIAL_BOMB_DESCRIPTION",
-                skillIcon = assetBundle.LoadAsset<Sprite>("texSpecialIcon"),
+                //skillIcon = assetBundle.LoadAsset<Sprite>("texSpecialIcon"),
 
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.SlashCombo)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.HyperModeSecondArmor)),
                 //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
                 activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
@@ -423,7 +510,7 @@ namespace MegamanXMod.Survivors.X
                 skillDescriptionToken = HENRY_PREFIX + "SPECIAL_BOMB_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texSpecialIcon"),
 
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.SlashCombo)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.HyperModeMaxArmor)),
                 //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
                 activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
@@ -447,9 +534,9 @@ namespace MegamanXMod.Survivors.X
                 skillName = "HenryBomb",
                 skillNameToken = HENRY_PREFIX + "SPECIAL_BOMB_NAME",
                 skillDescriptionToken = HENRY_PREFIX + "SPECIAL_BOMB_DESCRIPTION",
-                skillIcon = assetBundle.LoadAsset<Sprite>("texSpecialIcon"),
+                //skillIcon = assetBundle.LoadAsset<Sprite>("texSpecialIcon"),
 
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ThrowBomb)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.HyperModeFourthArmor)),
                 //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
                 activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
@@ -486,8 +573,7 @@ namespace MegamanXMod.Survivors.X
             //currently not needed as with only 1 skin they will simply take the default meshes
             //uncomment this when you have another skin
             defaultSkin.meshReplacements = Modules.Skins.getMeshReplacements(assetBundle, defaultRendererinfos,
-                "XBodyMesh",
-                "XBusterMesh");
+                "XBodyMesh");
 
             //add new skindef to our list of skindefs. this is what we'll be passing to the SkinController
             skins.Add(defaultSkin);

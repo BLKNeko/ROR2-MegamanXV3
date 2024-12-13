@@ -48,12 +48,12 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 {
                     childLocator = this.characterModel.GetComponent<ChildLocator>();
 
-                    childLocator.FindChildGameObject("XBusterMesh").active = false;
+                    //childLocator.FindChildGameObject("XBusterMesh").active = false;
                     meshRenderer = childLocator.FindChildGameObject("XBodyMesh").GetComponent<SkinnedMeshRenderer>();
-                    meshRenderer.sharedMesh = HenryAssets.GaeaBodyMesh;
-                    meshRenderer.sharedMaterial = HenryAssets.MatGaea;
+                    meshRenderer.sharedMesh = XAssets.GaeaBodyMesh;
+                    meshRenderer.sharedMaterial = XAssets.MatGaea;
 
-                    characterModel.baseRendererInfos[0].defaultMaterial = HenryAssets.MatGaea;
+                    characterModel.baseRendererInfos[0].defaultMaterial = XAssets.MatGaea;
 
                     //objectRenderer = characterModel.GetComponent<Renderer>();
 

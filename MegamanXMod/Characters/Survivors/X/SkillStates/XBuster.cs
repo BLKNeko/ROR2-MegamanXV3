@@ -212,7 +212,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 {
                     base.PlayAnimation("Gesture, Override", "ShootBurst", "attackSpeed", this.duration);
                     //Util.PlaySound(Sounds.xChargeShot, base.gameObject);
-                    ProjectileManager.instance.FireProjectile(HenryAssets.bombProjectilePrefab, aimRay.origin, Util.QuaternionSafeLookRotation(aimRay.direction), base.gameObject, (damageCoefficient * 4f) * damageStat, 0f, Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f);
+                    ProjectileManager.instance.FireProjectile(XAssets.bombProjectilePrefab, aimRay.origin, Util.QuaternionSafeLookRotation(aimRay.direction), base.gameObject, (damageCoefficient * 4f) * damageStat, 0f, Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f);
                 }
             }
         }

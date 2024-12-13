@@ -39,10 +39,10 @@ namespace MegamanXMod.Survivors.X.SkillStates
             hitSoundString = "";
             muzzleString = swingIndex % 2 == 0 ? "SwingLeft" : "SwingRight";
             playbackRateParam = "Slash.playbackRate";
-            swingEffectPrefab = HenryAssets.swordSwingEffect;
-            hitEffectPrefab = HenryAssets.swordHitImpactEffect;
+            swingEffectPrefab = XAssets.swordSwingEffect;
+            hitEffectPrefab = XAssets.swordHitImpactEffect;
 
-            impactSound = HenryAssets.swordHitSoundEvent.index;
+            impactSound = XAssets.swordHitSoundEvent.index;
 
             //TRANSFORM BACK TO X
             this.modelTransform = base.GetModelTransform();
@@ -53,11 +53,11 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 {
                     childLocator = this.characterModel.GetComponent<ChildLocator>();
 
-                    childLocator.FindChildGameObject("XBusterMesh").active = true;
+                    //childLocator.FindChildGameObject("XBusterMesh").active = true;
                     meshRenderer = childLocator.FindChildGameObject("XBodyMesh").GetComponent<SkinnedMeshRenderer>();
-                    meshRenderer.sharedMesh = HenryAssets.XBodyMesh;
-                    meshRenderer.sharedMaterial = HenryAssets.MatX;
-                    characterModel.baseRendererInfos[0].defaultMaterial = HenryAssets.MatX;
+                    meshRenderer.sharedMesh = XAssets.XBodyMesh;
+                    meshRenderer.sharedMaterial = XAssets.MatX;
+                    characterModel.baseRendererInfos[0].defaultMaterial = XAssets.MatX;
                 }
             }
 

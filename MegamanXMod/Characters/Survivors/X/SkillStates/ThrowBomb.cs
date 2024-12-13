@@ -21,7 +21,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
         public override void OnEnter()
         {
-            projectilePrefab = HenryAssets.bombProjectilePrefab;
+            projectilePrefab = XAssets.bombProjectilePrefab;
             //base.effectPrefab = Modules.Assets.SomeMuzzleEffect;
             //targetmuzzle = "muzzleThrow"
 
@@ -51,11 +51,14 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 {
                     childLocator = this.characterModel.GetComponent<ChildLocator>();
 
-                    childLocator.FindChildGameObject("XBusterMesh").active = false;
+                    //childLocator.FindChildGameObject("XBusterMesh").active = false;
                     meshRenderer = childLocator.FindChildGameObject("XBodyMesh").GetComponent<SkinnedMeshRenderer>();
-                    meshRenderer.sharedMesh = HenryAssets.LightBodyMesh;
-                    meshRenderer.sharedMaterial = HenryAssets.MatLight;
-                    characterModel.baseRendererInfos[0].defaultMaterial = HenryAssets.MatLight;
+                    meshRenderer.sharedMesh = XAssets.LightBodyMesh;
+                    meshRenderer.sharedMaterial = XAssets.MatLight;
+                    characterModel.baseRendererInfos[0].defaultMaterial = XAssets.MatLight;
+
+                    //childLocator.FindChildGameObject("BipHeadNub").transform.localScale = new Vector3(0, 0, 0);
+                    //childLocator.FindChildGameObject("EyelidL").transform.localScale = new Vector3(0, 0, 0);
 
                 }
             }
