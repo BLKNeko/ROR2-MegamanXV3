@@ -1,5 +1,6 @@
 ﻿using EntityStates;
 using MegamanXMod.Survivors.X;
+using MegamanXMod.Survivors.X.Components;
 using RoR2;
 using System;
 using UnityEngine;
@@ -21,22 +22,40 @@ namespace MegamanXMod.Survivors.X.SkillStates
         private Animator animator;
         private Vector3 previousPosition;
 
+        public static float hoverVelocity = -3f;
+        public static float hoverAcceleration = 0.5f;
+
+        private XHoverComponent hoverComponent;
+
         public override void OnEnter()
         {
             base.OnEnter();
             animator = GetModelAnimator();
+            characterBody.SetAimTimer(0.8f);
             Ray aimRay = GetAimRay();
+
+            hoverComponent = GetComponent<XHoverComponent>();
+
+            hoverComponent.SetHover(true);
+
+            //if (isAuthority && inputBank && characterDirection)
+            //{
+            //    if (inputBank.moveVector != Vector3.zero)
+            //    {
+            //        forwardDirection = aimRay.direction;
+            //    }
+            //    else
+            //    {
+            //        // forwardDirection = Vector3.zero;
+            //        float num3 = base.characterMotor.velocity.y;
+            //        num3 = Mathf.MoveTowards(num3, hoverVelocity, hoverAcceleration * base.GetDeltaTime());
+            //        base.characterMotor.velocity = new Vector3(base.characterMotor.velocity.x, num3, base.characterMotor.velocity.z);
+            //    }
+            //}
 
             if (isAuthority && inputBank && characterDirection)
             {
-                if (inputBank.moveVector != Vector3.zero)
-                {
-                    forwardDirection = aimRay.direction;
-                }
-                else
-                {
-                    forwardDirection = Vector3.zero;
-                }
+                forwardDirection = aimRay.direction;
             }
 
             Vector3 rhs = characterDirection ? characterDirection.forward : forwardDirection;
@@ -57,15 +76,17 @@ namespace MegamanXMod.Survivors.X.SkillStates
             previousPosition = transform.position - b;
 
             base.characterMotor.useGravity = false;
+
+            
             
 
-            PlayAnimation("FullBody, Override", "Roll", "Roll.playbackRate", duration);
+            PlayAnimation("FullBody, Override", "DashLoop", "DashLoop.playbackRate", duration);
             Util.PlaySound(dodgeSoundString, gameObject);
 
             if (NetworkServer.active)
             {
                 characterBody.AddTimedBuff(HenryBuffs.armorBuff, 3f * duration);
-                characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 0.5f * duration);
+                characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 0.2f * duration);
             }
         }
 
@@ -87,15 +108,21 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 Vector3 vector = normalized * rollSpeed;
                 float d = Mathf.Max(Vector3.Dot(vector, forwardDirection), 0f);
+                vector = forwardDirection * d;
 
-                if(inputBank.moveVector != Vector3.zero)
-                {
-                   vector = forwardDirection * d;
-                }
-                else
-                {
-                    vector = Vector3.zero;
-                }
+                //if(inputBank.moveVector != Vector3.zero)
+                //{
+                //   vector = forwardDirection * d;
+                //}
+                //else
+                //{
+                //    //vector = Vector3.zero;
+                //    // forwardDirection = Vector3.zero;
+                //    float num4 = base.characterMotor.velocity.y;
+                //    num4 = Mathf.MoveTowards(num4, hoverVelocity, hoverAcceleration * base.GetDeltaTime());
+                //    //base.characterMotor.velocity = new Vector3(base.characterMotor.velocity.x, num4, base.characterMotor.velocity.z);
+                //    vector = new Vector3(base.characterMotor.velocity.x, num4, base.characterMotor.velocity.z);
+                //}
 
                 //vector = forwardDirection * d;
                 //vector.y = 0f;
@@ -115,6 +142,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             if (isAuthority && fixedAge >= duration)
             {
                 base.characterMotor.useGravity = true;
+                PlayAnimation("FullBody, Override", "DashEnd", "DashEnd.playbackRate", duration);
                 outer.SetNextStateToMain();
                 return;
             }

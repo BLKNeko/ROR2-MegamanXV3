@@ -45,7 +45,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             PlayAnimation("LeftArm, Override", "ShootGun", "ShootGun.playbackRate", 1.8f);
 
 
-            //TRANSFORM INTO MAX ARMOR
+            //TRANSFORM INTO X ARMOR
             this.modelTransform = base.GetModelTransform();
             if (this.modelTransform)
             {
@@ -73,7 +73,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
         {
             base.FixedUpdate();
 
-            if (!setSkills)
+            if (!setSkills && isAuthority)
                 SetSkills();
 
 
@@ -87,11 +87,21 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
         private void SetSkills()
         {
-            Debug.Log(armorComponent.GetPrimaryArmorSkillDef());
-            Debug.Log(armorComponent.GetSecondaryArmorSkillDef());
-            Debug.Log(armorComponent.GetThirdArmorSkillDef());
+            armorComponent.UnsetAllExtraFirstSkills();
+            armorComponent.UnsetAllExtraSecondSkills();
+            armorComponent.UnsetAllExtraThirdSkills();
+            armorComponent.UnsetAllExtraFourthSkills();
 
-            
+            //RESET ALL SKILLS TO BASE
+            characterBody.skillLocator.primary.SetSkillOverride(characterBody.skillLocator.primary, XSurvivor.XFalconDashSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            characterBody.skillLocator.secondary.SetSkillOverride(characterBody.skillLocator.secondary, armorComponent.GetSecondaryBaseSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
+            characterBody.skillLocator.utility.SetSkillOverride(characterBody.skillLocator.utility, armorComponent.GetUtiliryBaseSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
+            characterBody.skillLocator.special.SetSkillOverride(characterBody.skillLocator.special, armorComponent.GetSpecialBaseSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
+
+            extraskillLocator.extraFirst.SetSkillOverride(extraskillLocator.extraFirst, armorComponent.GetPrimaryArmorSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
+            extraskillLocator.extraSecond.SetSkillOverride(extraskillLocator.extraSecond, armorComponent.GetSecondaryArmorSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
+            extraskillLocator.extraThird.SetSkillOverride(extraskillLocator.extraThird, armorComponent.GetThirdArmorSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
+            extraskillLocator.extraFourth.SetSkillOverride(extraskillLocator.extraFourth, armorComponent.GetFourthArmorSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
 
             setSkills = true;
         }

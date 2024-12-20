@@ -27,7 +27,7 @@ namespace MegamanXMod.Survivors.X.Components
 
         private ExtraSkillLocator extraskillLocator;
 
-        private SkillDef ArmorSkill1, ArmorSkill2, ArmorSkill3, ArmorSkill4;
+        private SkillDef ArmorSkill1, ArmorSkill2, ArmorSkill3, ArmorSkill4, BaseSkill2, BaseSkill3, BaseSkill4;
 
 
 
@@ -67,6 +67,15 @@ namespace MegamanXMod.Survivors.X.Components
             if (ArmorSkill4 == null)
                 ArmorSkill4 = extraskillLocator.extraFourth.skillDef;
 
+            if (BaseSkill2 == null)
+                BaseSkill2 = XBody.skillLocator.secondary.skillDef;
+
+            if (BaseSkill3 == null)
+                BaseSkill3 = XBody.skillLocator.utility.skillDef;
+
+            if (BaseSkill4 == null)
+                BaseSkill4 = XBody.skillLocator.special.skillDef;
+
 
         }
 
@@ -98,6 +107,47 @@ namespace MegamanXMod.Survivors.X.Components
             }
         }
 
+        public void UnsetAllExtraFirstSkills()
+        {
+            //UNSET ALL FIRST SKILL
+            extraskillLocator.extraFirst.UnsetSkillOverride(extraskillLocator.extraFirst, XSurvivor.CoolDownXArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            extraskillLocator.extraFirst.UnsetSkillOverride(extraskillLocator.extraFirst, XSurvivor.HyperModeLightArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            extraskillLocator.extraFirst.UnsetSkillOverride(extraskillLocator.extraFirst, XSurvivor.HyperModeSecondArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+        }
+
+        public void UnsetAllExtraSecondSkills()
+        {
+            //UNSET ALL SECOND SKILL
+            extraskillLocator.extraSecond.UnsetSkillOverride(extraskillLocator.extraSecond, XSurvivor.CoolDownXArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            extraskillLocator.extraSecond.UnsetSkillOverride(extraskillLocator.extraSecond, XSurvivor.HyperModeMaxArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            extraskillLocator.extraSecond.UnsetSkillOverride(extraskillLocator.extraSecond, XSurvivor.HyperModeFourthArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+        }
+
+
+        public void UnsetAllExtraThirdSkills()
+        {
+            //UNSET ALL THIRD SKILL
+            extraskillLocator.extraThird.UnsetSkillOverride(extraskillLocator.extraThird, XSurvivor.CoolDownXArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            extraskillLocator.extraThird.UnsetSkillOverride(extraskillLocator.extraThird, XSurvivor.HyperModeFalconArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            extraskillLocator.extraThird.UnsetSkillOverride(extraskillLocator.extraThird, XSurvivor.HyperModeGaeaArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+        }
+
+        public void UnsetAllExtraFourthSkills()
+        {
+            //UNSET ALL FOURTH SKILL
+            extraskillLocator.extraFourth.UnsetSkillOverride(extraskillLocator.extraFourth, XSurvivor.CoolDownXArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            extraskillLocator.extraFourth.UnsetSkillOverride(extraskillLocator.extraFourth, XSurvivor.HyperModeFalconArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            extraskillLocator.extraFourth.UnsetSkillOverride(extraskillLocator.extraFourth, XSurvivor.HyperModeGaeaArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+        }
+
+        public void UnsetAllUtilitySkills()
+        {
+            //UNSET ALL UTILITY SKILL
+            XBody.skillLocator.utility.UnsetSkillOverride(extraskillLocator.extraThird, XSurvivor.XFalconDashSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            XBody.skillLocator.utility.UnsetSkillOverride(extraskillLocator.extraThird, XSurvivor.HyperModeFalconArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            XBody.skillLocator.utility.UnsetSkillOverride(extraskillLocator.extraThird, XSurvivor.HyperModeGaeaArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+        }
+
         public SkillDef GetPrimaryArmorSkillDef()
         {
             return ArmorSkill1;
@@ -118,6 +168,20 @@ namespace MegamanXMod.Survivors.X.Components
             return ArmorSkill4;
         }
 
+        public SkillDef GetSecondaryBaseSkillDef()
+        {
+            return BaseSkill2;
+        }
+
+        public SkillDef GetUtiliryBaseSkillDef()
+        {
+            return BaseSkill3;
+        }
+
+        public SkillDef GetSpecialBaseSkillDef()
+        {
+            return BaseSkill4;
+        }
 
     }
 }

@@ -14,8 +14,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="BlinkScript.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove=".gitignore" />
     <None Remove="nuget.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="BlinkScript.cs" />
   </ItemGroup>
 
 	<ItemGroup>

@@ -95,6 +95,37 @@ Transform:
   m_Father: {fileID: 1530579792101552081}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &392934549711287887
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 975797632611551173}
+  m_Layer: 0
+  m_Name: CorePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &975797632611551173
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 392934549711287887}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.016, y: 1.422, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1651956394787960141}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &450462260844456187
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,6 +610,7 @@ GameObject:
   - component: {fileID: 1651956394787960141}
   - component: {fileID: 4615276208076664631}
   - component: {fileID: 5808759825850119452}
+  - component: {fileID: 1323822030478203164}
   m_Layer: 0
   m_Name: mdlX4
   m_TagString: Untagged
@@ -602,6 +634,7 @@ Transform:
   - {fileID: 2535718339553675046}
   - {fileID: 6709851168348308230}
   - {fileID: 8700726280758233514}
+  - {fileID: 975797632611551173}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -647,6 +680,23 @@ MonoBehaviour:
     transform: {fileID: 1571461542228893112}
   - name: EyelidR
     transform: {fileID: 7029235779648015371}
+  - name: CorePosition
+    transform: {fileID: 975797632611551173}
+--- !u!114 &1323822030478203164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136743868424859639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d56f36c5186e41348bf501b6f810a1cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinkObject: {fileID: 7849624555466563265}
+  blinkObject2: {fileID: 4251324714732758973}
+  timeBetweenBlink: 2
 --- !u!1 &2244900786321953013
 GameObject:
   m_ObjectHideFlags: 0

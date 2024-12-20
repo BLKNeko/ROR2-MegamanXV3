@@ -14,7 +14,9 @@ namespace MegamanXMod.Survivors.X
 
         public static GameObject bombExplosionEffect;
 
-        
+        public static GameObject HyperModeEffect;
+
+
         public static Mesh XBodyMesh;
         public static Mesh LightBodyMesh;
         public static Mesh SecondBodyMesh;
@@ -32,6 +34,18 @@ namespace MegamanXMod.Survivors.X
         public static Material MatFourth;
         public static Material MatFalcon;
         public static Material MatGaea;
+
+        public static Sprite IconX;
+        public static Sprite IconLight;
+        public static Sprite IconSecond;
+        public static Sprite IconMax;
+        public static Sprite IconFourth;
+        public static Sprite IconFalcon;
+        public static Sprite IconGaea;
+
+        public static Sprite IconFalconDash;
+        public static Sprite IconSkillLock;
+
 
         // networked hit sounds
         public static NetworkSoundEventDef swordHitSoundEvent;
@@ -77,16 +91,19 @@ namespace MegamanXMod.Survivors.X
             MatFalcon = _assetBundle.LoadAsset<Material>("matFalcon");
             MatGaea = _assetBundle.LoadAsset<Material>("matGaea");
 
-            Debug.Log(XAssets.XBodyMesh);
-            Debug.Log(XAssets.SecondBodyMesh);
-            Debug.Log(XAssets.MaxBodyMesh);
-            Debug.Log(XAssets.FourthBodyMesh);
-            Debug.Log(XAssets.FalconBodyMesh);
-            Debug.Log(XAssets.GaeaBodyMesh);
+            IconX = _assetBundle.LoadAsset<Sprite>("XIcon");
+            IconLight = _assetBundle.LoadAsset<Sprite>("XLightIcon");
+            IconSecond = _assetBundle.LoadAsset<Sprite>("XSecondIcon");
+            IconMax = _assetBundle.LoadAsset<Sprite>("XMaxIcon");
+            IconFourth = _assetBundle.LoadAsset<Sprite>("XFourthIcon");
+            IconFalcon = _assetBundle.LoadAsset<Sprite>("XFalconIcon");
+            IconGaea = _assetBundle.LoadAsset<Sprite>("XGaeaIcon");
 
-            Debug.Log(XAssets.MatLight);
-            Debug.Log(XAssets.MatSecond);
-            Debug.Log(XAssets.MatMax);
+            IconFalconDash = _assetBundle.LoadAsset<Sprite>("XSkillFalconDash");
+            IconSkillLock = _assetBundle.LoadAsset<Sprite>("XSkillLock");
+
+            HyperModeEffect = _assetBundle.LoadEffect("HyperModeEffect", true);
+
 
         }
 
