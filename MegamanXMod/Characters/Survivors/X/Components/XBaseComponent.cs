@@ -1,6 +1,7 @@
 ﻿using RoR2;
 using System.Collections;
 using UnityEngine;
+using BepInEx;
 
 namespace MegamanXMod.Survivors.X.Components
 {
@@ -74,6 +75,8 @@ namespace MegamanXMod.Survivors.X.Components
 
             XAnim.SetBool("isWeak", isWeak);
         }
+
+        
 
 
     }

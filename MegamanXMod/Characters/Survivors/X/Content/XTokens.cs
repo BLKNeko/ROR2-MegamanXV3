@@ -52,13 +52,13 @@ namespace MegamanXMod.Survivors.X
             LanguageAPI.Add(prefix + "EXTRA_FIRST_LIGHT_ARMOR_NAME", "Light Armor");
             LanguageAPI.Add(prefix + "EXTRA_FIRST_LIGHT_ARMOR_DESCRIPTION", "Shoot with X - Buster, dealing <style=cIsDamage>170 % damage</style>.");
 
-            LanguageAPI.Add(prefix + "EXTRA_FIRST_SECOND_ARMOR_NAME", "Second Armor");
+            LanguageAPI.Add(prefix + "EXTRA_FIRST_SECOND_ARMOR_NAME", "Giga Armor");
             LanguageAPI.Add(prefix + "EXTRA_FIRST_SECOND_ARMOR_DESCRIPTION", "Shoot with X - Buster, dealing <style=cIsDamage>170 % damage</style>.");
 
             LanguageAPI.Add(prefix + "EXTRA_SECOND_MAX_ARMOR_NAME", "Max Armor");
             LanguageAPI.Add(prefix + "EXTRA_SECOND_MAX_ARMOR_DESCRIPTION", "Shoot with X - Buster, dealing <style=cIsDamage>170 % damage</style>.");
 
-            LanguageAPI.Add(prefix + "EXTRA_SECOND_FOURTH_ARMOR_NAME", "Fourth Armor");
+            LanguageAPI.Add(prefix + "EXTRA_SECOND_FOURTH_ARMOR_NAME", "Force Armor");
             LanguageAPI.Add(prefix + "EXTRA_SECOND_FOURTH_ARMOR_DESCRIPTION", "Shoot with X - Buster, dealing <style=cIsDamage>170 % damage</style>.");
 
             LanguageAPI.Add(prefix + "EXTRA_THIRD_FALCON_ARMOR_NAME", "Falcon Armor");

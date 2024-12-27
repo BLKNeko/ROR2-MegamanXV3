@@ -4,6 +4,7 @@ using MegamanXMod.Survivors.X;
 using MegamanXMod.Survivors.X.Components;
 using RoR2;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace MegamanXMod.Survivors.X.SkillStates
 {
@@ -43,6 +44,13 @@ namespace MegamanXMod.Survivors.X.SkillStates
             extraskillLocator = base.GetComponent<ExtraSkillLocator>();
 
             PlayAnimation("LeftArm, Override", "ShootGun", "ShootGun.playbackRate", 1.8f);
+
+            if (NetworkServer.active)
+            {
+                characterBody.AddTimedBuff(RoR2Content.Buffs.Immune, 1.5f * duration);
+            }
+
+            EffectManager.SimpleMuzzleFlash(XAssets.HyperModeEffect, base.gameObject, "CorePosition", true);
 
 
             //TRANSFORM INTO MAX ARMOR

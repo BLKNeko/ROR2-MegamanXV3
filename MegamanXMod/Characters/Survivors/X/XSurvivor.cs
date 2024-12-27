@@ -4,10 +4,14 @@ using MegamanXMod.Modules.Characters;
 using MegamanXMod.Survivors.X.Components;
 using MegamanXMod.Survivors.X.SkillStates;
 using RoR2;
+using R2API;
+using RoR2.Projectile;
 using RoR2.Skills;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static UnityEngine.ParticleSystem.PlaybackState;
 
 namespace MegamanXMod.Survivors.X
 {
@@ -42,9 +46,15 @@ namespace MegamanXMod.Survivors.X
         internal static SkillDef HyperModeFourthArmorSkillDef;
         internal static SkillDef HyperModeFalconArmorSkillDef;
         internal static SkillDef HyperModeGaeaArmorSkillDef;
+        internal static SkillDef HyperModeShadowArmorSkillDef;
+        internal static SkillDef HyperModeUltimateArmorSkillDef;
+        internal static SkillDef HyperModeRathalosArmorSkillDef;
 
         //PRIMARY
         internal static SkillDef XBusterSkillDef;
+        internal static SkillDef XLightBusterSkillDef;
+        internal static SkillDef XGigaBusterSkillDef;
+        internal static SkillDef XForceBusterSkillDef;
         internal static SkillDef XShadowBusterSkillDef;
 
         //SECONDARY
@@ -132,7 +142,7 @@ namespace MegamanXMod.Survivors.X
             XTokens.Init();
 
             XAssets.Init(assetBundle);
-            HenryBuffs.Init(assetBundle);
+            XBuffs.Init(assetBundle);
 
             InitializeEntityStateMachines();
             InitializeSkills();
@@ -222,7 +232,7 @@ namespace MegamanXMod.Survivors.X
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
 
-                isCombatSkill = true,
+                isCombatSkill = false,
                 mustKeyPress = false,
             });
 
@@ -242,7 +252,7 @@ namespace MegamanXMod.Survivors.X
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
 
-                isCombatSkill = true,
+                isCombatSkill = false,
                 mustKeyPress = false,
             });
 
@@ -261,7 +271,7 @@ namespace MegamanXMod.Survivors.X
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
 
-                isCombatSkill = true,
+                isCombatSkill = false,
                 mustKeyPress = false,
             });
 
@@ -280,7 +290,7 @@ namespace MegamanXMod.Survivors.X
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
 
-                isCombatSkill = true,
+                isCombatSkill = false,
                 mustKeyPress = false,
             });
 
@@ -299,7 +309,7 @@ namespace MegamanXMod.Survivors.X
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
 
-                isCombatSkill = true,
+                isCombatSkill = false,
                 mustKeyPress = false,
             });
 
@@ -318,7 +328,7 @@ namespace MegamanXMod.Survivors.X
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
 
-                isCombatSkill = true,
+                isCombatSkill = false,
                 mustKeyPress = false,
             });
 
@@ -337,17 +347,195 @@ namespace MegamanXMod.Survivors.X
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
 
-                isCombatSkill = true,
+                isCombatSkill = false,
                 mustKeyPress = false,
             });
 
+            HyperModeShadowArmorSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "HyperModeShadowArmor",
+                skillNameToken = MEGAMAN_x_PREFIX + "EXTRA_FOURTH_SHADOW_ARMOR_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "EXTRA_FOURTH_SHADOW_ARMOR_DESCRIPTION",
+                skillIcon = XAssets.IconXShadow,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.HyperModeShadowArmor)),
+                //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
+                activationStateMachineName = "Body",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+
+                isCombatSkill = false,
+                mustKeyPress = false,
+            });
+
+            HyperModeUltimateArmorSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "HyperModeUltimateArmor",
+                skillNameToken = MEGAMAN_x_PREFIX + "EXTRA_FOURTH_ULTIMATE_ARMOR_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "EXTRA_FOURTH_ULTIMATE_ARMOR_DESCRIPTION",
+                skillIcon = XAssets.IconUltimate,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.HyperModeUltimateArmor)),
+                //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
+                activationStateMachineName = "Body",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+
+                isCombatSkill = false,
+                mustKeyPress = false,
+            });
+
+            HyperModeRathalosArmorSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "HyperModeRathalosArmor",
+                skillNameToken = MEGAMAN_x_PREFIX + "EXTRA_FOURTH_RATHALOS_ARMOR_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "EXTRA_FOURTH_RATHALOS_ARMOR_DESCRIPTION",
+                skillIcon = XAssets.IconXRathalos,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.HyperModeRathalosArmor)),
+                //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
+                activationStateMachineName = "Body",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+
+                isCombatSkill = false,
+                mustKeyPress = false,
+            });
+
+
             //PRIMARY
+            XBusterSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "XBuster",
+                skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_X_BUSTER_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_X_BUSTER_DESCRIPTION",
+                skillIcon = XAssets.IconXBuster,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(XBuster)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseRechargeInterval = 0f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = true,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = true,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+
+            XLightBusterSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "LightBuster",
+                skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_LIGHT_BUSTER_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_LIGHT_BUSTER_DESCRIPTION",
+                //skillIcon = XAssets.IconXBuster,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(XLightBuster)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseRechargeInterval = 0f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = true,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = true,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+
+            XGigaBusterSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "GigaBuster",
+                skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_GIGA_BUSTER_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_GIGA_BUSTER_DESCRIPTION",
+                //skillIcon = XAssets.IconXBuster,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(XGigaBuster)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseRechargeInterval = 0f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = true,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = true,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+
+            XForceBusterSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "ForceBuster",
+                skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_FORCE_BUSTER_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_FORCE_BUSTER_DESCRIPTION",
+                //skillIcon = XAssets.IconXBuster,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(XForceBuster)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseRechargeInterval = 0f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = true,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = true,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+
             XShadowBusterSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "ShadowBuster",
                 skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_SHADOW_BUSTER_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_SHADOW_BUSTER_DESCRIPTION",
-                //skillIcon = XAssets.IconFalconDash,
+                skillIcon = XAssets.IconShadowBuster,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ShadowBuster)),
                 activationStateMachineName = "Weapon",
@@ -410,7 +598,7 @@ namespace MegamanXMod.Survivors.X
                 skillName = "HeadScanner",
                 skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_HEAD_SCANNER_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "SPECIAL_HEAD_SCANNER_DESCRIPTION",
-                //skillIcon = XAssets.IconFalconDash,
+                skillIcon = XAssets.IconHeadScanner,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(HeadScanner)),
                 activationStateMachineName = "Weapon2",
@@ -518,6 +706,10 @@ namespace MegamanXMod.Survivors.X
 
             Skills.AddPrimarySkills(bodyPrefab, primarySkillDef1);
 
+            Skills.AddPrimarySkills(bodyPrefab, XBusterSkillDef);
+            Skills.AddPrimarySkills(bodyPrefab, XLightBusterSkillDef);
+            Skills.AddPrimarySkills(bodyPrefab, XGigaBusterSkillDef);
+            Skills.AddPrimarySkills(bodyPrefab, XForceBusterSkillDef);
             Skills.AddPrimarySkills(bodyPrefab, XShadowBusterSkillDef);
         }
 
@@ -737,6 +929,9 @@ namespace MegamanXMod.Survivors.X
             });
 
             Skills.AddFourthExtraSkill(bodyPrefab, FESSkillDef);
+            Skills.AddFourthExtraSkill(bodyPrefab, HyperModeShadowArmorSkillDef);
+            Skills.AddFourthExtraSkill(bodyPrefab, HyperModeUltimateArmorSkillDef);
+            Skills.AddFourthExtraSkill(bodyPrefab, HyperModeRathalosArmorSkillDef);
         }
 
         #region skins
@@ -858,15 +1053,203 @@ namespace MegamanXMod.Survivors.X
         private void AddHooks()
         {
             R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
+            On.RoR2.GlobalEventManager.OnHitEnemy += GlobalEventManager_OnHitEnemy;
+        }
+
+        private void GlobalEventManager_OnHitEnemy(On.RoR2.GlobalEventManager.orig_OnHitEnemy orig, GlobalEventManager self, DamageInfo damageInfo, GameObject victim)
+        {
+            orig.Invoke(self, damageInfo, victim);
+
+            if (!self || !damageInfo.attacker || !victim || !damageInfo.attacker.GetComponent<CharacterBody>() || !victim.GetComponent<CharacterBody>())
+                return;
+
+            if (damageInfo.attacker.name.Contains("XBody") && !victim.name.Contains("XBody"))
+            {
+                Debug.Log(damageInfo.attacker.name);
+                Debug.Log(damageInfo.attacker.transform.position);
+                Debug.Log(damageInfo.inflictor.name);
+                Debug.Log(victim.transform.position);
+
+                if (damageInfo.inflictor.name.Contains("XForceBusterProjectile"))
+                {
+                    Debug.Log(damageInfo.inflictor.name);
+                    Debug.Log(victim.transform.position);
+
+                    FireProjectileInfo XShockSphereProjectille = new FireProjectileInfo();
+                    XShockSphereProjectille.projectilePrefab = XAssets.xShockSphereProjectile;
+                    XShockSphereProjectille.position = victim.transform.position;
+                    XShockSphereProjectille.rotation = Util.QuaternionSafeLookRotation(victim.transform.position);
+                    XShockSphereProjectille.owner = damageInfo.attacker;
+                    XShockSphereProjectille.damage = 1f;
+                    XShockSphereProjectille.force = 200f;
+                    XShockSphereProjectille.crit = Util.CheckRoll(damageInfo.attacker.GetComponent<CharacterBody>().crit);
+                    XShockSphereProjectille.speedOverride = 0f;
+                    XShockSphereProjectille.damageColorIndex = DamageColorIndex.Default;
+
+                    ProjectileManager.instance.FireProjectile(XShockSphereProjectille);
+
+                    //BlastAttack ShockBlastAttack = new BlastAttack()
+                    //{
+                    //    attacker = damageInfo.attacker,
+                    //    inflictor = damageInfo.inflictor,
+                    //    radius = 8f,
+                    //    procCoefficient = 1f,
+                    //    position = victim.GetComponent<CharacterBody>().transform.position,
+                    //    damageType = DamageType.Stun1s,
+                    //    crit = Util.CheckRoll(damageInfo.attacker.GetComponent<CharacterBody>().crit),
+                    //    baseDamage = damageInfo.attacker.GetComponent<CharacterBody>().damage * 1f,
+                    //    falloffModel = BlastAttack.FalloffModel.None,
+                    //    baseForce = 500f,
+                    //    teamIndex = TeamComponent.GetObjectTeam(damageInfo.attacker),
+                    //    attackerFiltering = AttackerFiltering.NeverHitSelf,
+
+                    //};
+
+
+
+
+                    //EffectManager.SpawnEffect(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ExplodeOnDeathVoidExplosionEffect"), new EffectData
+                    //{
+                    //    origin = victim.GetComponent<CharacterBody>().transform.position,
+                    //    scale = 8f,
+
+                    //}, true);
+
+                    //ShockBlastAttack.Fire();
+
+                }
+            }
+
+                
+            
         }
 
         private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args)
         {
 
-            if (sender.HasBuff(HenryBuffs.armorBuff))
+            //if (sender.HasBuff(XBuffs.armorBuff))
+            //{
+            //    args.armorAdd += 300;
+            //}
+
+            if (sender.HasBuff(XBuffs.LightArmorBuff))
             {
-                args.armorAdd += 300;
+                args.armorAdd *= 1.5f;
+                args.healthMultAdd *= 1.5f;
+                args.damageMultAdd *= 1.8f;
+                args.attackSpeedMultAdd *= 1.3f;
+                args.regenMultAdd *= 1.3f;
+                args.jumpPowerMultAdd *= 1.2f;
+                args.moveSpeedMultAdd *= 1.2f;
+                args.shieldMultAdd *= 1.4f;
+                args.critDamageMultAdd *= 1f;
             }
+
+            if (sender.HasBuff(XBuffs.SecondArmorBuff))
+            {
+                args.armorAdd *= 1.3f;
+                args.healthMultAdd *= 1.3f;
+                args.damageMultAdd *= 1.5f;
+                args.attackSpeedMultAdd *= 1.2f;
+                args.regenMultAdd *= 1.3f;
+                args.jumpPowerMultAdd *= 1.2f;
+                args.moveSpeedMultAdd *= 1.25f;
+                args.shieldMultAdd *= 1f;
+                args.critDamageMultAdd *= 1.3f;
+            }
+
+            if (sender.HasBuff(XBuffs.MaxArmorBuff))
+            {
+                args.armorAdd *= 2f;
+                args.healthMultAdd *= 1.8f;
+                args.damageMultAdd *= 1.8f;
+                args.attackSpeedMultAdd *= 1.5f;
+                args.regenMultAdd *= 1.8f;
+                args.jumpPowerMultAdd *= 1.4f;
+                args.moveSpeedMultAdd *= 1.4f;
+                args.shieldMultAdd *= 1.7f;
+                args.critDamageMultAdd *= 1.5f;
+            }
+
+            if (sender.HasBuff(XBuffs.FourthArmorBuff))
+            {
+                args.armorAdd *= 2.2f;
+                args.healthMultAdd *= 1.5f;
+                args.damageMultAdd *= 2f;
+                args.attackSpeedMultAdd *= 1.4f;
+                args.regenMultAdd *= 1.5f;
+                args.jumpPowerMultAdd *= 1.4f;
+                args.moveSpeedMultAdd *= 1.4f;
+                args.shieldMultAdd *= 1.5f;
+                args.critDamageMultAdd *= 2f;
+            }
+
+            if (sender.HasBuff(XBuffs.FalconArmorBuff))
+            {
+                args.armorAdd *= 1.1f;
+                args.healthMultAdd *= 1.1f;
+                args.damageMultAdd *= 1f;
+                args.attackSpeedMultAdd *= 2f;
+                args.regenMultAdd *= 1.4f;
+                args.jumpPowerMultAdd *= 1.8f;
+                args.moveSpeedMultAdd *= 2.5f;
+                args.shieldMultAdd *= 1.2f;
+                args.critDamageMultAdd *= 2f;
+            }
+
+            if (sender.HasBuff(XBuffs.GaeaArmorBuff))
+            {
+                args.armorAdd *= 5f;
+                args.healthMultAdd *= 3f;
+                args.damageMultAdd *= 1.8f;
+                args.attackSpeedMultAdd *= 1f;
+                args.regenMultAdd *= 2f;
+                args.jumpPowerMultAdd *= 1f;
+                args.moveSpeedMultAdd *= 0.9f;
+                args.shieldMultAdd *= 3f;
+                args.critDamageMultAdd *= 2f;
+            }
+
+            if (sender.HasBuff(XBuffs.ShadowArmorBuff))
+            {
+                args.armorAdd *= 2.5f;
+                args.healthMultAdd *= 2f;
+                args.damageMultAdd *= 2f;
+                args.attackSpeedMultAdd *= 2.5f;
+                args.regenMultAdd *= 1.5f;
+                args.jumpPowerMultAdd *= 2f;
+                args.moveSpeedMultAdd *= 2.5f;
+                args.shieldMultAdd *= 1.8f;
+                args.critDamageMultAdd *= 4f;
+            }
+
+            if (sender.HasBuff(XBuffs.UltimateArmorBuff))
+            {
+                args.armorAdd *= 2.8f;
+                args.healthMultAdd *= 2f;
+                args.damageMultAdd *= 3f;
+                args.attackSpeedMultAdd *= 1.8f;
+                args.regenMultAdd *= 1.8f;
+                args.jumpPowerMultAdd *= 1.8f;
+                args.moveSpeedMultAdd *= 1.8f;
+                args.shieldMultAdd *= 2f;
+                args.critDamageMultAdd *= 3f;
+            }
+
+            if (sender.HasBuff(XBuffs.RathalosArmorBuff))
+            {
+                args.armorAdd *= 3f;
+                args.healthMultAdd *= 2f;
+                args.damageMultAdd *= 3f;
+                args.attackSpeedMultAdd *= 1.5f;
+                args.regenMultAdd *= 1.8f;
+                args.jumpPowerMultAdd *= 1.8f;
+                args.moveSpeedMultAdd *= 1.5f;
+                args.shieldMultAdd *= 2f;
+                args.critDamageMultAdd *= 3f;
+            }
+
+
         }
     }
 }

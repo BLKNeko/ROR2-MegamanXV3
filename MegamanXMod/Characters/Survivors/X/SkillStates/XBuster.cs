@@ -19,10 +19,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
         public static float force = 400f;
         public static float recoil = 3f;
         public static float range = 256f;
-        public static GameObject tracerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/TracerGoldGat");
-        public static GameObject MediumtracerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/tracers/TracerBanditShotgun");
-        private GameObject ShurikenTracerGO;
-        private Tracer ShurikenTracer;
+        public static GameObject tracerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/tracers/TracerBanditShotgun");
 
         private float duration;
         private float fireTime;
@@ -49,33 +46,6 @@ namespace MegamanXMod.Survivors.X.SkillStates
             muzzleString = "Muzzle";
 
             PlayAnimation("LeftArm, Override", "XBusterGun", "XBusterGun.playbackRate", 1.8f);
-
-
-            //ShurikenTracer.beamObject = XAssets.ShurikenVFX;
-            //ShurikenTracer.speed = 200f;
-            //ShurikenTracer.beamDensity = 10f;
-            //ShurikenTracer.length = 8f;
-            //ShurikenTracer.headTransform = XAssets.ShurikenVFX.transform;
-            //ShurikenTracer.tailTransform = XAssets.ShurikenVFX.transform;
-            //ShurikenTracer.startTransform = characterBody.transform;
-            //ShurikenTracer.reverse = false;
-
-            ////ShurikenTracerGO = XAssets.ShurikenVFX;
-
-            //ShurikenTracerGO.AddComponent<Tracer>();
-
-            //ShurikenTracerGO.GetComponent<Tracer>().beamObject = XAssets.ShurikenVFX;
-            //ShurikenTracerGO.GetComponent<Tracer>().speed = 200f;
-            //ShurikenTracerGO.GetComponent<Tracer>().beamDensity = 10f;
-            //ShurikenTracerGO.GetComponent<Tracer>().length = 8f;
-            //ShurikenTracerGO.GetComponent<Tracer>().headTransform = characterBody.transform;
-            //ShurikenTracerGO.GetComponent<Tracer>().tailTransform = characterBody.transform;
-            //ShurikenTracerGO.GetComponent<Tracer>().startTransform = characterBody.transform;
-            //ShurikenTracerGO.GetComponent<Tracer>().reverse = false;
-
-            //ShurikenTracerGO.AddComponent<LineRenderer>();
-
-            //ShurikenTracerGO.GetComponent<LineRenderer>()
 
         }
 
@@ -147,107 +117,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 if (isAuthority)
                 {
                     Ray aimRay = GetAimRay();
-                    Vector3 raygun1 = new Vector3(aimRay.direction.x + 0.15f, aimRay.direction.y, aimRay.direction.z);
-                    Vector3 raygun2 = new Vector3(aimRay.direction.x - 0.15f, aimRay.direction.y, aimRay.direction.z);
                     AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
-
-                    base.PlayAnimation("Gesture, Override", "ShootBurst", "attackSpeed", this.duration);
-                    //Util.PlaySound(Sounds.xChargeShot, base.gameObject);
-                    //ProjectileManager.instance.FireProjectile(XAssets.shurikenProjectilePrefab2, aimRay.origin, Util.QuaternionSafeLookRotation(aimRay.direction), base.gameObject, damageCoefficient * this.damageStat, 0f, Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f);
-
-                    FireProjectileInfo ShadowShurikenProjectille = new FireProjectileInfo();
-                    ShadowShurikenProjectille.projectilePrefab = XAssets.shurikenProjectilePrefab2;
-                    ShadowShurikenProjectille.position = aimRay.origin;
-                    ShadowShurikenProjectille.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
-                    ShadowShurikenProjectille.owner = gameObject;
-                    ShadowShurikenProjectille.damage = damageCoefficient * damageStat;
-                    ShadowShurikenProjectille.force = force;
-                    ShadowShurikenProjectille.crit = RollCrit();
-                    //ShadowShurikenProjectille.speedOverride = 20f;
-                    ShadowShurikenProjectille.damageColorIndex = DamageColorIndex.Default;
-
-                    
-
-                    FireProjectileInfo ShadowShurikenProjectille2 = new FireProjectileInfo();
-                    ShadowShurikenProjectille2.projectilePrefab = XAssets.shurikenProjectilePrefab2;
-                    ShadowShurikenProjectille2.position = aimRay.origin;
-                    ShadowShurikenProjectille2.rotation = Util.QuaternionSafeLookRotation(raygun1.normalized);
-                    ShadowShurikenProjectille2.owner = gameObject;
-                    ShadowShurikenProjectille2.damage = damageCoefficient * damageStat;
-                    ShadowShurikenProjectille2.force = force;
-                    ShadowShurikenProjectille2.crit = RollCrit();
-                    //ShadowShurikenProjectille2.speedOverride = 20f;
-                    ShadowShurikenProjectille2.damageColorIndex = DamageColorIndex.Default;
-
-                    
-
-                    FireProjectileInfo ShadowShurikenProjectille3 = new FireProjectileInfo();
-                    ShadowShurikenProjectille3.projectilePrefab = XAssets.shurikenProjectilePrefab2;
-                    ShadowShurikenProjectille3.position = aimRay.origin;
-                    ShadowShurikenProjectille3.rotation = Util.QuaternionSafeLookRotation(raygun2.normalized);
-                    ShadowShurikenProjectille3.owner = gameObject;
-                    ShadowShurikenProjectille3.damage = damageCoefficient * damageStat;
-                    ShadowShurikenProjectille3.force = force;
-                    ShadowShurikenProjectille3.crit = RollCrit();
-                    //ShadowShurikenProjectille2.speedOverride = 20f;
-                    ShadowShurikenProjectille3.damageColorIndex = DamageColorIndex.Default;
-
-
-
-                    ProjectileManager.instance.FireProjectile(ShadowShurikenProjectille);
-                    ProjectileManager.instance.FireProjectile(ShadowShurikenProjectille2);
-                    ProjectileManager.instance.FireProjectile(ShadowShurikenProjectille3);
-
-                    //new BulletAttack
-                    //{
-                    //    bulletCount = 1,
-                    //    aimVector = aimRay.direction,
-                    //    origin = aimRay.origin,
-                    //    damage = damageCoefficient * damageStat,
-                    //    damageColorIndex = DamageColorIndex.Default,
-                    //    damageType = DamageType.Generic,
-                    //    falloffModel = BulletAttack.FalloffModel.None,
-                    //    maxDistance = range,
-                    //    force = force,
-                    //    hitMask = LayerIndex.CommonMasks.bullet,
-                    //    minSpread = 0f,
-                    //    maxSpread = 0f,
-                    //    isCrit = RollCrit(),
-                    //    owner = gameObject,
-                    //    muzzleName = muzzleString,
-                    //    smartCollision = true,
-                    //    procChainMask = default,
-                    //    procCoefficient = procCoefficient,
-                    //    radius = 0.75f,
-                    //    sniper = false,
-                    //    stopperMask = LayerIndex.CommonMasks.bullet,
-                    //    weapon = null,
-                    //    tracerEffectPrefab = ShurikenTracerGO,
-                    //    spreadPitchScale = 1f,
-                    //    spreadYawScale = 1f,
-                    //    queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
-                    //    hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FirePistol2.hitEffectPrefab,
-                    //}.Fire();
-                }
-            }
-        }
-
-        private void FireMediumBullet()
-        {
-            if (!hasFired)
-            {
-                hasFired = true;
-
-                characterBody.AddSpreadBloom(0.8f);
-                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, gameObject, muzzleString, false);
-                Util.PlaySound("HenryXBusterPistol", gameObject);
-
-                if (isAuthority)
-                {
-                    Ray aimRay = GetAimRay();
-                    AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
-
-                    
 
                     new BulletAttack
                     {
@@ -283,19 +153,69 @@ namespace MegamanXMod.Survivors.X.SkillStates
             }
         }
 
+        private void FireMediumBullet()
+        {
+            if (!hasFired)
+            {
+                hasFired = true;
+
+                characterBody.AddSpreadBloom(0.8f);
+                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, gameObject, muzzleString, false);
+                Util.PlaySound("HenryXBusterPistol", gameObject);
+
+                if (isAuthority)
+                {
+                    Ray aimRay = GetAimRay();
+                    AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
+
+                    FireProjectileInfo XBusterMediumProjectille = new FireProjectileInfo();
+                    XBusterMediumProjectille.projectilePrefab = XAssets.xBusterMediumProjectile;
+                    XBusterMediumProjectille.position = aimRay.origin;
+                    XBusterMediumProjectille.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
+                    XBusterMediumProjectille.owner = gameObject;
+                    XBusterMediumProjectille.damage = damageCoefficient * damageStat;
+                    XBusterMediumProjectille.force = force;
+                    XBusterMediumProjectille.crit = RollCrit();
+                    //XBusterMediumProjectille.speedOverride = XBusterMediumProjectille.speedOverride * 0.8f;
+                    XBusterMediumProjectille.damageColorIndex = DamageColorIndex.Default;
+
+                    ProjectileManager.instance.FireProjectile(XBusterMediumProjectille);
+
+
+                }
+            }
+        }
+
         private void FireChargedBullet()
         {
             if (!this.hasFired)
             {
                 this.hasFired = true;
+
                 base.characterBody.AddSpreadBloom(0.75f);
-                Ray aimRay = base.GetAimRay();
                 EffectManager.SimpleMuzzleFlash(EntityStates.Mage.Weapon.FireRoller.fireMuzzleflashEffectPrefab, base.gameObject, this.muzzleString, false);
+                Util.PlaySound("HenryXBusterPistol", gameObject);
+
                 if (base.isAuthority)
                 {
-                    base.PlayAnimation("Gesture, Override", "ShootBurst", "attackSpeed", this.duration);
-                    //Util.PlaySound(Sounds.xChargeShot, base.gameObject);
-                    ProjectileManager.instance.FireProjectile(XAssets.bombProjectilePrefab, aimRay.origin, Util.QuaternionSafeLookRotation(aimRay.direction), base.gameObject, (damageCoefficient * 4f) * damageStat, 0f, Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f);
+
+                    Ray aimRay = GetAimRay();
+                    AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
+
+                    FireProjectileInfo XBusterChargeProjectille = new FireProjectileInfo();
+                    XBusterChargeProjectille.projectilePrefab = XAssets.xBusterChargeProjectile;
+                    XBusterChargeProjectille.position = aimRay.origin;
+                    XBusterChargeProjectille.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
+                    XBusterChargeProjectille.owner = gameObject;
+                    XBusterChargeProjectille.damage = damageCoefficient * damageStat;
+                    XBusterChargeProjectille.force = force;
+                    XBusterChargeProjectille.crit = RollCrit();
+                    //ShadowShurikenProjectille.speedOverride = 20f;
+                    XBusterChargeProjectille.damageColorIndex = DamageColorIndex.Default;
+
+
+                    ProjectileManager.instance.FireProjectile(XBusterChargeProjectille);
+
                 }
             }
         }
