@@ -54,11 +54,15 @@ namespace MegamanXMod.Survivors.X
         internal static SkillDef XBusterSkillDef;
         internal static SkillDef XLightBusterSkillDef;
         internal static SkillDef XGigaBusterSkillDef;
+        internal static SkillDef XMaxBusterSkillDef;
         internal static SkillDef XForceBusterSkillDef;
+        internal static SkillDef XFalconBusterSkillDef;
+        internal static SkillDef XGaeaBusterSkillDef;
         internal static SkillDef XShadowBusterSkillDef;
+        internal static SkillDef XUltimateBusterSkillDef;
 
         //SECONDARY
-
+        internal static SteppedSkillDef XShadowSaberSkillDef;
 
         //UTILITY
         internal static SkillDef XDashSkillDef;
@@ -66,6 +70,7 @@ namespace MegamanXMod.Survivors.X
 
         //SPECIAL
         internal static SkillDef XHeadScannerSkillDef;
+        internal static SkillDef XHyperChipSkillDef;
 
 
         public override BodyInfo bodyInfo => new BodyInfo
@@ -97,6 +102,11 @@ namespace MegamanXMod.Survivors.X
                 new CustomRendererInfo
                 {
                     childName = "XBodyMesh",
+                    material = XAssets.MatX,
+                },
+                 new CustomRendererInfo
+                {
+                    childName = "XShadowSaber",
                     material = XAssets.MatX,
                 }
                 //new CustomRendererInfo
@@ -167,7 +177,16 @@ namespace MegamanXMod.Survivors.X
         public void AddHitboxes()
         {
             //example of how to create a HitBoxGroup. see summary for more details
-            //Prefabs.SetupHitBoxGroup(characterModelObject, "SwordGroup", "SwordHitbox");
+            //Prefabs.SetupHitBoxGroup(characterModelObject, "ShadowSaberGroup", "ShadowSaberHitBox");
+
+            ChildLocator childLocator = bodyPrefab.GetComponentInChildren<ChildLocator>();
+            GameObject model = childLocator.gameObject;
+
+            Transform hitboxTransform = childLocator.FindChild("ShadowSaberHitBox");
+            Prefabs.SetupHitBoxGroup(model, "ShadowSaberGroup", "ShadowSaberHitBox");
+            //hitboxTransform.localScale = new Vector3(5.2f, 5.2f, 5.2f);
+            hitboxTransform.localScale = new Vector3(4f, 4f, 4f);
+
         }
 
         public override void InitializeEntityStateMachines() 
@@ -215,6 +234,7 @@ namespace MegamanXMod.Survivors.X
         {
 
             //ARMORS
+            #region XArmors
 
             //a basic skill. some fields are omitted and will just have default values
             CoolDownXArmorSkillDef = Skills.CreateSkillDef(new SkillDefInfo
@@ -407,7 +427,7 @@ namespace MegamanXMod.Survivors.X
                 isCombatSkill = false,
                 mustKeyPress = false,
             });
-
+            #endregion
 
             //PRIMARY
             XBusterSkillDef = Skills.CreateSkillDef(new SkillDefInfo
@@ -445,7 +465,7 @@ namespace MegamanXMod.Survivors.X
                 skillName = "LightBuster",
                 skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_LIGHT_BUSTER_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_LIGHT_BUSTER_DESCRIPTION",
-                //skillIcon = XAssets.IconXBuster,
+                skillIcon = XAssets.IconLightBuster,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(XLightBuster)),
                 activationStateMachineName = "Weapon",
@@ -475,9 +495,39 @@ namespace MegamanXMod.Survivors.X
                 skillName = "GigaBuster",
                 skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_GIGA_BUSTER_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_GIGA_BUSTER_DESCRIPTION",
-                //skillIcon = XAssets.IconXBuster,
+                skillIcon = XAssets.IconGigaBuster,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(XGigaBuster)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseRechargeInterval = 0f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = true,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = true,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+
+            XMaxBusterSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "MaxBuster",
+                skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_MAX_BUSTER_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_MAX_BUSTER_DESCRIPTION",
+                skillIcon = XAssets.IconMaxBuster,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(XMaxBuster)),
                 activationStateMachineName = "Weapon",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
@@ -505,9 +555,69 @@ namespace MegamanXMod.Survivors.X
                 skillName = "ForceBuster",
                 skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_FORCE_BUSTER_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_FORCE_BUSTER_DESCRIPTION",
-                //skillIcon = XAssets.IconXBuster,
+                skillIcon = XAssets.IconUltimateBuster,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(XForceBuster)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseRechargeInterval = 0f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = true,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = true,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+
+            XFalconBusterSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "FalconBuster",
+                skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_FALCON_BUSTER_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_FALCON_BUSTER_DESCRIPTION",
+                skillIcon = XAssets.IconFalconBuster,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(XFalconBuster)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseRechargeInterval = 0f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = true,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = true,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+
+            XGaeaBusterSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "GaeaBuster",
+                skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_GAEA_BUSTER_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_GAEA_BUSTER_DESCRIPTION",
+                skillIcon = XAssets.IconGaeaBuster,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(XGaeaBuster)),
                 activationStateMachineName = "Weapon",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
@@ -560,6 +670,72 @@ namespace MegamanXMod.Survivors.X
                 forceSprintDuringState = false,
             });
 
+            XUltimateBusterSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "UltimateBuster",
+                skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_ULTIMATE_BUSTER_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_ULTIMATE_BUSTER_DESCRIPTION",
+                skillIcon = XAssets.IconUltimateBuster,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(XUltimateBuster)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseRechargeInterval = 0f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = true,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = true,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+
+            //SECONDARY
+            XShadowSaberSkillDef = Skills.CreateSkillDef<SteppedSkillDef>(new SkillDefInfo
+            {
+                skillName = "ShadowSaber",
+                skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_SHADOW_SABER_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_SHADOW_SABER_DESCRIPTION",
+                skillIcon = XAssets.IconXShadow,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(XShadowSlashCombo)),
+                activationStateMachineName = "Weapon2",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseRechargeInterval = 0f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                
+
+                resetCooldownTimerOnUse = true,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = false,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+
+            });
+            //XShadowSaberSkillDef.stepCount = 2;
+            //XShadowSaberSkillDef.stepGraceDuration = 0.5f;
+            //XShadowSaberSkillDef.mustKeyPress = false;
 
             //UTILITY
             XFalconDashSkillDef = Skills.CreateSkillDef(new SkillDefInfo
@@ -601,6 +777,36 @@ namespace MegamanXMod.Survivors.X
                 skillIcon = XAssets.IconHeadScanner,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(HeadScanner)),
+                activationStateMachineName = "Weapon2",
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+
+                baseRechargeInterval = 3f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = false,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = false,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = false,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+
+            XHyperChipSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "HyperChip",
+                skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_HYPER_CHIP_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "SPECIAL_HYPER_CHIP_DESCRIPTION",
+                skillIcon = XAssets.IconHyperChip,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(HyperChip)),
                 activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
@@ -695,22 +901,26 @@ namespace MegamanXMod.Survivors.X
                     MEGAMAN_x_PREFIX + "PRIMARY_SLASH_NAME",
                     MEGAMAN_x_PREFIX + "PRIMARY_SLASH_DESCRIPTION",
                     assetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
-                    new EntityStates.SerializableEntityStateType(typeof(SkillStates.XBuster)),
+                    new EntityStates.SerializableEntityStateType(typeof(SkillStates.XShadowSlashCombo)),
                     "Weapon",
                     true
                 ));
             //custom Skilldefs can have additional fields that you can set manually
             primarySkillDef1.stepCount = 2;
             primarySkillDef1.stepGraceDuration = 0.5f;
-            primarySkillDef1.mustKeyPress = true;
+            primarySkillDef1.mustKeyPress = false;
 
             Skills.AddPrimarySkills(bodyPrefab, primarySkillDef1);
 
             Skills.AddPrimarySkills(bodyPrefab, XBusterSkillDef);
             Skills.AddPrimarySkills(bodyPrefab, XLightBusterSkillDef);
             Skills.AddPrimarySkills(bodyPrefab, XGigaBusterSkillDef);
+            Skills.AddPrimarySkills(bodyPrefab, XMaxBusterSkillDef);
             Skills.AddPrimarySkills(bodyPrefab, XForceBusterSkillDef);
+            Skills.AddPrimarySkills(bodyPrefab, XFalconBusterSkillDef);
+            Skills.AddPrimarySkills(bodyPrefab, XGaeaBusterSkillDef);
             Skills.AddPrimarySkills(bodyPrefab, XShadowBusterSkillDef);
+            Skills.AddPrimarySkills(bodyPrefab, XUltimateBusterSkillDef);
         }
 
         private void AddSecondarySkills()
@@ -751,6 +961,7 @@ namespace MegamanXMod.Survivors.X
             });
 
             Skills.AddSecondarySkills(bodyPrefab, secondarySkillDef1);
+            Skills.AddSecondarySkills(bodyPrefab, XShadowSaberSkillDef);
         }
 
         private void AddUtiitySkills()
@@ -819,6 +1030,7 @@ namespace MegamanXMod.Survivors.X
 
             Skills.AddSpecialSkills(bodyPrefab, specialSkillDef1);
             Skills.AddSpecialSkills(bodyPrefab, XHeadScannerSkillDef);
+            Skills.AddSpecialSkills(bodyPrefab, XHyperChipSkillDef);
         }
         #endregion skills
 
@@ -956,7 +1168,18 @@ namespace MegamanXMod.Survivors.X
             //currently not needed as with only 1 skin they will simply take the default meshes
             //uncomment this when you have another skin
             defaultSkin.meshReplacements = Modules.Skins.getMeshReplacements(assetBundle, defaultRendererinfos,
-                "XBodyMesh");
+                "XBodyMesh",
+                null);
+
+            //here's a barebones example of using gameobjectactivations that could probably be streamlined or rewritten entirely, truthfully, but it works
+            defaultSkin.gameObjectActivations = new SkinDef.GameObjectActivation[]
+            {
+                new SkinDef.GameObjectActivation
+                {
+                    gameObject = childLocator.FindChildGameObject("XShadowSaber"),
+                    shouldActivate = true,
+                }
+            };
 
             //add new skindef to our list of skindefs. this is what we'll be passing to the SkinController
             skins.Add(defaultSkin);
@@ -1199,6 +1422,7 @@ namespace MegamanXMod.Survivors.X
 
             if (sender.HasBuff(XBuffs.GaeaArmorBuff))
             {
+                args.armorAdd += 150;
                 args.armorAdd *= 5f;
                 args.healthMultAdd *= 3f;
                 args.damageMultAdd *= 1.8f;
@@ -1247,6 +1471,20 @@ namespace MegamanXMod.Survivors.X
                 args.moveSpeedMultAdd *= 1.5f;
                 args.shieldMultAdd *= 2f;
                 args.critDamageMultAdd *= 3f;
+            }
+
+            if (sender.HasBuff(XBuffs.HyperChipBuff))
+            {
+                args.armorAdd += 150;
+                args.armorAdd *= 2f;
+                args.healthMultAdd *= 2f;
+                args.damageMultAdd *= 2f;
+                args.attackSpeedMultAdd *= 2f;
+                args.regenMultAdd *= 3f;
+                args.jumpPowerMultAdd *= 1.6f;
+                args.moveSpeedMultAdd *= 1.8f;
+                args.shieldMultAdd *= 2f;
+                args.critDamageMultAdd *= 2f;
             }
 
 

@@ -19,6 +19,7 @@ namespace MegamanXMod.Survivors.X
         public static BuffDef RathalosArmorBuff;
 
         public static BuffDef GigaBusterChargeBuff;
+        public static BuffDef HyperChipBuff;
 
         public static void Init(AssetBundle assetBundle)
         {
@@ -83,7 +84,13 @@ namespace MegamanXMod.Survivors.X
                 false);
 
             GigaBusterChargeBuff = Modules.Content.CreateAndAddBuff("GigaBusterChargeBuff",
-                XAssets.IconXRathalos,
+                XAssets.IconGigaBuster,
+                Color.white,
+                false,
+                false);
+
+            HyperChipBuff = Modules.Content.CreateAndAddBuff("HyperChipBuff",
+                XAssets.IconHyperChip,
                 Color.white,
                 false,
                 false);

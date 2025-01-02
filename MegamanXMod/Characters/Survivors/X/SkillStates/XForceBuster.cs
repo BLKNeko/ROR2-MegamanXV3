@@ -120,7 +120,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
 
                     FireProjectileInfo XBusterMediumProjectille = new FireProjectileInfo();
-                    XBusterMediumProjectille.projectilePrefab = XAssets.xForceBusterProjectile;
+                    XBusterMediumProjectille.projectilePrefab = XAssets.xBusterMediumProjectile;
                     XBusterMediumProjectille.position = aimRay.origin;
                     XBusterMediumProjectille.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
                     XBusterMediumProjectille.owner = gameObject;
@@ -187,7 +187,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
 
                     FireProjectileInfo XLightBusterChargeProjectille = new FireProjectileInfo();
-                    XLightBusterChargeProjectille.projectilePrefab = XAssets.xLightBusterChargeProjectile;
+                    XLightBusterChargeProjectille.projectilePrefab = XAssets.xForceBusterProjectile;
                     XLightBusterChargeProjectille.position = aimRay.origin;
                     XLightBusterChargeProjectille.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
                     XLightBusterChargeProjectille.owner = gameObject;

@@ -40,7 +40,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             characterBody.SetAimTimer(2f);
             muzzleString = "Muzzle";
 
-            PlayAnimation("LeftArm, Override", "ShootGun", "ShootGun.playbackRate", 1.8f);
+            PlayAnimation("FullBody, Override", "HyperMode", "HyperMode.playbackRate", duration);
 
             if (NetworkServer.active)
             {
@@ -52,6 +52,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             armorComponent = GetComponent<XArmorComponent>();
             extraskillLocator = base.GetComponent<ExtraSkillLocator>();
 
+            armorComponent.RemoveArmorBuffs();
 
             //TRANSFORM INTO GAEA ARMOR
             this.modelTransform = base.GetModelTransform();
@@ -74,6 +75,30 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
         public override void OnExit()
         {
+
+            if (this.modelTransform)
+            {
+                TemporaryOverlayInstance temporaryOverlayInstance = TemporaryOverlayManager.AddOverlay(this.modelTransform.gameObject);
+                temporaryOverlayInstance.duration = 0.4f;
+                temporaryOverlayInstance.animateShaderAlpha = true;
+                temporaryOverlayInstance.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+                temporaryOverlayInstance.destroyComponentOnEnd = true;
+                temporaryOverlayInstance.originalMaterial = LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashBright");
+                temporaryOverlayInstance.AddToCharacterModel(this.modelTransform.GetComponent<CharacterModel>());
+                TemporaryOverlayInstance temporaryOverlayInstance2 = TemporaryOverlayManager.AddOverlay(this.modelTransform.gameObject);
+                temporaryOverlayInstance2.duration = 0.5f;
+                temporaryOverlayInstance2.animateShaderAlpha = true;
+                temporaryOverlayInstance2.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+                temporaryOverlayInstance2.destroyComponentOnEnd = true;
+                temporaryOverlayInstance2.originalMaterial = LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashExpanded");
+                temporaryOverlayInstance2.AddToCharacterModel(this.modelTransform.GetComponent<CharacterModel>());
+            }
+
+            if (NetworkServer.active)
+            {
+                characterBody.AddBuff(XBuffs.GaeaArmorBuff);
+            }
+
             base.OnExit();
         }
 
@@ -95,8 +120,12 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
         private void SetSkills()
         {
-            
+
+            armorComponent.UnsetAllExtraFirstSkills();
+            armorComponent.UnsetAllExtraSecondSkills();
             armorComponent.UnsetAllExtraThirdSkills();
+            armorComponent.UnsetAllExtraFourthSkills();
+            armorComponent.UnsetAllPrimarySkills();
             armorComponent.UnsetAllUtilitySkills();
             
 
@@ -106,10 +135,10 @@ namespace MegamanXMod.Survivors.X.SkillStates
             extraskillLocator.extraThird.SetSkillOverride(extraskillLocator.extraThird, XSurvivor.CoolDownXArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             extraskillLocator.extraFourth.SetSkillOverride(extraskillLocator.extraFourth, armorComponent.GetFourthArmorSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
 
-            //RESET ALL NORMAL SKILLS AND SET THE PRIMARY AND UTILITY FOR FALCON
-            characterBody.skillLocator.primary.SetSkillOverride(characterBody.skillLocator.primary, XSurvivor.XFalconDashSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            //RESET ALL NORMAL SKILLS AND SET THE PRIMARY AND SECONDARY FOR GAEA
+            characterBody.skillLocator.primary.SetSkillOverride(characterBody.skillLocator.primary, XSurvivor.XGaeaBusterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             characterBody.skillLocator.secondary.SetSkillOverride(characterBody.skillLocator.secondary, armorComponent.GetSecondaryBaseSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
-            characterBody.skillLocator.utility.SetSkillOverride(characterBody.skillLocator.utility, XSurvivor.XFalconDashSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            characterBody.skillLocator.utility.SetSkillOverride(characterBody.skillLocator.utility, armorComponent.GetUtiliryBaseSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
             characterBody.skillLocator.special.SetSkillOverride(characterBody.skillLocator.special, armorComponent.GetSpecialBaseSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
 
             setSkills = true;

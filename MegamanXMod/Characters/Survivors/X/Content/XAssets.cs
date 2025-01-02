@@ -38,6 +38,7 @@ namespace MegamanXMod.Survivors.X
         public static Material MatLight;
         public static Material MatSecond;
         public static Material MatMax;
+        public static Material MatMaxGold;
         public static Material MatFourth;
         public static Material MatFalcon;
         public static Material MatGaea;
@@ -57,14 +58,24 @@ namespace MegamanXMod.Survivors.X
         public static Sprite IconXRathalos;
 
         public static Sprite IconXBuster;
+        public static Sprite IconLightBuster;
+        public static Sprite IconGigaBuster;
+        public static Sprite IconMaxBuster;
         public static Sprite IconFalconBuster;
+        public static Sprite IconGaeaBuster;
         public static Sprite IconShadowBuster;
         public static Sprite IconUltimateBuster;
+        public static Sprite IconRathalosBuster;
 
-        public static Sprite IconHeadScanner;
+        public static Sprite IconShotgunIce;
 
         public static Sprite IconFalconDash;
+        public static Sprite IconXDash;
+
         public static Sprite IconSkillLock;
+
+        public static Sprite IconHeadScanner;
+        public static Sprite IconHyperChip;
 
 
         // networked hit sounds
@@ -79,8 +90,11 @@ namespace MegamanXMod.Survivors.X
         public static GameObject xBusterMediumProjectile;
         public static GameObject xLightBusterChargeProjectile;
         public static GameObject xLightBusterSmallProjectile;
+        public static GameObject xMaxBusterChargeProjectile;
+        public static GameObject xMaxBusterSmallProjectile;
         public static GameObject xForceBusterProjectile;
         public static GameObject xShockSphereProjectile;
+        public static GameObject xFalconBusterChargeProjectile;
         public static GameObject xGaeaBusterChargeProjectile;
         public static GameObject xGaeaBusterSmallProjectile;
         internal static GameObject shotFMJ;
@@ -123,6 +137,7 @@ namespace MegamanXMod.Survivors.X
             MatLight = _assetBundle.LoadAsset<Material>("matLight");
             MatSecond = _assetBundle.LoadAsset<Material>("matSecond");
             MatMax = _assetBundle.LoadAsset<Material>("matMax");
+            MatMaxGold = _assetBundle.LoadAsset<Material>("matMaxG");
             MatFourth = _assetBundle.LoadAsset<Material>("matFourth");
             MatFalcon = _assetBundle.LoadAsset<Material>("matFalcon");
             MatGaea = _assetBundle.LoadAsset<Material>("matGaea");
@@ -142,14 +157,22 @@ namespace MegamanXMod.Survivors.X
             IconXRathalos = _assetBundle.LoadAsset<Sprite>("XRathalosIcon");
 
             IconXBuster = _assetBundle.LoadAsset<Sprite>("XBusterIcon");
+            IconLightBuster = _assetBundle.LoadAsset<Sprite>("LightBusterIcon");
+            IconGigaBuster = _assetBundle.LoadAsset<Sprite>("GigaBusterIcon");
+            IconMaxBuster = _assetBundle.LoadAsset<Sprite>("MaxBusterIcon");
             IconFalconBuster = _assetBundle.LoadAsset<Sprite>("FalconBusterIcon");
+            IconGaeaBuster = _assetBundle.LoadAsset<Sprite>("GaeaBusterIcon");
             IconShadowBuster = _assetBundle.LoadAsset<Sprite>("ShadowBusterIcon");
             IconUltimateBuster = _assetBundle.LoadAsset<Sprite>("UltimateBusterIcon");
+            IconRathalosBuster = _assetBundle.LoadAsset<Sprite>("RathalosBusterIcon");
 
-            IconHeadScanner = _assetBundle.LoadAsset<Sprite>("XSkillHeadScanner");
+            IconShotgunIce = _assetBundle.LoadAsset<Sprite>("XSkillShotgunIce");
 
             IconFalconDash = _assetBundle.LoadAsset<Sprite>("XSkillFalconDash");
             IconSkillLock = _assetBundle.LoadAsset<Sprite>("XSkillLock");
+
+            IconHeadScanner = _assetBundle.LoadAsset<Sprite>("XSkillHeadScanner");
+            IconHyperChip = _assetBundle.LoadAsset<Sprite>("XSkillHyperChip");
 
             HyperModeEffect = _assetBundle.LoadEffect("HyperModeEffect", true);
             ShurikenVFX = _assetBundle.LoadEffect("ShurikenVFX", false);
@@ -192,8 +215,14 @@ namespace MegamanXMod.Survivors.X
             CreateXBusterMediumProjectile();
             CreateXLightBusterChargeProjectile();
             CreateXLightBusterSmallProjectile();
+            CreateXMaxBusterChargeProjectile();
+            CreateXMaxBusterSmallProjectile();
             CreateXForceBusterProjectile();
             CreateXShockSphereProjectile();
+            CreateXGaeaBusterChargeProjectile();
+            CreateXGaeaBusterSmallProjectile();
+            CreateXFalconBusterChargeProjectile();
+
 
             Content.AddProjectilePrefab(bombProjectilePrefab);
             Content.AddProjectilePrefab(shurikenProjectilePrefab);
@@ -204,8 +233,13 @@ namespace MegamanXMod.Survivors.X
             Content.AddProjectilePrefab(xBusterMediumProjectile);
             Content.AddProjectilePrefab(xLightBusterChargeProjectile);
             Content.AddProjectilePrefab(xLightBusterSmallProjectile);
+            Content.AddProjectilePrefab(xMaxBusterChargeProjectile);
+            Content.AddProjectilePrefab(xMaxBusterSmallProjectile);
             Content.AddProjectilePrefab(xForceBusterProjectile);
             Content.AddProjectilePrefab(xShockSphereProjectile);
+            Content.AddProjectilePrefab(xGaeaBusterChargeProjectile);
+            Content.AddProjectilePrefab(xGaeaBusterSmallProjectile);
+            Content.AddProjectilePrefab(xFalconBusterChargeProjectile);
         }
 
         private static void CreateBombProjectile()
@@ -442,6 +476,80 @@ namespace MegamanXMod.Survivors.X
             XLightBusterSmallController.startSound = "";
         }
 
+        private static void CreateXMaxBusterChargeProjectile()
+        {
+            //highly recommend setting up projectiles in editor, but this is a quick and dirty way to prototype if you want
+            xMaxBusterChargeProjectile = Asset.CloneProjectilePrefab("FMJ", "XMaxBusterChargeProjectile");
+
+            //remove their ProjectileImpactExplosion component and start from default values
+            UnityEngine.Object.Destroy(xMaxBusterChargeProjectile.GetComponent<ProjectileImpactExplosion>());
+            ProjectileImpactExplosion XMaxBusterChargeExplosion = xMaxBusterChargeProjectile.AddComponent<ProjectileImpactExplosion>();
+
+            XMaxBusterChargeExplosion.blastRadius = 14f;
+            XMaxBusterChargeExplosion.blastDamageCoefficient = 1f;
+            XMaxBusterChargeExplosion.falloffModel = BlastAttack.FalloffModel.None;
+            XMaxBusterChargeExplosion.destroyOnEnemy = true;
+            XMaxBusterChargeExplosion.lifetime = 12f;
+            //XShurkenExplosion.impactEffect = bombExplosionEffect;
+            //XShurkenExplosion.lifetimeExpiredSound = Content.CreateAndAddNetworkSoundEventDef("HenryBombExplosion");
+            XMaxBusterChargeExplosion.timerAfterImpact = true;
+            XMaxBusterChargeExplosion.lifetimeAfterImpact = 0.1f;
+
+            // just setting the numbers to 1 as the entitystate will take care of those
+            xMaxBusterChargeProjectile.GetComponent<ProjectileDamage>().damage = 1f;
+            xMaxBusterChargeProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
+            xMaxBusterChargeProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
+            xMaxBusterChargeProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
+
+            // register it for networking
+            if (xMaxBusterChargeProjectile) PrefabAPI.RegisterNetworkPrefab(xMaxBusterChargeProjectile);
+
+
+            ProjectileController XMaxBusterChargeController = xMaxBusterChargeProjectile.GetComponent<ProjectileController>();
+
+            if (_assetBundle.LoadAsset<GameObject>("MaxBusterChargeProjectille") != null)
+                XMaxBusterChargeController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("MaxBusterChargeProjectille");
+
+            XMaxBusterChargeController.startSound = "";
+        }
+
+        private static void CreateXMaxBusterSmallProjectile()
+        {
+            //highly recommend setting up projectiles in editor, but this is a quick and dirty way to prototype if you want
+            xMaxBusterSmallProjectile = Asset.CloneProjectilePrefab("FMJ", "XMaxBusterSmallProjectile");
+
+            //remove their ProjectileImpactExplosion component and start from default values
+            UnityEngine.Object.Destroy(xMaxBusterSmallProjectile.GetComponent<ProjectileImpactExplosion>());
+            ProjectileImpactExplosion XMaxBusterSmallExplosion = xMaxBusterSmallProjectile.AddComponent<ProjectileImpactExplosion>();
+
+            XMaxBusterSmallExplosion.blastRadius = 2f;
+            XMaxBusterSmallExplosion.blastDamageCoefficient = 1f;
+            XMaxBusterSmallExplosion.falloffModel = BlastAttack.FalloffModel.None;
+            XMaxBusterSmallExplosion.destroyOnEnemy = true;
+            XMaxBusterSmallExplosion.lifetime = 12f;
+            //XShurkenExplosion.impactEffect = bombExplosionEffect;
+            //XShurkenExplosion.lifetimeExpiredSound = Content.CreateAndAddNetworkSoundEventDef("HenryBombExplosion");
+            XMaxBusterSmallExplosion.timerAfterImpact = true;
+            XMaxBusterSmallExplosion.lifetimeAfterImpact = 0.1f;
+
+            // just setting the numbers to 1 as the entitystate will take care of those
+            xMaxBusterSmallProjectile.GetComponent<ProjectileDamage>().damage = 1f;
+            xMaxBusterSmallProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
+            xMaxBusterSmallProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
+            xMaxBusterSmallProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
+
+            // register it for networking
+            if (xMaxBusterSmallProjectile) PrefabAPI.RegisterNetworkPrefab(xMaxBusterSmallProjectile);
+
+
+            ProjectileController XMaxBusterSmallController = xMaxBusterSmallProjectile.GetComponent<ProjectileController>();
+
+            if (_assetBundle.LoadAsset<GameObject>("MaxBusterSmallProjectille") != null)
+                XMaxBusterSmallController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("MaxBusterSmallProjectille");
+
+            XMaxBusterSmallController.startSound = "";
+        }
+
         private static void CreateXForceBusterProjectile()
         {
             //highly recommend setting up projectiles in editor, but this is a quick and dirty way to prototype if you want
@@ -488,7 +596,7 @@ namespace MegamanXMod.Survivors.X
         private static void CreateXShockSphereProjectile()
         {
             //highly recommend setting up projectiles in editor, but this is a quick and dirty way to prototype if you want
-            xShockSphereProjectile = Asset.CloneProjectilePrefab("FMJRamping", "xShockSphereProjectile");
+            xShockSphereProjectile = Asset.CloneProjectilePrefab("FMJ", "xShockSphereProjectile");
 
             //remove their ProjectileImpactExplosion component and start from default values
             UnityEngine.Object.Destroy(xShockSphereProjectile.GetComponent<ProjectileImpactExplosion>());
@@ -527,6 +635,117 @@ namespace MegamanXMod.Survivors.X
 
             XShockSphereController.startSound = "";
             XShockSphereController.shouldPlaySounds = false;
+        }
+
+        private static void CreateXFalconBusterChargeProjectile()
+        {
+            //highly recommend setting up projectiles in editor, but this is a quick and dirty way to prototype if you want
+            xFalconBusterChargeProjectile = Asset.CloneProjectilePrefab("FMJ", "xFalconBusterChargeProjectile");
+
+            //remove their ProjectileImpactExplosion component and start from default values
+            UnityEngine.Object.Destroy(xFalconBusterChargeProjectile.GetComponent<ProjectileImpactExplosion>());
+            ProjectileImpactExplosion XFalconBusterChargeExplosion = xFalconBusterChargeProjectile.AddComponent<ProjectileImpactExplosion>();
+
+            XFalconBusterChargeExplosion.blastRadius = 14f;
+            XFalconBusterChargeExplosion.blastDamageCoefficient = 1f;
+            XFalconBusterChargeExplosion.falloffModel = BlastAttack.FalloffModel.None;
+            XFalconBusterChargeExplosion.destroyOnEnemy = true;
+            XFalconBusterChargeExplosion.lifetime = 12f;
+            //XShurkenExplosion.impactEffect = bombExplosionEffect;
+            //XShurkenExplosion.lifetimeExpiredSound = Content.CreateAndAddNetworkSoundEventDef("HenryBombExplosion");
+            XFalconBusterChargeExplosion.timerAfterImpact = true;
+            XFalconBusterChargeExplosion.lifetimeAfterImpact = 0.1f;
+
+            // just setting the numbers to 1 as the entitystate will take care of those
+            xFalconBusterChargeProjectile.GetComponent<ProjectileDamage>().damage = 1f;
+            xFalconBusterChargeProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
+            xFalconBusterChargeProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
+            xFalconBusterChargeProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
+
+            // register it for networking
+            if (xFalconBusterChargeProjectile) PrefabAPI.RegisterNetworkPrefab(xFalconBusterChargeProjectile);
+
+
+            ProjectileController XFalconBusterChargeController = xFalconBusterChargeProjectile.GetComponent<ProjectileController>();
+
+            if (_assetBundle.LoadAsset<GameObject>("XFalconBusterProjectille") != null)
+                XFalconBusterChargeController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("XFalconBusterProjectille");
+
+            XFalconBusterChargeController.startSound = "";
+        }
+
+        private static void CreateXGaeaBusterChargeProjectile()
+        {
+            //highly recommend setting up projectiles in editor, but this is a quick and dirty way to prototype if you want
+            xGaeaBusterChargeProjectile = Asset.CloneProjectilePrefab("FMJ", "XGaeaBusterChargeProjectile");
+
+            //remove their ProjectileImpactExplosion component and start from default values
+            UnityEngine.Object.Destroy(xGaeaBusterChargeProjectile.GetComponent<ProjectileImpactExplosion>());
+            ProjectileImpactExplosion XGaeaBusterChargeExplosion = xGaeaBusterChargeProjectile.AddComponent<ProjectileImpactExplosion>();
+
+            XGaeaBusterChargeExplosion.blastRadius = 14f;
+            XGaeaBusterChargeExplosion.blastDamageCoefficient = 1f;
+            XGaeaBusterChargeExplosion.falloffModel = BlastAttack.FalloffModel.None;
+            XGaeaBusterChargeExplosion.destroyOnEnemy = true;
+            XGaeaBusterChargeExplosion.lifetime = 12f;
+            //XShurkenExplosion.impactEffect = bombExplosionEffect;
+            //XShurkenExplosion.lifetimeExpiredSound = Content.CreateAndAddNetworkSoundEventDef("HenryBombExplosion");
+            XGaeaBusterChargeExplosion.timerAfterImpact = true;
+            XGaeaBusterChargeExplosion.lifetimeAfterImpact = 0.1f;
+
+            // just setting the numbers to 1 as the entitystate will take care of those
+            xGaeaBusterChargeProjectile.GetComponent<ProjectileDamage>().damage = 1f;
+            xGaeaBusterChargeProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
+            xGaeaBusterChargeProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.PoisonOnHit;
+            xGaeaBusterChargeProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Poison;
+
+            // register it for networking
+            if (xGaeaBusterChargeProjectile) PrefabAPI.RegisterNetworkPrefab(xGaeaBusterChargeProjectile);
+
+
+            ProjectileController XGaeaBusterChargeController = xGaeaBusterChargeProjectile.GetComponent<ProjectileController>();
+
+            if (_assetBundle.LoadAsset<GameObject>("GaeaBusterChargeProjectille") != null)
+                XGaeaBusterChargeController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("GaeaBusterChargeProjectille");
+
+            XGaeaBusterChargeController.startSound = "";
+        }
+
+        private static void CreateXGaeaBusterSmallProjectile()
+        {
+            //highly recommend setting up projectiles in editor, but this is a quick and dirty way to prototype if you want
+            xGaeaBusterSmallProjectile = Asset.CloneProjectilePrefab("FMJ", "xGaeaBusterSmallProjectile");
+
+            //remove their ProjectileImpactExplosion component and start from default values
+            UnityEngine.Object.Destroy(xGaeaBusterSmallProjectile.GetComponent<ProjectileImpactExplosion>());
+            ProjectileImpactExplosion XGaeaBusterSmallExplosion = xGaeaBusterSmallProjectile.AddComponent<ProjectileImpactExplosion>();
+
+            XGaeaBusterSmallExplosion.blastRadius = 4f;
+            XGaeaBusterSmallExplosion.blastDamageCoefficient = 1f;
+            XGaeaBusterSmallExplosion.falloffModel = BlastAttack.FalloffModel.None;
+            XGaeaBusterSmallExplosion.destroyOnEnemy = true;
+            XGaeaBusterSmallExplosion.lifetime = 12f;
+            //XShurkenExplosion.impactEffect = bombExplosionEffect;
+            //XShurkenExplosion.lifetimeExpiredSound = Content.CreateAndAddNetworkSoundEventDef("HenryBombExplosion");
+            XGaeaBusterSmallExplosion.timerAfterImpact = true;
+            XGaeaBusterSmallExplosion.lifetimeAfterImpact = 0.1f;
+
+            // just setting the numbers to 1 as the entitystate will take care of those
+            xGaeaBusterSmallProjectile.GetComponent<ProjectileDamage>().damage = 1f;
+            xGaeaBusterSmallProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
+            xGaeaBusterSmallProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.PoisonOnHit;
+            xGaeaBusterSmallProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Poison;
+
+            // register it for networking
+            if (xGaeaBusterSmallProjectile) PrefabAPI.RegisterNetworkPrefab(xGaeaBusterSmallProjectile);
+
+
+            ProjectileController XGaeaBusterSmallController = xGaeaBusterSmallProjectile.GetComponent<ProjectileController>();
+
+            if (_assetBundle.LoadAsset<GameObject>("GaeaBusterSmallProjectille") != null)
+                XGaeaBusterSmallController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("GaeaBusterSmallProjectille");
+
+            XGaeaBusterSmallController.startSound = "";
         }
 
         private static void CreateShotFMJ()

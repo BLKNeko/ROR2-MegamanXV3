@@ -74,7 +74,6 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
         public override void OnExit()
         {
-            base.OnExit();
 
             if (this.modelTransform)
             {
@@ -93,6 +92,13 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 temporaryOverlayInstance2.originalMaterial = LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashExpanded");
                 temporaryOverlayInstance2.AddToCharacterModel(this.modelTransform.GetComponent<CharacterModel>());
             }
+
+            if (NetworkServer.active)
+            {
+                characterBody.AddBuff(XBuffs.FalconArmorBuff);
+            }
+
+            base.OnExit();
 
         }
 
@@ -136,7 +142,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.PrioritySkill;
+            return InterruptPriority.Frozen;
         }
     }
 }

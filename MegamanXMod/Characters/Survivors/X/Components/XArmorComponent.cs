@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine;
 using ExtraSkillSlots;
 using RoR2.Skills;
+using UnityEngine.Networking;
+using System.Xml.Linq;
 
 namespace MegamanXMod.Survivors.X.Components
 {
@@ -16,6 +18,8 @@ namespace MegamanXMod.Survivors.X.Components
 
         private CharacterBody XBody;
 
+        private CharacterModel XModel;
+
         private bool isWeak;
 
         private float minHpWeak, initialStoreTime;
@@ -28,6 +32,10 @@ namespace MegamanXMod.Survivors.X.Components
         private ExtraSkillLocator extraskillLocator;
 
         private SkillDef ArmorSkill1, ArmorSkill2, ArmorSkill3, ArmorSkill4, BaseSkill2, BaseSkill3, BaseSkill4;
+
+        TemporaryOverlayInstance temporaryOverlayInstance;
+
+        private SkinnedMeshRenderer XmeshRenderer;
 
 
 
@@ -52,6 +60,8 @@ namespace MegamanXMod.Survivors.X.Components
             minHpWeak = 0.3f;
 
             childLocator = GetComponentInChildren<ChildLocator>();
+
+            temporaryOverlayInstance = TemporaryOverlayManager.AddOverlay(XBody.modelLocator.gameObject);
 
             if (ArmorSkill1 == null)
                 ArmorSkill1 = extraskillLocator.extraFirst.skillDef;
@@ -97,6 +107,9 @@ namespace MegamanXMod.Survivors.X.Components
 
 
             FalconDashReset();
+            ShouldRemoveHyperChipBuff();
+            ShouldRemoveGoldTexture();
+            //SholdApplyGoldenArmorTexture();
         }
 
         private void FalconDashReset()
@@ -107,12 +120,229 @@ namespace MegamanXMod.Survivors.X.Components
             }
         }
 
+        private void ShouldRemoveHyperChipBuff()
+        {
+            if(!XBody.HasBuff(XBuffs.MaxArmorBuff) && XBody.HasBuff(XBuffs.HyperChipBuff))
+            {
+                if (NetworkServer.active)
+                {
+                    //XBody.RemoveBuff(XBuffs.HyperChipBuff);
+                    XBody.RemoveOldestTimedBuff(XBuffs.HyperChipBuff);
+                    //Debug.Log("REMOVE GOLD BUFF");
+                }
+            }
+        }
+
+        private void ShouldRemoveGoldTexture()
+        {
+            if (XBody.HasBuff(XBuffs.MaxArmorBuff) && !XBody.HasBuff(XBuffs.HyperChipBuff))
+            {
+                if (XModel && XmeshRenderer)
+                {
+                    if (XModel.baseRendererInfos[0].defaultMaterial == XAssets.MatMaxGold)
+                    {
+                        XmeshRenderer.sharedMaterial = XAssets.MatMax;
+                        XModel.baseRendererInfos[0].defaultMaterial = XAssets.MatMax;
+                    }
+                }
+                
+                //if (XModel)
+                //{
+                //    if (XModel.temporaryOverlays.Contains(temporaryOverlayInstance))
+                //    {
+                //        temporaryOverlayInstance.RemoveFromCharacterModel();
+
+                //        if (temporaryOverlayInstance != null)
+                //        {
+                //            temporaryOverlayInstance.Destroy();
+                //            Debug.Log("DESTROY OVERLAY");
+                //        }
+
+                //        Debug.Log("REMOVE OVERLAY");
+                //    }
+                    
+                //}
+            }
+        }
+
+        public void SetXModel(CharacterModel model)
+        {
+            XModel = model;
+        }
+
+        public void SetXMeshRender(SkinnedMeshRenderer render)
+        {
+            XmeshRenderer = render;
+        }
+
+
+
+        //private void SholdApplyGoldenArmorTexture()
+        //{
+        //    if (XBody)
+        //    {
+        //        if (XBody.HasBuff(XBuffs.MaxArmorBuff) && XBody.HasBuff(XBuffs.HyperChipBuff))
+        //        {
+
+        //            if (XBody.modelLocator)
+        //            {
+        //                temporaryOverlayInstance = TemporaryOverlayManager.AddOverlay(XBody.modelLocator.gameObject);
+        //                temporaryOverlayInstance.duration = 20f;
+        //                temporaryOverlayInstance.animateShaderAlpha = true;
+        //                temporaryOverlayInstance.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+        //                temporaryOverlayInstance.destroyComponentOnEnd = true;
+        //                //temporaryOverlayInstance.originalMaterial = LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashBright");
+        //                temporaryOverlayInstance.originalMaterial = XAssets.MatMaxGold;
+        //                temporaryOverlayInstance.inspectorCharacterModel = XBody.modelLocator.GetComponent<CharacterModel>();
+        //                temporaryOverlayInstance.AddToCharacterModel(XBody.modelLocator.GetComponent<CharacterModel>());
+
+        //                //XmodelTransform.GetComponent<CharacterModel>().AddTempOverlay(temporaryOverlayInstance);
+        //                //XmodelTransform.GetComponent<CharacterModel>().UpdateOverlays();
+        //                //XmodelTransform.GetComponent<CharacterModel>().UpdateOverlayStates();
+
+        //                Debug.Log("ADD OVERLAY");
+        //            }
+
+
+
+        //        }
+        //        else
+        //        {
+        //            //temporaryOverlayInstance.CleanupEffect();
+        //            if (XBody.modelLocator)
+        //            {
+        //                //XmodelTransform.GetComponent<CharacterModel>().temporaryOverlays.Clear();
+        //                Debug.Log("Cleanup");
+        //            }
+
+        //        }
+        //    }
+
+        //}
+
+        //public void ApplyGoldTexture(CharacterModel characterModel)
+        //{
+
+        //    XModel = characterModel;
+
+        //    temporaryOverlayInstance = TemporaryOverlayManager.AddOverlay(characterModel.gameObject);
+        //    temporaryOverlayInstance.duration = 20f;
+        //    temporaryOverlayInstance.animateShaderAlpha = true;
+        //    temporaryOverlayInstance.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+        //    temporaryOverlayInstance.destroyComponentOnEnd = true;
+        //    //temporaryOverlayInstance.originalMaterial = LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashBright");
+        //    temporaryOverlayInstance.originalMaterial = XAssets.MatMaxGold;
+        //    //temporaryOverlayInstance.originalMaterial = XSurvivor.instance.assetBundle.LoadAsset<Material>("matMaxG");
+        //    temporaryOverlayInstance.inspectorCharacterModel = characterModel;
+        //    temporaryOverlayInstance.AddToCharacterModel(characterModel);
+
+        //    Debug.Log("Overlay Mat: " + temporaryOverlayInstance.originalMaterial);
+        //    Debug.Log("Overlay: " + temporaryOverlayInstance);
+        //    Debug.Log("Overlay assing charmodel: " + temporaryOverlayInstance.assignedCharacterModel);
+        //    Debug.Log("Overlay initialized: " + temporaryOverlayInstance.initialized);
+        //    Debug.Log("Overlay is assigned: " + temporaryOverlayInstance.isAssigned);
+        //    Debug.Log("Overlay transmit: " + temporaryOverlayInstance.transmit);
+        //    Debug.Log("Overlay GO: " + temporaryOverlayInstance.gameObject);
+
+        //}
+
+
+        public void RemoveArmorBuffs()
+        {
+
+            if (XBody.HasBuff(XBuffs.LightArmorBuff))
+            {
+                if (NetworkServer.active)
+                {
+                    XBody.RemoveBuff(XBuffs.LightArmorBuff);
+                }   
+            }
+
+            if (XBody.HasBuff(XBuffs.SecondArmorBuff))
+            {
+                if (NetworkServer.active)
+                {
+                    XBody.RemoveBuff(XBuffs.SecondArmorBuff);
+                }
+            }
+
+            if (XBody.HasBuff(XBuffs.MaxArmorBuff))
+            {
+                if (NetworkServer.active)
+                {
+                    XBody.RemoveBuff(XBuffs.MaxArmorBuff);
+                }
+            }
+
+            if (XBody.HasBuff(XBuffs.MaxArmorBuff))
+            {
+                if (NetworkServer.active)
+                {
+                    XBody.RemoveBuff(XBuffs.MaxArmorBuff);
+                }
+            }
+
+            if (XBody.HasBuff(XBuffs.FourthArmorBuff))
+            {
+                if (NetworkServer.active)
+                {
+                    XBody.RemoveBuff(XBuffs.FourthArmorBuff);
+                }
+            }
+
+            if (XBody.HasBuff(XBuffs.FalconArmorBuff))
+            {
+                if (NetworkServer.active)
+                {
+                    XBody.RemoveBuff(XBuffs.FalconArmorBuff);
+                }
+            }
+
+            if (XBody.HasBuff(XBuffs.GaeaArmorBuff))
+            {
+                if (NetworkServer.active)
+                {
+                    XBody.RemoveBuff(XBuffs.GaeaArmorBuff);
+                }
+            }
+
+            if (XBody.HasBuff(XBuffs.ShadowArmorBuff))
+            {
+                if (NetworkServer.active)
+                {
+                    XBody.RemoveBuff(XBuffs.ShadowArmorBuff);
+                }
+            }
+
+            if (XBody.HasBuff(XBuffs.UltimateArmorBuff))
+            {
+                if (NetworkServer.active)
+                {
+                    XBody.RemoveBuff(XBuffs.UltimateArmorBuff);
+                }
+            }
+
+            if (XBody.HasBuff(XBuffs.RathalosArmorBuff))
+            {
+                if (NetworkServer.active)
+                {
+                    XBody.RemoveBuff(XBuffs.RathalosArmorBuff);
+                }
+            }
+
+
+
+
+        }
+
         public void UnsetAllExtraFirstSkills()
         {
             //UNSET ALL FIRST SKILL
             extraskillLocator.extraFirst.UnsetSkillOverride(extraskillLocator.extraFirst, XSurvivor.CoolDownXArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             extraskillLocator.extraFirst.UnsetSkillOverride(extraskillLocator.extraFirst, XSurvivor.HyperModeLightArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             extraskillLocator.extraFirst.UnsetSkillOverride(extraskillLocator.extraFirst, XSurvivor.HyperModeSecondArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+
+            
         }
 
         public void UnsetAllExtraSecondSkills()
@@ -136,16 +366,32 @@ namespace MegamanXMod.Survivors.X.Components
         {
             //UNSET ALL FOURTH SKILL
             extraskillLocator.extraFourth.UnsetSkillOverride(extraskillLocator.extraFourth, XSurvivor.CoolDownXArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
-            extraskillLocator.extraFourth.UnsetSkillOverride(extraskillLocator.extraFourth, XSurvivor.HyperModeFalconArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
-            extraskillLocator.extraFourth.UnsetSkillOverride(extraskillLocator.extraFourth, XSurvivor.HyperModeGaeaArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            extraskillLocator.extraFourth.UnsetSkillOverride(extraskillLocator.extraFourth, XSurvivor.HyperModeShadowArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            extraskillLocator.extraFourth.UnsetSkillOverride(extraskillLocator.extraFourth, XSurvivor.HyperModeUltimateArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            extraskillLocator.extraFourth.UnsetSkillOverride(extraskillLocator.extraFourth, XSurvivor.HyperModeRathalosArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+        }
+
+        public void UnsetAllPrimarySkills()
+        {
+            //UNSET ALL PRIMARY SKILL
+            XBody.skillLocator.primary.UnsetSkillOverride(XBody.skillLocator.primary, XSurvivor.XBusterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            XBody.skillLocator.primary.UnsetSkillOverride(XBody.skillLocator.primary, XSurvivor.XLightBusterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            XBody.skillLocator.primary.UnsetSkillOverride(XBody.skillLocator.primary, XSurvivor.XGigaBusterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            XBody.skillLocator.primary.UnsetSkillOverride(XBody.skillLocator.primary, XSurvivor.XMaxBusterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            XBody.skillLocator.primary.UnsetSkillOverride(XBody.skillLocator.primary, XSurvivor.XForceBusterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            XBody.skillLocator.primary.UnsetSkillOverride(XBody.skillLocator.primary, XSurvivor.XFalconBusterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            XBody.skillLocator.primary.UnsetSkillOverride(XBody.skillLocator.primary, XSurvivor.XGaeaBusterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            XBody.skillLocator.primary.UnsetSkillOverride(XBody.skillLocator.primary, XSurvivor.XShadowBusterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            XBody.skillLocator.primary.UnsetSkillOverride(XBody.skillLocator.primary, XSurvivor.XUltimateBusterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            //XBody.skillLocator.primary.UnsetSkillOverride(XBody.skillLocator.primary, XSurvivor.XGigaBusterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
         }
 
         public void UnsetAllUtilitySkills()
         {
             //UNSET ALL UTILITY SKILL
-            XBody.skillLocator.utility.UnsetSkillOverride(extraskillLocator.extraThird, XSurvivor.XFalconDashSkillDef, GenericSkill.SkillOverridePriority.Contextual);
-            XBody.skillLocator.utility.UnsetSkillOverride(extraskillLocator.extraThird, XSurvivor.HyperModeFalconArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
-            XBody.skillLocator.utility.UnsetSkillOverride(extraskillLocator.extraThird, XSurvivor.HyperModeGaeaArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            XBody.skillLocator.utility.UnsetSkillOverride(XBody.skillLocator.utility, XSurvivor.XFalconDashSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            XBody.skillLocator.utility.UnsetSkillOverride(XBody.skillLocator.utility, XSurvivor.HyperModeFalconArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            XBody.skillLocator.utility.UnsetSkillOverride(XBody.skillLocator.utility, XSurvivor.HyperModeGaeaArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
         }
 
         public SkillDef GetPrimaryArmorSkillDef()
