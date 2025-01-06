@@ -67,6 +67,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     meshRenderer.sharedMesh = XAssets.XBodyMesh;
                     meshRenderer.sharedMaterial = XAssets.MatX;
                     characterModel.baseRendererInfos[0].defaultMaterial = XAssets.MatX;
+                    childLocator.FindChildGameObject("XShadowSaber").SetActive(false);
+                    childLocator.FindChildGameObject("XRathalosSaber").SetActive(false);
 
                 }
             }
@@ -100,11 +102,15 @@ namespace MegamanXMod.Survivors.X.SkillStates
             armorComponent.UnsetAllExtraSecondSkills();
             armorComponent.UnsetAllExtraThirdSkills();
             armorComponent.UnsetAllExtraFourthSkills();
+            armorComponent.UnsetAllPrimarySkills();
+            armorComponent.UnsetAllSecondarySkills();
+            armorComponent.UnsetAllUtilitySkills();
+            armorComponent.UnsetAllSpecialSkills();
 
             //RESET ALL SKILLS TO BASE
             characterBody.skillLocator.primary.SetSkillOverride(characterBody.skillLocator.primary, XSurvivor.XBusterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             characterBody.skillLocator.secondary.SetSkillOverride(characterBody.skillLocator.secondary, armorComponent.GetSecondaryBaseSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
-            characterBody.skillLocator.utility.SetSkillOverride(characterBody.skillLocator.utility, armorComponent.GetUtiliryBaseSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
+            characterBody.skillLocator.utility.SetSkillOverride(characterBody.skillLocator.utility, armorComponent.GetUtilityBaseSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
             characterBody.skillLocator.special.SetSkillOverride(characterBody.skillLocator.special, armorComponent.GetSpecialBaseSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
 
             extraskillLocator.extraFirst.SetSkillOverride(extraskillLocator.extraFirst, armorComponent.GetPrimaryArmorSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
@@ -117,7 +123,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.PrioritySkill;
+            return InterruptPriority.Frozen;
         }
     }
 }

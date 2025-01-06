@@ -40,6 +40,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             characterBody.SetAimTimer(2f);
             muzzleString = "Muzzle";
 
+
             PlayAnimation("FullBody, Override", "HyperMode", "HyperMode.playbackRate", duration);
 
             if (NetworkServer.active)
@@ -67,7 +68,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     meshRenderer.sharedMesh = XAssets.GaeaBodyMesh;
                     meshRenderer.sharedMaterial = XAssets.MatGaea;
                     characterModel.baseRendererInfos[0].defaultMaterial = XAssets.MatGaea;
-
+                    childLocator.FindChildGameObject("XShadowSaber").SetActive(false);
+                    childLocator.FindChildGameObject("XRathalosSaber").SetActive(false);
                 }
             }
 
@@ -126,8 +128,10 @@ namespace MegamanXMod.Survivors.X.SkillStates
             armorComponent.UnsetAllExtraThirdSkills();
             armorComponent.UnsetAllExtraFourthSkills();
             armorComponent.UnsetAllPrimarySkills();
+            armorComponent.UnsetAllSecondarySkills();
             armorComponent.UnsetAllUtilitySkills();
-            
+            armorComponent.UnsetAllSpecialSkills();
+
 
             //RESET ALL EXTRA SKILLS AND SET THIRD EXTRA TO COOLDOWN X
             extraskillLocator.extraFirst.SetSkillOverride(extraskillLocator.extraFirst, armorComponent.GetPrimaryArmorSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
@@ -138,7 +142,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             //RESET ALL NORMAL SKILLS AND SET THE PRIMARY AND SECONDARY FOR GAEA
             characterBody.skillLocator.primary.SetSkillOverride(characterBody.skillLocator.primary, XSurvivor.XGaeaBusterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             characterBody.skillLocator.secondary.SetSkillOverride(characterBody.skillLocator.secondary, armorComponent.GetSecondaryBaseSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
-            characterBody.skillLocator.utility.SetSkillOverride(characterBody.skillLocator.utility, armorComponent.GetUtiliryBaseSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
+            characterBody.skillLocator.utility.SetSkillOverride(characterBody.skillLocator.utility, armorComponent.GetUtilityBaseSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
             characterBody.skillLocator.special.SetSkillOverride(characterBody.skillLocator.special, armorComponent.GetSpecialBaseSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
 
             setSkills = true;

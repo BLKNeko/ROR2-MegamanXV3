@@ -52,6 +52,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             armorComponent = GetComponent<XArmorComponent>();
             extraskillLocator = base.GetComponent<ExtraSkillLocator>();
 
+            armorComponent.RemoveArmorBuffs();
 
             //TRANSFORM INTO SHADOW ARMOR
             this.modelTransform = base.GetModelTransform();
@@ -66,6 +67,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     meshRenderer.sharedMesh = XAssets.ShadowBodyMesh;
                     meshRenderer.sharedMaterial = XAssets.MatShadow;
                     characterModel.baseRendererInfos[0].defaultMaterial = XAssets.MatShadow;
+                    childLocator.FindChildGameObject("XShadowSaber").SetActive(true);
+                    childLocator.FindChildGameObject("XRathalosSaber").SetActive(false);
 
                 }
             }
@@ -94,6 +97,11 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 temporaryOverlayInstance2.AddToCharacterModel(this.modelTransform.GetComponent<CharacterModel>());
             }
 
+            if (NetworkServer.active)
+            {
+                characterBody.AddBuff(XBuffs.ShadowArmorBuff);
+            }
+
         }
 
         public override void FixedUpdate()
@@ -114,21 +122,27 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
         private void SetSkills()
         {
-            
-            armorComponent.UnsetAllExtraThirdSkills();
-            armorComponent.UnsetAllUtilitySkills();
-            
 
-            //RESET ALL EXTRA SKILLS AND SET THIRD EXTRA TO COOLDOWN X
+            armorComponent.UnsetAllExtraFirstSkills();
+            armorComponent.UnsetAllExtraSecondSkills();
+            armorComponent.UnsetAllExtraThirdSkills();
+            armorComponent.UnsetAllExtraFourthSkills();
+            armorComponent.UnsetAllPrimarySkills();
+            armorComponent.UnsetAllSecondarySkills();
+            armorComponent.UnsetAllUtilitySkills();
+            armorComponent.UnsetAllSpecialSkills();
+
+
+            //RESET ALL EXTRA SKILLS AND SET FOURTH EXTRA TO COOLDOWN X
             extraskillLocator.extraFirst.SetSkillOverride(extraskillLocator.extraFirst, armorComponent.GetPrimaryArmorSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
             extraskillLocator.extraSecond.SetSkillOverride(extraskillLocator.extraSecond, armorComponent.GetSecondaryArmorSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
-            extraskillLocator.extraThird.SetSkillOverride(extraskillLocator.extraThird, XSurvivor.CoolDownXArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
-            extraskillLocator.extraFourth.SetSkillOverride(extraskillLocator.extraFourth, armorComponent.GetFourthArmorSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
+            extraskillLocator.extraThird.SetSkillOverride(extraskillLocator.extraThird, armorComponent.GetThirdArmorSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
+            extraskillLocator.extraFourth.SetSkillOverride(extraskillLocator.extraFourth, XSurvivor.CoolDownXArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
 
-            //RESET ALL NORMAL SKILLS AND SET THE PRIMARY AND UTILITY FOR FALCON
-            characterBody.skillLocator.primary.SetSkillOverride(characterBody.skillLocator.primary, XSurvivor.XFalconDashSkillDef, GenericSkill.SkillOverridePriority.Contextual);
-            characterBody.skillLocator.secondary.SetSkillOverride(characterBody.skillLocator.secondary, armorComponent.GetSecondaryBaseSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
-            characterBody.skillLocator.utility.SetSkillOverride(characterBody.skillLocator.utility, XSurvivor.XFalconDashSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            //RESET ALL NORMAL SKILLS AND SET THE PRIMARY AND SECONDARY FOR SHADOW
+            characterBody.skillLocator.primary.SetSkillOverride(characterBody.skillLocator.primary, XSurvivor.XShadowBusterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            characterBody.skillLocator.secondary.SetSkillOverride(characterBody.skillLocator.secondary, XSurvivor.XShadowSaberSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            characterBody.skillLocator.utility.SetSkillOverride(characterBody.skillLocator.utility, armorComponent.GetUtilityBaseSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
             characterBody.skillLocator.special.SetSkillOverride(characterBody.skillLocator.special, armorComponent.GetSpecialBaseSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
 
             setSkills = true;
@@ -136,7 +150,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.PrioritySkill;
+            return InterruptPriority.Frozen;
         }
     }
 }

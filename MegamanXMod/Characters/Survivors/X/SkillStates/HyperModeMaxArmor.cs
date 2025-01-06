@@ -67,6 +67,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     meshRenderer.sharedMesh = XAssets.MaxBodyMesh;
                     meshRenderer.sharedMaterial = XAssets.MatMax;
                     characterModel.baseRendererInfos[0].defaultMaterial = XAssets.MatMax;
+                    childLocator.FindChildGameObject("XShadowSaber").SetActive(false);
+                    childLocator.FindChildGameObject("XRathalosSaber").SetActive(false);
 
                 }
             }
@@ -136,7 +138,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             //RESET ALL NORMAL SKILLS AND SET THE PRIMARY AND SPECIAL FOR MAX
             characterBody.skillLocator.primary.SetSkillOverride(characterBody.skillLocator.primary, XSurvivor.XMaxBusterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             characterBody.skillLocator.secondary.SetSkillOverride(characterBody.skillLocator.secondary, armorComponent.GetSecondaryBaseSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
-            characterBody.skillLocator.utility.SetSkillOverride(characterBody.skillLocator.utility, armorComponent.GetUtiliryBaseSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
+            characterBody.skillLocator.utility.SetSkillOverride(characterBody.skillLocator.utility, armorComponent.GetUtilityBaseSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
             characterBody.skillLocator.special.SetSkillOverride(characterBody.skillLocator.special, XSurvivor.XHyperChipSkillDef, GenericSkill.SkillOverridePriority.Contextual);
 
             setSkills = true;

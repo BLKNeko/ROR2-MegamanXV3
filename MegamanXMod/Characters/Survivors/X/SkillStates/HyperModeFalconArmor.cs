@@ -52,6 +52,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
             armorComponent = GetComponent<XArmorComponent>();
             extraskillLocator = base.GetComponent<ExtraSkillLocator>();
 
+            armorComponent.RemoveArmorBuffs();
+
 
             //TRANSFORM INTO FALCON ARMOR
             this.modelTransform = base.GetModelTransform();
@@ -66,6 +68,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     meshRenderer.sharedMesh = XAssets.FalconBodyMesh;
                     meshRenderer.sharedMaterial = XAssets.MatFalcon;
                     characterModel.baseRendererInfos[0].defaultMaterial = XAssets.MatFalcon;
+                    childLocator.FindChildGameObject("XShadowSaber").SetActive(false);
+                    childLocator.FindChildGameObject("XRathalosSaber").SetActive(false);
 
                 }
             }
@@ -120,10 +124,16 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
         private void SetSkills()
         {
-            
+
+            armorComponent.UnsetAllExtraFirstSkills();
+            armorComponent.UnsetAllExtraSecondSkills();
             armorComponent.UnsetAllExtraThirdSkills();
+            armorComponent.UnsetAllExtraFourthSkills();
+            armorComponent.UnsetAllPrimarySkills();
+            armorComponent.UnsetAllSecondarySkills();
             armorComponent.UnsetAllUtilitySkills();
-            
+            armorComponent.UnsetAllSpecialSkills();
+
 
             //RESET ALL EXTRA SKILLS AND SET THIRD EXTRA TO COOLDOWN X
             extraskillLocator.extraFirst.SetSkillOverride(extraskillLocator.extraFirst, armorComponent.GetPrimaryArmorSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
@@ -132,7 +142,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             extraskillLocator.extraFourth.SetSkillOverride(extraskillLocator.extraFourth, armorComponent.GetFourthArmorSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
 
             //RESET ALL NORMAL SKILLS AND SET THE PRIMARY AND UTILITY FOR FALCON
-            characterBody.skillLocator.primary.SetSkillOverride(characterBody.skillLocator.primary, XSurvivor.XFalconDashSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            characterBody.skillLocator.primary.SetSkillOverride(characterBody.skillLocator.primary, XSurvivor.XFalconBusterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             characterBody.skillLocator.secondary.SetSkillOverride(characterBody.skillLocator.secondary, armorComponent.GetSecondaryBaseSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
             characterBody.skillLocator.utility.SetSkillOverride(characterBody.skillLocator.utility, XSurvivor.XFalconDashSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             characterBody.skillLocator.special.SetSkillOverride(characterBody.skillLocator.special, armorComponent.GetSpecialBaseSkillDef(), GenericSkill.SkillOverridePriority.Contextual);

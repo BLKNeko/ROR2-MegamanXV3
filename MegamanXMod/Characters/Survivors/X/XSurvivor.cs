@@ -60,17 +60,23 @@ namespace MegamanXMod.Survivors.X
         internal static SkillDef XGaeaBusterSkillDef;
         internal static SkillDef XShadowBusterSkillDef;
         internal static SkillDef XUltimateBusterSkillDef;
+        internal static SkillDef XRathalosBusterSkillDef;
 
         //SECONDARY
         internal static SteppedSkillDef XShadowSaberSkillDef;
+        internal static SteppedSkillDef XRathalosSaberSkillDef;
 
         //UTILITY
         internal static SkillDef XDashSkillDef;
         internal static SkillDef XFalconDashSkillDef;
+        internal static SkillDef XNovaDashSkillDef;
+        internal static SkillDef XNovaStrikeSkillDef;
 
         //SPECIAL
         internal static SkillDef XHeadScannerSkillDef;
         internal static SkillDef XHyperChipSkillDef;
+        internal static SkillDef XGaeaGigaAttackSkillDef;
+        internal static SkillDef XRathalosSlashSkillDef;
 
 
         public override BodyInfo bodyInfo => new BodyInfo
@@ -104,10 +110,15 @@ namespace MegamanXMod.Survivors.X
                     childName = "XBodyMesh",
                     material = XAssets.MatX,
                 },
-                 new CustomRendererInfo
+                new CustomRendererInfo
                 {
                     childName = "XShadowSaber",
-                    material = XAssets.MatX,
+                    //material = XAssets.MatX,
+                },
+                new CustomRendererInfo
+                {
+                    childName = "XRathalosSaber",
+                    //material = XAssets.MatX,
                 }
                 //new CustomRendererInfo
                 //{
@@ -185,7 +196,11 @@ namespace MegamanXMod.Survivors.X
             Transform hitboxTransform = childLocator.FindChild("ShadowSaberHitBox");
             Prefabs.SetupHitBoxGroup(model, "ShadowSaberGroup", "ShadowSaberHitBox");
             //hitboxTransform.localScale = new Vector3(5.2f, 5.2f, 5.2f);
-            hitboxTransform.localScale = new Vector3(4f, 4f, 4f);
+            hitboxTransform.localScale = new Vector3(6f, 6f, 6f);
+
+            Transform hitboxTransform2 = childLocator.FindChild("BodyDashHitbox");
+            Prefabs.SetupHitBoxGroup(characterModelObject, "BodyDashHitbox", "BodyDashHitbox");
+            hitboxTransform2.localScale = new Vector3(6f, 6f, 6f);
 
         }
 
@@ -700,17 +715,47 @@ namespace MegamanXMod.Survivors.X
                 forceSprintDuringState = false,
             });
 
+            XRathalosBusterSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "RathalosBuster",
+                skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_RATHALOS_BUSTER_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_RATHALOS_BUSTER_DESCRIPTION",
+                skillIcon = XAssets.IconRathalosBuster,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(XRathalosBuster)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseRechargeInterval = 0f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = true,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = true,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+
             //SECONDARY
             XShadowSaberSkillDef = Skills.CreateSkillDef<SteppedSkillDef>(new SkillDefInfo
             {
                 skillName = "ShadowSaber",
-                skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_SHADOW_SABER_NAME",
-                skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_SHADOW_SABER_DESCRIPTION",
+                skillNameToken = MEGAMAN_x_PREFIX + "SECONDARY_SHADOW_SABER_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "SECONDARY_SHADOW_SABER_DESCRIPTION",
                 skillIcon = XAssets.IconXShadow,
 
-                activationState = new EntityStates.SerializableEntityStateType(typeof(XShadowSlashCombo)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(XSSlashCombo)),
                 activationStateMachineName = "Weapon2",
-                interruptPriority = EntityStates.InterruptPriority.Skill,
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
                 baseRechargeInterval = 0f,
                 baseMaxStock = 1,
@@ -733,9 +778,44 @@ namespace MegamanXMod.Survivors.X
                 forceSprintDuringState = false,
 
             });
-            //XShadowSaberSkillDef.stepCount = 2;
-            //XShadowSaberSkillDef.stepGraceDuration = 0.5f;
+            XShadowSaberSkillDef.stepCount = 2;
+            XShadowSaberSkillDef.stepGraceDuration = 0.5f;
             //XShadowSaberSkillDef.mustKeyPress = false;
+
+            XRathalosSaberSkillDef = Skills.CreateSkillDef<SteppedSkillDef>(new SkillDefInfo
+            {
+                skillName = "RathalosSaber",
+                skillNameToken = MEGAMAN_x_PREFIX + "SECONDARY_RATHALOS_SABER_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "SECONDARY_RATHALOS_SABER_DESCRIPTION",
+                //skillIcon = XAssets.IconXShadow,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(XRSlashCombo)),
+                activationStateMachineName = "Weapon2",
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+
+                baseRechargeInterval = 0f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+
+
+                resetCooldownTimerOnUse = true,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = false,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+
+            });
+            XRathalosSaberSkillDef.stepCount = 2;
+            XRathalosSaberSkillDef.stepGraceDuration = 0.5f;
 
             //UTILITY
             XFalconDashSkillDef = Skills.CreateSkillDef(new SkillDefInfo
@@ -766,6 +846,72 @@ namespace MegamanXMod.Survivors.X
                 canceledFromSprinting = false,
                 cancelSprintingOnActivation = false,
                 forceSprintDuringState = true,
+            });
+
+            XNovaDashSkillDef = Skills.CreateSkillDef<SteppedSkillDef>(new SkillDefInfo
+            {
+                skillName = "NovaDash",
+                skillNameToken = MEGAMAN_x_PREFIX + "UTILITY_NOVA_DASH_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "UTILITY_NOVA_DASH_DESCRIPTION",
+                //skillIcon = XAssets.IconXShadow,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(NovaDash)),
+                activationStateMachineName = "Weapon2",
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+
+                baseRechargeInterval = 2f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+
+
+                resetCooldownTimerOnUse = true,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = false,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = false,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+
+            });
+
+            XNovaStrikeSkillDef = Skills.CreateSkillDef<SteppedSkillDef>(new SkillDefInfo
+            {
+                skillName = "NovaStrike",
+                skillNameToken = MEGAMAN_x_PREFIX + "UTILITY_NOVA_STRIKE_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "UTILITY_NOVA_STRIKE_DESCRIPTION",
+                //skillIcon = XAssets.IconXShadow,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(NovaStrike)),
+                activationStateMachineName = "Weapon2",
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+
+                baseRechargeInterval = 2f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+
+
+                resetCooldownTimerOnUse = true,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = false,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = false,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+
             });
 
             //SPECIAL
@@ -811,6 +957,66 @@ namespace MegamanXMod.Survivors.X
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
                 baseRechargeInterval = 3f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = false,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = false,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = false,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+
+            XGaeaGigaAttackSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "GigaAttackGaeaArmor",
+                skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_GIGA_ATTACK_GAEA_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "SPECIAL_GIGA_ATTACK_GAEA_DESCRIPTION",
+                skillIcon = XAssets.IconHyperChip,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(GigaAttackGaea)),
+                activationStateMachineName = "Body",
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+
+                baseRechargeInterval = 3f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = false,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = false,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = false,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+
+            XRathalosSlashSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "XRathalosSlash",
+                skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_RATHALOS_SLASH_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "SPECIAL_RATHALOS_SLASH_DESCRIPTION",
+                //skillIcon = XAssets.IconHyperChip,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(XRathalosSlashCombo1)),
+                activationStateMachineName = "Weapon2",
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+
+                baseRechargeInterval = 0f,
                 baseMaxStock = 1,
 
                 rechargeStock = 1,
@@ -901,7 +1107,7 @@ namespace MegamanXMod.Survivors.X
                     MEGAMAN_x_PREFIX + "PRIMARY_SLASH_NAME",
                     MEGAMAN_x_PREFIX + "PRIMARY_SLASH_DESCRIPTION",
                     assetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
-                    new EntityStates.SerializableEntityStateType(typeof(SkillStates.XShadowSlashCombo)),
+                    new EntityStates.SerializableEntityStateType(typeof(SkillStates.XSSlashCombo)),
                     "Weapon",
                     true
                 ));
@@ -921,6 +1127,7 @@ namespace MegamanXMod.Survivors.X
             Skills.AddPrimarySkills(bodyPrefab, XGaeaBusterSkillDef);
             Skills.AddPrimarySkills(bodyPrefab, XShadowBusterSkillDef);
             Skills.AddPrimarySkills(bodyPrefab, XUltimateBusterSkillDef);
+            Skills.AddPrimarySkills(bodyPrefab, XRathalosBusterSkillDef);
         }
 
         private void AddSecondarySkills()
@@ -1002,6 +1209,8 @@ namespace MegamanXMod.Survivors.X
             Skills.AddUtilitySkills(bodyPrefab, utilitySkillDef1);
 
             Skills.AddUtilitySkills(bodyPrefab, XFalconDashSkillDef);
+            Skills.AddUtilitySkills(bodyPrefab, XNovaDashSkillDef);
+            Skills.AddUtilitySkills(bodyPrefab, XNovaStrikeSkillDef);
 
         }
 
@@ -1031,6 +1240,8 @@ namespace MegamanXMod.Survivors.X
             Skills.AddSpecialSkills(bodyPrefab, specialSkillDef1);
             Skills.AddSpecialSkills(bodyPrefab, XHeadScannerSkillDef);
             Skills.AddSpecialSkills(bodyPrefab, XHyperChipSkillDef);
+            Skills.AddSpecialSkills(bodyPrefab, XGaeaGigaAttackSkillDef);
+            Skills.AddSpecialSkills(bodyPrefab, XRathalosSlashSkillDef);
         }
         #endregion skills
 
@@ -1140,7 +1351,7 @@ namespace MegamanXMod.Survivors.X
                 mustKeyPress = false,
             });
 
-            Skills.AddFourthExtraSkill(bodyPrefab, FESSkillDef);
+            //Skills.AddFourthExtraSkill(bodyPrefab, FESSkillDef);
             Skills.AddFourthExtraSkill(bodyPrefab, HyperModeShadowArmorSkillDef);
             Skills.AddFourthExtraSkill(bodyPrefab, HyperModeUltimateArmorSkillDef);
             Skills.AddFourthExtraSkill(bodyPrefab, HyperModeRathalosArmorSkillDef);
@@ -1169,6 +1380,7 @@ namespace MegamanXMod.Survivors.X
             //uncomment this when you have another skin
             defaultSkin.meshReplacements = Modules.Skins.getMeshReplacements(assetBundle, defaultRendererinfos,
                 "XBodyMesh",
+                null,
                 null);
 
             //here's a barebones example of using gameobjectactivations that could probably be streamlined or rewritten entirely, truthfully, but it works
@@ -1177,7 +1389,12 @@ namespace MegamanXMod.Survivors.X
                 new SkinDef.GameObjectActivation
                 {
                     gameObject = childLocator.FindChildGameObject("XShadowSaber"),
-                    shouldActivate = true,
+                    shouldActivate = false,
+                },
+                new SkinDef.GameObjectActivation
+                {
+                    gameObject = childLocator.FindChildGameObject("XRathalosSaber"),
+                    shouldActivate = false,
                 }
             };
 
@@ -1357,6 +1574,7 @@ namespace MegamanXMod.Survivors.X
 
             if (sender.HasBuff(XBuffs.LightArmorBuff))
             {
+                args.armorAdd += 40;
                 args.armorAdd *= 1.5f;
                 args.healthMultAdd *= 1.5f;
                 args.damageMultAdd *= 1.8f;
@@ -1370,6 +1588,7 @@ namespace MegamanXMod.Survivors.X
 
             if (sender.HasBuff(XBuffs.SecondArmorBuff))
             {
+                args.armorAdd += 30;
                 args.armorAdd *= 1.3f;
                 args.healthMultAdd *= 1.3f;
                 args.damageMultAdd *= 1.5f;
@@ -1383,6 +1602,7 @@ namespace MegamanXMod.Survivors.X
 
             if (sender.HasBuff(XBuffs.MaxArmorBuff))
             {
+                args.armorAdd += 50;
                 args.armorAdd *= 2f;
                 args.healthMultAdd *= 1.8f;
                 args.damageMultAdd *= 1.8f;
@@ -1396,6 +1616,7 @@ namespace MegamanXMod.Survivors.X
 
             if (sender.HasBuff(XBuffs.FourthArmorBuff))
             {
+                args.armorAdd += 80;
                 args.armorAdd *= 2.2f;
                 args.healthMultAdd *= 1.5f;
                 args.damageMultAdd *= 2f;
@@ -1409,12 +1630,14 @@ namespace MegamanXMod.Survivors.X
 
             if (sender.HasBuff(XBuffs.FalconArmorBuff))
             {
+                args.armorAdd += 20;
                 args.armorAdd *= 1.1f;
                 args.healthMultAdd *= 1.1f;
                 args.damageMultAdd *= 1f;
                 args.attackSpeedMultAdd *= 2f;
                 args.regenMultAdd *= 1.4f;
-                args.jumpPowerMultAdd *= 1.8f;
+                args.jumpPowerMultAdd += 0.25f;
+                args.jumpPowerMultAdd *= 1.5f;
                 args.moveSpeedMultAdd *= 2.5f;
                 args.shieldMultAdd *= 1.2f;
                 args.critDamageMultAdd *= 2f;
@@ -1436,11 +1659,13 @@ namespace MegamanXMod.Survivors.X
 
             if (sender.HasBuff(XBuffs.ShadowArmorBuff))
             {
+                args.armorAdd += 80;
                 args.armorAdd *= 2.5f;
                 args.healthMultAdd *= 2f;
                 args.damageMultAdd *= 2f;
                 args.attackSpeedMultAdd *= 2.5f;
                 args.regenMultAdd *= 1.5f;
+                args.jumpPowerMultAdd += 0.5f;
                 args.jumpPowerMultAdd *= 2f;
                 args.moveSpeedMultAdd *= 2.5f;
                 args.shieldMultAdd *= 1.8f;
@@ -1449,6 +1674,7 @@ namespace MegamanXMod.Survivors.X
 
             if (sender.HasBuff(XBuffs.UltimateArmorBuff))
             {
+                args.armorAdd += 100;
                 args.armorAdd *= 2.8f;
                 args.healthMultAdd *= 2f;
                 args.damageMultAdd *= 3f;
@@ -1462,6 +1688,7 @@ namespace MegamanXMod.Survivors.X
 
             if (sender.HasBuff(XBuffs.RathalosArmorBuff))
             {
+                args.armorAdd += 100;
                 args.armorAdd *= 3f;
                 args.healthMultAdd *= 2f;
                 args.damageMultAdd *= 3f;

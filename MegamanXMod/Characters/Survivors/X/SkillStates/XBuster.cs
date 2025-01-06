@@ -45,12 +45,13 @@ namespace MegamanXMod.Survivors.X.SkillStates
             characterBody.SetAimTimer(2f);
             muzzleString = "Muzzle";
 
-            PlayAnimation("LeftArm, Override", "XBusterGun", "XBusterGun.playbackRate", 1.8f);
+            
 
         }
 
         public override void OnExit()
         {
+            //base.PlayAnimation("Gesture, Override", "BufferEmpty", "attackSpeed", this.duration);
             chargeTime = 0f;
             chargeLevel = 0;
             base.OnExit();
@@ -113,6 +114,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 characterBody.AddSpreadBloom(0.8f);
                 EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, gameObject, muzzleString, false);
                 Util.PlaySound("HenryXBusterPistol", gameObject);
+                PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
 
                 if (isAuthority)
                 {
@@ -162,6 +164,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 characterBody.AddSpreadBloom(0.8f);
                 EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, gameObject, muzzleString, false);
                 Util.PlaySound("HenryXBusterPistol", gameObject);
+                PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
 
                 if (isAuthority)
                 {
@@ -195,6 +198,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 base.characterBody.AddSpreadBloom(0.75f);
                 EffectManager.SimpleMuzzleFlash(EntityStates.Mage.Weapon.FireRoller.fireMuzzleflashEffectPrefab, base.gameObject, this.muzzleString, false);
                 Util.PlaySound("HenryXBusterPistol", gameObject);
+                PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
 
                 if (base.isAuthority)
                 {
@@ -278,11 +282,13 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     //Util.PlaySound(Sounds.charging, base.gameObject);
                     //EffectManager.SimpleMuzzleFlash(Modules.Assets.chargeeffect1C, base.gameObject, "Center", true);
                     //EffectManager.SimpleMuzzleFlash(Modules.Assets.chargeeffect1W, base.gameObject, "Center", true);
+                    EffectManager.SimpleMuzzleFlash(XAssets.Charge1VFX, base.gameObject, "CorePosition", true);
                     break;
 
                 case 2:
                     //Util.PlaySound(Sounds.fullCharge, base.gameObject);
                     //EffectManager.SimpleMuzzleFlash(Modules.Assets.chargeeffect2C, base.gameObject, "Center", true);
+                    EffectManager.SimpleMuzzleFlash(XAssets.Charge2VFX, base.gameObject, "CorePosition", true);
                     break;
 
                 default:

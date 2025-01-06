@@ -18,7 +18,11 @@ namespace MegamanXMod.Survivors.X
 
         public static GameObject HyperModeEffect;
         public static GameObject ShurikenVFX;
-        
+        public static GameObject GaeaGAVFX;
+        public static GameObject Charge1VFX;
+        public static GameObject Charge2VFX;
+        public static GameObject NovaStrikeVFX;
+
 
 
         public static Mesh XBodyMesh;
@@ -97,8 +101,10 @@ namespace MegamanXMod.Survivors.X
         public static GameObject xFalconBusterChargeProjectile;
         public static GameObject xGaeaBusterChargeProjectile;
         public static GameObject xGaeaBusterSmallProjectile;
-        internal static GameObject shotFMJ;
-        internal static GameObject shotgunIceprefab;
+        public static GameObject shotFMJ;
+        public static GameObject shotgunIceprefab;
+        public static GameObject XRFireProjectile;
+        public static GameObject XRFire2Projectile;
 
         private static AssetBundle _assetBundle;
 
@@ -175,6 +181,11 @@ namespace MegamanXMod.Survivors.X
             IconHyperChip = _assetBundle.LoadAsset<Sprite>("XSkillHyperChip");
 
             HyperModeEffect = _assetBundle.LoadEffect("HyperModeEffect", true);
+            GaeaGAVFX = _assetBundle.LoadEffect("GaeaGigaAttackVFX", true);
+            Charge1VFX = _assetBundle.LoadEffect("Charge1VFX", true);
+            Charge2VFX = _assetBundle.LoadEffect("Charge2VFX", true);
+            NovaStrikeVFX = _assetBundle.LoadEffect("NovaStrikeVFX", true);
+
             ShurikenVFX = _assetBundle.LoadEffect("ShurikenVFX", false);
 
 
@@ -222,6 +233,8 @@ namespace MegamanXMod.Survivors.X
             CreateXGaeaBusterChargeProjectile();
             CreateXGaeaBusterSmallProjectile();
             CreateXFalconBusterChargeProjectile();
+            CreateXRFireProjectile();
+            CreateXRFire2Projectile();
 
 
             Content.AddProjectilePrefab(bombProjectilePrefab);
@@ -240,6 +253,8 @@ namespace MegamanXMod.Survivors.X
             Content.AddProjectilePrefab(xGaeaBusterChargeProjectile);
             Content.AddProjectilePrefab(xGaeaBusterSmallProjectile);
             Content.AddProjectilePrefab(xFalconBusterChargeProjectile);
+            Content.AddProjectilePrefab(XRFireProjectile);
+            Content.AddProjectilePrefab(XRFire2Projectile);
         }
 
         private static void CreateBombProjectile()
@@ -788,6 +803,80 @@ namespace MegamanXMod.Survivors.X
             ProjectileController shotgunIceController = shotgunIceprefab.GetComponent<ProjectileController>();
             if (_assetBundle.LoadAsset<GameObject>("ShotgunIceGhost") != null) shotgunIceController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("ShotgunIceGhost");
             shotgunIceController.startSound = "";
+        }
+
+        private static void CreateXRFireProjectile()
+        {
+            //highly recommend setting up projectiles in editor, but this is a quick and dirty way to prototype if you want
+            XRFireProjectile = Asset.CloneProjectilePrefab("Fireball", "XRFireProjectile");
+
+            //remove their ProjectileImpactExplosion component and start from default values
+            UnityEngine.Object.Destroy(XRFireProjectile.GetComponent<ProjectileImpactExplosion>());
+            ProjectileImpactExplosion XRFireExplosion = XRFireProjectile.AddComponent<ProjectileImpactExplosion>();
+
+            XRFireExplosion.blastRadius = 4f;
+            XRFireExplosion.blastDamageCoefficient = 1f;
+            XRFireExplosion.falloffModel = BlastAttack.FalloffModel.None;
+            XRFireExplosion.destroyOnEnemy = true;
+            XRFireExplosion.lifetime = 12f;
+            //XShurkenExplosion.impactEffect = bombExplosionEffect;
+            //XShurkenExplosion.lifetimeExpiredSound = Content.CreateAndAddNetworkSoundEventDef("HenryBombExplosion");
+            XRFireExplosion.timerAfterImpact = true;
+            XRFireExplosion.lifetimeAfterImpact = 0.1f;
+
+            // just setting the numbers to 1 as the entitystate will take care of those
+            XRFireProjectile.GetComponent<ProjectileDamage>().damage = 1f;
+            XRFireProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
+            XRFireProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.IgniteOnHit;
+            XRFireProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
+
+            // register it for networking
+            if (XRFireProjectile) PrefabAPI.RegisterNetworkPrefab(XRFireProjectile);
+
+
+            ProjectileController XRFireController = XRFireProjectile.GetComponent<ProjectileController>();
+
+            //if (_assetBundle.LoadAsset<GameObject>("XRFireProjectille") != null)
+            //    XRFireController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("XBusterHalfChargeProjectille");
+
+            XRFireController.startSound = "";
+        }
+
+        private static void CreateXRFire2Projectile()
+        {
+            //highly recommend setting up projectiles in editor, but this is a quick and dirty way to prototype if you want
+            XRFire2Projectile = Asset.CloneProjectilePrefab("FMJ", "XRFire2Projectile");
+
+            //remove their ProjectileImpactExplosion component and start from default values
+            UnityEngine.Object.Destroy(XRFire2Projectile.GetComponent<ProjectileImpactExplosion>());
+            ProjectileImpactExplosion XRFire2Explosion = XRFire2Projectile.AddComponent<ProjectileImpactExplosion>();
+
+            XRFire2Explosion.blastRadius = 6f;
+            XRFire2Explosion.blastDamageCoefficient = 1f;
+            XRFire2Explosion.falloffModel = BlastAttack.FalloffModel.None;
+            XRFire2Explosion.destroyOnEnemy = true;
+            XRFire2Explosion.lifetime = 12f;
+            //XShurkenExplosion.impactEffect = bombExplosionEffect;
+            //XShurkenExplosion.lifetimeExpiredSound = Content.CreateAndAddNetworkSoundEventDef("HenryBombExplosion");
+            XRFire2Explosion.timerAfterImpact = true;
+            XRFire2Explosion.lifetimeAfterImpact = 0.1f;
+
+            // just setting the numbers to 1 as the entitystate will take care of those
+            XRFire2Projectile.GetComponent<ProjectileDamage>().damage = 1f;
+            XRFire2Projectile.GetComponent<ProjectileController>().procCoefficient = 1f;
+            XRFire2Projectile.GetComponent<ProjectileDamage>().damageType = DamageType.IgniteOnHit;
+            XRFire2Projectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
+
+            // register it for networking
+            if (XRFire2Projectile) PrefabAPI.RegisterNetworkPrefab(XRFire2Projectile);
+
+
+            ProjectileController XRFire2Controller = XRFire2Projectile.GetComponent<ProjectileController>();
+
+            if (_assetBundle.LoadAsset<GameObject>("RathalosBusterChargeProjectille") != null)
+                XRFire2Controller.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("RathalosBusterChargeProjectille");
+
+            XRFire2Controller.startSound = "";
         }
 
 
