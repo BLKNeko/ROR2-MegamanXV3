@@ -78,6 +78,8 @@ namespace MegamanXMod.Survivors.X
         internal static SkillDef XGaeaGigaAttackSkillDef;
         internal static SkillDef XRathalosSlashSkillDef;
 
+        internal static HuntTrackerSkillDef HomingTorpedoSkillDef;
+
 
         public override BodyInfo bodyInfo => new BodyInfo
         {
@@ -181,6 +183,14 @@ namespace MegamanXMod.Survivors.X
             bodyPrefab.AddComponent<XBaseComponent>();
             bodyPrefab.AddComponent<XArmorComponent>();
             bodyPrefab.AddComponent<XHoverComponent>();
+
+            bodyPrefab.AddComponent<HuntressTracker>();
+            HuntressTracker huntressTracker = bodyPrefab.GetComponent<HuntressTracker>();
+            if (huntressTracker)
+            {
+                huntressTracker.maxTrackingDistance = 500f;
+                huntressTracker.maxTrackingAngle = 4f;
+            }
             //bodyPrefab.AddComponent<HuntressTrackerComopnent>();
             //anything else here
         }
@@ -1035,6 +1045,29 @@ namespace MegamanXMod.Survivors.X
                 forceSprintDuringState = false,
             });
 
+            HomingTorpedoSkillDef = ScriptableObject.CreateInstance<HuntTrackerSkillDef>();
+            HomingTorpedoSkillDef.skillName = MEGAMAN_x_PREFIX + "SPECIAL_RATHALOS_SLASH_NAME";
+            HomingTorpedoSkillDef.skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_RATHALOS_SLASH_NAME";
+            HomingTorpedoSkillDef.skillDescriptionToken = MEGAMAN_x_PREFIX + "SPECIAL_RATHALOS_SLASH_DESCRIPTION";
+            HomingTorpedoSkillDef.icon = XAssets.IconX;
+            HomingTorpedoSkillDef.activationState = new EntityStates.SerializableEntityStateType(typeof(HomingTorpedo));
+            HomingTorpedoSkillDef.activationStateMachineName = "Weapon";
+            HomingTorpedoSkillDef.baseMaxStock = 12;
+            HomingTorpedoSkillDef.baseRechargeInterval = 3f;
+            HomingTorpedoSkillDef.beginSkillCooldownOnSkillEnd = false;
+            HomingTorpedoSkillDef.canceledFromSprinting = false;
+            HomingTorpedoSkillDef.forceSprintDuringState = false;
+            HomingTorpedoSkillDef.fullRestockOnAssign = true;
+            HomingTorpedoSkillDef.interruptPriority = EntityStates.InterruptPriority.Skill;
+            HomingTorpedoSkillDef.resetCooldownTimerOnUse = false;
+            HomingTorpedoSkillDef.isCombatSkill = true;
+            HomingTorpedoSkillDef.mustKeyPress = true;
+            HomingTorpedoSkillDef.cancelSprintingOnActivation = false;
+            HomingTorpedoSkillDef.rechargeStock = 0;
+            HomingTorpedoSkillDef.requiredStock = 1;
+            HomingTorpedoSkillDef.stockToConsume = 1;
+            ((ScriptableObject)HomingTorpedoSkillDef).name = "HomingTorpedo";
+
 
 
 
@@ -1242,6 +1275,7 @@ namespace MegamanXMod.Survivors.X
             Skills.AddSpecialSkills(bodyPrefab, XHyperChipSkillDef);
             Skills.AddSpecialSkills(bodyPrefab, XGaeaGigaAttackSkillDef);
             Skills.AddSpecialSkills(bodyPrefab, XRathalosSlashSkillDef);
+            Skills.AddSpecialSkills(bodyPrefab, HomingTorpedoSkillDef);
         }
         #endregion skills
 
@@ -1370,7 +1404,7 @@ namespace MegamanXMod.Survivors.X
             #region DefaultSkin
             //this creates a SkinDef with all default fields
             SkinDef defaultSkin = Skins.CreateSkinDef("DEFAULT_SKIN",
-                assetBundle.LoadAsset<Sprite>("texMainSkin"),
+                XAssets.IconX,
                 defaultRendererinfos,
                 prefabCharacterModel.gameObject);
 
@@ -1498,70 +1532,62 @@ namespace MegamanXMod.Survivors.X
 
         private void GlobalEventManager_OnHitEnemy(On.RoR2.GlobalEventManager.orig_OnHitEnemy orig, GlobalEventManager self, DamageInfo damageInfo, GameObject victim)
         {
-            orig.Invoke(self, damageInfo, victim);
-
-            if (!self || !damageInfo.attacker || !victim || !damageInfo.attacker.GetComponent<CharacterBody>() || !victim.GetComponent<CharacterBody>())
-                return;
-
-            if (damageInfo.attacker.name.Contains("XBody") && !victim.name.Contains("XBody"))
+            // Verifique se algum objeto é nulo antes de prosseguir
+            if (self == null || damageInfo == null || damageInfo.attacker == null || victim == null)
             {
-                Debug.Log(damageInfo.attacker.name);
-                Debug.Log(damageInfo.attacker.transform.position);
-                Debug.Log(damageInfo.inflictor.name);
-                Debug.Log(victim.transform.position);
-
-                if (damageInfo.inflictor.name.Contains("XForceBusterProjectile"))
-                {
-                    Debug.Log(damageInfo.inflictor.name);
-                    Debug.Log(victim.transform.position);
-
-                    FireProjectileInfo XShockSphereProjectille = new FireProjectileInfo();
-                    XShockSphereProjectille.projectilePrefab = XAssets.xShockSphereProjectile;
-                    XShockSphereProjectille.position = victim.transform.position;
-                    XShockSphereProjectille.rotation = Util.QuaternionSafeLookRotation(victim.transform.position);
-                    XShockSphereProjectille.owner = damageInfo.attacker;
-                    XShockSphereProjectille.damage = 1f;
-                    XShockSphereProjectille.force = 200f;
-                    XShockSphereProjectille.crit = Util.CheckRoll(damageInfo.attacker.GetComponent<CharacterBody>().crit);
-                    XShockSphereProjectille.speedOverride = 0f;
-                    XShockSphereProjectille.damageColorIndex = DamageColorIndex.Default;
-
-                    ProjectileManager.instance.FireProjectile(XShockSphereProjectille);
-
-                    //BlastAttack ShockBlastAttack = new BlastAttack()
-                    //{
-                    //    attacker = damageInfo.attacker,
-                    //    inflictor = damageInfo.inflictor,
-                    //    radius = 8f,
-                    //    procCoefficient = 1f,
-                    //    position = victim.GetComponent<CharacterBody>().transform.position,
-                    //    damageType = DamageType.Stun1s,
-                    //    crit = Util.CheckRoll(damageInfo.attacker.GetComponent<CharacterBody>().crit),
-                    //    baseDamage = damageInfo.attacker.GetComponent<CharacterBody>().damage * 1f,
-                    //    falloffModel = BlastAttack.FalloffModel.None,
-                    //    baseForce = 500f,
-                    //    teamIndex = TeamComponent.GetObjectTeam(damageInfo.attacker),
-                    //    attackerFiltering = AttackerFiltering.NeverHitSelf,
-
-                    //};
-
-
-
-
-                    //EffectManager.SpawnEffect(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ExplodeOnDeathVoidExplosionEffect"), new EffectData
-                    //{
-                    //    origin = victim.GetComponent<CharacterBody>().transform.position,
-                    //    scale = 8f,
-
-                    //}, true);
-
-                    //ShockBlastAttack.Fire();
-
-                }
+                Debug.LogWarning("[XSurvivor] Um dos objetos passados para OnHitEnemy é nulo.");
+                return;
             }
 
-                
-            
+            // Verifique se attacker e victim possuem CharacterBody
+            var attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
+            var victimBody = victim.GetComponent<CharacterBody>();
+            if (attackerBody == null || victimBody == null)
+            {
+                Debug.LogWarning("[XSurvivor] Um dos CharacterBody é nulo.");
+                return;
+            }
+
+            // Verifique se inflictor não é nulo antes de usar
+            if (damageInfo.inflictor == null)
+            {
+                Debug.LogWarning("[XSurvivor] Inflictor é nulo.");
+                return;
+            }
+
+            // Log básico para depuração
+            Debug.Log($"[XSurvivor] OnHitEnemy chamado com attacker: {attackerBody.name}, victim: {victimBody.name}, inflictor: {damageInfo.inflictor.name}");
+
+            // Verifique as condições específicas antes de executar sua lógica customizada
+            if (damageInfo.attacker.name.Contains("XBody") && !victim.name.Contains("XBody") && damageInfo.inflictor.name.Contains("XForceBusterProjectile"))
+            {
+                // Crie o projétil
+                var position = victim.transform.position;
+                if (position == Vector3.zero)
+                {
+                    Debug.LogWarning("[XSurvivor] Posição do victim é inválida.");
+                    return;
+                }
+
+                var XShockSphereProjectile = new FireProjectileInfo
+                {
+                    projectilePrefab = XAssets.xShockSphereProjectile,
+                    position = position,
+                    rotation = Util.QuaternionSafeLookRotation(position),
+                    owner = damageInfo.attacker,
+                    damage = 1f,
+                    force = 200f,
+                    crit = Util.CheckRoll(attackerBody.crit),
+                    speedOverride = 0f,
+                    damageColorIndex = DamageColorIndex.Default
+                };
+
+                ProjectileManager.instance.FireProjectile(XShockSphereProjectile);
+                Debug.Log("[XSurvivor] Projétil XShockSphere criado com sucesso.");
+            }
+
+            // Chame o método original
+            orig.Invoke(self, damageInfo, victim);
         }
 
         private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args)
