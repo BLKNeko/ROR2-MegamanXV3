@@ -93,7 +93,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             if (characterMotor && characterDirection)
             {
                 //characterMotor.velocity.y = 0f;
-                characterMotor.velocity = forwardDirection * rollSpeed;
+                characterMotor.velocity = (forwardDirection * rollSpeed) + Vector3.one;
             }
 
             Vector3 b = characterMotor ? characterMotor.velocity : Vector3.zero;
@@ -122,7 +122,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
         private void RecalculateRollSpeed()
         {
-            rollSpeed = moveSpeedStat * Mathf.Lerp(initialSpeedCoefficient, finalSpeedCoefficient, fixedAge / duration);
+            rollSpeed = (moveSpeedStat * Mathf.Lerp(initialSpeedCoefficient, finalSpeedCoefficient, fixedAge / baseDuration)) + 0.5f;
         }
 
         public override void FixedUpdate()

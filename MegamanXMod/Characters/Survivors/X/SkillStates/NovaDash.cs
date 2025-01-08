@@ -26,6 +26,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             //his.childLocator = base.GetModelTransform().GetComponent<ChildLocator>();
 
+
             EffectManager.SimpleMuzzleFlash(XAssets.NovaStrikeVFX, base.gameObject, "NovaDashPos", true);
 
             //EffectManager.SpawnEffect(XAssets.NovaStrikeVFX, new EffectData
@@ -82,6 +83,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 forwardDirection = aimRay.direction;
             }
 
+            
+
             Vector3 rhs = characterDirection ? characterDirection.forward : forwardDirection;
             Vector3 rhs2 = Vector3.Cross(Vector3.up, rhs);
 
@@ -93,13 +96,17 @@ namespace MegamanXMod.Survivors.X.SkillStates
             if (characterMotor && characterDirection)
             {
                 //characterMotor.velocity.y = 0f;
-                characterMotor.velocity = forwardDirection * rollSpeed;
+                characterMotor.velocity = (forwardDirection * rollSpeed) + Vector3.one;
             }
 
             Vector3 b = characterMotor ? characterMotor.velocity : Vector3.zero;
             previousPosition = transform.position - b;
 
-
+            Debug.Log("forwardDirection: " + forwardDirection);
+            Debug.Log("characterDirection: " + characterDirection);
+            Debug.Log("characterMotor: " + characterMotor);
+            Debug.Log("rollSpeed: " + rollSpeed);
+            Debug.Log("inputBank: " + inputBank);
 
             base.OnEnter();
         }
@@ -122,7 +129,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
         private void RecalculateRollSpeed()
         {
-            rollSpeed = moveSpeedStat * Mathf.Lerp(initialSpeedCoefficient, finalSpeedCoefficient, fixedAge / duration);
+            rollSpeed = (moveSpeedStat * Mathf.Lerp(initialSpeedCoefficient, finalSpeedCoefficient, fixedAge / baseDuration)) + 0.5f;
         }
 
         public override void FixedUpdate()

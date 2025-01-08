@@ -65,6 +65,9 @@ namespace MegamanXMod.Survivors.X
         //SECONDARY
         internal static SteppedSkillDef XShadowSaberSkillDef;
         internal static SteppedSkillDef XRathalosSaberSkillDef;
+        internal static SkillDef XShotgunIceSkillDef;
+        internal static SkillDef XSqueezeBombSkillDef;
+        internal static SkillDef XFireWaveSkillDef;
 
         //UTILITY
         internal static SkillDef XDashSkillDef;
@@ -77,6 +80,9 @@ namespace MegamanXMod.Survivors.X
         internal static SkillDef XHyperChipSkillDef;
         internal static SkillDef XGaeaGigaAttackSkillDef;
         internal static SkillDef XRathalosSlashSkillDef;
+        internal static SkillDef XRisingFireSkillDef;
+        internal static SkillDef XAcidBurstSkillDef;
+        internal static SkillDef XChameleonStingSkillDef;
 
         internal static HuntTrackerSkillDef HomingTorpedoSkillDef;
 
@@ -827,6 +833,66 @@ namespace MegamanXMod.Survivors.X
             XRathalosSaberSkillDef.stepCount = 2;
             XRathalosSaberSkillDef.stepGraceDuration = 0.5f;
 
+            XShotgunIceSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "ShotgunIce",
+                skillNameToken = MEGAMAN_x_PREFIX + "SECONDARY_SHOTGUN_ICE_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "SECONDARY_SHOTGUN_ICE_DESCRIPTION",
+                skillIcon = XAssets.IconShotgunIce,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(XShotgunIce)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseRechargeInterval = 0f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = true,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = true,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+
+            XFireWaveSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "FireWave",
+                skillNameToken = MEGAMAN_x_PREFIX + "SECONDARY_FIRE_WAVE_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "SECONDARY_FIRE_WAVE_DESCRIPTION",
+                skillIcon = XAssets.IconShotgunIce,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(XFireWave)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseRechargeInterval = 0f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = true,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = true,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+
             //UTILITY
             XFalconDashSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
@@ -1176,7 +1242,7 @@ namespace MegamanXMod.Survivors.X
                 keywordTokens = new string[] { "KEYWORD_AGILE" },
                 skillIcon = assetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
 
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ShotgunIce)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(XBuster)),
                 activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
@@ -1202,6 +1268,8 @@ namespace MegamanXMod.Survivors.X
 
             Skills.AddSecondarySkills(bodyPrefab, secondarySkillDef1);
             Skills.AddSecondarySkills(bodyPrefab, XShadowSaberSkillDef);
+            Skills.AddSecondarySkills(bodyPrefab, XShotgunIceSkillDef);
+            Skills.AddSecondarySkills(bodyPrefab, XFireWaveSkillDef);
         }
 
         private void AddUtiitySkills()
