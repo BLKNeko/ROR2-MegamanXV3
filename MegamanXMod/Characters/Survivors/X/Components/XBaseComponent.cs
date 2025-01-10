@@ -69,6 +69,11 @@ namespace MegamanXMod.Survivors.X.Components
             IsXWeak();
         }
 
+        public CharacterBody GetXBody()
+        {
+            return XBody;
+        }
+
         private void IsXWeak()
         {
             isWeak = XHealth.combinedHealthFraction < minHpWeak;

@@ -329,6 +329,8 @@ Transform:
   - {fileID: 749983445974988997}
   - {fileID: 3902918011968443345}
   - {fileID: 8700795298174736404}
+  - {fileID: 6646920016712345432}
+  - {fileID: 5097277279810179414}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -392,6 +394,10 @@ MonoBehaviour:
     transform: {fileID: 3902918011968443345}
   - name: NovaDashPos
     transform: {fileID: 8700795298174736404}
+  - name: MeltCreeperFrontPos
+    transform: {fileID: 6646920016712345432}
+  - name: MeltCreeperBackPos
+    transform: {fileID: 5097277279810179414}
 --- !u!114 &5664056050378279192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1355,6 +1361,37 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 20, y: 20, z: 20}
   m_Center: {x: -0.17100406, y: -0.50494313, z: 0.3327198}
+--- !u!1 &5711496396454275893
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6646920016712345432}
+  m_Layer: 0
+  m_Name: MeltCreeperFrontPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6646920016712345432
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5711496396454275893}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.39}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2003848329021394455}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5811220286183539445
 GameObject:
   m_ObjectHideFlags: 0
@@ -1688,6 +1725,37 @@ Transform:
   m_Father: {fileID: 4289206433901410087}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -69.33736, y: 7.197129, z: 102.95386}
+--- !u!1 &6899689262477537798
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5097277279810179414}
+  m_Layer: 0
+  m_Name: MeltCreeperBackPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5097277279810179414
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6899689262477537798}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.36}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2003848329021394455}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!1 &6921343311206691433
 GameObject:
   m_ObjectHideFlags: 0

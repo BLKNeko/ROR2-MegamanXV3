@@ -83,6 +83,7 @@ namespace MegamanXMod.Survivors.X
         internal static SkillDef XRisingFireSkillDef;
         internal static SkillDef XAcidBurstSkillDef;
         internal static SkillDef XChameleonStingSkillDef;
+        internal static SkillDef XMeltCreeperSkillDef;
 
         internal static HuntTrackerSkillDef HomingTorpedoSkillDef;
 
@@ -1111,6 +1112,36 @@ namespace MegamanXMod.Survivors.X
                 forceSprintDuringState = false,
             });
 
+            XMeltCreeperSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "MeltCreeper",
+                skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_MELTCREEPER_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "SPECIAL_MELTCREEPER_DESCRIPTION",
+                skillIcon = XAssets.IconXRathalos,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(MeltCreeper)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseRechargeInterval = 0f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = true,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = true,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+
             HomingTorpedoSkillDef = ScriptableObject.CreateInstance<HuntTrackerSkillDef>();
             HomingTorpedoSkillDef.skillName = MEGAMAN_x_PREFIX + "SPECIAL_RATHALOS_SLASH_NAME";
             HomingTorpedoSkillDef.skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_RATHALOS_SLASH_NAME";
@@ -1344,6 +1375,7 @@ namespace MegamanXMod.Survivors.X
             Skills.AddSpecialSkills(bodyPrefab, XGaeaGigaAttackSkillDef);
             Skills.AddSpecialSkills(bodyPrefab, XRathalosSlashSkillDef);
             Skills.AddSpecialSkills(bodyPrefab, HomingTorpedoSkillDef);
+            Skills.AddSpecialSkills(bodyPrefab, XMeltCreeperSkillDef);
         }
         #endregion skills
 

@@ -106,7 +106,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 if (isAuthority)
                 {
                     Ray aimRay = GetAimRay();
-                    AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
+                    //AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
 
                     //if (repeatFire == 1)
                     //    Util.PlaySound(Sounds.FireWaveSFX, base.gameObject);
