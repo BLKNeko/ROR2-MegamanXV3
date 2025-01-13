@@ -96,6 +96,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XAcidBurstSimpleProjectille.damage = damageCoefficient * damageStat;
                     XAcidBurstSimpleProjectille.force = force;
                     XAcidBurstSimpleProjectille.crit = RollCrit();
+                    XAcidBurstSimpleProjectille.speedOverride = 50f;
                     XAcidBurstSimpleProjectille.damageColorIndex = DamageColorIndex.Poison;
 
                     ProjectileManager.instance.FireProjectile(XAcidBurstSimpleProjectille);
@@ -129,6 +130,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XAcidBurstMediumProjectille.damage = damageCoefficient * damageStat;
                     XAcidBurstMediumProjectille.force = force;
                     XAcidBurstMediumProjectille.crit = RollCrit();
+                    XAcidBurstMediumProjectille.speedOverride = 50f;
                     XAcidBurstMediumProjectille.damageColorIndex = DamageColorIndex.Poison;
 
                     ProjectileManager.instance.FireProjectile(XAcidBurstMediumProjectille);
@@ -163,10 +165,23 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XAcidBurstChargeProjectille.damage = damageCoefficient * damageStat;
                     XAcidBurstChargeProjectille.force = force;
                     XAcidBurstChargeProjectille.crit = RollCrit();
+                    XAcidBurstChargeProjectille.speedOverride = 50f;
                     XAcidBurstChargeProjectille.damageColorIndex = DamageColorIndex.Poison;
+
+                    FireProjectileInfo XAcidBurstChargeProjectille2 = new FireProjectileInfo();
+                    XAcidBurstChargeProjectille2.projectilePrefab = XAssets.AcidBurstProjectile;
+                    XAcidBurstChargeProjectille2.position = aimRay.origin;
+                    XAcidBurstChargeProjectille2.rotation = Util.QuaternionSafeLookRotation(new Vector3(aimRay.direction.x, aimRay.direction.y + 0.25f, aimRay.direction.z).normalized);
+                    XAcidBurstChargeProjectille2.owner = gameObject;
+                    XAcidBurstChargeProjectille2.damage = damageCoefficient * damageStat;
+                    XAcidBurstChargeProjectille2.force = force;
+                    XAcidBurstChargeProjectille2.crit = RollCrit();
+                    XAcidBurstChargeProjectille2.speedOverride = 50f;
+                    XAcidBurstChargeProjectille2.damageColorIndex = DamageColorIndex.Poison;
 
 
                     ProjectileManager.instance.FireProjectile(XAcidBurstChargeProjectille);
+                    ProjectileManager.instance.FireProjectile(XAcidBurstChargeProjectille2);
 
                 }
             }
