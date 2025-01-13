@@ -1142,6 +1142,36 @@ namespace MegamanXMod.Survivors.X
                 forceSprintDuringState = false,
             });
 
+            XAcidBurstSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "AcidBurst",
+                skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_ACID_BURST_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "SPECIAL_ACID_BURST_DESCRIPTION",
+                //skillIcon = XAssets.IconXRathalos,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(AcidBurst)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseRechargeInterval = 0f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = true,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = true,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+
             HomingTorpedoSkillDef = ScriptableObject.CreateInstance<HuntTrackerSkillDef>();
             HomingTorpedoSkillDef.skillName = MEGAMAN_x_PREFIX + "SPECIAL_RATHALOS_SLASH_NAME";
             HomingTorpedoSkillDef.skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_RATHALOS_SLASH_NAME";
@@ -1246,7 +1276,7 @@ namespace MegamanXMod.Survivors.X
             primarySkillDef1.stepGraceDuration = 0.5f;
             primarySkillDef1.mustKeyPress = false;
 
-            Skills.AddPrimarySkills(bodyPrefab, primarySkillDef1);
+            Skills.AddPrimarySkills(bodyPrefab, XAcidBurstSkillDef);
 
             Skills.AddPrimarySkills(bodyPrefab, XBusterSkillDef);
             Skills.AddPrimarySkills(bodyPrefab, XLightBusterSkillDef);

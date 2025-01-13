@@ -108,6 +108,7 @@ namespace MegamanXMod.Survivors.X
         public static GameObject XRFire2Projectile;
         public static GameObject SqueezeBombProjectile;
         public static GameObject MeltCreeperProjectile;
+        public static GameObject AcidBurstProjectile;
 
         private static AssetBundle _assetBundle;
 
@@ -241,6 +242,7 @@ namespace MegamanXMod.Survivors.X
             CreateXRFire2Projectile();
             CreateSqueezeBombProjectile();
             CreateMeltCreeperProjectile();
+            CreateXAcidBurstProjectile();
 
 
             Content.AddProjectilePrefab(bombProjectilePrefab);
@@ -263,6 +265,7 @@ namespace MegamanXMod.Survivors.X
             Content.AddProjectilePrefab(XRFire2Projectile);
             Content.AddProjectilePrefab(SqueezeBombProjectile);
             Content.AddProjectilePrefab(MeltCreeperProjectile);
+            Content.AddProjectilePrefab(AcidBurstProjectile);
         }
 
         private static void CreateBombProjectile()
@@ -885,6 +888,42 @@ namespace MegamanXMod.Survivors.X
                 XRFire2Controller.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("RathalosBusterChargeProjectille");
 
             XRFire2Controller.startSound = "";
+        }
+
+        private static void CreateXAcidBurstProjectile()
+        {
+            //highly recommend setting up projectiles in editor, but this is a quick and dirty way to prototype if you want
+            AcidBurstProjectile = Asset.CloneProjectilePrefab("PoisonOrbProjectile", "AcidBurstProjectile");
+
+            //remove their ProjectileImpactExplosion component and start from default values
+            //UnityEngine.Object.Destroy(AcidBurstProjectile.GetComponent<ProjectileImpactExplosion>());
+            ProjectileImpactExplosion XAcidBurstExplosion = AcidBurstProjectile.GetComponent<ProjectileImpactExplosion>();
+
+            XAcidBurstExplosion.blastRadius = 6f;
+            XAcidBurstExplosion.blastDamageCoefficient = 1f;
+            //XAcidBurstExplosion.falloffModel = BlastAttack.FalloffModel.None;
+            XAcidBurstExplosion.destroyOnEnemy = true;
+            XAcidBurstExplosion.lifetime = 12f;
+            XAcidBurstExplosion.timerAfterImpact = true;
+            XAcidBurstExplosion.lifetimeAfterImpact = 0.1f;
+
+            // just setting the numbers to 1 as the entitystate will take care of those
+            AcidBurstProjectile.GetComponent<ProjectileDamage>().damage = 1f;
+            AcidBurstProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
+            AcidBurstProjectile.GetComponent<ProjectileDamage>().damageType |= DamageType.PoisonOnHit;
+            AcidBurstProjectile.GetComponent<ProjectileDamage>().damageType |= DamageType.WeakOnHit;
+            AcidBurstProjectile.GetComponent<ProjectileDamage>().damageType |= DamageType.BypassArmor;
+            AcidBurstProjectile.GetComponent<ProjectileDamage>().damageType |= DamageType.BypassBlock;
+            AcidBurstProjectile.GetComponent<ProjectileDamage>().damageType |= DamageType.SlowOnHit;
+            AcidBurstProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Poison;
+
+
+            ProjectileController XAcidBurstController = AcidBurstProjectile.GetComponent<ProjectileController>();
+
+            //if (_assetBundle.LoadAsset<GameObject>("RathalosBusterChargeProjectille") != null)
+            //    XRFire2Controller.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("RathalosBusterChargeProjectille");
+
+            XAcidBurstController.startSound = "";
         }
 
         private static void CreateSqueezeBombProjectile()
