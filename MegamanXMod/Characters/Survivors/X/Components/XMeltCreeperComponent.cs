@@ -62,7 +62,8 @@ namespace MegamanXMod.Survivors.X.Components
                 blastAttack = new BlastAttack();
                 blastAttack.attacker = base.gameObject;
                 blastAttack.inflictor = base.gameObject;
-                blastAttack.teamIndex = TeamIndex.Player;
+                blastAttack.teamIndex = TeamComponent.GetObjectTeam(projectileController.owner);
+                //blastAttack.teamIndex = TeamIndex.Player;
                 //blastAttack.teamIndex = TeamComponent.GetObjectTeam(base.gameObject);
                 blastAttack.baseDamage = 1f + damageStat;
                 blastAttack.baseForce = 10f;

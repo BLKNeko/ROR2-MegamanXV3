@@ -50,29 +50,9 @@ namespace MegamanXMod.Survivors.X.SkillStates
         {
             base.FixedUpdate();
 
-            if ((base.fixedAge >= this.fireTime || !base.inputBank || !base.inputBank.skill1.down) && chargeLevel == 3 && hasTime == true)
-            {
-                FireChargedBullet();
-            } 
-            else if ((base.fixedAge >= this.fireTime || !base.inputBank || !base.inputBank.skill1.down) && chargeLevel == 2 && hasTime == true)
-            {
-                FireMediumBullet();
-            }
-            else if ((base.fixedAge >= this.fireTime || !base.inputBank || !base.inputBank.skill1.down) && chargeLevel == 1 && hasTime == true)
-            {
-                FireSimpleBullet();
-            }
-
-            if (base.fixedAge >= this.duration && base.isAuthority && hasTime == true)
-            {
-                hasTime = false;
-                
-                this.outer.SetNextStateToMain();
-            }
-
         }
 
-        private void FireSimpleBullet()
+        protected override void FireSimpleBullet()
         {
             if (!hasFired)
             {
@@ -106,7 +86,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             }
         }
 
-        private void FireMediumBullet()
+        protected override void FireMediumBullet()
         {
             if (!hasFired)
             {
@@ -140,7 +120,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             }
         }
 
-        private void FireChargedBullet()
+        protected override void FireChargedBullet()
         {
             if (!this.hasFired)
             {

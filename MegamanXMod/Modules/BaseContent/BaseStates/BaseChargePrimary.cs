@@ -76,6 +76,41 @@ namespace MegamanXMod.Modules.BaseStates
                 ReleaseChargeShot();
             }
 
+            if ((base.fixedAge >= this.fireTime || !base.inputBank || !base.inputBank.skill1.down) && chargeLevel == 3 && hasTime == true)
+            {
+                FireChargedBullet();
+            }
+            else if ((base.fixedAge >= this.fireTime || !base.inputBank || !base.inputBank.skill1.down) && chargeLevel == 2 && hasTime == true)
+            {
+                FireMediumBullet();
+            }
+            else if ((base.fixedAge >= this.fireTime || !base.inputBank || !base.inputBank.skill1.down) && chargeLevel == 1 && hasTime == true)
+            {
+                FireSimpleBullet();
+            }
+
+            if (base.fixedAge >= this.duration && base.isAuthority && hasTime == true)
+            {
+                hasTime = false;
+
+                this.outer.SetNextStateToMain();
+            }
+
+        }
+
+        protected virtual void FireSimpleBullet()
+        {
+            //Apenas para ser sobrescrito
+        }
+
+        protected virtual void FireMediumBullet()
+        {
+            //Apenas para ser sobrescrito
+        }
+
+        protected virtual void FireChargedBullet()
+        {
+            //Apenas para ser sobrescrito
         }
 
         //CHARGE LOGIC

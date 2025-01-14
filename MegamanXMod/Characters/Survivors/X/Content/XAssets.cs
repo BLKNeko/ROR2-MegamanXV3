@@ -22,6 +22,7 @@ namespace MegamanXMod.Survivors.X
         public static GameObject Charge2VFX;
         public static GameObject NovaStrikeVFX;
         public static GameObject MeltCreeperVFX;
+        public static GameObject MeltCreeperChargeVFX;
 
 
 
@@ -108,7 +109,9 @@ namespace MegamanXMod.Survivors.X
         public static GameObject XRFire2Projectile;
         public static GameObject SqueezeBombProjectile;
         public static GameObject MeltCreeperProjectile;
+        public static GameObject MeltCreeperChargeProjectile;
         public static GameObject AcidBurstProjectile;
+        public static GameObject ChameleonStingProjectile;
 
         private static AssetBundle _assetBundle;
 
@@ -192,6 +195,7 @@ namespace MegamanXMod.Survivors.X
 
             ShurikenVFX = _assetBundle.LoadEffect("ShurikenVFX", false);
             MeltCreeperVFX = _assetBundle.LoadEffect("MeltCreeperVFX", false);
+            MeltCreeperChargeVFX = _assetBundle.LoadEffect("MeltCreeperChargeVFX", false);
 
 
         }
@@ -242,7 +246,9 @@ namespace MegamanXMod.Survivors.X
             CreateXRFire2Projectile();
             CreateSqueezeBombProjectile();
             CreateMeltCreeperProjectile();
+            CreateMeltCreeperChargeProjectile();
             CreateXAcidBurstProjectile();
+            CreateChameleonStingProjectile();
 
 
             Content.AddProjectilePrefab(bombProjectilePrefab);
@@ -265,7 +271,9 @@ namespace MegamanXMod.Survivors.X
             Content.AddProjectilePrefab(XRFire2Projectile);
             Content.AddProjectilePrefab(SqueezeBombProjectile);
             Content.AddProjectilePrefab(MeltCreeperProjectile);
+            Content.AddProjectilePrefab(MeltCreeperChargeProjectile);
             Content.AddProjectilePrefab(AcidBurstProjectile);
+            Content.AddProjectilePrefab(ChameleonStingProjectile);
         }
 
         private static void CreateBombProjectile()
@@ -893,7 +901,7 @@ namespace MegamanXMod.Survivors.X
         private static void CreateXAcidBurstProjectile()
         {
             //highly recommend setting up projectiles in editor, but this is a quick and dirty way to prototype if you want
-            AcidBurstProjectile = Asset.CloneProjectilePrefab("PoisonOrbProjectile", "AcidBurstProjectile");
+            AcidBurstProjectile = Asset.CloneProjectilePrefab("PoisonOrbProjectile", "XAcidBurstProjectile");
 
             //remove their ProjectileImpactExplosion component and start from default values
             //UnityEngine.Object.Destroy(AcidBurstProjectile.GetComponent<ProjectileImpactExplosion>());
@@ -977,6 +985,50 @@ namespace MegamanXMod.Survivors.X
                 MeltCreeperController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("MCSmallVFX");
 
             MeltCreeperController.startSound = "";
+        }
+
+        private static void CreateMeltCreeperChargeProjectile()
+        {
+            //highly recommend setting up projectiles in editor, but this is a quick and dirty way to prototype if you want
+            MeltCreeperChargeProjectile = Asset.CloneProjectilePrefab("FMJ", "MeltCreeperChargeProjectile");
+
+            // just setting the numbers to 1 as the entitystate will take care of those
+            MeltCreeperChargeProjectile.GetComponent<ProjectileDamage>().damage = 1f;
+            MeltCreeperChargeProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
+            MeltCreeperChargeProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.IgniteOnHit;
+            MeltCreeperChargeProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
+
+
+            ProjectileController MeltCreeperChargeController = MeltCreeperChargeProjectile.GetComponent<ProjectileController>();
+
+            MeltCreeperChargeProjectile.AddComponent<XMeltCreeperChargeComponent>();
+
+            if (_assetBundle.LoadAsset<GameObject>("MCSmallVFX") != null)
+                MeltCreeperChargeController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("MCSmallVFX");
+
+            MeltCreeperChargeController.startSound = "";
+        }
+
+        private static void CreateChameleonStingProjectile()
+        {
+            //highly recommend setting up projectiles in editor, but this is a quick and dirty way to prototype if you want
+            ChameleonStingProjectile = Asset.CloneProjectilePrefab("Arrow", "XChameleonStingProjectile");
+
+            // just setting the numbers to 1 as the entitystate will take care of those
+            ChameleonStingProjectile.GetComponent<ProjectileDamage>().damage = 1f;
+            ChameleonStingProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
+            ChameleonStingProjectile.GetComponent<ProjectileDamage>().damageType |= DamageType.BonusToLowHealth;
+            ChameleonStingProjectile.GetComponent<ProjectileDamage>().damageType |= DamageType.BypassArmor;
+            ChameleonStingProjectile.GetComponent<ProjectileDamage>().damageType |= DamageType.BypassBlock;
+            ChameleonStingProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Luminous;
+
+
+            ProjectileController ChameleonStingController = MeltCreeperProjectile.GetComponent<ProjectileController>();
+
+            //if (_assetBundle.LoadAsset<GameObject>("MCSmallVFX") != null)
+            //    MeltCreeperController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("MCSmallVFX");
+
+            ChameleonStingController.startSound = "";
         }
 
 

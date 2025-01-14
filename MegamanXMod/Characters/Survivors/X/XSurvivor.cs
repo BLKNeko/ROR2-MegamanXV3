@@ -468,6 +468,10 @@ namespace MegamanXMod.Survivors.X
                 skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_X_BUSTER_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_X_BUSTER_DESCRIPTION",
                 skillIcon = XAssets.IconXBuster,
+                keywordTokens = new string[]
+                {
+                    MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"
+                },
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(XBuster)),
                 activationStateMachineName = "Weapon",
@@ -894,6 +898,36 @@ namespace MegamanXMod.Survivors.X
                 forceSprintDuringState = false,
             });
 
+            XSqueezeBombSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "SqueezeBomb",
+                skillNameToken = MEGAMAN_x_PREFIX + "SECONDARY_SQUEEZE_BOMB_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "SECONDARY_SQUEEZE_BOMB_DESCRIPTION",
+                //skillIcon = XAssets.IconShotgunIce,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SqueezeBomb)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseRechargeInterval = 0f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = true,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = false,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+
             //UTILITY
             XFalconDashSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
@@ -1172,6 +1206,36 @@ namespace MegamanXMod.Survivors.X
                 forceSprintDuringState = false,
             });
 
+            XChameleonStingSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "ChameleonSting",
+                skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_CHAMELEON_STING_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "SPECIAL_CHAMELEON_STING_DESCRIPTION",
+                //skillIcon = XAssets.IconXRathalos,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(ChameleonSting)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseRechargeInterval = 0f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = true,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = true,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+
             HomingTorpedoSkillDef = ScriptableObject.CreateInstance<HuntTrackerSkillDef>();
             HomingTorpedoSkillDef.skillName = MEGAMAN_x_PREFIX + "SPECIAL_RATHALOS_SLASH_NAME";
             HomingTorpedoSkillDef.skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_RATHALOS_SLASH_NAME";
@@ -1190,7 +1254,7 @@ namespace MegamanXMod.Survivors.X
             HomingTorpedoSkillDef.isCombatSkill = true;
             HomingTorpedoSkillDef.mustKeyPress = true;
             HomingTorpedoSkillDef.cancelSprintingOnActivation = false;
-            HomingTorpedoSkillDef.rechargeStock = 0;
+            HomingTorpedoSkillDef.rechargeStock = 1;
             HomingTorpedoSkillDef.requiredStock = 1;
             HomingTorpedoSkillDef.stockToConsume = 1;
             ((ScriptableObject)HomingTorpedoSkillDef).name = "HomingTorpedo";
@@ -1331,6 +1395,7 @@ namespace MegamanXMod.Survivors.X
             Skills.AddSecondarySkills(bodyPrefab, XShadowSaberSkillDef);
             Skills.AddSecondarySkills(bodyPrefab, XShotgunIceSkillDef);
             Skills.AddSecondarySkills(bodyPrefab, XFireWaveSkillDef);
+            Skills.AddSecondarySkills(bodyPrefab, XSqueezeBombSkillDef);
         }
 
         private void AddUtiitySkills()
@@ -1406,6 +1471,7 @@ namespace MegamanXMod.Survivors.X
             Skills.AddSpecialSkills(bodyPrefab, XRathalosSlashSkillDef);
             Skills.AddSpecialSkills(bodyPrefab, HomingTorpedoSkillDef);
             Skills.AddSpecialSkills(bodyPrefab, XMeltCreeperSkillDef);
+            Skills.AddSpecialSkills(bodyPrefab, XChameleonStingSkillDef);
         }
         #endregion skills
 

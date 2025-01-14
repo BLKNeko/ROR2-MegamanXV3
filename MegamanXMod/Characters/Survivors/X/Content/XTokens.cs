@@ -44,6 +44,8 @@ namespace MegamanXMod.Survivors.X
             LanguageAPI.Add(prefix + "MASTERY_SKIN_NAME", "Alternate");
             #endregion
 
+            LanguageAPI.Add(prefix + "X_KEYWORD_CHARGE", "Hold to charge");
+
             #region Armors
 
             LanguageAPI.Add(prefix + "X_ARMOR_NAME", "X");
