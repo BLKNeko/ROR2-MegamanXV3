@@ -23,6 +23,7 @@ namespace MegamanXMod.Survivors.X
         public static GameObject NovaStrikeVFX;
         public static GameObject MeltCreeperVFX;
         public static GameObject MeltCreeperChargeVFX;
+        public static GameObject RisingFireVFX;
 
 
 
@@ -197,7 +198,7 @@ namespace MegamanXMod.Survivors.X
             IconRathalosSlash = _assetBundle.LoadAsset<Sprite>("XSkillRathalosSlash");
             IconShotgunIce = _assetBundle.LoadAsset<Sprite>("XSkillShotgunIce");
             IconFireWave = _assetBundle.LoadAsset<Sprite>("XSkillFireWave");
-            IconSqueezeBomb = _assetBundle.LoadAsset<Sprite>("XSkillShotgunIce");
+            IconSqueezeBomb = _assetBundle.LoadAsset<Sprite>("XSkillSqueezeBomb");
 
 
             IconXDash = _assetBundle.LoadAsset<Sprite>("XSkillDash");
@@ -212,8 +213,8 @@ namespace MegamanXMod.Survivors.X
             IconGigaAttackGaea = _assetBundle.LoadAsset<Sprite>("XSkillGigaAttackGaea");
             IconTrueRathalosSlash = _assetBundle.LoadAsset<Sprite>("XSkillTrueRathalosSlash");
             IconHomingTorpedo = _assetBundle.LoadAsset<Sprite>("XSkillHomingTorpedo");
-            IconChameleonSting = _assetBundle.LoadAsset<Sprite>("XSkillHyperChip");
-            IconAcidBurst = _assetBundle.LoadAsset<Sprite>("XSkillHyperChip");
+            IconChameleonSting = _assetBundle.LoadAsset<Sprite>("XSkillChameleonSting");
+            IconAcidBurst = _assetBundle.LoadAsset<Sprite>("XSkillAcidBurst");
             IconRisingFire = _assetBundle.LoadAsset<Sprite>("XSkillRisingFire");
             IconMeltCreeper = _assetBundle.LoadAsset<Sprite>("XSkillMeltCreeper");
 
@@ -222,6 +223,7 @@ namespace MegamanXMod.Survivors.X
             Charge1VFX = _assetBundle.LoadEffect("Charge1VFX", true);
             Charge2VFX = _assetBundle.LoadEffect("Charge2VFX", true);
             NovaStrikeVFX = _assetBundle.LoadEffect("NovaStrikeVFX", true);
+            RisingFireVFX = _assetBundle.LoadEffect("RisingFireVFX", true);
 
             ShurikenVFX = _assetBundle.LoadEffect("ShurikenVFX", false);
             MeltCreeperVFX = _assetBundle.LoadEffect("MeltCreeperVFX", false);

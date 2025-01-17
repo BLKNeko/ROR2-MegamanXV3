@@ -21,15 +21,15 @@ namespace MegamanXMod.Survivors.X.SkillStates
             procCoefficient = 1f;
             pushForce = 1000f;
             bonusForce = Vector3.up * upwardForce;
-            baseDuration = 1f;            
+            baseDuration = 1.1f;            
 
             //0-1 multiplier of baseduration, used to time when the hitbox is out (usually based on the run time of the animation)
             //for example, if attackStartPercentTime is 0.5, the attack will start hitting halfway through the ability. if baseduration is 3 seconds, the attack will start happening at 1.5 seconds
-            attackStartPercentTime = 0.2f;
-            attackEndPercentTime = 0.8f;
+            attackStartPercentTime = 0.01f;
+            attackEndPercentTime = 0.99f;
 
             //this is the point at which the attack can be interrupted by itself, continuing a combo
-            earlyExitPercentTime = 0.8f;
+            earlyExitPercentTime = 0.99f;
 
             hitStopDuration = 0.012f;
             attackRecoil = 0.5f;
@@ -37,9 +37,9 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             swingSoundString = "HenrySwordSwing";
             hitSoundString = "";
-            muzzleString = swingIndex % 2 == 0 ? "SwingLeft" : "SwingRight";
+            muzzleString = "RisingFirePos";
             playbackRateParam = "Slash.playbackRate";
-            swingEffectPrefab = XAssets.swordSwingEffect;
+            //swingEffectPrefab = XAssets.RisingFireVFX;
             hitEffectPrefab = XAssets.swordHitImpactEffect;
 
             impactSound = XAssets.swordHitSoundEvent.index;
@@ -48,6 +48,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             SetHitReset(true, 8);
 
+            EffectManager.SimpleMuzzleFlash(XAssets.RisingFireVFX, gameObject, muzzleString, true);
+
 
             base.OnEnter();
         }
@@ -55,7 +57,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
         protected override void PlayAttackAnimation()
         {
             //PlayCrossfade("Gesture, Override", "Slash" + (1 + swingIndex), playbackRateParam, duration, 0.1f * duration);
-            //base.PlayAnimation("FullBody, Override", "XRSlash1", "attackSpeed", this.duration);
+            base.PlayAnimation("FullBody, Override", "RisingFireStart", "attackSpeed", this.duration);
         }
 
         protected override void PlaySwingEffect()
@@ -102,7 +104,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
         public override void OnExit()
         {
 
-            base.PlayAnimation("FullBody, Override", "BufferEmpty", "attackSpeed", this.duration);
+            base.PlayAnimation("FullBody, Override", "RisingFireEnd", "attackSpeed", this.duration);
+            //base.PlayAnimation("FullBody, Override", "BufferEmpty", "attackSpeed", this.duration);
 
             base.OnExit();
         }

@@ -950,7 +950,7 @@ namespace MegamanXMod.Survivors.X
                 skillName = "SqueezeBomb",
                 skillNameToken = MEGAMAN_x_PREFIX + "SECONDARY_SQUEEZE_BOMB_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "SECONDARY_SQUEEZE_BOMB_DESCRIPTION",
-                //skillIcon = XAssets.IconShotgunIce,
+                skillIcon = XAssets.IconSqueezeBomb,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SqueezeBomb)),
                 activationStateMachineName = "Weapon",
@@ -1240,7 +1240,7 @@ namespace MegamanXMod.Survivors.X
                 skillName = "AcidBurst",
                 skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_ACID_BURST_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "SPECIAL_ACID_BURST_DESCRIPTION",
-                //skillIcon = XAssets.IconXRathalos,
+                skillIcon = XAssets.IconAcidBurst,
                 keywordTokens = new string[]
                 {
                     MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"
@@ -1274,7 +1274,7 @@ namespace MegamanXMod.Survivors.X
                 skillName = "ChameleonSting",
                 skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_CHAMELEON_STING_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "SPECIAL_CHAMELEON_STING_DESCRIPTION",
-                //skillIcon = XAssets.IconXRathalos,
+                skillIcon = XAssets.IconChameleonSting,
                 keywordTokens = new string[]
                 {
                     MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"

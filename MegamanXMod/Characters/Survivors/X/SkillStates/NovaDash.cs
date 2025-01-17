@@ -77,6 +77,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             characterBody.SetAimTimer(0.8f);
             Ray aimRay = GetAimRay();
 
+            base.characterMotor.Motor.ForceUnground(0.1f);
 
             if (isAuthority && inputBank && characterDirection)
             {
@@ -102,11 +103,11 @@ namespace MegamanXMod.Survivors.X.SkillStates
             Vector3 b = characterMotor ? characterMotor.velocity : Vector3.zero;
             previousPosition = transform.position - b;
 
-            Debug.Log("forwardDirection: " + forwardDirection);
-            Debug.Log("characterDirection: " + characterDirection);
-            Debug.Log("characterMotor: " + characterMotor);
-            Debug.Log("rollSpeed: " + rollSpeed);
-            Debug.Log("inputBank: " + inputBank);
+            //Debug.Log("forwardDirection: " + forwardDirection);
+            //Debug.Log("characterDirection: " + characterDirection);
+            //Debug.Log("characterMotor: " + characterMotor);
+            //Debug.Log("rollSpeed: " + rollSpeed);
+            //Debug.Log("inputBank: " + inputBank);
 
             base.OnEnter();
         }
@@ -139,6 +140,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
             //characterMotor.velocity *= 1.5f;
 
             RecalculateRollSpeed();
+
+            base.characterMotor.Motor.ForceUnground(0.1f);
 
             if (characterDirection) characterDirection.forward = forwardDirection;
             if (cameraTargetParams) cameraTargetParams.fovOverride = Mathf.Lerp(dodgeFOV, 60f, fixedAge / duration);

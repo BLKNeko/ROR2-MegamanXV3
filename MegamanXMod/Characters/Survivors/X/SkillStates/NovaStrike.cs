@@ -76,6 +76,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             characterBody.SetAimTimer(0.8f);
             Ray aimRay = GetAimRay();
 
+            base.characterMotor.Motor.ForceUnground(0.1f);
 
             if (isAuthority && inputBank && characterDirection)
             {
@@ -135,6 +136,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             if (characterDirection) characterDirection.forward = forwardDirection;
             if (cameraTargetParams) cameraTargetParams.fovOverride = Mathf.Lerp(dodgeFOV, 60f, fixedAge / duration);
+
+            base.characterMotor.Motor.ForceUnground(0.1f);
 
             Vector3 normalized = (transform.position - previousPosition).normalized;
             if (characterMotor && characterDirection && normalized != Vector3.zero)

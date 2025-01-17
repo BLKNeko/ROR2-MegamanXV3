@@ -10,6 +10,13 @@ namespace MegamanXMod.Survivors.X
 
         public const float bombDamageCoefficient = 16f;
 
+        public const float XMidChargeDamageCoefficient = 2f;
+
+        public const float XFullChargeDamageCoefficient = 5f;
+
         public const float XBusterDamageCoefficient = 2f;
+
+        
+
     }
 }
