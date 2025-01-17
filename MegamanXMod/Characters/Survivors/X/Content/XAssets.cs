@@ -73,15 +73,28 @@ namespace MegamanXMod.Survivors.X
         public static Sprite IconUltimateBuster;
         public static Sprite IconRathalosBuster;
 
+        public static Sprite IconShadowSaber;
+        public static Sprite IconRathalosSlash;
         public static Sprite IconShotgunIce;
+        public static Sprite IconFireWave;
+        public static Sprite IconSqueezeBomb;
 
         public static Sprite IconFalconDash;
         public static Sprite IconXDash;
+        public static Sprite IconXNovaDash;
+        public static Sprite IconXNovaStrike;
 
         public static Sprite IconSkillLock;
 
         public static Sprite IconHeadScanner;
         public static Sprite IconHyperChip;
+        public static Sprite IconGigaAttackGaea;
+        public static Sprite IconTrueRathalosSlash;
+        public static Sprite IconHomingTorpedo;
+        public static Sprite IconChameleonSting;
+        public static Sprite IconAcidBurst;
+        public static Sprite IconRisingFire;
+        public static Sprite IconMeltCreeper;
 
 
         // networked hit sounds
@@ -179,13 +192,30 @@ namespace MegamanXMod.Survivors.X
             IconUltimateBuster = _assetBundle.LoadAsset<Sprite>("UltimateBusterIcon");
             IconRathalosBuster = _assetBundle.LoadAsset<Sprite>("RathalosBusterIcon");
 
-            IconShotgunIce = _assetBundle.LoadAsset<Sprite>("XSkillShotgunIce");
 
+            IconShadowSaber = _assetBundle.LoadAsset<Sprite>("XSkillShadowSaber");
+            IconRathalosSlash = _assetBundle.LoadAsset<Sprite>("XSkillRathalosSlash");
+            IconShotgunIce = _assetBundle.LoadAsset<Sprite>("XSkillShotgunIce");
+            IconFireWave = _assetBundle.LoadAsset<Sprite>("XSkillFireWave");
+            IconSqueezeBomb = _assetBundle.LoadAsset<Sprite>("XSkillShotgunIce");
+
+
+            IconXDash = _assetBundle.LoadAsset<Sprite>("XSkillDash");
             IconFalconDash = _assetBundle.LoadAsset<Sprite>("XSkillFalconDash");
+            IconXNovaDash = _assetBundle.LoadAsset<Sprite>("XSkillNovaDash");
+            IconXNovaStrike = _assetBundle.LoadAsset<Sprite>("XSkillNovaStrike");
+
             IconSkillLock = _assetBundle.LoadAsset<Sprite>("XSkillLock");
 
             IconHeadScanner = _assetBundle.LoadAsset<Sprite>("XSkillHeadScanner");
             IconHyperChip = _assetBundle.LoadAsset<Sprite>("XSkillHyperChip");
+            IconGigaAttackGaea = _assetBundle.LoadAsset<Sprite>("XSkillGigaAttackGaea");
+            IconTrueRathalosSlash = _assetBundle.LoadAsset<Sprite>("XSkillTrueRathalosSlash");
+            IconHomingTorpedo = _assetBundle.LoadAsset<Sprite>("XSkillHomingTorpedo");
+            IconChameleonSting = _assetBundle.LoadAsset<Sprite>("XSkillHyperChip");
+            IconAcidBurst = _assetBundle.LoadAsset<Sprite>("XSkillHyperChip");
+            IconRisingFire = _assetBundle.LoadAsset<Sprite>("XSkillRisingFire");
+            IconMeltCreeper = _assetBundle.LoadAsset<Sprite>("XSkillMeltCreeper");
 
             HyperModeEffect = _assetBundle.LoadEffect("HyperModeEffect", true);
             GaeaGAVFX = _assetBundle.LoadEffect("GaeaGigaAttackVFX", true);

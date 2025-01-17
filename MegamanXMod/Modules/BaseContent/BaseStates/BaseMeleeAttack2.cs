@@ -166,7 +166,7 @@ namespace MegamanXMod.Modules.BaseStates
 
                 if (resetTimer > hitResetTime)
                 {
-                    Debug.Log("Reset!");
+                    //Debug.Log("Reset!");
                     attack.ResetIgnoredHealthComponents();
                     resetTimer = 0f;
                 }

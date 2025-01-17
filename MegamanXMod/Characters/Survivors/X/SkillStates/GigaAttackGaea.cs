@@ -9,7 +9,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 {
     public class GigaAttackGaea : BaseSkillState
     {
-        public static float damageCoefficient = HenryStaticValues.gunDamageCoefficient;
+        public static float damageCoefficient = XStaticValues.gunDamageCoefficient;
         public static float procCoefficient = 1f;
         public static float baseDuration = 5f;
         //delay on firing is usually ass-feeling. only set this if you know what you're doing

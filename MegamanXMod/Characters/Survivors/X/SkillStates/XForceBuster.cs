@@ -11,7 +11,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 {
     public class XForceBuster : BaseSkillState
     {
-        public static float damageCoefficient = HenryStaticValues.XBusterDamageCoefficient;
+        public static float damageCoefficient = XStaticValues.XBusterDamageCoefficient;
         public static float procCoefficient = 1f;
         public static float baseDuration = 1f;
         //delay on firing is usually ass-feeling. only set this if you know what you're doing

@@ -462,6 +462,7 @@ namespace MegamanXMod.Survivors.X
             #endregion
 
             //PRIMARY
+            #region XPrimary
             XBusterSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "XBuster",
@@ -502,6 +503,10 @@ namespace MegamanXMod.Survivors.X
                 skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_LIGHT_BUSTER_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_LIGHT_BUSTER_DESCRIPTION",
                 skillIcon = XAssets.IconLightBuster,
+                keywordTokens = new string[]
+                {
+                    MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"
+                },
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(XLightBuster)),
                 activationStateMachineName = "Weapon",
@@ -532,6 +537,10 @@ namespace MegamanXMod.Survivors.X
                 skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_GIGA_BUSTER_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_GIGA_BUSTER_DESCRIPTION",
                 skillIcon = XAssets.IconGigaBuster,
+                keywordTokens = new string[]
+                {
+                    MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"
+                },
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(XGigaBuster)),
                 activationStateMachineName = "Weapon",
@@ -562,6 +571,10 @@ namespace MegamanXMod.Survivors.X
                 skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_MAX_BUSTER_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_MAX_BUSTER_DESCRIPTION",
                 skillIcon = XAssets.IconMaxBuster,
+                keywordTokens = new string[]
+                {
+                    MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"
+                },
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(XMaxBuster)),
                 activationStateMachineName = "Weapon",
@@ -592,6 +605,10 @@ namespace MegamanXMod.Survivors.X
                 skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_FORCE_BUSTER_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_FORCE_BUSTER_DESCRIPTION",
                 skillIcon = XAssets.IconUltimateBuster,
+                keywordTokens = new string[]
+                {
+                    MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"
+                },
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(XForceBuster)),
                 activationStateMachineName = "Weapon",
@@ -622,6 +639,10 @@ namespace MegamanXMod.Survivors.X
                 skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_FALCON_BUSTER_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_FALCON_BUSTER_DESCRIPTION",
                 skillIcon = XAssets.IconFalconBuster,
+                keywordTokens = new string[]
+                {
+                    MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"
+                },
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(XFalconBuster)),
                 activationStateMachineName = "Weapon",
@@ -652,6 +673,10 @@ namespace MegamanXMod.Survivors.X
                 skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_GAEA_BUSTER_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_GAEA_BUSTER_DESCRIPTION",
                 skillIcon = XAssets.IconGaeaBuster,
+                keywordTokens = new string[]
+                {
+                    MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"
+                },
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(XGaeaBuster)),
                 activationStateMachineName = "Weapon",
@@ -682,6 +707,10 @@ namespace MegamanXMod.Survivors.X
                 skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_SHADOW_BUSTER_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_SHADOW_BUSTER_DESCRIPTION",
                 skillIcon = XAssets.IconShadowBuster,
+                keywordTokens = new string[]
+                {
+                    MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"
+                },
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ShadowBuster)),
                 activationStateMachineName = "Weapon",
@@ -712,6 +741,10 @@ namespace MegamanXMod.Survivors.X
                 skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_ULTIMATE_BUSTER_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_ULTIMATE_BUSTER_DESCRIPTION",
                 skillIcon = XAssets.IconUltimateBuster,
+                keywordTokens = new string[]
+                {
+                    MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"
+                },
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(XUltimateBuster)),
                 activationStateMachineName = "Weapon",
@@ -742,6 +775,10 @@ namespace MegamanXMod.Survivors.X
                 skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_RATHALOS_BUSTER_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_RATHALOS_BUSTER_DESCRIPTION",
                 skillIcon = XAssets.IconRathalosBuster,
+                keywordTokens = new string[]
+                {
+                    MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"
+                },
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(XRathalosBuster)),
                 activationStateMachineName = "Weapon",
@@ -765,14 +802,16 @@ namespace MegamanXMod.Survivors.X
                 cancelSprintingOnActivation = false,
                 forceSprintDuringState = false,
             });
+            #endregion
 
             //SECONDARY
+            #region XSecondary
             XShadowSaberSkillDef = Skills.CreateSkillDef<SteppedSkillDef>(new SkillDefInfo
             {
                 skillName = "ShadowSaber",
                 skillNameToken = MEGAMAN_x_PREFIX + "SECONDARY_SHADOW_SABER_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "SECONDARY_SHADOW_SABER_DESCRIPTION",
-                skillIcon = XAssets.IconXShadow,
+                skillIcon = XAssets.IconShadowSaber,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(XSSlashCombo)),
                 activationStateMachineName = "Weapon2",
@@ -808,7 +847,7 @@ namespace MegamanXMod.Survivors.X
                 skillName = "RathalosSaber",
                 skillNameToken = MEGAMAN_x_PREFIX + "SECONDARY_RATHALOS_SABER_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "SECONDARY_RATHALOS_SABER_DESCRIPTION",
-                //skillIcon = XAssets.IconXShadow,
+                skillIcon = XAssets.IconRathalosSlash,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(XRSlashCombo)),
                 activationStateMachineName = "Weapon2",
@@ -844,6 +883,10 @@ namespace MegamanXMod.Survivors.X
                 skillNameToken = MEGAMAN_x_PREFIX + "SECONDARY_SHOTGUN_ICE_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "SECONDARY_SHOTGUN_ICE_DESCRIPTION",
                 skillIcon = XAssets.IconShotgunIce,
+                keywordTokens = new string[]
+                {
+                    MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"
+                },
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(XShotgunIce)),
                 activationStateMachineName = "Weapon",
@@ -873,7 +916,11 @@ namespace MegamanXMod.Survivors.X
                 skillName = "FireWave",
                 skillNameToken = MEGAMAN_x_PREFIX + "SECONDARY_FIRE_WAVE_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "SECONDARY_FIRE_WAVE_DESCRIPTION",
-                skillIcon = XAssets.IconShotgunIce,
+                skillIcon = XAssets.IconFireWave,
+                keywordTokens = new string[]
+                {
+                    MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"
+                },
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(XFireWave)),
                 activationStateMachineName = "Weapon",
@@ -927,13 +974,15 @@ namespace MegamanXMod.Survivors.X
                 cancelSprintingOnActivation = false,
                 forceSprintDuringState = false,
             });
+            #endregion
 
             //UTILITY
+            #region XUtility
             XFalconDashSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "FalconDash",
-                skillNameToken = MEGAMAN_x_PREFIX + "UTILITY_ROLL_NAME",
-                skillDescriptionToken = MEGAMAN_x_PREFIX + "UTILITY_ROLL_DESCRIPTION",
+                skillNameToken = MEGAMAN_x_PREFIX + "UTILITY_FALCON_DASH_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "UTILITY_FALCON_DASH_DESCRIPTION",
                 skillIcon = XAssets.IconFalconDash,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(FalconDash)),
@@ -964,7 +1013,7 @@ namespace MegamanXMod.Survivors.X
                 skillName = "NovaDash",
                 skillNameToken = MEGAMAN_x_PREFIX + "UTILITY_NOVA_DASH_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "UTILITY_NOVA_DASH_DESCRIPTION",
-                //skillIcon = XAssets.IconXShadow,
+                skillIcon = XAssets.IconXNovaDash,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(NovaDash)),
                 activationStateMachineName = "Weapon2",
@@ -997,7 +1046,7 @@ namespace MegamanXMod.Survivors.X
                 skillName = "NovaStrike",
                 skillNameToken = MEGAMAN_x_PREFIX + "UTILITY_NOVA_STRIKE_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "UTILITY_NOVA_STRIKE_DESCRIPTION",
-                //skillIcon = XAssets.IconXShadow,
+                skillIcon = XAssets.IconXNovaStrike,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(NovaStrike)),
                 activationStateMachineName = "Weapon2",
@@ -1024,8 +1073,10 @@ namespace MegamanXMod.Survivors.X
                 forceSprintDuringState = false,
 
             });
+            #endregion
 
             //SPECIAL
+            #region XSpecial
             XHeadScannerSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "HeadScanner",
@@ -1091,7 +1142,7 @@ namespace MegamanXMod.Survivors.X
                 skillName = "GigaAttackGaeaArmor",
                 skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_GIGA_ATTACK_GAEA_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "SPECIAL_GIGA_ATTACK_GAEA_DESCRIPTION",
-                skillIcon = XAssets.IconHyperChip,
+                skillIcon = XAssets.IconGigaAttackGaea,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(GigaAttackGaea)),
                 activationStateMachineName = "Body",
@@ -1121,7 +1172,11 @@ namespace MegamanXMod.Survivors.X
                 skillName = "XRathalosSlash",
                 skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_RATHALOS_SLASH_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "SPECIAL_RATHALOS_SLASH_DESCRIPTION",
-                //skillIcon = XAssets.IconHyperChip,
+                skillIcon = XAssets.IconTrueRathalosSlash,
+                keywordTokens = new string[]
+                {
+                    MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"
+                },
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(XRathalosSlashCombo1)),
                 activationStateMachineName = "Weapon2",
@@ -1151,7 +1206,11 @@ namespace MegamanXMod.Survivors.X
                 skillName = "MeltCreeper",
                 skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_MELTCREEPER_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "SPECIAL_MELTCREEPER_DESCRIPTION",
-                skillIcon = XAssets.IconXRathalos,
+                skillIcon = XAssets.IconMeltCreeper,
+                keywordTokens = new string[]
+                {
+                    MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"
+                },
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(MeltCreeper)),
                 activationStateMachineName = "Weapon",
@@ -1182,6 +1241,10 @@ namespace MegamanXMod.Survivors.X
                 skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_ACID_BURST_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "SPECIAL_ACID_BURST_DESCRIPTION",
                 //skillIcon = XAssets.IconXRathalos,
+                keywordTokens = new string[]
+                {
+                    MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"
+                },
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(AcidBurst)),
                 activationStateMachineName = "Weapon",
@@ -1212,6 +1275,10 @@ namespace MegamanXMod.Survivors.X
                 skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_CHAMELEON_STING_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "SPECIAL_CHAMELEON_STING_DESCRIPTION",
                 //skillIcon = XAssets.IconXRathalos,
+                keywordTokens = new string[]
+                {
+                    MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"
+                },
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ChameleonSting)),
                 activationStateMachineName = "Weapon",
@@ -1236,11 +1303,46 @@ namespace MegamanXMod.Survivors.X
                 forceSprintDuringState = false,
             });
 
+            XRisingFireSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "RisingFire",
+                skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_RISING_FIRE_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "SPECIAL_RISING_FIRE_DESCRIPTION",
+                skillIcon = XAssets.IconRisingFire,
+                keywordTokens = new string[]
+                {
+                    MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"
+                },
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(RisingFireCharge)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseRechargeInterval = 0f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = true,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = true,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+
             HomingTorpedoSkillDef = ScriptableObject.CreateInstance<HuntTrackerSkillDef>();
-            HomingTorpedoSkillDef.skillName = MEGAMAN_x_PREFIX + "SPECIAL_RATHALOS_SLASH_NAME";
-            HomingTorpedoSkillDef.skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_RATHALOS_SLASH_NAME";
-            HomingTorpedoSkillDef.skillDescriptionToken = MEGAMAN_x_PREFIX + "SPECIAL_RATHALOS_SLASH_DESCRIPTION";
-            HomingTorpedoSkillDef.icon = XAssets.IconX;
+            HomingTorpedoSkillDef.skillName = MEGAMAN_x_PREFIX + "SPECIAL_HOMMING_TORPEDO_NAME";
+            HomingTorpedoSkillDef.skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_HOMMING_TORPEDO_NAME";
+            HomingTorpedoSkillDef.skillDescriptionToken = MEGAMAN_x_PREFIX + "SPECIAL_HOMMING_TORPEDO_DESCRIPTION";
+            HomingTorpedoSkillDef.icon = XAssets.IconHomingTorpedo;
+            HomingTorpedoSkillDef.keywordTokens = new string[] {MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"};
             HomingTorpedoSkillDef.activationState = new EntityStates.SerializableEntityStateType(typeof(HomingTorpedo));
             HomingTorpedoSkillDef.activationStateMachineName = "Weapon";
             HomingTorpedoSkillDef.baseMaxStock = 12;
@@ -1259,7 +1361,7 @@ namespace MegamanXMod.Survivors.X
             HomingTorpedoSkillDef.stockToConsume = 1;
             ((ScriptableObject)HomingTorpedoSkillDef).name = "HomingTorpedo";
 
-
+            #endregion
 
 
 
@@ -1472,6 +1574,7 @@ namespace MegamanXMod.Survivors.X
             Skills.AddSpecialSkills(bodyPrefab, HomingTorpedoSkillDef);
             Skills.AddSpecialSkills(bodyPrefab, XMeltCreeperSkillDef);
             Skills.AddSpecialSkills(bodyPrefab, XChameleonStingSkillDef);
+            Skills.AddSpecialSkills(bodyPrefab, XRisingFireSkillDef);
         }
         #endregion skills
 
