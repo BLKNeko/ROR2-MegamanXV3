@@ -29,7 +29,7 @@ namespace MegamanXMod.Survivors.X.Components
             impactExplosion = GetComponent<ProjectileImpactExplosion>();
             overlapAttack = GetComponent<ProjectileOverlapAttack>();
             projectileController = GetComponent<ProjectileController>();
-            damageCoeficient = XStaticValues.gunDamageCoefficient;
+            damageCoeficient = XStaticValues.MeltCreeperDamageCoefficient;
 
             //Debug.Log("Wake");
 

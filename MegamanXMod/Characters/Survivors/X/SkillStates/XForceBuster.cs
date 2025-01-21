@@ -16,7 +16,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
         public override void OnEnter()
         {
             base.OnEnter();
-            damageCoefficient = XStaticValues.XBusterDamageCoefficient;
+            damageCoefficient = XStaticValues.XForceBusterDamageCoefficient;
             procCoefficient = 1f;
             baseDuration = 1f;
             firePercentTime = 0.0f;
@@ -65,7 +65,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XBusterMediumProjectille.position = aimRay.origin;
                     XBusterMediumProjectille.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
                     XBusterMediumProjectille.owner = gameObject;
-                    XBusterMediumProjectille.damage = 1f;
+                    XBusterMediumProjectille.damage = damageCoefficient * damageStat;
                     XBusterMediumProjectille.force = force;
                     XBusterMediumProjectille.crit = RollCrit();
                     //XBusterMediumProjectille.speedOverride = XBusterMediumProjectille.speedOverride * 0.8f;
@@ -98,7 +98,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XBusterChargeProjectille.position = aimRay.origin;
                     XBusterChargeProjectille.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
                     XBusterChargeProjectille.owner = gameObject;
-                    XBusterChargeProjectille.damage = damageCoefficient * damageStat;
+                    XBusterChargeProjectille.damage = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat;
                     XBusterChargeProjectille.force = force;
                     XBusterChargeProjectille.crit = RollCrit();
                     //ShadowShurikenProjectille.speedOverride = 20f;
@@ -134,7 +134,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XLightBusterChargeProjectille.position = aimRay.origin;
                     XLightBusterChargeProjectille.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
                     XLightBusterChargeProjectille.owner = gameObject;
-                    XLightBusterChargeProjectille.damage = damageCoefficient * damageStat;
+                    XLightBusterChargeProjectille.damage = (damageCoefficient * XStaticValues.XFullChargeDamageCoefficient) * damageStat;
                     XLightBusterChargeProjectille.force = force;
                     XLightBusterChargeProjectille.crit = RollCrit();
                     XLightBusterChargeProjectille.speedOverride = 300f;

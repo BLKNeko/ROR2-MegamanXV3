@@ -16,7 +16,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
         public override void OnEnter()
         {
             base.OnEnter();
-            damageCoefficient = XStaticValues.XBusterDamageCoefficient;
+            damageCoefficient = XStaticValues.XRathalosBusterDamageCoefficient;
             procCoefficient = 1f;
             baseDuration = 1f;
             firePercentTime = 0.0f;
@@ -98,7 +98,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XRethalosBusterChargeProjectille.position = aimRay.origin;
                     XRethalosBusterChargeProjectille.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
                     XRethalosBusterChargeProjectille.owner = gameObject;
-                    XRethalosBusterChargeProjectille.damage = damageCoefficient * damageStat;
+                    XRethalosBusterChargeProjectille.damage = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat;
                     XRethalosBusterChargeProjectille.force = force;
                     XRethalosBusterChargeProjectille.crit = RollCrit();
                     //ShadowShurikenProjectille.speedOverride = 20f;
@@ -134,7 +134,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XRethalosBusterChargeProjectille.position = aimRay.origin;
                     XRethalosBusterChargeProjectille.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
                     XRethalosBusterChargeProjectille.owner = gameObject;
-                    XRethalosBusterChargeProjectille.damage = damageCoefficient * damageStat;
+                    XRethalosBusterChargeProjectille.damage = (damageCoefficient * XStaticValues.XFullChargeDamageCoefficient) * damageStat;
                     XRethalosBusterChargeProjectille.force = force;
                     XRethalosBusterChargeProjectille.crit = RollCrit();
                     //XGaeaBusterChargeProjectille.speedOverride = 300f;

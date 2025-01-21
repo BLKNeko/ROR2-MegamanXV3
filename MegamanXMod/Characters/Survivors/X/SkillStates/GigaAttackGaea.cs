@@ -9,7 +9,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 {
     public class GigaAttackGaea : BaseSkillState
     {
-        public static float damageCoefficient = XStaticValues.gunDamageCoefficient;
+        public static float damageCoefficient = XStaticValues.GigaAttackGaeaDamageCoefficient;
         public static float procCoefficient = 1f;
         public static float baseDuration = 5f;
         //delay on firing is usually ass-feeling. only set this if you know what you're doing
@@ -127,13 +127,17 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     gaeaBlastAttack.attacker = base.gameObject;
                     gaeaBlastAttack.inflictor = base.gameObject;
                     gaeaBlastAttack.teamIndex = TeamComponent.GetObjectTeam(base.gameObject);
-                    gaeaBlastAttack.baseDamage = damageStat * damageCoefficient;
+                    gaeaBlastAttack.baseDamage = damageCoefficient * damageStat;
                     gaeaBlastAttack.baseForce = force;
                     //gaeaBlastAttack.position = base.characterBody.corePosition;
                     gaeaBlastAttack.position = gaeaGAPos;
                     gaeaBlastAttack.radius = gaeasize;
                     gaeaBlastAttack.bonusForce = new Vector3(1f, 1f, 1f);
-                    gaeaBlastAttack.damageType = DamageType.PoisonOnHit;
+                    gaeaBlastAttack.damageType |= DamageType.PoisonOnHit;
+                    gaeaBlastAttack.damageType |= DamageType.Shock5s;
+                    gaeaBlastAttack.damageType |= DamageType.WeakOnHit;
+                    gaeaBlastAttack.damageType |= DamageType.BypassArmor;
+                    gaeaBlastAttack.damageType |= DamageType.SlowOnHit;
                     gaeaBlastAttack.damageColorIndex = DamageColorIndex.Poison;
 
                     gaeaBlastAttack.Fire();

@@ -11,7 +11,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 {
     public class XGigaBuster : BaseSkillState
     {
-        public static float damageCoefficient = XStaticValues.XBusterDamageCoefficient;
+        public static float damageCoefficient = XStaticValues.XGigaBusterDamageCoefficient;
         public static float procCoefficient = 1f;
         public static float baseDuration = 1f;
         //delay on firing is usually ass-feeling. only set this if you know what you're doing
@@ -162,7 +162,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XBusterChargeProjectille.position = aimRay.origin;
                     XBusterChargeProjectille.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
                     XBusterChargeProjectille.owner = gameObject;
-                    XBusterChargeProjectille.damage = damageCoefficient * damageStat;
+                    XBusterChargeProjectille.damage = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat;
                     XBusterChargeProjectille.force = force;
                     XBusterChargeProjectille.crit = RollCrit();
                     //ShadowShurikenProjectille.speedOverride = 20f;
@@ -213,7 +213,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XLightBusterChargeProjectille.position = aimRay.origin;
                     XLightBusterChargeProjectille.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
                     XLightBusterChargeProjectille.owner = gameObject;
-                    XLightBusterChargeProjectille.damage = damageCoefficient * damageStat;
+                    XLightBusterChargeProjectille.damage = (damageCoefficient * XStaticValues.XFullChargeDamageCoefficient) * damageStat;
                     XLightBusterChargeProjectille.force = force;
                     XLightBusterChargeProjectille.crit = RollCrit();
                     XLightBusterChargeProjectille.speedOverride = 300f;

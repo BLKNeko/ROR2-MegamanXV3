@@ -23,7 +23,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             damageType = DamageType.BypassArmor;
             damageType = DamageType.BypassBlock;
             damageType = DamageType.SlowOnHit;
-            damageCoefficient = 1f;
+            damageCoefficient = XStaticValues.AcidBurstDamageCoefficient;
             procCoefficient = 1f;
             baseDuration = 1f;
             firePercentTime = 0.0f;
@@ -34,8 +34,9 @@ namespace MegamanXMod.Survivors.X.SkillStates
             duration = baseDuration / attackSpeedStat;
             fireTime = firePercentTime * duration;
             characterBody.SetAimTimer(2f);
-            muzzleString = "Muzzle";
-            hitEffectPrefab = XAssets.swordHitImpactEffect;
+            muzzleString = "BusterMuzzPos";
+            hitEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/ImpactEffects/CrocoDiseaseImpactEffect");
+            muzzleEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/MuzzleFlashes/MuzzleflashVerminSpit");
 
 
 
@@ -59,7 +60,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 hasFired = true;
 
                 characterBody.AddSpreadBloom(0.8f);
-                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, gameObject, muzzleString, false);
+                EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
                 Util.PlaySound("HenryXBusterPistol", gameObject);
                 PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
 
@@ -93,7 +94,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 hasFired = true;
 
                 characterBody.AddSpreadBloom(0.8f);
-                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, gameObject, muzzleString, false);
+                EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
                 Util.PlaySound("HenryXBusterPistol", gameObject);
                 PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
 
@@ -107,7 +108,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XAcidBurstMediumProjectille.position = aimRay.origin;
                     XAcidBurstMediumProjectille.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
                     XAcidBurstMediumProjectille.owner = gameObject;
-                    XAcidBurstMediumProjectille.damage = damageCoefficient * damageStat;
+                    XAcidBurstMediumProjectille.damage = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat;
                     XAcidBurstMediumProjectille.force = force;
                     XAcidBurstMediumProjectille.crit = RollCrit();
                     XAcidBurstMediumProjectille.speedOverride = 50f;
@@ -127,7 +128,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 this.hasFired = true;
 
                 base.characterBody.AddSpreadBloom(0.75f);
-                EffectManager.SimpleMuzzleFlash(EntityStates.Mage.Weapon.FireRoller.fireMuzzleflashEffectPrefab, base.gameObject, this.muzzleString, false);
+                EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
                 Util.PlaySound("HenryXBusterPistol", gameObject);
                 PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
 
@@ -142,7 +143,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XAcidBurstChargeProjectille.position = aimRay.origin;
                     XAcidBurstChargeProjectille.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
                     XAcidBurstChargeProjectille.owner = gameObject;
-                    XAcidBurstChargeProjectille.damage = damageCoefficient * damageStat;
+                    XAcidBurstChargeProjectille.damage = (damageCoefficient * XStaticValues.XFullChargeDamageCoefficient) * damageStat;
                     XAcidBurstChargeProjectille.force = force;
                     XAcidBurstChargeProjectille.crit = RollCrit();
                     XAcidBurstChargeProjectille.speedOverride = 50f;
@@ -153,7 +154,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XAcidBurstChargeProjectille2.position = aimRay.origin;
                     XAcidBurstChargeProjectille2.rotation = Util.QuaternionSafeLookRotation(new Vector3(aimRay.direction.x, aimRay.direction.y + 0.25f, aimRay.direction.z).normalized);
                     XAcidBurstChargeProjectille2.owner = gameObject;
-                    XAcidBurstChargeProjectille2.damage = damageCoefficient * damageStat;
+                    XAcidBurstChargeProjectille2.damage = (damageCoefficient * XStaticValues.XFullChargeDamageCoefficient) * damageStat;
                     XAcidBurstChargeProjectille2.force = force;
                     XAcidBurstChargeProjectille2.crit = RollCrit();
                     XAcidBurstChargeProjectille2.speedOverride = 50f;

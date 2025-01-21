@@ -17,7 +17,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
         {
             base.OnEnter();
 
-            damageCoefficient = 1f;
+            damageCoefficient = XStaticValues.ChameleonStingDamageCoefficient;
             procCoefficient = 1f;
             baseDuration = 1f;
             firePercentTime = 0.0f;
@@ -28,8 +28,9 @@ namespace MegamanXMod.Survivors.X.SkillStates
             duration = baseDuration / attackSpeedStat;
             fireTime = firePercentTime * duration;
             characterBody.SetAimTimer(2f);
-            muzzleString = "Muzzle";
-            hitEffectPrefab = XAssets.swordHitImpactEffect;
+            muzzleString = "BusterMuzzPos";
+            hitEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/ImpactEffects/HitsparkCommandoFMJ");
+            muzzleEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/MuzzleFlashes/MuzzleflashBanditShotgun");
 
 
 
@@ -53,7 +54,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 hasFired = true;
 
                 characterBody.AddSpreadBloom(0.8f);
-                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, gameObject, muzzleString, false);
+                EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
                 Util.PlaySound("HenryXBusterPistol", gameObject);
                 PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
 
@@ -110,7 +111,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 hasFired = true;
 
                 characterBody.AddSpreadBloom(0.8f);
-                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, gameObject, muzzleString, false);
+                EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
                 Util.PlaySound("HenryXBusterPistol", gameObject);
                 PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
 
@@ -124,7 +125,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XChameleonStingSimpleProjectille.position = aimRay.origin;
                     XChameleonStingSimpleProjectille.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
                     XChameleonStingSimpleProjectille.owner = gameObject;
-                    XChameleonStingSimpleProjectille.damage = damageCoefficient * damageStat;
+                    XChameleonStingSimpleProjectille.damage = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat;
                     XChameleonStingSimpleProjectille.force = force;
                     XChameleonStingSimpleProjectille.crit = RollCrit();
                     XChameleonStingSimpleProjectille.damageColorIndex = DamageColorIndex.Luminous;
@@ -134,7 +135,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XChameleonSting2SimpleProjectille.position = aimRay.origin;
                     XChameleonSting2SimpleProjectille.rotation = Util.QuaternionSafeLookRotation(new Vector3(aimRay.direction.x + 0.2f, aimRay.direction.y, aimRay.direction.z).normalized);
                     XChameleonSting2SimpleProjectille.owner = gameObject;
-                    XChameleonSting2SimpleProjectille.damage = damageCoefficient * damageStat;
+                    XChameleonSting2SimpleProjectille.damage = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat;
                     XChameleonSting2SimpleProjectille.force = force;
                     XChameleonSting2SimpleProjectille.crit = RollCrit();
                     XChameleonSting2SimpleProjectille.damageColorIndex = DamageColorIndex.Luminous;
@@ -144,7 +145,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XChameleonSting3SimpleProjectille.position = aimRay.origin;
                     XChameleonSting3SimpleProjectille.rotation = Util.QuaternionSafeLookRotation(new Vector3(aimRay.direction.x - 0.2f, aimRay.direction.y, aimRay.direction.z).normalized);
                     XChameleonSting3SimpleProjectille.owner = gameObject;
-                    XChameleonSting3SimpleProjectille.damage = damageCoefficient * damageStat;
+                    XChameleonSting3SimpleProjectille.damage = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat;
                     XChameleonSting3SimpleProjectille.force = force;
                     XChameleonSting3SimpleProjectille.crit = RollCrit();
                     XChameleonSting3SimpleProjectille.damageColorIndex = DamageColorIndex.Luminous;
@@ -166,10 +167,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 this.hasFired = true;
 
-                base.characterBody.AddSpreadBloom(0.75f);
-                EffectManager.SimpleMuzzleFlash(EntityStates.Mage.Weapon.FireRoller.fireMuzzleflashEffectPrefab, base.gameObject, this.muzzleString, false);
                 Util.PlaySound("HenryXBusterPistol", gameObject);
-                PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
+                PlayAnimation("FullBody, Override", "HyperMode", "HyperMode.playbackRate", duration);
 
                 if (base.isAuthority)
                 {

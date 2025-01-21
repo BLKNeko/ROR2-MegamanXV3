@@ -16,7 +16,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
         public override void OnEnter()
         {
             base.OnEnter();
-            damageCoefficient = XStaticValues.XBusterDamageCoefficient;
+            damageCoefficient = XStaticValues.XMaxBusterDamageCoefficient;
             procCoefficient = 1f;
             baseDuration = 1f;
             firePercentTime = 0.0f;
@@ -98,7 +98,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XBusterChargeProjectille.position = aimRay.origin;
                     XBusterChargeProjectille.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
                     XBusterChargeProjectille.owner = gameObject;
-                    XBusterChargeProjectille.damage = damageCoefficient * damageStat;
+                    XBusterChargeProjectille.damage = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat;
                     XBusterChargeProjectille.force = force;
                     XBusterChargeProjectille.crit = RollCrit();
                     //ShadowShurikenProjectille.speedOverride = 20f;
@@ -134,7 +134,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XMaxBusterChargeProjectille.position = aimRay.origin;
                     XMaxBusterChargeProjectille.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
                     XMaxBusterChargeProjectille.owner = gameObject;
-                    XMaxBusterChargeProjectille.damage = damageCoefficient * damageStat;
+                    XMaxBusterChargeProjectille.damage = (damageCoefficient * XStaticValues.XFullChargeDamageCoefficient) * damageStat;
                     XMaxBusterChargeProjectille.force = force;
                     XMaxBusterChargeProjectille.crit = RollCrit();
                     XMaxBusterChargeProjectille.speedOverride = 300f;

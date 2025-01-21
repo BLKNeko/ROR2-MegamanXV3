@@ -98,7 +98,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XGaeaBusterChargeProjectille.position = aimRay.origin;
                     XGaeaBusterChargeProjectille.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
                     XGaeaBusterChargeProjectille.owner = gameObject;
-                    XGaeaBusterChargeProjectille.damage = damageCoefficient * damageStat;
+                    XGaeaBusterChargeProjectille.damage = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat;
                     XGaeaBusterChargeProjectille.force = force;
                     XGaeaBusterChargeProjectille.crit = RollCrit();
                     //ShadowShurikenProjectille.speedOverride = 20f;
@@ -134,7 +134,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XGaeaBusterChargeProjectille.position = aimRay.origin;
                     XGaeaBusterChargeProjectille.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
                     XGaeaBusterChargeProjectille.owner = gameObject;
-                    XGaeaBusterChargeProjectille.damage = damageCoefficient * damageStat;
+                    XGaeaBusterChargeProjectille.damage = (damageCoefficient * XStaticValues.XFullChargeDamageCoefficient) * damageStat;
                     XGaeaBusterChargeProjectille.force = force;
                     XGaeaBusterChargeProjectille.crit = RollCrit();
                     //XGaeaBusterChargeProjectille.speedOverride = 300f;

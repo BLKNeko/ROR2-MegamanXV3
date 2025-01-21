@@ -16,7 +16,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
         public override void OnEnter()
         {
             base.OnEnter();
-            damageCoefficient = XStaticValues.XBusterDamageCoefficient;
+            damageCoefficient = XStaticValues.XFalconBusterDamageCoefficient;
             procCoefficient = 1f;
             baseDuration = 1f;
             firePercentTime = 0.0f;
@@ -67,7 +67,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                         bulletCount = 1,
                         aimVector = aimRay.direction,
                         origin = aimRay.origin,
-                        damage = (damageCoefficient * 2f) * damageStat,
+                        damage = damageCoefficient * damageStat,
                         damageColorIndex = DamageColorIndex.Default,
                         damageType = DamageType.Generic,
                         falloffModel = BulletAttack.FalloffModel.None,
@@ -117,7 +117,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XBusterMediumProjectille.position = aimRay.origin;
                     XBusterMediumProjectille.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
                     XBusterMediumProjectille.owner = gameObject;
-                    XBusterMediumProjectille.damage = damageCoefficient * damageStat;
+                    XBusterMediumProjectille.damage = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat;
                     XBusterMediumProjectille.force = force;
                     XBusterMediumProjectille.crit = RollCrit();
                     //XBusterMediumProjectille.speedOverride = XBusterMediumProjectille.speedOverride * 0.8f;
@@ -152,7 +152,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XFalconChargeProjectille.position = aimRay.origin;
                     XFalconChargeProjectille.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
                     XFalconChargeProjectille.owner = gameObject;
-                    XFalconChargeProjectille.damage = damageCoefficient * damageStat;
+                    XFalconChargeProjectille.damage = (damageCoefficient * XStaticValues.XFullChargeDamageCoefficient) * damageStat;
                     XFalconChargeProjectille.force = force;
                     XFalconChargeProjectille.crit = RollCrit();
                     //ShadowShurikenProjectille.speedOverride = 20f;
