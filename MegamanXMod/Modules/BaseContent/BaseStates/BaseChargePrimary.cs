@@ -17,9 +17,10 @@ namespace MegamanXMod.Modules.BaseStates
         protected float damageCoefficient = 1f;
         protected float procCoefficient = 1f;
         protected float baseDuration = 1f;
-        protected string muzzleString = "";
+        protected string muzzleString = "BusterMuzzPos";
         protected GameObject hitEffectPrefab;
-        
+        protected GameObject muzzleEffectPrefab;
+
         //delay on firing is usually ass-feeling. only set this if you know what you're doing
         public static float firePercentTime = 0.0f;
         public static float force = 400f;

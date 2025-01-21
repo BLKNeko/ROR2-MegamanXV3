@@ -10,7 +10,7 @@ using UnityEngine.Networking;
 
 namespace MegamanXMod.Survivors.X.SkillStates
 {
-    public class AcidBurst : BaseChargePrimary
+    public class AcidBurst : BaseChargeSpecial
     {
 
         public override void OnEnter()

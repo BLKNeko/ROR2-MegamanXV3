@@ -43,13 +43,13 @@ namespace MegamanXMod.Survivors.X.SkillStates
         public override void OnEnter()
         {
             base.OnEnter();
-            duration = baseDuration / attackSpeedStat;
+            duration = baseDuration;
             fireTime = firePercentTime * duration;
-            characterBody.SetAimTimer(2f);
+            characterBody.SetAimTimer(5f);
             muzzleString = "GaeaGAPosition";
 
             this.childLocator = base.GetModelTransform().GetComponent<ChildLocator>();
-            Debug.Log("ChildLocator" + childLocator);
+            //Debug.Log("ChildLocator" + childLocator);
 
             //childLocator = characterModel.GetComponent<ChildLocator>();
 
@@ -65,7 +65,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             }
 
             gaeaGAPos = childLocator.FindChild("GaeaGAPosition").transform.position;
-            Debug.Log("GaeaPOS" + gaeaGAPos);
+            //Debug.Log("GaeaPOS" + gaeaGAPos);
 
             EffectManager.SimpleMuzzleFlash(XAssets.GaeaGAVFX, gameObject, muzzleString, true);
 
@@ -121,23 +121,22 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     Ray aimRay = GetAimRay();
                     //AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
 
-                    base.PlayAnimation("Gesture, Override", "ShootBurst", "attackSpeed", this.duration);
-                //Util.PlaySound(Sounds.xChargeShot, base.gameObject);
+                    //Util.PlaySound(Sounds.xChargeShot, base.gameObject);
 
-                gaeaBlastAttack = new BlastAttack();
-                gaeaBlastAttack.attacker = base.gameObject;
-                gaeaBlastAttack.inflictor = base.gameObject;
-                gaeaBlastAttack.teamIndex = TeamComponent.GetObjectTeam(base.gameObject);
-                gaeaBlastAttack.baseDamage = damageStat * damageCoefficient;
-                gaeaBlastAttack.baseForce = force;
-                //gaeaBlastAttack.position = base.characterBody.corePosition;
-                gaeaBlastAttack.position = gaeaGAPos;
-                gaeaBlastAttack.radius = gaeasize;
-                gaeaBlastAttack.bonusForce = new Vector3(1f, 1f, 1f);
-                gaeaBlastAttack.damageType = DamageType.PoisonOnHit;
+                    gaeaBlastAttack = new BlastAttack();
+                    gaeaBlastAttack.attacker = base.gameObject;
+                    gaeaBlastAttack.inflictor = base.gameObject;
+                    gaeaBlastAttack.teamIndex = TeamComponent.GetObjectTeam(base.gameObject);
+                    gaeaBlastAttack.baseDamage = damageStat * damageCoefficient;
+                    gaeaBlastAttack.baseForce = force;
+                    //gaeaBlastAttack.position = base.characterBody.corePosition;
+                    gaeaBlastAttack.position = gaeaGAPos;
+                    gaeaBlastAttack.radius = gaeasize;
+                    gaeaBlastAttack.bonusForce = new Vector3(1f, 1f, 1f);
+                    gaeaBlastAttack.damageType = DamageType.PoisonOnHit;
+                    gaeaBlastAttack.damageColorIndex = DamageColorIndex.Poison;
 
-
-                gaeaBlastAttack.Fire();
+                    gaeaBlastAttack.Fire();
                 }
             
         }

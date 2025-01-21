@@ -24,12 +24,12 @@ namespace MegamanXMod.Survivors.X.SkillStates
             force = 400f;
             recoil = 3f;
             range = 256f;
+            muzzleString = "BusterMuzzPos";
 
             duration = baseDuration / attackSpeedStat;
             fireTime = firePercentTime * duration;
-            characterBody.SetAimTimer(2f);
-            muzzleString = "Muzzle";
-            hitEffectPrefab = XAssets.swordHitImpactEffect;
+            characterBody.SetAimTimer(1f);
+            hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/FireMeatBallExplosion");
 
 
 
@@ -53,7 +53,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 hasFired = true;
 
                 characterBody.AddSpreadBloom(0.8f);
-                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, gameObject, muzzleString, false);
+                EffectManager.SimpleMuzzleFlash(EntityStates.Mage.Weapon.FireRoller.fireMuzzleflashEffectPrefab, gameObject, muzzleString, false);
                 Util.PlaySound("HenryXBusterPistol", gameObject);
                 PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
 
@@ -88,7 +88,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 hasFired = true;
 
                 characterBody.AddSpreadBloom(0.8f);
-                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, gameObject, muzzleString, false);
+                EffectManager.SimpleMuzzleFlash(EntityStates.Mage.Weapon.FireRoller.fireMuzzleflashEffectPrefab, gameObject, muzzleString, false);
                 Util.PlaySound("HenryXBusterPistol", gameObject);
                 PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
 
@@ -122,16 +122,10 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 this.hasFired = true;
 
-                base.characterBody.AddSpreadBloom(0.75f);
-                EffectManager.SimpleMuzzleFlash(EntityStates.Mage.Weapon.FireRoller.fireMuzzleflashEffectPrefab, base.gameObject, this.muzzleString, false);
-                Util.PlaySound("HenryXBusterPistol", gameObject);
-                //PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
+                RisingFireCharge risingFireCharge = new RisingFireCharge();
 
-                if (base.isAuthority)
-                {
+                SetNextEntityState(risingFireCharge);
 
-
-                }
             }
         }
 

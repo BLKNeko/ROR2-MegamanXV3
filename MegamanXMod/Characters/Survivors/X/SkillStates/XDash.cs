@@ -11,8 +11,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
     public class XDash : BaseSkillState
     {
         public static float duration = 0.5f;
-        public static float initialSpeedCoefficient = 5f;
-        public static float finalSpeedCoefficient = 4f;
+        public static float initialSpeedCoefficient = 7f;
+        public static float finalSpeedCoefficient = 6f;
 
         public static string dodgeSoundString = "HenryRoll";
         public static float dodgeFOV = global::EntityStates.Commando.DodgeState.dodgeFOV;
@@ -21,6 +21,9 @@ namespace MegamanXMod.Survivors.X.SkillStates
         private Vector3 forwardDirection;
         private Animator animator;
         private Vector3 previousPosition;
+
+        private string LDashPos = "LDashPos";
+        private string RDashPos = "RDashPos";
 
         public override void OnEnter()
         {
@@ -57,9 +60,11 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             RecalculateRollSpeed();
 
+            base.characterMotor.Motor.ForceUnground(0.1f);
+
             if (characterMotor && characterDirection)
             {
-                //characterMotor.velocity.y = 0f;
+                characterMotor.velocity.y = 0f;
                 characterMotor.velocity = forwardDirection * rollSpeed;
             }
 
@@ -67,15 +72,16 @@ namespace MegamanXMod.Survivors.X.SkillStates
             previousPosition = transform.position - b;
 
 
-
+            EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, gameObject, LDashPos, true);
+            EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, gameObject, RDashPos, true);
             PlayAnimation("FullBody, Override", "DashLoop", "DashLoop.playbackRate", duration);
             Util.PlaySound(dodgeSoundString, gameObject);
 
-            if (NetworkServer.active)
-            {
-                characterBody.AddTimedBuff(XBuffs.armorBuff, 3f * duration);
-                characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 0.2f * duration);
-            }
+            //if (NetworkServer.active)
+            //{
+            //    characterBody.AddTimedBuff(XBuffs.armorBuff, 3f * duration);
+            //    characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 0.2f * duration);
+            //}
         }
 
         private void RecalculateRollSpeed()
@@ -90,6 +96,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             if (characterDirection) characterDirection.forward = forwardDirection;
             if (cameraTargetParams) cameraTargetParams.fovOverride = Mathf.Lerp(dodgeFOV, 60f, fixedAge / duration);
+
+            base.characterMotor.Motor.ForceUnground(0.1f);
 
             Vector3 normalized = (transform.position - previousPosition).normalized;
             if (characterMotor && characterDirection && normalized != Vector3.zero)
@@ -113,7 +121,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 //}
 
                 //vector = forwardDirection * d;
-                //vector.y = 0f;
+                vector.y = 0f;
 
                 characterMotor.velocity = vector;
             }

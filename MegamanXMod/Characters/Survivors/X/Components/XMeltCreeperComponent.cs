@@ -19,6 +19,7 @@ namespace MegamanXMod.Survivors.X.Components
         private float timer = 0f;
         private float timeLimit = 0.15f;
         private float damageStat;
+        private float damageCoeficient;
 
         private BlastAttack blastAttack;
 
@@ -27,8 +28,9 @@ namespace MegamanXMod.Survivors.X.Components
             impactExplosion = GetComponent<ProjectileImpactExplosion>();
             overlapAttack = GetComponent<ProjectileOverlapAttack>();
             projectileController = GetComponent<ProjectileController>();
+            damageCoeficient = XStaticValues.gunDamageCoefficient;
 
-            Debug.Log("Wake");
+            //Debug.Log("Wake");
 
             //EffectManager.SpawnEffect(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ExplodeOnDeathVoidExplosionEffect"), new EffectData
             //{
@@ -65,12 +67,12 @@ namespace MegamanXMod.Survivors.X.Components
                 blastAttack.teamIndex = TeamComponent.GetObjectTeam(projectileController.owner);
                 //blastAttack.teamIndex = TeamIndex.Player;
                 //blastAttack.teamIndex = TeamComponent.GetObjectTeam(base.gameObject);
-                blastAttack.baseDamage = 1f + damageStat;
+                blastAttack.baseDamage = damageCoeficient * damageStat;
                 blastAttack.baseForce = 10f;
                 blastAttack.position = gameObject.transform.position;
                 blastAttack.radius = 8f;
                 blastAttack.bonusForce = new Vector3(1f, 1f, 1f);
-                blastAttack.damageType = DamageType.Generic;
+                blastAttack.damageType = DamageType.IgniteOnHit;
                 blastAttack.damageColorIndex = DamageColorIndex.Default;
 
 

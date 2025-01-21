@@ -23,15 +23,19 @@ namespace MegamanXMod.Survivors.X.SkillStates
         private bool hasFired;
         private string muzzleString;
 
+        private GameObject hitEffectPrefab;
+        private GameObject muzzleEffectPrefab;
+
         public override void OnEnter()
         {
             base.OnEnter();
             duration = baseDuration / attackSpeedStat;
             fireTime = firePercentTime * duration;
-            characterBody.SetAimTimer(2f);
-            muzzleString = "Muzzle";
+            characterBody.SetAimTimer(1f);
+            muzzleString = "BusterMuzzPos";
 
-            PlayAnimation("LeftArm, Override", "ShootGun", "ShootGun.playbackRate", 1.8f);
+            hitEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/ImpactEffects/BackstabSpark");
+            muzzleEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/MuzzleFlashes/MuzzleflashBarrage");
 
 
         }
@@ -66,8 +70,9 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 hasFired = true;
 
                 characterBody.AddSpreadBloom(0.8f);
-                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, gameObject, muzzleString, false);
+                EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
                 Util.PlaySound("HenryXBusterPistol", gameObject);
+                PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
 
                 if (isAuthority)
                 {
@@ -76,7 +81,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     Vector3 raygun2 = new Vector3(aimRay.direction.x - 0.15f, aimRay.direction.y, aimRay.direction.z);
                     AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
 
-                    base.PlayAnimation("Gesture, Override", "ShootBurst", "attackSpeed", this.duration);
+                    
                     //Util.PlaySound(Sounds.xChargeShot, base.gameObject);
                     //ProjectileManager.instance.FireProjectile(XAssets.shurikenProjectilePrefab2, aimRay.origin, Util.QuaternionSafeLookRotation(aimRay.direction), base.gameObject, damageCoefficient * this.damageStat, 0f, Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f);
 

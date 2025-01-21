@@ -17,6 +17,15 @@ namespace MegamanXMod.Survivors.X.SkillStates
         public static string dodgeSoundString = "HenryRoll";
         public static float dodgeFOV = global::EntityStates.Commando.DodgeState.dodgeFOV;
 
+        private string LDashPos = "LDashPos";
+        private string RDashPos = "RDashPos";
+        private string FWingR1 = "FWingR1";
+        private string FWingR2 = "FWingR2";
+        private string FWingR3 = "FWingR3";
+        private string FWingL1 = "FWingL1";
+        private string FWingL2 = "FWingL2";
+        private string FWingL3 = "FWingL3";
+
         private float rollSpeed;
         private Vector3 forwardDirection;
         private Animator animator;
@@ -37,6 +46,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
             hoverComponent = GetComponent<XHoverComponent>();
 
             hoverComponent.SetHover(true);
+
+            //hoverComponent.SetChildLocator(base.GetModelTransform().GetComponent<ChildLocator>());
 
             //if (isAuthority && inputBank && characterDirection)
             //{
@@ -77,8 +88,16 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             base.characterMotor.useGravity = false;
 
-            
-            
+
+            EffectManager.SimpleMuzzleFlash(EntityStates.Mage.FlyUpState.muzzleflashEffect, gameObject, LDashPos, true);
+            EffectManager.SimpleMuzzleFlash(EntityStates.Mage.FlyUpState.muzzleflashEffect, gameObject, RDashPos, true);
+            EffectManager.SimpleMuzzleFlash(EntityStates.Mage.FlyUpState.muzzleflashEffect, gameObject, FWingR1, true);
+            EffectManager.SimpleMuzzleFlash(EntityStates.Mage.FlyUpState.muzzleflashEffect, gameObject, FWingR2, true);
+            EffectManager.SimpleMuzzleFlash(EntityStates.Mage.FlyUpState.muzzleflashEffect, gameObject, FWingR3, true);
+            EffectManager.SimpleMuzzleFlash(EntityStates.Mage.FlyUpState.muzzleflashEffect, gameObject, FWingL1, true);
+            EffectManager.SimpleMuzzleFlash(EntityStates.Mage.FlyUpState.muzzleflashEffect, gameObject, FWingL2, true);
+            EffectManager.SimpleMuzzleFlash(EntityStates.Mage.FlyUpState.muzzleflashEffect, gameObject, FWingL3, true);
+
 
             PlayAnimation("FullBody, Override", "DashLoop", "DashLoop.playbackRate", duration);
             Util.PlaySound(dodgeSoundString, gameObject);
@@ -99,6 +118,13 @@ namespace MegamanXMod.Survivors.X.SkillStates
         {
             base.FixedUpdate();
             RecalculateRollSpeed();
+
+            //EffectManager.SimpleMuzzleFlash(EntityStates.Mage.FlyUpState.muzzleflashEffect, gameObject, FWingR1, true);
+            //EffectManager.SimpleMuzzleFlash(EntityStates.Mage.FlyUpState.muzzleflashEffect, gameObject, FWingR2, true);
+            //EffectManager.SimpleMuzzleFlash(EntityStates.Mage.FlyUpState.muzzleflashEffect, gameObject, FWingR3, true);
+            //EffectManager.SimpleMuzzleFlash(EntityStates.Mage.FlyUpState.muzzleflashEffect, gameObject, FWingL1, true);
+            //EffectManager.SimpleMuzzleFlash(EntityStates.Mage.FlyUpState.muzzleflashEffect, gameObject, FWingL2, true);
+            //EffectManager.SimpleMuzzleFlash(EntityStates.Mage.FlyUpState.muzzleflashEffect, gameObject, FWingL3, true);
 
             if (characterDirection) characterDirection.forward = forwardDirection;
             if (cameraTargetParams) cameraTargetParams.fovOverride = Mathf.Lerp(dodgeFOV, 60f, fixedAge / duration);

@@ -13,8 +13,11 @@ namespace MegamanXMod.Survivors.X.Components
 
         private ProjectileImpactExplosion impactExplosion;
 
+        private ProjectileController projectileController;
+
         private float timer = 0f;
         private float timeLimit = 0.2f;
+        private float damageStat;
 
         private BlastAttack blastAttack;
 
@@ -22,8 +25,9 @@ namespace MegamanXMod.Survivors.X.Components
         {
             impactExplosion = GetComponent<ProjectileImpactExplosion>();
             overlapAttack = GetComponent<ProjectileOverlapAttack>();
+            projectileController = GetComponent<ProjectileController>();
 
-            Debug.Log("Wake");
+            //Debug.Log("Wake");
 
             //EffectManager.SpawnEffect(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ExplodeOnDeathVoidExplosionEffect"), new EffectData
             //{
@@ -31,6 +35,20 @@ namespace MegamanXMod.Survivors.X.Components
             //    scale = 8f,
 
             //}, true);
+
+        }
+
+        void start()
+        {
+            if (projectileController && projectileController.owner)
+            {
+                // Tenta obter o CharacterBody do dono do projétil
+                CharacterBody ownerBody = projectileController.owner.GetComponent<CharacterBody>();
+                if (ownerBody)
+                {
+                    damageStat = ownerBody.damage;
+                }
+            }
 
         }
 
@@ -43,8 +61,8 @@ namespace MegamanXMod.Survivors.X.Components
                 blastAttack = new BlastAttack();
                 blastAttack.attacker = base.gameObject;
                 blastAttack.inflictor = base.gameObject;
-                blastAttack.teamIndex = TeamIndex.Player;
-                blastAttack.baseDamage = 1;
+                blastAttack.teamIndex = TeamComponent.GetObjectTeam(projectileController.owner);
+                blastAttack.baseDamage = damageStat * 0.1f;
                 blastAttack.baseForce = 10f;
                 blastAttack.position = gameObject.transform.position;
                 blastAttack.radius = 5f;

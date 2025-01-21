@@ -73,8 +73,12 @@ namespace MegamanXMod.Survivors.X
             #endregion
 
             #region Passive
-            LanguageAPI.Add(prefix + "PASSIVE_NAME", "Limitless Potential");
-            LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", "<style=cIsUtility>X's true potential still unachieved, but his adaptation and improvement grow's super fast.</style> <style=cIsHealing>When X HP gets Low, he uses his true powers, getting temporary stronger and generating a shield</style>, <style=cIsDamage> but after this he need to recharge before use this again.</style>");
+            //LanguageAPI.Add(prefix + "PASSIVE_NAME", "Limitless Potential");
+            //LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", "<style=cIsUtility>X's true potential still unachieved, but his adaptation and improvement grow's super fast.</style> <style=cIsHealing>When X HP gets Low, he uses his true powers, getting temporary stronger and generating a shield</style>, <style=cIsDamage> but after this he need to recharge before use this again.</style>");
+
+            LanguageAPI.Add(prefix + "PASSIVE_NAME", "X-Heart and Limitless Potential");
+            LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", "<style=cIsUtility>X's true potential still unachieved, but his adaptation and improvement grow's super fast in tense moments.</style> <style=cIsHealing>When X HP gets Low, he uses his true powers, getting temporary stronger and generating a shield</style>, <style=cIsDamage> but after this he need to recharge before use this again, also X starts with</style>");
+
             #endregion
 
             #region Primary

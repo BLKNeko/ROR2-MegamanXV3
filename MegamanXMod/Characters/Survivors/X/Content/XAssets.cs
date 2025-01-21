@@ -24,6 +24,7 @@ namespace MegamanXMod.Survivors.X
         public static GameObject MeltCreeperVFX;
         public static GameObject MeltCreeperChargeVFX;
         public static GameObject RisingFireVFX;
+        public static GameObject FJetVFX;
 
 
 
@@ -224,6 +225,7 @@ namespace MegamanXMod.Survivors.X
             Charge2VFX = _assetBundle.LoadEffect("Charge2VFX", true);
             NovaStrikeVFX = _assetBundle.LoadEffect("NovaStrikeVFX", true);
             RisingFireVFX = _assetBundle.LoadEffect("RisingFireVFX", true);
+            FJetVFX = _assetBundle.LoadEffect("FJet", true);
 
             ShurikenVFX = _assetBundle.LoadEffect("ShurikenVFX", false);
             MeltCreeperVFX = _assetBundle.LoadEffect("MeltCreeperVFX", false);
@@ -917,6 +919,7 @@ namespace MegamanXMod.Survivors.X
             XRFire2Projectile.GetComponent<ProjectileController>().procCoefficient = 1f;
             XRFire2Projectile.GetComponent<ProjectileDamage>().damageType = DamageType.IgniteOnHit;
             XRFire2Projectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
+
 
             // register it for networking
             if (XRFire2Projectile) PrefabAPI.RegisterNetworkPrefab(XRFire2Projectile);

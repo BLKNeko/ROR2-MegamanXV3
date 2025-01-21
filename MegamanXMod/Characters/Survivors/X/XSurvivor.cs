@@ -187,6 +187,9 @@ namespace MegamanXMod.Survivors.X
         private void AdditionalBodySetup()
         {
             AddHitboxes();
+
+            ChildLocator cLocator = prefabCharacterModel.GetComponent<ChildLocator>();
+
             bodyPrefab.AddComponent<XBaseComponent>();
             bodyPrefab.AddComponent<XArmorComponent>();
             bodyPrefab.AddComponent<XHoverComponent>();
@@ -978,6 +981,37 @@ namespace MegamanXMod.Survivors.X
 
             //UTILITY
             #region XUtility
+
+            XDashSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "XDash",
+                skillNameToken = MEGAMAN_x_PREFIX + "UTILITY_X_DASH_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "UTILITY_X_DASH_DESCRIPTION",
+                skillIcon = XAssets.IconXDash,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(XDash)),
+                activationStateMachineName = "Weapon2",
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+
+                baseRechargeInterval = 1f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = true,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = false,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = false,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+
             XFalconDashSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "FalconDash",
@@ -1314,7 +1348,7 @@ namespace MegamanXMod.Survivors.X
                     MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"
                 },
 
-                activationState = new EntityStates.SerializableEntityStateType(typeof(RisingFireCharge)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(RisingFire)),
                 activationStateMachineName = "Weapon",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
@@ -1442,18 +1476,18 @@ namespace MegamanXMod.Survivors.X
             primarySkillDef1.stepGraceDuration = 0.5f;
             primarySkillDef1.mustKeyPress = false;
 
-            Skills.AddPrimarySkills(bodyPrefab, XAcidBurstSkillDef);
+            //Skills.AddPrimarySkills(bodyPrefab, XAcidBurstSkillDef);
 
             Skills.AddPrimarySkills(bodyPrefab, XBusterSkillDef);
-            Skills.AddPrimarySkills(bodyPrefab, XLightBusterSkillDef);
-            Skills.AddPrimarySkills(bodyPrefab, XGigaBusterSkillDef);
-            Skills.AddPrimarySkills(bodyPrefab, XMaxBusterSkillDef);
-            Skills.AddPrimarySkills(bodyPrefab, XForceBusterSkillDef);
-            Skills.AddPrimarySkills(bodyPrefab, XFalconBusterSkillDef);
-            Skills.AddPrimarySkills(bodyPrefab, XGaeaBusterSkillDef);
-            Skills.AddPrimarySkills(bodyPrefab, XShadowBusterSkillDef);
-            Skills.AddPrimarySkills(bodyPrefab, XUltimateBusterSkillDef);
-            Skills.AddPrimarySkills(bodyPrefab, XRathalosBusterSkillDef);
+            //Skills.AddPrimarySkills(bodyPrefab, XLightBusterSkillDef);
+            //Skills.AddPrimarySkills(bodyPrefab, XGigaBusterSkillDef);
+            //Skills.AddPrimarySkills(bodyPrefab, XMaxBusterSkillDef);
+            //Skills.AddPrimarySkills(bodyPrefab, XForceBusterSkillDef);
+            //Skills.AddPrimarySkills(bodyPrefab, XFalconBusterSkillDef);
+            //Skills.AddPrimarySkills(bodyPrefab, XGaeaBusterSkillDef);
+            //Skills.AddPrimarySkills(bodyPrefab, XShadowBusterSkillDef);
+            //Skills.AddPrimarySkills(bodyPrefab, XUltimateBusterSkillDef);
+            //Skills.AddPrimarySkills(bodyPrefab, XRathalosBusterSkillDef);
         }
 
         private void AddSecondarySkills()
@@ -1493,8 +1527,8 @@ namespace MegamanXMod.Survivors.X
 
             });
 
-            Skills.AddSecondarySkills(bodyPrefab, secondarySkillDef1);
-            Skills.AddSecondarySkills(bodyPrefab, XShadowSaberSkillDef);
+            //Skills.AddSecondarySkills(bodyPrefab, secondarySkillDef1);
+            //Skills.AddSecondarySkills(bodyPrefab, XShadowSaberSkillDef);
             Skills.AddSecondarySkills(bodyPrefab, XShotgunIceSkillDef);
             Skills.AddSecondarySkills(bodyPrefab, XFireWaveSkillDef);
             Skills.AddSecondarySkills(bodyPrefab, XSqueezeBombSkillDef);
@@ -1535,11 +1569,11 @@ namespace MegamanXMod.Survivors.X
                 forceSprintDuringState = true,
             });
 
-            Skills.AddUtilitySkills(bodyPrefab, utilitySkillDef1);
+            Skills.AddUtilitySkills(bodyPrefab, XDashSkillDef);
 
-            Skills.AddUtilitySkills(bodyPrefab, XFalconDashSkillDef);
-            Skills.AddUtilitySkills(bodyPrefab, XNovaDashSkillDef);
-            Skills.AddUtilitySkills(bodyPrefab, XNovaStrikeSkillDef);
+            //Skills.AddUtilitySkills(bodyPrefab, XFalconDashSkillDef);
+            //Skills.AddUtilitySkills(bodyPrefab, XNovaDashSkillDef);
+            //Skills.AddUtilitySkills(bodyPrefab, XNovaStrikeSkillDef);
 
         }
 
@@ -1566,13 +1600,15 @@ namespace MegamanXMod.Survivors.X
                 mustKeyPress = false,
             });
 
-            Skills.AddSpecialSkills(bodyPrefab, specialSkillDef1);
-            Skills.AddSpecialSkills(bodyPrefab, XHeadScannerSkillDef);
-            Skills.AddSpecialSkills(bodyPrefab, XHyperChipSkillDef);
-            Skills.AddSpecialSkills(bodyPrefab, XGaeaGigaAttackSkillDef);
-            Skills.AddSpecialSkills(bodyPrefab, XRathalosSlashSkillDef);
+            //Skills.AddSpecialSkills(bodyPrefab, specialSkillDef1);
+            //Skills.AddSpecialSkills(bodyPrefab, XHeadScannerSkillDef);
+            //Skills.AddSpecialSkills(bodyPrefab, XHyperChipSkillDef);
+            //Skills.AddSpecialSkills(bodyPrefab, XGaeaGigaAttackSkillDef);
+            //Skills.AddSpecialSkills(bodyPrefab, XRathalosSlashSkillDef);
+
             Skills.AddSpecialSkills(bodyPrefab, HomingTorpedoSkillDef);
             Skills.AddSpecialSkills(bodyPrefab, XMeltCreeperSkillDef);
+            Skills.AddSpecialSkills(bodyPrefab, XAcidBurstSkillDef);
             Skills.AddSpecialSkills(bodyPrefab, XChameleonStingSkillDef);
             Skills.AddSpecialSkills(bodyPrefab, XRisingFireSkillDef);
         }

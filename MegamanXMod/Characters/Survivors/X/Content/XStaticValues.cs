@@ -14,7 +14,7 @@ namespace MegamanXMod.Survivors.X
 
         public const float XFullChargeDamageCoefficient = 5f;
 
-        public const float XBusterDamageCoefficient = 2f;
+        public const float XBusterDamageCoefficient = 1f;
 
         
 

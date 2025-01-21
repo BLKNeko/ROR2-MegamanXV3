@@ -2,6 +2,7 @@
 using MegamanXMod.Modules.BaseStates;
 using RoR2;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace MegamanXMod.Survivors.X.SkillStates
 {
@@ -50,8 +51,15 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             EffectManager.SimpleMuzzleFlash(XAssets.RisingFireVFX, gameObject, muzzleString, true);
 
+            
 
             base.OnEnter();
+
+            if (NetworkServer.active)
+            {
+                characterBody.AddTimedBuff(RoR2Content.Buffs.Immune, duration * 3);
+            }
+
         }
 
         protected override void PlayAttackAnimation()

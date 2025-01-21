@@ -1,4 +1,5 @@
 ﻿using RoR2;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -25,8 +26,19 @@ namespace MegamanXMod.Survivors.X.Components
 
         private bool shouldHover { get; set; }
 
+        private string LDashPos = "LDashPos";
+        private string RDashPos = "RDashPos";
+        private string FWingR1 = "FWingR1";
+        private string FWingR2 = "FWingR2";
+        private string FWingR3 = "FWingR3";
+        private string FWingL1 = "FWingL1";
+        private string FWingL2 = "FWingL2";
+        private string FWingL3 = "FWingL3";
 
+        private GameObject EffectPrefab;
 
+        private float timeLimit = 0.4f;
+        private float timer;
 
         private void Start()
         {
@@ -43,8 +55,9 @@ namespace MegamanXMod.Survivors.X.Components
 
             XAnim = XBody.characterDirection.modelAnimator;
 
-            childLocator = GetComponentInChildren<ChildLocator>();
-
+            //EffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/MuzzleFlashes/Muzzleflash1");
+            EffectPrefab = XAssets.FJetVFX;
+            
 
         }
 
@@ -64,7 +77,6 @@ namespace MegamanXMod.Survivors.X.Components
             //Debug.Log("XHealth: " + XHealth);
             //Debug.Log("XBody: " + XBody);
 
-
             Hover();
             CheckGround();
         }
@@ -73,6 +85,11 @@ namespace MegamanXMod.Survivors.X.Components
         {
             shouldHover = b;
             hoverTimer = 0f;
+        }
+
+        public void SetChildLocator(ChildLocator cLocator)
+        {
+            childLocator = cLocator;
         }
 
         public bool GetHover()
@@ -98,6 +115,34 @@ namespace MegamanXMod.Survivors.X.Components
                 num = Mathf.MoveTowards(num, hoverVelocity, hoverAcceleration);
                 XBody.characterMotor.velocity = new Vector3(XBody.characterMotor.velocity.x, num, XBody.characterMotor.velocity.z);
                 hoverTimer += Time.fixedDeltaTime;
+
+                timer += Time.fixedDeltaTime;
+
+                if(timer > timeLimit)
+                {
+                    EffectManager.SimpleMuzzleFlash(EffectPrefab, gameObject, LDashPos, true);
+                    EffectManager.SimpleMuzzleFlash(EffectPrefab, gameObject, RDashPos, true);
+                    EffectManager.SimpleMuzzleFlash(EffectPrefab, gameObject, FWingR1, true);
+                    EffectManager.SimpleMuzzleFlash(EffectPrefab, gameObject, FWingR2, true);
+                    EffectManager.SimpleMuzzleFlash(EffectPrefab, gameObject, FWingR3, true);
+                    EffectManager.SimpleMuzzleFlash(EffectPrefab, gameObject, FWingL1, true);
+                    EffectManager.SimpleMuzzleFlash(EffectPrefab, gameObject, FWingL2, true);
+                    EffectManager.SimpleMuzzleFlash(EffectPrefab, gameObject, FWingL3, true);
+
+                    //EffectManager.SpawnEffect(EffectPrefab, new EffectData
+                    //{
+                    //    origin = childLocator.FindChild(FWingL3).position,
+                    //    rotation = Util.QuaternionSafeLookRotation(Vector3.down),
+                    //    scale = 8f,
+
+                    //}, true);
+
+
+                    timer = 0;
+                }
+
+                
+
             }
         }
 
