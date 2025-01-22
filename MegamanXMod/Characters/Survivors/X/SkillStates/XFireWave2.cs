@@ -11,12 +11,12 @@ namespace MegamanXMod.Survivors.X.SkillStates
 {
     public class XFireWave2 : BaseSkillState
     {
-        public static float damageCoefficient = XStaticValues.XBusterDamageCoefficient;
+        public static float damageCoefficient = XStaticValues.XFireWaveDamageCoefficient;
         public static float procCoefficient = 1f;
         public static float baseDuration = 1f;
         //delay on firing is usually ass-feeling. only set this if you know what you're doing
         public static float firePercentTime = 0.0f;
-        public static float force = 400f;
+        public static float force = 100f;
         public static float recoil = 3f;
         public static float range = 40f;
         public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("prefabs/effects/tracers/TracerEmbers");
@@ -47,7 +47,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             duration = baseDuration / attackSpeedStat;
             fireTime = firePercentTime * duration;
             characterBody.SetAimTimer(2f);
-            muzzleString = "Muzzle";
+            muzzleString = "BusterMuzzPos";
 
             
 
@@ -72,7 +72,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             if (base.fixedAge >= this.duration && base.isAuthority)
             {
-                if (repeatFire <= 90)
+                if (repeatFire <= 30)
                 {
                     repeatFire++;
                     FireWaveAttack();
@@ -85,7 +85,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 //FireW2 FTR2 = new FireW2();
                 //this.outer.SetNextState(FTR2);
 
-                Debug.Log("repeatFire: " + repeatFire);
+                //Debug.Log("repeatFire: " + repeatFire);
 
             }
         }
@@ -101,7 +101,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 Util.PlaySound("HenryXBusterPistol", gameObject);
                 PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
 
-                Debug.Log("Suposed to fire");
+                //Debug.Log("Suposed to fire");
 
                 if (isAuthority)
                 {
@@ -118,9 +118,9 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     bulletCount = 1,
                     aimVector = aimRay.direction,
                     origin = aimRay.origin,
-                    damage = (damageCoefficient * 2f) * damageStat,
+                    damage = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat,
                     damageColorIndex = DamageColorIndex.Default,
-                    damageType = DamageType.Generic,
+                    damageType = DamageType.IgniteOnHit,
                     falloffModel = BulletAttack.FalloffModel.None,
                     maxDistance = range,
                     force = force,

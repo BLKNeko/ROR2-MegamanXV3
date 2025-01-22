@@ -17,7 +17,7 @@ namespace MegamanXMod.Survivors.X.Components
 
         private float timer = 0f;
         private float timeLimit = 0.2f;
-        private float damageStat;
+        private float damageCoeficient;
 
         private BlastAttack blastAttack;
 
@@ -26,6 +26,7 @@ namespace MegamanXMod.Survivors.X.Components
             impactExplosion = GetComponent<ProjectileImpactExplosion>();
             overlapAttack = GetComponent<ProjectileOverlapAttack>();
             projectileController = GetComponent<ProjectileController>();
+            damageCoeficient = XStaticValues.XShockSphereDamageCoefficient;
 
             //Debug.Log("Wake");
 
@@ -38,19 +39,6 @@ namespace MegamanXMod.Survivors.X.Components
 
         }
 
-        void start()
-        {
-            if (projectileController && projectileController.owner)
-            {
-                // Tenta obter o CharacterBody do dono do projétil
-                CharacterBody ownerBody = projectileController.owner.GetComponent<CharacterBody>();
-                if (ownerBody)
-                {
-                    damageStat = ownerBody.damage;
-                }
-            }
-
-        }
 
         void FixedUpdate()
         {
@@ -62,7 +50,7 @@ namespace MegamanXMod.Survivors.X.Components
                 blastAttack.attacker = base.gameObject;
                 blastAttack.inflictor = base.gameObject;
                 blastAttack.teamIndex = TeamComponent.GetObjectTeam(projectileController.owner);
-                blastAttack.baseDamage = damageStat * 0.25f;
+                blastAttack.baseDamage = damageCoeficient * projectileController.owner.GetComponent<CharacterBody>().damage;
                 blastAttack.baseForce = 10f;
                 blastAttack.position = gameObject.transform.position;
                 blastAttack.radius = 5f;
@@ -70,6 +58,11 @@ namespace MegamanXMod.Survivors.X.Components
                 blastAttack.damageType = DamageType.Shock5s;
                 blastAttack.damageColorIndex = DamageColorIndex.Luminous;
 
+                //Debug.Log("damageCoeficient: " + damageCoeficient);
+                //Debug.Log("damageStat: " + damageStat);
+                //Debug.Log("blastAttack.baseDamage: " + blastAttack.baseDamage);
+                //Debug.Log("projectileController.owner: " + projectileController.owner);
+                //Debug.Log("projectileController.owner.GetComponent<CharacterBody>().damage: " + projectileController.owner.GetComponent<CharacterBody>().damage);
 
                 if (timer > timeLimit)
                 {

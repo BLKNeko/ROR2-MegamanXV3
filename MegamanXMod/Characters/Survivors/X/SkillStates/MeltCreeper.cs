@@ -19,7 +19,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
         public override void OnEnter()
         {
             base.OnEnter();
-            damageCoefficient = 1f;
+            damageCoefficient = XStaticValues.MeltCreeperDamageCoefficient;
             procCoefficient = 1f;
             baseDuration = 1f;
             firePercentTime = 0.0f;
@@ -30,7 +30,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             duration = baseDuration / attackSpeedStat;
             fireTime = firePercentTime * duration;
             characterBody.SetAimTimer(2f);
-            hitEffectPrefab = XAssets.swordHitImpactEffect;
+            hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/FireMeatBallExplosion");
             muzzleString = "MeltCreeperFrontPos";
             muzzleStringB = "MeltCreeperBackPos";
 
@@ -71,7 +71,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XMeltCreeperProjectille.position = childLocator.FindChild("MeltCreeperFrontPos").transform.position;
                     XMeltCreeperProjectille.rotation = childLocator.FindChild("MeltCreeperFrontPos").rotation;
                     XMeltCreeperProjectille.owner = gameObject;
-                    XMeltCreeperProjectille.damage = 1;
+                    XMeltCreeperProjectille.damage = damageCoefficient * damageStat;
                     XMeltCreeperProjectille.force = force;
                     XMeltCreeperProjectille.crit = RollCrit();
                     XMeltCreeperProjectille.speedOverride = 2f;
@@ -106,7 +106,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XMeltCreeperProjectille.position = childLocator.FindChild("MeltCreeperFrontPos").transform.position;
                     XMeltCreeperProjectille.rotation = childLocator.FindChild("MeltCreeperFrontPos").rotation;
                     XMeltCreeperProjectille.owner = gameObject;
-                    XMeltCreeperProjectille.damage = 1;
+                    XMeltCreeperProjectille.damage = damageCoefficient * damageStat;
                     XMeltCreeperProjectille.force = force;
                     XMeltCreeperProjectille.crit = RollCrit();
                     XMeltCreeperProjectille.speedOverride = 2f;
@@ -141,7 +141,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XMeltCreeperProjectille.position = childLocator.FindChild("MeltCreeperFrontPos").transform.position;
                     XMeltCreeperProjectille.rotation = childLocator.FindChild("MeltCreeperFrontPos").rotation;
                     XMeltCreeperProjectille.owner = gameObject;
-                    XMeltCreeperProjectille.damage = 1;
+                    XMeltCreeperProjectille.damage = damageCoefficient * damageStat;
                     XMeltCreeperProjectille.force = force;
                     XMeltCreeperProjectille.crit = RollCrit();
                     XMeltCreeperProjectille.speedOverride = 0f;

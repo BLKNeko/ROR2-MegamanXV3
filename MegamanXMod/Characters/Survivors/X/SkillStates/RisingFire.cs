@@ -17,7 +17,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
         {
             base.OnEnter();
 
-            damageCoefficient = 1f;
+            damageCoefficient = XStaticValues.RisingFireDamageCoefficient;
             procCoefficient = 1f;
             baseDuration = 1f;
             firePercentTime = 0.0f;
@@ -102,7 +102,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XRisingFireSimpleProjectille.position = aimRay.origin;
                     XRisingFireSimpleProjectille.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
                     XRisingFireSimpleProjectille.owner = gameObject;
-                    XRisingFireSimpleProjectille.damage = damageCoefficient * damageStat;
+                    XRisingFireSimpleProjectille.damage = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat;
                     XRisingFireSimpleProjectille.force = force;
                     XRisingFireSimpleProjectille.crit = RollCrit();
                     XRisingFireSimpleProjectille.damageColorIndex = DamageColorIndex.Luminous;

@@ -3,9 +3,9 @@ using MegamanXMod.Modules;
 
 namespace MegamanXMod.Survivors.X
 {
-    public static class HenryConfig
+    public static class XConfig
     {
-        public static ConfigEntry<bool> someConfigBool;
+        public static ConfigEntry<bool> enableVoiceBool;
         public static ConfigEntry<float> someConfigFloat;
         public static ConfigEntry<float> someConfigFloatWithCustomRange;
 
@@ -13,11 +13,11 @@ namespace MegamanXMod.Survivors.X
         {
             string section = "X";
 
-            someConfigBool = Config.BindAndOptions(
+            enableVoiceBool = Config.BindAndOptions(
                 section,
-                "someConfigBool",
+                "EnableVoice",
                 true,
-                "this creates a bool config, and a checkbox option in risk of options");
+                "At certain moments or when using a skill, X may talk or scream. If you prefer to disable this feature, you can turn it off here.");
 
             someConfigFloat = Config.BindAndOptions(
                 section,

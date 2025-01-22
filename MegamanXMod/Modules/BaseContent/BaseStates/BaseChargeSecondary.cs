@@ -43,6 +43,8 @@ namespace MegamanXMod.Modules.BaseStates
         protected int chargeLevel = 0;
         protected bool chargingSFX = false;
 
+        private EntityState NextState;
+
         public override void OnEnter()
         {
             base.OnEnter();
@@ -94,7 +96,21 @@ namespace MegamanXMod.Modules.BaseStates
             {
                 hasTime = false;
 
-                this.outer.SetNextStateToMain();
+                if (NextState != null)
+                {
+                    //Debug.Log("To Next State");
+                    //Debug.Log("Nextstate: " + NextState);
+                    outer.SetNextState(NextState);
+                    NextState = null;
+                    return;
+                }
+                else
+                {
+                    //Debug.Log("NextStae suposted null");
+                    //Debug.Log("Nextstate: " + NextState);
+                    outer.SetNextStateToMain();
+                    return;
+                }
             }
 
         }
@@ -184,6 +200,11 @@ namespace MegamanXMod.Modules.BaseStates
                 default:
                     break;
             }
+        }
+
+        public void SetNextEntityState(EntityState state)
+        {
+            NextState = state;
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()

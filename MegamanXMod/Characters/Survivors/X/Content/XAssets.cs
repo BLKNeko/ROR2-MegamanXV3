@@ -25,6 +25,9 @@ namespace MegamanXMod.Survivors.X
         public static GameObject MeltCreeperChargeVFX;
         public static GameObject RisingFireVFX;
         public static GameObject FJetVFX;
+        public static GameObject swordSwingEffectY;
+        public static GameObject swordSwingEffectR;
+
 
 
 
@@ -231,6 +234,9 @@ namespace MegamanXMod.Survivors.X
             MeltCreeperVFX = _assetBundle.LoadEffect("MeltCreeperVFX", false);
             MeltCreeperChargeVFX = _assetBundle.LoadEffect("MeltCreeperChargeVFX", false);
 
+            swordSwingEffectY = _assetBundle.LoadEffect("HSwordSwingY", true);
+            swordSwingEffectR = _assetBundle.LoadEffect("HSwordSwingR", true);
+
 
         }
 
@@ -363,7 +369,7 @@ namespace MegamanXMod.Survivors.X
             shurikenProjectilePrefab.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Bleed;
 
             // register it for networking
-            if (shurikenProjectilePrefab) PrefabAPI.RegisterNetworkPrefab(shurikenProjectilePrefab);
+            //if (shurikenProjectilePrefab) PrefabAPI.RegisterNetworkPrefab(shurikenProjectilePrefab);
 
 
             ProjectileController XShurikenController = shurikenProjectilePrefab.GetComponent<ProjectileController>();
@@ -386,7 +392,7 @@ namespace MegamanXMod.Survivors.X
             shurikenProjectilePrefab2.GetComponent<ProjectileDamage>().damageType = DamageType.BleedOnHit;
 
             // register it for networking
-            if (shurikenProjectilePrefab2) PrefabAPI.RegisterNetworkPrefab(shurikenProjectilePrefab2);
+            //if (shurikenProjectilePrefab2) PrefabAPI.RegisterNetworkPrefab(shurikenProjectilePrefab2);
 
             ProjectileController XShurikenController2 = shurikenProjectilePrefab2.GetComponent<ProjectileController>();
 
@@ -422,7 +428,7 @@ namespace MegamanXMod.Survivors.X
             xBusterMediumProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
 
             // register it for networking
-            if (xBusterMediumProjectile) PrefabAPI.RegisterNetworkPrefab(xBusterMediumProjectile);
+            //if (xBusterMediumProjectile) PrefabAPI.RegisterNetworkPrefab(xBusterMediumProjectile);
 
 
             ProjectileController XBusterMediumController = xBusterMediumProjectile.GetComponent<ProjectileController>();
@@ -459,7 +465,7 @@ namespace MegamanXMod.Survivors.X
             xBusterChargeProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
 
             // register it for networking
-            if (xBusterChargeProjectile) PrefabAPI.RegisterNetworkPrefab(xBusterChargeProjectile);
+            //if (xBusterChargeProjectile) PrefabAPI.RegisterNetworkPrefab(xBusterChargeProjectile);
 
 
             ProjectileController XBusterChargeController = xBusterChargeProjectile.GetComponent<ProjectileController>();
@@ -496,7 +502,7 @@ namespace MegamanXMod.Survivors.X
             xLightBusterChargeProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
 
             // register it for networking
-            if (xLightBusterChargeProjectile) PrefabAPI.RegisterNetworkPrefab(xLightBusterChargeProjectile);
+            //if (xLightBusterChargeProjectile) PrefabAPI.RegisterNetworkPrefab(xLightBusterChargeProjectile);
 
 
             ProjectileController XLightBusterChargeController = xLightBusterChargeProjectile.GetComponent<ProjectileController>();
@@ -533,7 +539,7 @@ namespace MegamanXMod.Survivors.X
             xLightBusterSmallProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
 
             // register it for networking
-            if (xLightBusterSmallProjectile) PrefabAPI.RegisterNetworkPrefab(xLightBusterSmallProjectile);
+            //if (xLightBusterSmallProjectile) PrefabAPI.RegisterNetworkPrefab(xLightBusterSmallProjectile);
 
 
             ProjectileController XLightBusterSmallController = xLightBusterSmallProjectile.GetComponent<ProjectileController>();
@@ -570,7 +576,7 @@ namespace MegamanXMod.Survivors.X
             xMaxBusterChargeProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
 
             // register it for networking
-            if (xMaxBusterChargeProjectile) PrefabAPI.RegisterNetworkPrefab(xMaxBusterChargeProjectile);
+            //if (xMaxBusterChargeProjectile) PrefabAPI.RegisterNetworkPrefab(xMaxBusterChargeProjectile);
 
 
             ProjectileController XMaxBusterChargeController = xMaxBusterChargeProjectile.GetComponent<ProjectileController>();
@@ -607,7 +613,7 @@ namespace MegamanXMod.Survivors.X
             xMaxBusterSmallProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
 
             // register it for networking
-            if (xMaxBusterSmallProjectile) PrefabAPI.RegisterNetworkPrefab(xMaxBusterSmallProjectile);
+            //if (xMaxBusterSmallProjectile) PrefabAPI.RegisterNetworkPrefab(xMaxBusterSmallProjectile);
 
 
             ProjectileController XMaxBusterSmallController = xMaxBusterSmallProjectile.GetComponent<ProjectileController>();
@@ -648,7 +654,7 @@ namespace MegamanXMod.Survivors.X
             xForceBusterProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
 
             // register it for networking
-            if (xForceBusterProjectile) PrefabAPI.RegisterNetworkPrefab(xForceBusterProjectile);
+            //if (xForceBusterProjectile) PrefabAPI.RegisterNetworkPrefab(xForceBusterProjectile);
 
 
             ProjectileController XForceBusterController = xForceBusterProjectile.GetComponent<ProjectileController>();
@@ -691,7 +697,7 @@ namespace MegamanXMod.Survivors.X
 
 
             // register it for networking
-            if (xShockSphereProjectile) PrefabAPI.RegisterNetworkPrefab(xShockSphereProjectile);
+            //if (xShockSphereProjectile) PrefabAPI.RegisterNetworkPrefab(xShockSphereProjectile);
 
 
             ProjectileController XShockSphereController = xShockSphereProjectile.GetComponent<ProjectileController>();
@@ -731,7 +737,7 @@ namespace MegamanXMod.Survivors.X
             xFalconBusterChargeProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
 
             // register it for networking
-            if (xFalconBusterChargeProjectile) PrefabAPI.RegisterNetworkPrefab(xFalconBusterChargeProjectile);
+            //if (xFalconBusterChargeProjectile) PrefabAPI.RegisterNetworkPrefab(xFalconBusterChargeProjectile);
 
 
             ProjectileController XFalconBusterChargeController = xFalconBusterChargeProjectile.GetComponent<ProjectileController>();
@@ -768,7 +774,7 @@ namespace MegamanXMod.Survivors.X
             xGaeaBusterChargeProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Poison;
 
             // register it for networking
-            if (xGaeaBusterChargeProjectile) PrefabAPI.RegisterNetworkPrefab(xGaeaBusterChargeProjectile);
+            //if (xGaeaBusterChargeProjectile) PrefabAPI.RegisterNetworkPrefab(xGaeaBusterChargeProjectile);
 
 
             ProjectileController XGaeaBusterChargeController = xGaeaBusterChargeProjectile.GetComponent<ProjectileController>();
@@ -805,7 +811,7 @@ namespace MegamanXMod.Survivors.X
             xGaeaBusterSmallProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Poison;
 
             // register it for networking
-            if (xGaeaBusterSmallProjectile) PrefabAPI.RegisterNetworkPrefab(xGaeaBusterSmallProjectile);
+            //if (xGaeaBusterSmallProjectile) PrefabAPI.RegisterNetworkPrefab(xGaeaBusterSmallProjectile);
 
 
             ProjectileController XGaeaBusterSmallController = xGaeaBusterSmallProjectile.GetComponent<ProjectileController>();
@@ -828,7 +834,7 @@ namespace MegamanXMod.Survivors.X
             shotFMJ.GetComponent<ProjectileDamage>().damageType = DamageType.Shock5s;
 
             // register it for networking
-            if (shotFMJ) PrefabAPI.RegisterNetworkPrefab(shotFMJ);
+            //if (shotFMJ) PrefabAPI.RegisterNetworkPrefab(shotFMJ);
 
 
             ProjectileController shotFMJController = shotFMJ.GetComponent<ProjectileController>();
@@ -851,7 +857,7 @@ namespace MegamanXMod.Survivors.X
             shotgunIceprefab.GetComponent<ProjectileDamage>().damageType = DamageType.Freeze2s;
 
             // register it for networking
-            if (shotgunIceprefab) PrefabAPI.RegisterNetworkPrefab(shotgunIceprefab);
+            //if (shotgunIceprefab) PrefabAPI.RegisterNetworkPrefab(shotgunIceprefab);
 
             ProjectileController shotgunIceController = shotgunIceprefab.GetComponent<ProjectileController>();
             if (_assetBundle.LoadAsset<GameObject>("ShotgunIceGhost") != null) shotgunIceController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("ShotgunIceGhost");
@@ -884,7 +890,7 @@ namespace MegamanXMod.Survivors.X
             XRFireProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
 
             // register it for networking
-            if (XRFireProjectile) PrefabAPI.RegisterNetworkPrefab(XRFireProjectile);
+            //if (XRFireProjectile) PrefabAPI.RegisterNetworkPrefab(XRFireProjectile);
 
 
             ProjectileController XRFireController = XRFireProjectile.GetComponent<ProjectileController>();
@@ -922,7 +928,7 @@ namespace MegamanXMod.Survivors.X
 
 
             // register it for networking
-            if (XRFire2Projectile) PrefabAPI.RegisterNetworkPrefab(XRFire2Projectile);
+            //if (XRFire2Projectile) PrefabAPI.RegisterNetworkPrefab(XRFire2Projectile);
 
 
             ProjectileController XRFire2Controller = XRFire2Projectile.GetComponent<ProjectileController>();
@@ -984,7 +990,7 @@ namespace MegamanXMod.Survivors.X
             SqueezeBombProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
 
             // register it for networking
-            if (SqueezeBombProjectile) PrefabAPI.RegisterNetworkPrefab(SqueezeBombProjectile);
+            //if (SqueezeBombProjectile) PrefabAPI.RegisterNetworkPrefab(SqueezeBombProjectile);
 
 
             ProjectileController SqueezeBombController = SqueezeBombProjectile.GetComponent<ProjectileController>();
@@ -1009,7 +1015,7 @@ namespace MegamanXMod.Survivors.X
             
 
             // register it for networking
-            if (MeltCreeperProjectile) PrefabAPI.RegisterNetworkPrefab(MeltCreeperProjectile);
+            //if (MeltCreeperProjectile) PrefabAPI.RegisterNetworkPrefab(MeltCreeperProjectile);
 
 
             ProjectileController MeltCreeperController = MeltCreeperProjectile.GetComponent<ProjectileController>();

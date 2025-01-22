@@ -40,7 +40,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             //}, true);
 
             damageType = DamageType.Generic;
-            damageCoefficient = XStaticValues.swordDamageCoefficient;
+            damageCoefficient = XStaticValues.NovaStrikeDamageCoefficient;
             procCoefficient = 1f;
             pushForce = 300f;
             bonusForce = Vector3.zero;

@@ -11,12 +11,12 @@ namespace MegamanXMod.Survivors.X.SkillStates
 {
     public class XFireWave3 : BaseSkillState
     {
-        public static float damageCoefficient = XStaticValues.XBusterDamageCoefficient;
+        public static float damageCoefficient = XStaticValues.XFireWaveDamageCoefficient;
         public static float procCoefficient = 1f;
         public static float baseDuration = 1f;
         //delay on firing is usually ass-feeling. only set this if you know what you're doing
         public static float firePercentTime = 0.0f;
-        public static float force = 400f;
+        public static float force = 200f;
         public static float recoil = 3f;
         public static float range = 50f;
         public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("prefabs/effects/tracers/TracerEmbers");
@@ -47,7 +47,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             duration = baseDuration / attackSpeedStat;
             fireTime = firePercentTime * duration;
             characterBody.SetAimTimer(2f);
-            muzzleString = "Muzzle";
+            muzzleString = "BusterMuzzPos";
 
             
 
@@ -72,7 +72,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             if (base.fixedAge >= this.duration && base.isAuthority)
             {
-                if (repeatFire <= 150)
+                if (repeatFire <= 80)
                 {
                     repeatFire++;
                     FireWaveAttack();
@@ -113,9 +113,9 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     FireWave2BulletAttack.bulletCount = 1;
                     FireWave2BulletAttack.aimVector = aimRay.direction;
                     FireWave2BulletAttack.origin = aimRay.origin;
-                    FireWave2BulletAttack.damage = (damageCoefficient * 2f) * damageStat;
+                    FireWave2BulletAttack.damage = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat;
                     FireWave2BulletAttack.damageColorIndex = DamageColorIndex.Default;
-                    FireWave2BulletAttack.damageType = DamageType.Generic;
+                    FireWave2BulletAttack.damageType = DamageType.IgniteOnHit;
                     FireWave2BulletAttack.falloffModel = BulletAttack.FalloffModel.None;
                     FireWave2BulletAttack.maxDistance = range;
                     FireWave2BulletAttack.force = force;

@@ -53,7 +53,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             fireTime = firePercentTime * duration;
             base.characterBody.SetAimTimer(2f);
             this.animator = base.GetModelAnimator();
-            this.muzzleString = "CorePosition";
+            this.muzzleString = "BusterMuzzPos";
 
             this.modelTransform = base.GetModelTransform();
             this.animator = base.GetModelAnimator();
@@ -75,8 +75,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 base.characterBody.SetAimTimer(this.duration);
             }
 
-            Debug.Log("Tracker:" + huntressTracker);
-            Debug.Log("OrbTarget:" + initialOrbTarget);
+            //Debug.Log("Tracker:" + huntressTracker);
+            //Debug.Log("OrbTarget:" + initialOrbTarget);
 
             //Util.PlaySound(Modules.Sounds.vileFragDrop, base.gameObject);
 
@@ -109,13 +109,14 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 Debug.Log("Create arrow:" + CreateArrowOrb());
 
                 GenericDamageOrb genericDamageOrb = this.CreateArrowOrb();
-                genericDamageOrb.damageValue = (damageCoefficient * 2f) * damageStat;
+                genericDamageOrb.damageValue = damageCoefficient * damageStat;
                 genericDamageOrb.isCrit = RollCrit();
                 genericDamageOrb.teamIndex = TeamComponent.GetObjectTeam(base.gameObject);
                 genericDamageOrb.attacker = base.gameObject;
                 genericDamageOrb.procCoefficient = procCoefficient;
                 genericDamageOrb.damageType = DamageType.Generic;
                 genericDamageOrb.damageColorIndex = DamageColorIndex.Default;
+                
                 //genericDamageOrb.damageType = DamageType.ApplyMercExpose;
 
                 Debug.Log("GenereciDamageOrb:" + genericDamageOrb);
@@ -124,7 +125,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 if (hurtBox)
                 {
                     Transform transform = this.childLocator.FindChild(this.muzzleString);
-                    EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, base.gameObject, this.muzzleString, true);
+                    EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, true);
                     genericDamageOrb.origin = transform.position;
                     genericDamageOrb.target = hurtBox;
                     OrbManager.instance.AddOrb(genericDamageOrb);
@@ -136,7 +137,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
                 base.characterBody.AddSpreadBloom(0.15f);
                 Ray aimRay = base.GetAimRay();
-                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireBarrage.effectPrefab, base.gameObject, this.muzzleString, false);
+                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, false);
             }
         }
 
@@ -148,7 +149,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
 
                 GenericDamageOrb genericDamageOrb = this.CreateArrowOrb();
-                genericDamageOrb.damageValue = (damageCoefficient * 2f) * damageStat;
+                genericDamageOrb.damageValue = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat;
                 genericDamageOrb.isCrit = RollCrit();
                 genericDamageOrb.teamIndex = TeamComponent.GetObjectTeam(base.gameObject);
                 genericDamageOrb.attacker = base.gameObject;
@@ -161,7 +162,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 if (hurtBox)
                 {
                     Transform transform = this.childLocator.FindChild(this.muzzleString);
-                    EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, base.gameObject, this.muzzleString, true);
+                    EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, true);
                     genericDamageOrb.origin = transform.position;
                     genericDamageOrb.target = hurtBox;
                     OrbManager.instance.AddOrb(genericDamageOrb);
@@ -172,7 +173,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
                 base.characterBody.AddSpreadBloom(0.15f);
                 Ray aimRay = base.GetAimRay();
-                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireBarrage.effectPrefab, base.gameObject, this.muzzleString, false);
+                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, false);
             }
         }
 
@@ -184,7 +185,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
 
                 GenericDamageOrb genericDamageOrb = this.CreateArrowOrb();
-                genericDamageOrb.damageValue = (damageCoefficient * 2f) * damageStat;
+                genericDamageOrb.damageValue = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat;
                 genericDamageOrb.isCrit = RollCrit();
                 genericDamageOrb.teamIndex = TeamComponent.GetObjectTeam(base.gameObject);
                 genericDamageOrb.attacker = base.gameObject;
@@ -197,7 +198,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 if (hurtBox)
                 {
                     Transform transform = this.childLocator.FindChild(this.muzzleString);
-                    EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, base.gameObject, this.muzzleString, true);
+                    EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, true);
                     genericDamageOrb.origin = transform.position;
                     genericDamageOrb.target = hurtBox;
                     OrbManager.instance.AddOrb(genericDamageOrb);
@@ -211,7 +212,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
                 base.characterBody.AddSpreadBloom(0.15f);
                 Ray aimRay = base.GetAimRay();
-                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireBarrage.effectPrefab, base.gameObject, this.muzzleString, false);
+                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, false);
             }
         }
 

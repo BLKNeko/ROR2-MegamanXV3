@@ -33,7 +33,7 @@ namespace MegamanXMod.Modules.BaseStates
 
         protected string swingSoundString = "";
         protected string hitSoundString = "";
-        protected string muzzleString = "SwingCenter";
+        protected string muzzleString = "SwordMuzzPos";
         protected string playbackRateParam = "Slash.playbackRate";
         protected GameObject swingEffectPrefab;
         protected GameObject hitEffectPrefab;

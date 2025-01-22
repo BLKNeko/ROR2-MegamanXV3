@@ -27,8 +27,7 @@ namespace MegamanXMod.Survivors.X
             Modules.Content.AddEntityState(typeof(ShadowBuster));
             Modules.Content.AddEntityState(typeof(XUltimateBuster));
             Modules.Content.AddEntityState(typeof(XRathalosBuster));
-            Modules.Content.AddEntityState(typeof(XShadowSlashCombo));
-            Modules.Content.AddEntityState(typeof(XShadowSlashCombo2));
+            Modules.Content.AddEntityState(typeof(XSSlashCombo));
             Modules.Content.AddEntityState(typeof(XRSlashCombo));
             Modules.Content.AddEntityState(typeof(XShotgunIce));
             Modules.Content.AddEntityState(typeof(SqueezeBomb));

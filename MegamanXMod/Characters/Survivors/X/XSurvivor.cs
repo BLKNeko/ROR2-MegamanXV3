@@ -95,7 +95,7 @@ namespace MegamanXMod.Survivors.X
             subtitleNameToken = MEGAMAN_x_PREFIX + "SUBTITLE",
 
             characterPortrait = assetBundle.LoadAsset<Texture>("TexX"),
-            bodyColor = Color.white,
+            bodyColor = new Color(0.0f, 0.24f, 0.48f),
             sortPosition = 100,
 
             crosshair = Asset.LoadCrosshair("Standard"),
@@ -105,7 +105,7 @@ namespace MegamanXMod.Survivors.X
             armor = 20f,
             healthGrowth = 25f,
             healthRegen = 1.5f,
-            damage = 20f,
+            damage = 15f,
             shieldGrowth = 0.25f,
             jumpPowerGrowth = 0.35f,
             jumpCount = 1
@@ -167,7 +167,7 @@ namespace MegamanXMod.Survivors.X
 
             base.InitializeCharacter();
 
-            HenryConfig.Init();
+            XConfig.Init();
             XStates.Init();
             XTokens.Init();
 
@@ -483,6 +483,9 @@ namespace MegamanXMod.Survivors.X
 
                 baseRechargeInterval = 0f,
                 baseMaxStock = 1,
+                
+                
+              
 
                 rechargeStock = 1,
                 requiredStock = 1,
@@ -1475,6 +1478,7 @@ namespace MegamanXMod.Survivors.X
             primarySkillDef1.stepCount = 2;
             primarySkillDef1.stepGraceDuration = 0.5f;
             primarySkillDef1.mustKeyPress = false;
+            
 
             //Skills.AddPrimarySkills(bodyPrefab, XAcidBurstSkillDef);
 

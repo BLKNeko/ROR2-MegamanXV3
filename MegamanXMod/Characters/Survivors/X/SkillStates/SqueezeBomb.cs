@@ -22,13 +22,16 @@ namespace MegamanXMod.Survivors.X.SkillStates
         private bool hasFired;
         private string muzzleString;
 
+        private GameObject muzzleObject;
+
         public override void OnEnter()
         {
             base.OnEnter();
             duration = baseDuration / attackSpeedStat;
             fireTime = firePercentTime * duration;
             characterBody.SetAimTimer(2f);
-            muzzleString = "Muzzle";
+            muzzleString = "BusterMuzzPos";
+            muzzleObject = Resources.Load<GameObject>("Prefabs/Effects/MuzzleFlashes/MuzzleflashLunarSecondary");
 
         }
 
@@ -62,7 +65,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 hasFired = true;
 
                 characterBody.AddSpreadBloom(1f);
-                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, gameObject, muzzleString, false);
+                EffectManager.SimpleMuzzleFlash(muzzleObject, gameObject, muzzleString, false);
                 Util.PlaySound("HenryXBusterPistol", gameObject);
 
                 if (isAuthority)
@@ -70,7 +73,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     Ray aimRay = GetAimRay();
                     AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
 
-                    base.PlayAnimation("Gesture, Override", "ShootBurst", "attackSpeed", this.duration);
+                    PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
                     //Util.PlaySound(Sounds.xChargeShot, base.gameObject);
                     //ProjectileManager.instance.FireProjectile(XAssets.shurikenProjectilePrefab2, aimRay.origin, Util.QuaternionSafeLookRotation(aimRay.direction), base.gameObject, damageCoefficient * this.damageStat, 0f, Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f);
 

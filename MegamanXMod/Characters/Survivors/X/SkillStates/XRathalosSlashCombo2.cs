@@ -13,7 +13,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             hitboxGroupName = "ShadowSaberGroup";
 
             damageType = DamageType.Generic;
-            damageCoefficient = XStaticValues.swordDamageCoefficient;
+            damageCoefficient = XStaticValues.XRathalosSlashCombo2DamageCoefficient;
             procCoefficient = 1f;
             pushForce = 5000f;
             bonusForce = new Vector3 (2f, 1f, 2f);
@@ -33,9 +33,9 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             swingSoundString = "HenrySwordSwing";
             hitSoundString = "";
-            muzzleString = swingIndex % 2 == 0 ? "SwingLeft" : "SwingRight";
+            muzzleString = "SwordMuzzPos";
             playbackRateParam = "Slash.playbackRate";
-            swingEffectPrefab = XAssets.swordSwingEffect;
+            swingEffectPrefab = EntityStates.Merc.WhirlwindBase.swingEffectPrefab;
             hitEffectPrefab = XAssets.swordHitImpactEffect;
 
             impactSound = XAssets.swordHitSoundEvent.index;
