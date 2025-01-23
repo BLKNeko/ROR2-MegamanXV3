@@ -42,6 +42,7 @@ namespace MegamanXMod.Modules.BaseStates
         protected bool hasTime = false;
         protected int chargeLevel = 0;
         protected bool chargingSFX = false;
+        protected bool playedVSFX = false;
 
         public override void OnEnter()
         {
@@ -58,6 +59,7 @@ namespace MegamanXMod.Modules.BaseStates
         public override void OnExit()
         {
             //base.PlayAnimation("Gesture, Override", "BufferEmpty", "attackSpeed", this.duration);
+            playedVSFX = false;
             chargeTime = 0f;
             chargeLevel = 0;
             base.OnExit();
@@ -157,6 +159,13 @@ namespace MegamanXMod.Modules.BaseStates
                 chargeLevel = 1; // Nível mínimo de carregamento
             }
 
+            if (XConfig.enableVoiceBool.Value && !playedVSFX && chargeLevel == 3)
+            {
+                Util.PlaySound(XStaticValues.XAttack, base.gameObject);
+                playedVSFX = true;
+            }
+                
+
             chargingSFX = false;
             chargeFullSFX = false;
             hasTime = true;
@@ -169,15 +178,12 @@ namespace MegamanXMod.Modules.BaseStates
             switch (level)
             {
                 case 1:
-                    //Util.PlaySound(Sounds.charging, base.gameObject);
-                    //EffectManager.SimpleMuzzleFlash(Modules.Assets.chargeeffect1C, base.gameObject, "Center", true);
-                    //EffectManager.SimpleMuzzleFlash(Modules.Assets.chargeeffect1W, base.gameObject, "Center", true);
+                    Util.PlaySound(XStaticValues.charging, base.gameObject);
                     EffectManager.SimpleMuzzleFlash(XAssets.Charge1VFX, base.gameObject, "CorePosition", true);
                     break;
 
                 case 2:
-                    //Util.PlaySound(Sounds.fullCharge, base.gameObject);
-                    //EffectManager.SimpleMuzzleFlash(Modules.Assets.chargeeffect2C, base.gameObject, "Center", true);
+                    Util.PlaySound(XStaticValues.fullCharge, base.gameObject);
                     EffectManager.SimpleMuzzleFlash(XAssets.Charge2VFX, base.gameObject, "CorePosition", true);
                     break;
 

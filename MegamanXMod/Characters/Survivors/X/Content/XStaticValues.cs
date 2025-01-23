@@ -68,6 +68,49 @@ namespace MegamanXMod.Survivors.X
         public const float XShockSphereDamageCoefficient = 0.25f;
 
 
+        //SOUND STRINGS
+
+        public static readonly string X_Simple_Bullet = "Play_X_Simple_Bullet";
+
+        public static readonly string X_Mid_Bullet = "X_MidBullet";
+
+        public static readonly string X_Charge_Shot = "X_ChargeShot";
+
+        public static readonly string shotgunIce = "CallShotgunIce";
+        
+        public static readonly string greenSpinner = "CallGreenSpinner";
+        
+        public static readonly string xFootstep = "CallXFootstep";
+        
+        public static readonly string charging = "X_Charging";
+        
+        public static readonly string fullCharge = "X_FullCharged";
+        
+        public static readonly string die = "CallDie";
+        
+        public static readonly string xDash = "CallXDash";
+        
+        public static readonly string xFullPower = "CallXFullPower";
+        
+        public static readonly string xHurt = "CallXHurt";
+        
+        public static readonly string meltCreeper = "CallMeltCreeper";
+        
+        public static readonly string squeezeBomb = "CallSqueezeBomb";
+        
+        public static readonly string FireWave = "CallFireWave";
+        
+        public static readonly string FireWaveSFX = "CallFireWaveSFX";
+        
+        public static readonly string XAttack = "X_XAttack";
+        
+        public static readonly string XPassive = "CallXPassive";
+        
+        public static readonly string HomingTorpedo = "CallXHomingTorpedo";
+        
+        public static readonly string ChameleonSting = "CallXChameleonSting";
+
+
 
 
     }

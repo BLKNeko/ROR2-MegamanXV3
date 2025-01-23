@@ -33,9 +33,9 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             swingSoundString = "HenrySwordSwing";
             hitSoundString = "";
-            muzzleString = "SwordMuzzPos";
+            muzzleString = "SwordMuzzLPos";
             playbackRateParam = "Slash.playbackRate";
-            swingEffectPrefab = EntityStates.Merc.WhirlwindBase.swingEffectPrefab;
+            swingEffectPrefab = XAssets.swordSwingEffectR;
             hitEffectPrefab = XAssets.swordHitImpactEffect;
 
             impactSound = XAssets.swordHitSoundEvent.index;
