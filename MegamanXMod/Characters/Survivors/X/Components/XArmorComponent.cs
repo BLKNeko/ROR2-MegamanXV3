@@ -22,6 +22,10 @@ namespace MegamanXMod.Survivors.X.Components
 
         private bool isWeak;
 
+        private bool secondArmorUnlock = false;
+        private bool thirdArmorUnlock = false;
+        private bool fourthArmorUnlock = false;
+
         private float minHpWeak, initialStoreTime;
         private float timeBetweenBlink = 2f;
 
@@ -110,6 +114,57 @@ namespace MegamanXMod.Survivors.X.Components
             ShouldRemoveHyperChipBuff();
             ShouldRemoveGoldTexture();
             //SholdApplyGoldenArmorTexture();
+
+            if (!secondArmorUnlock)
+                SecondArmorLockCheck();
+
+            if (!thirdArmorUnlock)
+                ThirdArmorLockCheck();
+
+            if (!fourthArmorUnlock)
+                FourthArmorLockCheck();
+        }
+
+        private void SecondArmorLockCheck()
+        {
+            if (XBody.level < XConfig.secondArmorSlotLvl.Value)
+            {
+                extraskillLocator.extraSecond.SetSkillOverride(extraskillLocator.extraSecond, XSurvivor.LockArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            }
+            else
+            {
+                UnsetAllExtraSecondSkills();
+                extraskillLocator.extraSecond.SetSkillOverride(extraskillLocator.extraSecond, ArmorSkill2, GenericSkill.SkillOverridePriority.Contextual);
+                secondArmorUnlock = true;
+            }
+        }
+
+        private void ThirdArmorLockCheck()
+        {
+            if (XBody.level < XConfig.thirdArmorSlotLvl.Value)
+            {
+                extraskillLocator.extraThird.SetSkillOverride(extraskillLocator.extraThird, XSurvivor.LockArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            }
+            else
+            {
+                UnsetAllExtraThirdSkills();
+                extraskillLocator.extraThird.SetSkillOverride(extraskillLocator.extraThird, ArmorSkill3, GenericSkill.SkillOverridePriority.Contextual);
+                thirdArmorUnlock = true;
+            }
+        }
+
+        private void FourthArmorLockCheck()
+        {
+            if (XBody.level < XConfig.fourthArmorSlotLvl.Value)
+            {
+                extraskillLocator.extraFourth.SetSkillOverride(extraskillLocator.extraFourth, XSurvivor.LockArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            }
+            else
+            {
+                UnsetAllExtraFourthSkills();
+                extraskillLocator.extraFourth.SetSkillOverride(extraskillLocator.extraFourth, ArmorSkill4, GenericSkill.SkillOverridePriority.Contextual);
+                fourthArmorUnlock = true;
+            }
         }
 
         private void FalconDashReset()
@@ -348,6 +403,7 @@ namespace MegamanXMod.Survivors.X.Components
         public void UnsetAllExtraSecondSkills()
         {
             //UNSET ALL SECOND SKILL
+            extraskillLocator.extraSecond.UnsetSkillOverride(extraskillLocator.extraSecond, XSurvivor.LockArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             extraskillLocator.extraSecond.UnsetSkillOverride(extraskillLocator.extraSecond, XSurvivor.CoolDownXArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             extraskillLocator.extraSecond.UnsetSkillOverride(extraskillLocator.extraSecond, XSurvivor.HyperModeMaxArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             extraskillLocator.extraSecond.UnsetSkillOverride(extraskillLocator.extraSecond, XSurvivor.HyperModeFourthArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
@@ -357,6 +413,7 @@ namespace MegamanXMod.Survivors.X.Components
         public void UnsetAllExtraThirdSkills()
         {
             //UNSET ALL THIRD SKILL
+            extraskillLocator.extraThird.UnsetSkillOverride(extraskillLocator.extraThird, XSurvivor.LockArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             extraskillLocator.extraThird.UnsetSkillOverride(extraskillLocator.extraThird, XSurvivor.CoolDownXArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             extraskillLocator.extraThird.UnsetSkillOverride(extraskillLocator.extraThird, XSurvivor.HyperModeFalconArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             extraskillLocator.extraThird.UnsetSkillOverride(extraskillLocator.extraThird, XSurvivor.HyperModeGaeaArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
@@ -365,6 +422,7 @@ namespace MegamanXMod.Survivors.X.Components
         public void UnsetAllExtraFourthSkills()
         {
             //UNSET ALL FOURTH SKILL
+            extraskillLocator.extraFourth.UnsetSkillOverride(extraskillLocator.extraFourth, XSurvivor.LockArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             extraskillLocator.extraFourth.UnsetSkillOverride(extraskillLocator.extraFourth, XSurvivor.CoolDownXArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             extraskillLocator.extraFourth.UnsetSkillOverride(extraskillLocator.extraFourth, XSurvivor.HyperModeShadowArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             extraskillLocator.extraFourth.UnsetSkillOverride(extraskillLocator.extraFourth, XSurvivor.HyperModeUltimateArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);

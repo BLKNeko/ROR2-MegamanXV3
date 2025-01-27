@@ -36,14 +36,13 @@ namespace MegamanXMod.Survivors.X.SkillStates
             attackRecoil = 0.5f;
             hitHopVelocity = 5f;
 
-            swingSoundString = "HenrySwordSwing";
             hitSoundString = "";
             muzzleString = "RisingFirePos";
             playbackRateParam = "Slash.playbackRate";
             //swingEffectPrefab = XAssets.RisingFireVFX;
-            hitEffectPrefab = XAssets.swordHitImpactEffect;
+            //hitEffectPrefab = XAssets.swordHitImpactEffect;
 
-            impactSound = XAssets.swordHitSoundEvent.index;
+            //impactSound = XAssets.swordHitSoundEvent.index;
 
             XRathalosSlashCombo2 xRathalosSlashCombo2 = new XRathalosSlashCombo2();
 
@@ -51,7 +50,13 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             EffectManager.SimpleMuzzleFlash(XAssets.RisingFireVFX, gameObject, muzzleString, true);
 
-            
+            if (XConfig.enableVoiceBool.Value)
+            {
+                AkSoundEngine.PostEvent(XStaticValues.X_Attack_VSFX, this.gameObject);
+            }
+            AkSoundEngine.PostEvent(XStaticValues.X_RisingFireCharged_SFX, this.gameObject);
+
+
 
             base.OnEnter();
 
@@ -70,7 +75,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
         protected override void PlaySwingEffect()
         {
-            base.PlaySwingEffect();
+            //base.PlaySwingEffect();
         }
 
         protected override void OnHitEnemyAuthority()

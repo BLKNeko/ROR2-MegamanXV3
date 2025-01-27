@@ -496,8 +496,8 @@ namespace MegamanXMod.Modules
         private static void SetupFootstepController(GameObject model)
         {
             FootstepHandler footstepHandler = model.AddComponent<FootstepHandler>();
-            footstepHandler.baseFootstepString = "Play_player_footstep";
-            footstepHandler.sprintFootstepOverrideString = "";
+            footstepHandler.baseFootstepString = "Play_X_Footstep_SFX";
+            footstepHandler.sprintFootstepOverrideString = "Play_X_Footstep_SFX";
             footstepHandler.enableFootstepDust = true;
             footstepHandler.footstepDustPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/GenericFootstepDust");
         }

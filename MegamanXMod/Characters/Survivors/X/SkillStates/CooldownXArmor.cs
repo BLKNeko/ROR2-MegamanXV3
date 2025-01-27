@@ -52,6 +52,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             EffectManager.SimpleMuzzleFlash(XAssets.HyperModeEffect, base.gameObject, "CorePosition", true);
 
+            AkSoundEngine.PostEvent(XStaticValues.X_HMCooldown_SFX, this.gameObject);
+
             armorComponent.RemoveArmorBuffs();
 
             //TRANSFORM INTO X ARMOR

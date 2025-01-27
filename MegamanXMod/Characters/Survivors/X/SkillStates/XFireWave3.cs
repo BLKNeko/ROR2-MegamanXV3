@@ -95,7 +95,6 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
                 characterBody.AddSpreadBloom(0.8f);
                 EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, gameObject, muzzleString, false);
-                Util.PlaySound("HenryXBusterPistol", gameObject);
                 PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
 
                 if (isAuthority)
@@ -103,11 +102,16 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     Ray aimRay = GetAimRay();
                     //AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
 
-                    //if (repeatFire == 1)
-                    //    Util.PlaySound(Sounds.FireWaveSFX, base.gameObject);
+                    if (XConfig.enableVoiceBool.Value && repeatFire == 1)
+                    {
+                        AkSoundEngine.PostEvent(XStaticValues.X_FireWave_VSFX, this.gameObject);
+                    }
 
-                    //if (repeatFire % 10 == 0 && repeatFire > 10 && repeatFire < 140)
-                    //    Util.PlaySound(Sounds.FireWaveSFX, base.gameObject);
+                    if (repeatFire == 0)
+                        AkSoundEngine.PostEvent(XStaticValues.X_FireWave_SFX, this.gameObject);
+
+                    if (repeatFire % 10 == 0 && repeatFire > 10 && repeatFire < 90)
+                        AkSoundEngine.PostEvent(XStaticValues.X_FireWave_SFX, this.gameObject);
 
                     FireWave2BulletAttack = new BulletAttack();
                     FireWave2BulletAttack.bulletCount = 1;

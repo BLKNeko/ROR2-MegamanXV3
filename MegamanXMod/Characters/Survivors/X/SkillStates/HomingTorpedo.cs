@@ -45,6 +45,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
         private bool hasTime = false;
         private int chargeLevel = 0;
         private bool chargingSFX = false;
+        private bool playedVSFX = false;
 
         public override void OnEnter()
         {
@@ -87,7 +88,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
         public override void OnExit()
         {
-
+            playedVSFX = false;
             chargeTime = 0f;
             chargeLevel = 0;
 
@@ -106,7 +107,13 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 this.hasFired = true;
                 PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
 
-                Debug.Log("Create arrow:" + CreateArrowOrb());
+                //Debug.Log("Create arrow:" + CreateArrowOrb());
+
+                if (XConfig.enableVoiceBool.Value)
+                {
+                    AkSoundEngine.PostEvent(XStaticValues.X_HomingTorpedo_VSFX, this.gameObject);
+                }
+                AkSoundEngine.PostEvent(XStaticValues.X_HomingTorpedo_SFX, this.gameObject);
 
                 GenericDamageOrb genericDamageOrb = this.CreateArrowOrb();
                 genericDamageOrb.damageValue = damageCoefficient * damageStat;
@@ -119,7 +126,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 
                 //genericDamageOrb.damageType = DamageType.ApplyMercExpose;
 
-                Debug.Log("GenereciDamageOrb:" + genericDamageOrb);
+                //Debug.Log("GenereciDamageOrb:" + genericDamageOrb);
 
                 HurtBox hurtBox = this.initialOrbTarget;
                 if (hurtBox)
@@ -131,7 +138,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     OrbManager.instance.AddOrb(genericDamageOrb);
                 }
 
-                Debug.Log("HurbBox:" + hurtBox);
+                //Debug.Log("HurbBox:" + hurtBox);
 
 
 
@@ -147,6 +154,12 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 this.hasFired = true;
                 PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
+
+                if (XConfig.enableVoiceBool.Value)
+                {
+                    AkSoundEngine.PostEvent(XStaticValues.X_HomingTorpedo_VSFX, this.gameObject);
+                }
+                AkSoundEngine.PostEvent(XStaticValues.X_HomingTorpedo_SFX, this.gameObject);
 
                 GenericDamageOrb genericDamageOrb = this.CreateArrowOrb();
                 genericDamageOrb.damageValue = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat;
@@ -183,6 +196,12 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 this.hasFired = true;
                 PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
+
+                if (XConfig.enableVoiceBool.Value)
+                {
+                    AkSoundEngine.PostEvent(XStaticValues.X_HomingTorpedo_VSFX, this.gameObject);
+                }
+                AkSoundEngine.PostEvent(XStaticValues.X_HomingTorpedo_SFX, this.gameObject);
 
                 GenericDamageOrb genericDamageOrb = this.CreateArrowOrb();
                 genericDamageOrb.damageValue = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat;
@@ -297,6 +316,14 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 chargeLevel = 1; // Nível mínimo de carregamento
             }
 
+            AkSoundEngine.PostEvent(21663534, base.gameObject);
+
+            if (XConfig.enableVoiceBool.Value && !playedVSFX && chargeLevel == 3)
+            {
+                AkSoundEngine.PostEvent(XStaticValues.X_Attack_VSFX, this.gameObject);
+                playedVSFX = true;
+            }
+
             chargingSFX = false;
             chargeFullSFX = false;
             hasTime = true;
@@ -309,15 +336,14 @@ namespace MegamanXMod.Survivors.X.SkillStates
             switch (level)
             {
                 case 1:
-                    //Util.PlaySound(Sounds.charging, base.gameObject);
-                    //EffectManager.SimpleMuzzleFlash(Modules.Assets.chargeeffect1C, base.gameObject, "Center", true);
-                    //EffectManager.SimpleMuzzleFlash(Modules.Assets.chargeeffect1W, base.gameObject, "Center", true);
+                    //Util.PlaySound(XStaticValues.charging, base.gameObject);
+                    AkSoundEngine.PostEvent(3358936867, this.gameObject);
                     EffectManager.SimpleMuzzleFlash(XAssets.Charge1VFX, base.gameObject, "CorePosition", true);
                     break;
 
                 case 2:
-                    //Util.PlaySound(Sounds.fullCharge, base.gameObject);
-                    //EffectManager.SimpleMuzzleFlash(Modules.Assets.chargeeffect2C, base.gameObject, "Center", true);
+                    //Util.PlaySound(XStaticValues.fullCharge, base.gameObject);
+                    AkSoundEngine.PostEvent(992292707, this.gameObject);
                     EffectManager.SimpleMuzzleFlash(XAssets.Charge2VFX, base.gameObject, "CorePosition", true);
                     break;
 

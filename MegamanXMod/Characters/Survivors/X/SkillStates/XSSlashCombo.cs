@@ -17,7 +17,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             procCoefficient = 1f;
             pushForce = 300f;
             bonusForce = Vector3.zero;
-            baseDuration = 1f;
+            baseDuration = 0.9f;
 
             //0-1 multiplier of baseduration, used to time when the hitbox is out (usually based on the run time of the animation)
             //for example, if attackStartPercentTime is 0.5, the attack will start hitting halfway through the ability. if baseduration is 3 seconds, the attack will start happening at 1.5 seconds
@@ -31,7 +31,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
             attackRecoil = 0.5f;
             hitHopVelocity = 5f;
 
-            swingSoundString = "HenrySwordSwing";
+            swingSoundString = swingIndex % 2 == 0 ? XStaticValues.X_Slash3_SFX : XStaticValues.X_Slash2_SFX;
+
             hitSoundString = "";
             //muzzleString = "SwordMuzzPos";
             muzzleString = swingIndex % 2 == 0 ? "SwordMuzzLPos" : "SwordMuzzRPos";

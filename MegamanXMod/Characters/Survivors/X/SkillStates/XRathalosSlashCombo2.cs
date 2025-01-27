@@ -31,9 +31,9 @@ namespace MegamanXMod.Survivors.X.SkillStates
             attackRecoil = 0.5f;
             hitHopVelocity = 5f;
 
-            swingSoundString = "HenrySwordSwing";
+            swingSoundString = XStaticValues.X_Rathalos_Swing_SFX;
             hitSoundString = "";
-            muzzleString = "SwordMuzzLPos";
+            muzzleString = "SwordMuzzRPos";
             playbackRateParam = "Slash.playbackRate";
             swingEffectPrefab = XAssets.swordSwingEffectR;
             hitEffectPrefab = XAssets.swordHitImpactEffect;

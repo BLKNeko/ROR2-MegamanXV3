@@ -100,7 +100,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
 
             PlayAnimation("FullBody, Override", "DashLoop", "DashLoop.playbackRate", duration);
-            Util.PlaySound(dodgeSoundString, gameObject);
+            AkSoundEngine.PostEvent(XStaticValues.X_Falcon_Dash, this.gameObject);
 
             if (NetworkServer.active)
             {

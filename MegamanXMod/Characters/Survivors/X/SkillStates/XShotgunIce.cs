@@ -29,7 +29,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
             fireTime = firePercentTime * duration;
             characterBody.SetAimTimer(1f);
             hitEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/ImpactEffects/HitsparkCommandoFMJ");
-            muzzleEffectPrefab = EntityStates.Mage.Weapon.IceNova.impactEffectPrefab;
+            //muzzleEffectPrefab = EntityStates.Mage.Weapon.IceNova.impactEffectPrefab;
+            muzzleEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/MuzzleFlashes/MuzzleflashFMJ");
 
 
 
@@ -53,8 +54,19 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 hasFired = true;
 
                 characterBody.AddSpreadBloom(0.8f);
-                EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
-                Util.PlaySound("HenryXBusterPistol", gameObject);
+                //EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
+
+                EffectManager.SpawnEffect(EntityStates.Mage.Weapon.IceNova.impactEffectPrefab, new EffectData
+                {
+                    origin = childLocator.FindChild(muzzleString).transform.position,
+
+                }, true);
+
+                if (XConfig.enableVoiceBool.Value)
+                {
+                    AkSoundEngine.PostEvent(XStaticValues.X_shotgunIce_VSFX, this.gameObject);
+                }
+
                 PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
 
                 if (isAuthority)
@@ -87,8 +99,19 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 hasFired = true;
 
                 characterBody.AddSpreadBloom(0.8f);
-                EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
-                Util.PlaySound("HenryXBusterPistol", gameObject);
+                //EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
+
+                EffectManager.SpawnEffect(EntityStates.Mage.Weapon.IceNova.impactEffectPrefab, new EffectData
+                {
+                    origin = childLocator.FindChild(muzzleString).transform.position,
+
+                }, true);
+
+                if (XConfig.enableVoiceBool.Value)
+                {
+                    AkSoundEngine.PostEvent(XStaticValues.X_shotgunIce_VSFX, this.gameObject);
+                }
+
                 PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
 
                 if (isAuthority)
@@ -121,8 +144,19 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 this.hasFired = true;
 
                 base.characterBody.AddSpreadBloom(0.75f);
-                EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
-                Util.PlaySound("HenryXBusterPistol", gameObject);
+                //EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
+
+                EffectManager.SpawnEffect(EntityStates.Mage.Weapon.IceNova.impactEffectPrefab, new EffectData
+                {
+                    origin = childLocator.FindChild(muzzleString).transform.position,
+
+                }, true);
+
+                if (XConfig.enableVoiceBool.Value)
+                {
+                    AkSoundEngine.PostEvent(XStaticValues.X_shotgunIce_VSFX, this.gameObject);
+                }
+
                 PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
 
                 if (isAuthority)

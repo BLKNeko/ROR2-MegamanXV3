@@ -71,7 +71,9 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
                 characterBody.AddSpreadBloom(0.8f);
                 EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
-                Util.PlaySound("HenryXBusterPistol", gameObject);
+
+                //AkSoundEngine.PostEvent(XStaticValues.X_Simple_Bullet, this.gameObject);
+
                 PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
 
                 if (isAuthority)

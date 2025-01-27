@@ -42,6 +42,9 @@ namespace MegamanXMod.Modules.BaseStates
         protected bool hasTime = false;
         protected int chargeLevel = 0;
         protected bool chargingSFX = false;
+        protected bool playedVSFX = false;
+
+        protected ChildLocator childLocator;
 
         private EntityState NextState;
 
@@ -52,7 +55,7 @@ namespace MegamanXMod.Modules.BaseStates
             fireTime = firePercentTime * duration;
             characterBody.SetAimTimer(2f);
             muzzleString = "Muzzle";
-
+            childLocator = base.GetModelTransform().GetComponent<ChildLocator>();
 
 
         }
@@ -173,6 +176,8 @@ namespace MegamanXMod.Modules.BaseStates
                 chargeLevel = 1; // Nível mínimo de carregamento
             }
 
+            AkSoundEngine.PostEvent(21663534, base.gameObject);
+
             chargingSFX = false;
             chargeFullSFX = false;
             hasTime = true;
@@ -185,15 +190,12 @@ namespace MegamanXMod.Modules.BaseStates
             switch (level)
             {
                 case 1:
-                    //Util.PlaySound(Sounds.charging, base.gameObject);
-                    //EffectManager.SimpleMuzzleFlash(Modules.Assets.chargeeffect1C, base.gameObject, "Center", true);
-                    //EffectManager.SimpleMuzzleFlash(Modules.Assets.chargeeffect1W, base.gameObject, "Center", true);
+                    AkSoundEngine.PostEvent(3358936867, this.gameObject);
                     EffectManager.SimpleMuzzleFlash(XAssets.Charge1VFX, base.gameObject, "CorePosition", true);
                     break;
 
                 case 2:
-                    //Util.PlaySound(Sounds.fullCharge, base.gameObject);
-                    //EffectManager.SimpleMuzzleFlash(Modules.Assets.chargeeffect2C, base.gameObject, "Center", true);
+                    AkSoundEngine.PostEvent(992292707, this.gameObject);
                     EffectManager.SimpleMuzzleFlash(XAssets.Charge2VFX, base.gameObject, "CorePosition", true);
                     break;
 

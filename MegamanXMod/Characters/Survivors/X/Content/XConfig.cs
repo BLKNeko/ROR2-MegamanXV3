@@ -6,8 +6,13 @@ namespace MegamanXMod.Survivors.X
     public static class XConfig
     {
         public static ConfigEntry<bool> enableVoiceBool;
-        public static ConfigEntry<float> someConfigFloat;
-        public static ConfigEntry<float> someConfigFloatWithCustomRange;
+        public static ConfigEntry<float> midChargeMultiplierFloat;
+        public static ConfigEntry<float> fullChargeMultiplierFloat;
+
+        public static ConfigEntry<float> secondArmorSlotLvl;
+        public static ConfigEntry<float> thirdArmorSlotLvl;
+        public static ConfigEntry<float> fourthArmorSlotLvl;
+
 
         public static void Init()
         {
@@ -19,18 +24,47 @@ namespace MegamanXMod.Survivors.X
                 true,
                 "At certain moments or when using a skill, X may talk or scream. If you prefer to disable this feature, you can turn it off here.");
 
-            someConfigFloat = Config.BindAndOptions(
+            midChargeMultiplierFloat = Config.BindAndOptions(
                 section,
-                "someConfigfloat",
-                5f);//blank description will default to just the name
-
-            someConfigFloatWithCustomRange = Config.BindAndOptions(
-                section,
-                "someConfigfloat2",
+                "MidChargeDamageMultiplier",
+                1.8f,
+                1.5f,
                 5f,
-                0,
-                50,
-                "if a custom range is not passed in, a float will default to a slider with range 0-20. risk of options only has sliders");
+                "This is the medium charge damage multiplier.");
+
+            fullChargeMultiplierFloat = Config.BindAndOptions(
+                section,
+                "FullChargeDamageMultiplier",
+                4f,
+                2f,
+                10f,
+                "This is the full charge damage multiplier.");
+
+            secondArmorSlotLvl = Config.BindAndOptions(
+                section,
+                "SecondArmorSlotLvl",
+                3f,
+                2f,
+                4f,
+                "Lvl required to unlock the second armor slot.");
+
+            thirdArmorSlotLvl = Config.BindAndOptions(
+                section,
+                "ThirdArmorSlotLvl",
+                5f,
+                4f,
+                7f,
+                "Lvl required to unlock the third armor slot.");
+
+            fourthArmorSlotLvl = Config.BindAndOptions(
+                section,
+                "FourthArmorSlotLvl",
+                8f,
+                7f,
+                10f,
+                "Lvl required to unlock the fourt armor slot.");
+
+
         }
     }
 }

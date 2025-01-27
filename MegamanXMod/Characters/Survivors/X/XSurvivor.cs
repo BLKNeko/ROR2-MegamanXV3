@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEngine.ParticleSystem.PlaybackState;
+using MegamanXMod.Modules.BaseContent.BaseStates;
 
 namespace MegamanXMod.Survivors.X
 {
@@ -49,6 +50,7 @@ namespace MegamanXMod.Survivors.X
         internal static SkillDef HyperModeShadowArmorSkillDef;
         internal static SkillDef HyperModeUltimateArmorSkillDef;
         internal static SkillDef HyperModeRathalosArmorSkillDef;
+        internal static SkillDef LockArmorSkillDef;
 
         //PRIMARY
         internal static SkillDef XBusterSkillDef;
@@ -231,9 +233,13 @@ namespace MegamanXMod.Survivors.X
             Prefabs.ClearEntityStateMachines(bodyPrefab);
 
             //the main "Body" state machine has some special properties
-            Prefabs.AddMainEntityStateMachine(bodyPrefab, "Body", typeof(EntityStates.GenericCharacterMain), typeof(EntityStates.SpawnTeleporterState));
+            //Prefabs.AddMainEntityStateMachine(bodyPrefab, "Body", typeof(EntityStates.GenericCharacterMain), typeof(EntityStates.SpawnTeleporterState));
             //if you set up a custom main characterstate, set it up here
-                //don't forget to register custom entitystates in your HenryStates.cs
+            //don't forget to register custom entitystates in your HenryStates.cs
+
+            Prefabs.AddMainEntityStateMachine(bodyPrefab, "Body", typeof(XHeart), typeof(EntityStates.GenericCharacterMain));
+            bodyPrefab.GetComponent<CharacterDeathBehavior>().deathState = new EntityStates.SerializableEntityStateType(typeof(DeathState));
+            bodyPrefab.GetComponent<EntityStateMachine>().initialStateType = new EntityStates.SerializableEntityStateType(typeof(SpawnState));
 
             Prefabs.AddEntityStateMachine(bodyPrefab, "Weapon");
             Prefabs.AddEntityStateMachine(bodyPrefab, "Weapon2");
@@ -250,7 +256,7 @@ namespace MegamanXMod.Survivors.X
             Skills.CreateFourthExtraSkillFamily(bodyPrefab);
             //add our own
             CreateSkillDefs();
-            //AddPassiveSkill();
+            AddPassiveSkill();
             AddPrimarySkills();
             AddSecondarySkills();
             AddUtiitySkills();
@@ -305,7 +311,7 @@ namespace MegamanXMod.Survivors.X
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseMaxStock = 1,
-                baseRechargeInterval = 1f,
+                baseRechargeInterval = 10f,
 
                 isCombatSkill = false,
                 mustKeyPress = false,
@@ -324,7 +330,7 @@ namespace MegamanXMod.Survivors.X
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseMaxStock = 1,
-                baseRechargeInterval = 1f,
+                baseRechargeInterval = 10f,
 
                 isCombatSkill = false,
                 mustKeyPress = false,
@@ -343,7 +349,7 @@ namespace MegamanXMod.Survivors.X
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseMaxStock = 1,
-                baseRechargeInterval = 1f,
+                baseRechargeInterval = 15f,
 
                 isCombatSkill = false,
                 mustKeyPress = false,
@@ -362,7 +368,7 @@ namespace MegamanXMod.Survivors.X
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseMaxStock = 1,
-                baseRechargeInterval = 1f,
+                baseRechargeInterval = 15f,
 
                 isCombatSkill = false,
                 mustKeyPress = false,
@@ -381,7 +387,7 @@ namespace MegamanXMod.Survivors.X
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseMaxStock = 1,
-                baseRechargeInterval = 1f,
+                baseRechargeInterval = 20f,
 
                 isCombatSkill = false,
                 mustKeyPress = false,
@@ -400,7 +406,7 @@ namespace MegamanXMod.Survivors.X
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseMaxStock = 1,
-                baseRechargeInterval = 1f,
+                baseRechargeInterval = 20f,
 
                 isCombatSkill = false,
                 mustKeyPress = false,
@@ -419,7 +425,7 @@ namespace MegamanXMod.Survivors.X
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseMaxStock = 1,
-                baseRechargeInterval = 1f,
+                baseRechargeInterval = 25f,
 
                 isCombatSkill = false,
                 mustKeyPress = false,
@@ -438,7 +444,7 @@ namespace MegamanXMod.Survivors.X
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseMaxStock = 1,
-                baseRechargeInterval = 1f,
+                baseRechargeInterval = 25f,
 
                 isCombatSkill = false,
                 mustKeyPress = false,
@@ -454,6 +460,25 @@ namespace MegamanXMod.Survivors.X
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.HyperModeRathalosArmor)),
                 //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
                 activationStateMachineName = "Body",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseMaxStock = 1,
+                baseRechargeInterval = 25f,
+
+                isCombatSkill = false,
+                mustKeyPress = false,
+            });
+
+            LockArmorSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "LockArmor",
+                skillNameToken = MEGAMAN_x_PREFIX + "EXTRA_LOCK_ARMOR_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "EXTRA_LOCK_ARMOR_DESCRIPTION",
+                skillIcon = XAssets.IconSkillLock,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.LockArmor)),
+                //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
+                activationStateMachineName = "Weapon",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseMaxStock = 1,
@@ -898,8 +923,8 @@ namespace MegamanXMod.Survivors.X
                 activationStateMachineName = "Weapon",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
-                baseRechargeInterval = 0f,
-                baseMaxStock = 1,
+                baseRechargeInterval = 8f,
+                baseMaxStock = 3,
 
                 rechargeStock = 1,
                 requiredStock = 1,
@@ -932,7 +957,7 @@ namespace MegamanXMod.Survivors.X
                 activationStateMachineName = "Weapon",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
-                baseRechargeInterval = 0f,
+                baseRechargeInterval = 8f,
                 baseMaxStock = 1,
 
                 rechargeStock = 1,
@@ -962,7 +987,7 @@ namespace MegamanXMod.Survivors.X
                 activationStateMachineName = "Weapon",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
-                baseRechargeInterval = 0f,
+                baseRechargeInterval = 10f,
                 baseMaxStock = 1,
 
                 rechargeStock = 1,
@@ -996,7 +1021,7 @@ namespace MegamanXMod.Survivors.X
                 activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
-                baseRechargeInterval = 1f,
+                baseRechargeInterval = 3f,
                 baseMaxStock = 1,
 
                 rechargeStock = 1,
@@ -1056,7 +1081,7 @@ namespace MegamanXMod.Survivors.X
                 activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
-                baseRechargeInterval = 2f,
+                baseRechargeInterval = 10f,
                 baseMaxStock = 1,
 
                 rechargeStock = 1,
@@ -1089,7 +1114,7 @@ namespace MegamanXMod.Survivors.X
                 activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
-                baseRechargeInterval = 2f,
+                baseRechargeInterval = 3f,
                 baseMaxStock = 1,
 
                 rechargeStock = 1,
@@ -1125,7 +1150,7 @@ namespace MegamanXMod.Survivors.X
                 activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
-                baseRechargeInterval = 3f,
+                baseRechargeInterval = 60f,
                 baseMaxStock = 1,
 
                 rechargeStock = 1,
@@ -1155,7 +1180,7 @@ namespace MegamanXMod.Survivors.X
                 activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
-                baseRechargeInterval = 3f,
+                baseRechargeInterval = 30f,
                 baseMaxStock = 1,
 
                 rechargeStock = 1,
@@ -1185,7 +1210,7 @@ namespace MegamanXMod.Survivors.X
                 activationStateMachineName = "Body",
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
-                baseRechargeInterval = 3f,
+                baseRechargeInterval = 60f,
                 baseMaxStock = 1,
 
                 rechargeStock = 1,
@@ -1219,7 +1244,7 @@ namespace MegamanXMod.Survivors.X
                 activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
-                baseRechargeInterval = 0f,
+                baseRechargeInterval = 8f,
                 baseMaxStock = 1,
 
                 rechargeStock = 1,
@@ -1253,8 +1278,8 @@ namespace MegamanXMod.Survivors.X
                 activationStateMachineName = "Weapon",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
-                baseRechargeInterval = 0f,
-                baseMaxStock = 1,
+                baseRechargeInterval = 8f,
+                baseMaxStock = 3,
 
                 rechargeStock = 1,
                 requiredStock = 1,
@@ -1287,8 +1312,8 @@ namespace MegamanXMod.Survivors.X
                 activationStateMachineName = "Weapon",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
-                baseRechargeInterval = 0f,
-                baseMaxStock = 1,
+                baseRechargeInterval = 5f,
+                baseMaxStock = 2,
 
                 rechargeStock = 1,
                 requiredStock = 1,
@@ -1321,8 +1346,8 @@ namespace MegamanXMod.Survivors.X
                 activationStateMachineName = "Weapon",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
-                baseRechargeInterval = 0f,
-                baseMaxStock = 1,
+                baseRechargeInterval = 5f,
+                baseMaxStock = 3,
 
                 rechargeStock = 1,
                 requiredStock = 1,
@@ -1355,8 +1380,8 @@ namespace MegamanXMod.Survivors.X
                 activationStateMachineName = "Weapon",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
-                baseRechargeInterval = 0f,
-                baseMaxStock = 1,
+                baseRechargeInterval = 10f,
+                baseMaxStock = 3,
 
                 rechargeStock = 1,
                 requiredStock = 1,
@@ -1382,7 +1407,7 @@ namespace MegamanXMod.Survivors.X
             HomingTorpedoSkillDef.keywordTokens = new string[] {MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"};
             HomingTorpedoSkillDef.activationState = new EntityStates.SerializableEntityStateType(typeof(HomingTorpedo));
             HomingTorpedoSkillDef.activationStateMachineName = "Weapon";
-            HomingTorpedoSkillDef.baseMaxStock = 12;
+            HomingTorpedoSkillDef.baseMaxStock = 5;
             HomingTorpedoSkillDef.baseRechargeInterval = 3f;
             HomingTorpedoSkillDef.beginSkillCooldownOnSkillEnd = false;
             HomingTorpedoSkillDef.canceledFromSprinting = false;
@@ -1412,49 +1437,48 @@ namespace MegamanXMod.Survivors.X
             bodyPrefab.GetComponent<SkillLocator>().passiveSkill = new SkillLocator.PassiveSkill
             {
                 enabled = true,
-                skillNameToken = MEGAMAN_x_PREFIX + "PASSIVE_NAME",
-                skillDescriptionToken = MEGAMAN_x_PREFIX + "PASSIVE_DESCRIPTION",
-                keywordToken = "KEYWORD_STUNNING",
-                icon = assetBundle.LoadAsset<Sprite>("texPassiveIcon"),
+                skillNameToken = MEGAMAN_x_PREFIX + "X_PASSIVE_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "X_PASSIVE_DESCRIPTION",
+                icon = XAssets.IconXPassive,
             };
 
             //option 2. a new SkillFamily for a passive, used if you want multiple selectable passives
-            GenericSkill passiveGenericSkill = Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "PassiveSkill");
-            SkillDef passiveSkillDef1 = Skills.CreateSkillDef(new SkillDefInfo
-            {
-                skillName = "HenryPassive",
-                skillNameToken = MEGAMAN_x_PREFIX + "PASSIVE_NAME",
-                skillDescriptionToken = MEGAMAN_x_PREFIX + "PASSIVE_DESCRIPTION",
-                keywordTokens = new string[] { "KEYWORD_AGILE" },
-                skillIcon = assetBundle.LoadAsset<Sprite>("texPassiveIcon"),
+            //GenericSkill passiveGenericSkill = Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "PassiveSkill");
+            //SkillDef passiveSkillDef1 = Skills.CreateSkillDef(new SkillDefInfo
+            //{
+            //    skillName = "HenryPassive",
+            //    skillNameToken = MEGAMAN_x_PREFIX + "PASSIVE_NAME",
+            //    skillDescriptionToken = MEGAMAN_x_PREFIX + "PASSIVE_DESCRIPTION",
+            //    keywordTokens = new string[] { "KEYWORD_AGILE" },
+            //    skillIcon = assetBundle.LoadAsset<Sprite>("texPassiveIcon"),
 
-                //unless you're somehow activating your passive like a skill, none of the following is needed.
-                //but that's just me saying things. the tools are here at your disposal to do whatever you like with
+            //    //unless you're somehow activating your passive like a skill, none of the following is needed.
+            //    //but that's just me saying things. the tools are here at your disposal to do whatever you like with
 
-                //activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Shoot)),
-                //activationStateMachineName = "Weapon1",
-                //interruptPriority = EntityStates.InterruptPriority.Skill,
+            //    //activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Shoot)),
+            //    //activationStateMachineName = "Weapon1",
+            //    //interruptPriority = EntityStates.InterruptPriority.Skill,
 
-                //baseRechargeInterval = 1f,
-                //baseMaxStock = 1,
+            //    //baseRechargeInterval = 1f,
+            //    //baseMaxStock = 1,
 
-                //rechargeStock = 1,
-                //requiredStock = 1,
-                //stockToConsume = 1,
+            //    //rechargeStock = 1,
+            //    //requiredStock = 1,
+            //    //stockToConsume = 1,
 
-                //resetCooldownTimerOnUse = false,
-                //fullRestockOnAssign = true,
-                //dontAllowPastMaxStocks = false,
-                //mustKeyPress = false,
-                //beginSkillCooldownOnSkillEnd = false,
+            //    //resetCooldownTimerOnUse = false,
+            //    //fullRestockOnAssign = true,
+            //    //dontAllowPastMaxStocks = false,
+            //    //mustKeyPress = false,
+            //    //beginSkillCooldownOnSkillEnd = false,
 
-                //isCombatSkill = true,
-                //canceledFromSprinting = false,
-                //cancelSprintingOnActivation = false,
-                //forceSprintDuringState = false,
+            //    //isCombatSkill = true,
+            //    //canceledFromSprinting = false,
+            //    //cancelSprintingOnActivation = false,
+            //    //forceSprintDuringState = false,
 
-            });
-            Skills.AddSkillsToFamily(passiveGenericSkill.skillFamily, passiveSkillDef1);
+            //});
+            //Skills.AddSkillsToFamily(passiveGenericSkill.skillFamily, passiveSkillDef1);
         }
 
         //if this is your first look at skilldef creation, take a look at Secondary first

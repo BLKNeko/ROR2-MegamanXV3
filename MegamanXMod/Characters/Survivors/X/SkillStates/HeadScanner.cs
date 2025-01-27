@@ -23,9 +23,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             duration = baseDuration / attackSpeedStat;
             fireTime = firePercentTime * duration;
 
-            PlayAnimation("LeftArm, Override", "ShootGun", "ShootGun.playbackRate", duration);
-
-
+            AkSoundEngine.PostEvent(XStaticValues.X_Head_SFX, this.gameObject);
 
         }
 

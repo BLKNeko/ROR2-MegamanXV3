@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using static ak;
 
 namespace MegamanXMod.Modules.BaseStates
 {
@@ -159,9 +160,11 @@ namespace MegamanXMod.Modules.BaseStates
                 chargeLevel = 1; // Nível mínimo de carregamento
             }
 
+            AkSoundEngine.PostEvent(21663534, base.gameObject);
+
             if (XConfig.enableVoiceBool.Value && !playedVSFX && chargeLevel == 3)
             {
-                Util.PlaySound(XStaticValues.XAttack, base.gameObject);
+                AkSoundEngine.PostEvent(XStaticValues.X_Attack_VSFX, this.gameObject);
                 playedVSFX = true;
             }
                 
@@ -178,12 +181,14 @@ namespace MegamanXMod.Modules.BaseStates
             switch (level)
             {
                 case 1:
-                    Util.PlaySound(XStaticValues.charging, base.gameObject);
+                    //Util.PlaySound(XStaticValues.charging, base.gameObject);
+                    AkSoundEngine.PostEvent(3358936867, this.gameObject);
                     EffectManager.SimpleMuzzleFlash(XAssets.Charge1VFX, base.gameObject, "CorePosition", true);
                     break;
 
                 case 2:
-                    Util.PlaySound(XStaticValues.fullCharge, base.gameObject);
+                    //Util.PlaySound(XStaticValues.fullCharge, base.gameObject);
+                    AkSoundEngine.PostEvent(992292707, this.gameObject);
                     EffectManager.SimpleMuzzleFlash(XAssets.Charge2VFX, base.gameObject, "CorePosition", true);
                     break;
 

@@ -17,21 +17,21 @@ namespace MegamanXMod.Survivors.X.SkillStates
             procCoefficient = 1f;
             pushForce = 300f;
             bonusForce = Vector3.zero;
-            baseDuration = 1f;
+            baseDuration = 1.4f;
 
             //0-1 multiplier of baseduration, used to time when the hitbox is out (usually based on the run time of the animation)
             //for example, if attackStartPercentTime is 0.5, the attack will start hitting halfway through the ability. if baseduration is 3 seconds, the attack will start happening at 1.5 seconds
             attackStartPercentTime = 0.2f;
-            attackEndPercentTime = 0.8f;
+            attackEndPercentTime = 0.9f;
 
             //this is the point at which the attack can be interrupted by itself, continuing a combo
-            earlyExitPercentTime = 0.8f;
+            earlyExitPercentTime = 0.9f;
 
             hitStopDuration = 0.012f;
             attackRecoil = 0.5f;
             hitHopVelocity = 5f;
 
-            swingSoundString = "HenrySwordSwing";
+            swingSoundString = XStaticValues.X_Rathalos_Swing_SFX;
             hitSoundString = "";
             muzzleString = swingIndex % 2 == 0 ? "SwordMuzzLPos" : "SwordMuzzRPos";
             playbackRateParam = "Slash.playbackRate";

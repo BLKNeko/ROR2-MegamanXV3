@@ -58,14 +58,11 @@ namespace MegamanXMod.Survivors.X.SkillStates
             attackRecoil = 0.5f;
             hitHopVelocity = 5f;
 
-            swingSoundString = "HenrySwordSwing";
             hitSoundString = "";
-            muzzleString = swingIndex % 2 == 0 ? "SwingLeft" : "SwingRight";
-            playbackRateParam = "Slash.playbackRate";
-            swingEffectPrefab = XAssets.swordSwingEffect;
-            hitEffectPrefab = XAssets.swordHitImpactEffect;
 
             impactSound = XAssets.swordHitSoundEvent.index;
+
+            AkSoundEngine.PostEvent(XStaticValues.X_NovaStrike_SFX, this.gameObject);
 
             //XRathalosSlashCombo2 xRathalosSlashCombo2 = new XRathalosSlashCombo2();
 

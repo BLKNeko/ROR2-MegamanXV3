@@ -65,6 +65,7 @@ namespace MegamanXMod.Survivors.X.Components
                 if (timer > timeLimit)
                 {
                     //overlapAttack.ResetOverlapAttack();
+                    AkSoundEngine.PostEvent(XStaticValues.X_FireWave_SFX, this.gameObject);
                     blastAttack.Fire();
                     timer = 0f;
                 }

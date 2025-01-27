@@ -91,6 +91,8 @@ namespace MegamanXMod.Survivors.X
 
         public static Sprite IconSkillLock;
 
+        public static Sprite IconXPassive;
+
         public static Sprite IconHeadScanner;
         public static Sprite IconHyperChip;
         public static Sprite IconGigaAttackGaea;
@@ -212,6 +214,8 @@ namespace MegamanXMod.Survivors.X
 
             IconSkillLock = _assetBundle.LoadAsset<Sprite>("XSkillLock");
 
+            IconXPassive = _assetBundle.LoadAsset<Sprite>("XPassiveIcon");
+
             IconHeadScanner = _assetBundle.LoadAsset<Sprite>("XSkillHeadScanner");
             IconHyperChip = _assetBundle.LoadAsset<Sprite>("XSkillHyperChip");
             IconGigaAttackGaea = _assetBundle.LoadAsset<Sprite>("XSkillGigaAttackGaea");
@@ -270,7 +274,6 @@ namespace MegamanXMod.Survivors.X
             CreateShurikenProjectile();
             CreateShurikenProjectile2();
             CreateShotgunIce();
-            CreateShotFMJ();
             CreateXBusterChargeProjectile();
             CreateXBusterMediumProjectile();
             CreateXLightBusterChargeProjectile();
@@ -295,7 +298,6 @@ namespace MegamanXMod.Survivors.X
             Content.AddProjectilePrefab(shurikenProjectilePrefab);
             Content.AddProjectilePrefab(shurikenProjectilePrefab2);
             Content.AddProjectilePrefab(shotgunIceprefab);
-            Content.AddProjectilePrefab(shotFMJ);
             Content.AddProjectilePrefab(xBusterChargeProjectile);
             Content.AddProjectilePrefab(xBusterMediumProjectile);
             Content.AddProjectilePrefab(xLightBusterChargeProjectile);
@@ -396,8 +398,8 @@ namespace MegamanXMod.Survivors.X
 
             ProjectileController XShurikenController2 = shurikenProjectilePrefab2.GetComponent<ProjectileController>();
 
-            if (_assetBundle.LoadAsset<GameObject>("ShurikenVFX") != null)
-                XShurikenController2.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("ShurikenVFX");
+            //if (_assetBundle.LoadAsset<GameObject>("ShurikenVFX") != null)
+            //    XShurikenController2.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("ShurikenVFX");
 
             XShurikenController2.startSound = "";
         }
@@ -822,34 +824,17 @@ namespace MegamanXMod.Survivors.X
             XGaeaBusterSmallController.startSound = "";
         }
 
-        private static void CreateShotFMJ()
-        {
-            // clone Lunar's syringe projectile prefab here to use as our own projectile
-            shotFMJ = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/projectiles/FMJ"), "Prefabs/Projectiles/shotFMJProjectile", true, "", "RegisterCharacter", 155);
-
-
-            // just setting the numbers to 1 as the entitystate will take care of those
-            shotFMJ.GetComponent<ProjectileDamage>().damage = 1f;
-            shotFMJ.GetComponent<ProjectileController>().procCoefficient = 1f;
-            shotFMJ.GetComponent<ProjectileDamage>().damageType = DamageType.Shock5s;
-
-            // register it for networking
-            //if (shotFMJ) PrefabAPI.RegisterNetworkPrefab(shotFMJ);
-
-
-            ProjectileController shotFMJController = shotFMJ.GetComponent<ProjectileController>();
-            if (_assetBundle.LoadAsset<GameObject>("shotFMJGhost") != null)
-                shotFMJController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("shotFMJGhost");
-
-            shotFMJController.startSound = "";
-
-        }
-
         private static void CreateShotgunIce()
         {
 
             // clone FMJ's syringe projectile prefab here to use as our own projectile
-            shotgunIceprefab = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/projectiles/MageIceBombProjectile"), "Prefabs/Projectiles/ShotgIceProjectile", true, "C:\\Users\\test\\Documents\\ror2mods\\MegamanX\\MegamanX\\MegamanX\\MegamanX.cs", "RegisterCharacter", 155);
+            //shotgunIceprefab = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/projectiles/MageIceBombProjectile"), "Prefabs/Projectiles/ShotgIceProjectile", true, "C:\\Users\\test\\Documents\\ror2mods\\MegamanX\\MegamanX\\MegamanX\\MegamanX.cs", "RegisterCharacter", 155);
+
+            //highly recommend setting up projectiles in editor, but this is a quick and dirty way to prototype if you want
+            shotgunIceprefab = Asset.CloneProjectilePrefab("MageIceBombProjectile", "shotgunIceProjectile");
+
+            //UnityEngine.Object.Destroy(shotgunIceprefab.GetComponent<EffectComponent>());
+            //UnityEngine.Object.Destroy(shotgunIceprefab.GetComponent<VFXAttributes>());
 
             // just setting the numbers to 1 as the entitystate will take care of those
             shotgunIceprefab.GetComponent<ProjectileDamage>().damage = 1f;
@@ -860,8 +845,13 @@ namespace MegamanXMod.Survivors.X
             //if (shotgunIceprefab) PrefabAPI.RegisterNetworkPrefab(shotgunIceprefab);
 
             ProjectileController shotgunIceController = shotgunIceprefab.GetComponent<ProjectileController>();
-            if (_assetBundle.LoadAsset<GameObject>("ShotgunIceGhost") != null) shotgunIceController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("ShotgunIceGhost");
+            shotgunIceController.ghostPrefab = shotgunIceprefab.GetComponent<ProjectileController>().ghostPrefab;
+
+            //if (_assetBundle.LoadAsset<GameObject>("ShotgunIceGhost") != null) shotgunIceController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("ShotgunIceGhost");
+            //shotgunIceController.ghostPrefab = shotgunIceprefab;
+
             shotgunIceController.startSound = "";
+
         }
 
         private static void CreateXRFireProjectile()

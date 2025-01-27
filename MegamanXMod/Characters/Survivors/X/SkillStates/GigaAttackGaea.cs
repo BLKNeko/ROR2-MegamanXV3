@@ -76,6 +76,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             //}, true);
 
+            AkSoundEngine.PostEvent(XStaticValues.X_GAGaea, this.gameObject);
+
         }
 
         public override void OnExit()

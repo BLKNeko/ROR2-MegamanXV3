@@ -66,7 +66,13 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
                 characterBody.AddSpreadBloom(1f);
                 EffectManager.SimpleMuzzleFlash(muzzleObject, gameObject, muzzleString, false);
-                Util.PlaySound("HenryXBusterPistol", gameObject);
+
+                if (XConfig.enableVoiceBool.Value)
+                {
+                    AkSoundEngine.PostEvent(XStaticValues.X_squeezeBomb_VSFX, this.gameObject);
+                }
+
+                AkSoundEngine.PostEvent(XStaticValues.X_Squeezebomb_SFX, this.gameObject);
 
                 if (isAuthority)
                 {

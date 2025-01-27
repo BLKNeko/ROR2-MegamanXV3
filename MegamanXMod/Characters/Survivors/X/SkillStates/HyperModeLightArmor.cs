@@ -54,6 +54,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             armorComponent.RemoveArmorBuffs();
 
+            AkSoundEngine.PostEvent(XStaticValues.X_HyperMode_SFX, this.gameObject);
+
 
             //TRANSFORM INTO LIGHT ARMOR
             this.modelTransform = base.GetModelTransform();

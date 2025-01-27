@@ -75,7 +75,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, gameObject, LDashPos, true);
             EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, gameObject, RDashPos, true);
             PlayAnimation("FullBody, Override", "DashLoop", "DashLoop.playbackRate", duration);
-            Util.PlaySound(dodgeSoundString, gameObject);
+            AkSoundEngine.PostEvent(XStaticValues.X_Dash_SFX, this.gameObject);
 
             //if (NetworkServer.active)
             //{

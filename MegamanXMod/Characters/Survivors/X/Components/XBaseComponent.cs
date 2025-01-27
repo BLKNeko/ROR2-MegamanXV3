@@ -17,6 +17,9 @@ namespace MegamanXMod.Survivors.X.Components
 
         private bool isWeak;
 
+        private bool giveExtraLife { get; set; }
+        private bool HasUsedExtraLife { get; set; }
+
         private float minHpWeak, initialStoreTime;
         private float timeBetweenBlink = 2f;
 
@@ -42,9 +45,11 @@ namespace MegamanXMod.Survivors.X.Components
 
             XAnim = XBody.characterDirection.modelAnimator;
 
-            minHpWeak = 0.3f;
+            minHpWeak = 0.45f;
 
             childLocator = GetComponentInChildren<ChildLocator>();
+
+            giveExtraLife = false;
 
 
         }
@@ -81,7 +86,15 @@ namespace MegamanXMod.Survivors.X.Components
             XAnim.SetBool("isWeak", isWeak);
         }
 
-        
+        public void SetExtraLife(bool b)
+        {
+            giveExtraLife = b;
+        }
+
+        public bool GetExtraLife()
+        {
+            return giveExtraLife;
+        }
 
 
     }

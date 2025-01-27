@@ -38,6 +38,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             armorComponent = GetComponent<XArmorComponent>();
 
+            AkSoundEngine.PostEvent(XStaticValues.X_GoldenArmor_SFX, this.gameObject);
+
             //TRANSFORM INTO MAX ARMOR
             this.modelTransform = base.GetModelTransform();
             if (this.modelTransform)

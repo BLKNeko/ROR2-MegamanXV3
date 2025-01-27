@@ -38,6 +38,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
         private bool hasTime = false;
         private int chargeLevel = 0;
         private bool chargingSFX = false;
+        private bool playedVSFX = false;
 
         public override void OnEnter()
         {
@@ -54,6 +55,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
         public override void OnExit()
         {
+            playedVSFX = false;
             chargeTime = 0f;
             chargeLevel = 0;
             base.OnExit();
@@ -115,7 +117,9 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
                 characterBody.AddSpreadBloom(0.8f);
                 EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
-                Util.PlaySound("HenryXBusterPistol", gameObject);
+
+                AkSoundEngine.PostEvent(XStaticValues.X_Mid_Bullet, this.gameObject);
+
                 PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
 
 
@@ -148,7 +152,9 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
                 characterBody.AddSpreadBloom(0.8f);
                 EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
-                Util.PlaySound("HenryXBusterPistol", gameObject);
+
+                AkSoundEngine.PostEvent(XStaticValues.X_Charge_Shot, this.gameObject);
+
                 PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
 
                 if (isAuthority)
@@ -184,7 +190,9 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
                 base.characterBody.AddSpreadBloom(0.75f);
                 EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
-                Util.PlaySound("HenryXBusterPistol", gameObject);
+
+                AkSoundEngine.PostEvent(XStaticValues.X_Charge_Shot, this.gameObject);
+
                 PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
 
                 if (characterBody.HasBuff(XBuffs.GigaBusterChargeBuff))
@@ -269,6 +277,14 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 chargeLevel = 1; // Nível mínimo de carregamento
             }
 
+            AkSoundEngine.PostEvent(21663534, base.gameObject);
+
+            if (XConfig.enableVoiceBool.Value && !playedVSFX && chargeLevel == 3)
+            {
+                AkSoundEngine.PostEvent(XStaticValues.X_Attack_VSFX, this.gameObject);
+                playedVSFX = true;
+            }
+
             chargingSFX = false;
             chargeFullSFX = false;
             hasTime = true;
@@ -281,15 +297,14 @@ namespace MegamanXMod.Survivors.X.SkillStates
             switch (level)
             {
                 case 1:
-                    //Util.PlaySound(Sounds.charging, base.gameObject);
-                    //EffectManager.SimpleMuzzleFlash(Modules.Assets.chargeeffect1C, base.gameObject, "Center", true);
-                    //EffectManager.SimpleMuzzleFlash(Modules.Assets.chargeeffect1W, base.gameObject, "Center", true);
+                    //Util.PlaySound(XStaticValues.charging, base.gameObject);
+                    AkSoundEngine.PostEvent(3358936867, this.gameObject);
                     EffectManager.SimpleMuzzleFlash(XAssets.Charge1VFX, base.gameObject, "CorePosition", true);
                     break;
 
                 case 2:
-                    //Util.PlaySound(Sounds.fullCharge, base.gameObject);
-                    //EffectManager.SimpleMuzzleFlash(Modules.Assets.chargeeffect2C, base.gameObject, "Center", true);
+                    //Util.PlaySound(XStaticValues.fullCharge, base.gameObject);
+                    AkSoundEngine.PostEvent(992292707, this.gameObject);
                     EffectManager.SimpleMuzzleFlash(XAssets.Charge2VFX, base.gameObject, "CorePosition", true);
                     break;
 

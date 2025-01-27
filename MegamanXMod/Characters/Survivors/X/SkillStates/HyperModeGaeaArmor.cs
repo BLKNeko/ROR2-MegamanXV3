@@ -55,6 +55,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             armorComponent.RemoveArmorBuffs();
 
+            AkSoundEngine.PostEvent(XStaticValues.X_HyperMode_SFX, this.gameObject);
+
             //TRANSFORM INTO GAEA ARMOR
             this.modelTransform = base.GetModelTransform();
             if (this.modelTransform)

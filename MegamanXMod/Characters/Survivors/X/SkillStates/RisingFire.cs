@@ -54,7 +54,13 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
                 characterBody.AddSpreadBloom(0.8f);
                 EffectManager.SimpleMuzzleFlash(EntityStates.Mage.Weapon.FireRoller.fireMuzzleflashEffectPrefab, gameObject, muzzleString, false);
-                Util.PlaySound("HenryXBusterPistol", gameObject);
+
+                if (XConfig.enableVoiceBool.Value)
+                {
+                    AkSoundEngine.PostEvent(XStaticValues.X_Attack_VSFX, this.gameObject);
+                }
+                AkSoundEngine.PostEvent(XStaticValues.X_RisingFire_SFX, this.gameObject);
+
                 PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
 
                 if (isAuthority)
@@ -89,7 +95,13 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
                 characterBody.AddSpreadBloom(0.8f);
                 EffectManager.SimpleMuzzleFlash(EntityStates.Mage.Weapon.FireRoller.fireMuzzleflashEffectPrefab, gameObject, muzzleString, false);
-                Util.PlaySound("HenryXBusterPistol", gameObject);
+
+                if (XConfig.enableVoiceBool.Value)
+                {
+                    AkSoundEngine.PostEvent(XStaticValues.X_Attack_VSFX, this.gameObject);
+                }
+                AkSoundEngine.PostEvent(XStaticValues.X_RisingFire_SFX, this.gameObject);
+
                 PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
 
                 if (isAuthority)
