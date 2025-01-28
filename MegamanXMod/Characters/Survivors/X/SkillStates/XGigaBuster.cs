@@ -195,23 +195,23 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
                 PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
 
-                if (characterBody.HasBuff(XBuffs.GigaBusterChargeBuff))
-                {
-                    if (NetworkServer.active)
-                    {
-                        characterBody.RemoveBuff(XBuffs.GigaBusterChargeBuff);
-                    }
-                }
-                else
-                {
-                    if (NetworkServer.active)
-                    {
-                        characterBody.AddBuff(XBuffs.GigaBusterChargeBuff);
-                    }
-                }
-
                 if (base.isAuthority)
                 {
+
+                    if (characterBody.HasBuff(XBuffs.GigaBusterChargeBuff))
+                    {
+                        if (NetworkServer.active)
+                        {
+                            characterBody.RemoveBuff(XBuffs.GigaBusterChargeBuff);
+                        }
+                    }
+                    else
+                    {
+                        if (NetworkServer.active)
+                        {
+                            characterBody.AddBuff(XBuffs.GigaBusterChargeBuff);
+                        }
+                    }
 
                     Ray aimRay = GetAimRay();
                     AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);

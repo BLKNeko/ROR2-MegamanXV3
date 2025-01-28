@@ -55,7 +55,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
         {
             if (!hasFired)
             {
-                Chat.AddMessage("I Can`t use this yet!");
+                Chat.AddMessage("X: I Can`t use this yet!");
                 hasFired = true;
 
             }

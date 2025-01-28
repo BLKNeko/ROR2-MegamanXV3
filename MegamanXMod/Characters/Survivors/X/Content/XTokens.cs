@@ -9,7 +9,7 @@ namespace MegamanXMod.Survivors.X
     {
         public static void Init()
         {
-            AddHenryTokens();
+            //AddHenryTokens();
             AddXTokens();
 
             ////uncomment this to spit out a lanuage file with all the above tokens that people can translate
@@ -22,12 +22,14 @@ namespace MegamanXMod.Survivors.X
         {
             string prefix = XSurvivor.MEGAMAN_x_PREFIX;
 
-            string desc = "Megaman X, the B class maverick hunter<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > X can transform either of his arms into a powerful buster to shoot bullets of compressed solar energy, and has an energy amplifier that allows it to be charged up and release a more powerful shot." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > X-Buster is powerful but slow and his charged shot have a limited range, FK-Buster is weaker but faster and have no range limit</color>" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > X fires a shard of ice that can freeze and damage a target." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Emergency Acceleration System(DASH) is a move that temporarily speeds up the character." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > X's Limitless Potencial make it easy to turn on the table, but be wary of it's high cooldown." + Environment.NewLine + Environment.NewLine;
+            string desc = "<color=#CCD3E0>Mega Man X, the B-Class Maverick Hunter.</color>\n\n";
+            desc += "< ! > The <color=#f79902>X-Buster</color> is a powerful weapon, capable of charging energy to unleash devastating charged shots!\n\n";
+            desc += "< ! > X can also charge some of his <color=#2302f7>skills</color>, allowing him to deal increased damage or perform unique actions.</color>\n\n";
+            desc += "< ! > The <color=#CCD3E0>Emergency Acceleration System (DASH)</color> temporarily boosts X's speed, making it ideal for repositioning or evading danger.\n\n";
+            desc += "< ! > <color=#f79902>X-Heart</color> and <color=#f79902>Limitless Potential</color> grant X the ability to turn the tide of battle, but beware of its high cooldown.\n\n";
+            desc += "< ! > X's full potential is unlocked as he levels up, granting access to different armors with unique capabilities.</color>\n\n";
+            desc += "< ! > Choose X's armor wisely—each comes with distinct advantages to suit your strategy.</color>\n\n";
+
 
             string outro = "Back to the Hunter Base.";
             string outroFailure = "Sorry...I...Failed....";
@@ -53,22 +55,34 @@ namespace MegamanXMod.Survivors.X
             LanguageAPI.Add(prefix + "X_ARMOR_DESCRIPTION", "X regular armor");
 
             LanguageAPI.Add(prefix + "EXTRA_FIRST_LIGHT_ARMOR_NAME", "Light Armor");
-            LanguageAPI.Add(prefix + "EXTRA_FIRST_LIGHT_ARMOR_DESCRIPTION", "Shoot with X - Buster, dealing <style=cIsDamage>170 % damage</style>.");
+            LanguageAPI.Add(prefix + "EXTRA_FIRST_LIGHT_ARMOR_DESCRIPTION", "X's first armor. The Light Buster can hit enemies multiple times, and this armor provides a small boost to X's stats.");
 
             LanguageAPI.Add(prefix + "EXTRA_FIRST_SECOND_ARMOR_NAME", "Giga Armor");
-            LanguageAPI.Add(prefix + "EXTRA_FIRST_SECOND_ARMOR_DESCRIPTION", "Shoot with X - Buster, dealing <style=cIsDamage>170 % damage</style>.");
+            LanguageAPI.Add(prefix + "EXTRA_FIRST_SECOND_ARMOR_DESCRIPTION", "X's second armor. The Giga Buster can store an additional charge, and the helmet replaces X's special skill with the <color=#f79902>HEAD SCANNER</color>.");
 
             LanguageAPI.Add(prefix + "EXTRA_SECOND_MAX_ARMOR_NAME", "Max Armor");
-            LanguageAPI.Add(prefix + "EXTRA_SECOND_MAX_ARMOR_DESCRIPTION", "Shoot with X - Buster, dealing <style=cIsDamage>170 % damage</style>.");
+            LanguageAPI.Add(prefix + "EXTRA_SECOND_MAX_ARMOR_DESCRIPTION", "X's third armor. The Max Buster fires additional projectiles in a wide range, and this armor replaces X's special skill with the <color=#f79902>HYPER CHIP</color>.");
 
             LanguageAPI.Add(prefix + "EXTRA_SECOND_FOURTH_ARMOR_NAME", "Force Armor");
-            LanguageAPI.Add(prefix + "EXTRA_SECOND_FOURTH_ARMOR_DESCRIPTION", "Shoot with X - Buster, dealing <style=cIsDamage>170 % damage</style>.");
+            LanguageAPI.Add(prefix + "EXTRA_SECOND_FOURTH_ARMOR_DESCRIPTION", "X's fourth armor. This powerful armor equips the Ultimate Buster, which leaves a shock sphere on enemies, causing damage over time. It also replaces X's DASH with the <color=#f79902>NOVA DASH</color>.");
 
             LanguageAPI.Add(prefix + "EXTRA_THIRD_FALCON_ARMOR_NAME", "Falcon Armor");
-            LanguageAPI.Add(prefix + "EXTRA_THIRD_FALCON_ARMOR_DESCRIPTION", "Shoot with X - Buster, dealing <style=cIsDamage>170 % damage</style>.");
+            LanguageAPI.Add(prefix + "EXTRA_THIRD_FALCON_ARMOR_DESCRIPTION", "This armor focuses on mobility, replacing X's DASH with an advanced form that allows him to fly and hover in the air.");
 
             LanguageAPI.Add(prefix + "EXTRA_THIRD_GAEA_ARMOR_NAME", "Gaea Armor");
-            LanguageAPI.Add(prefix + "EXTRA_THIRD_GAEA_ARMOR_DESCRIPTION", "Shoot with X - Buster, dealing <style=cIsDamage>170 % damage</style>.");
+            LanguageAPI.Add(prefix + "EXTRA_THIRD_GAEA_ARMOR_DESCRIPTION", "This armor is extremely heavy, providing a massive boost to defense. The Gaea Buster can poison enemies, and X's special skill is replaced with the <color=#012906>GAEA GIGA ATTACK</color>.");
+
+            LanguageAPI.Add(prefix + "EXTRA_FOURTH_SHADOW_ARMOR_NAME", "Shadow Armor");
+            LanguageAPI.Add(prefix + "EXTRA_FOURTH_SHADOW_ARMOR_DESCRIPTION", "This armor is both fast and powerful. While equipped, X's secondary skill is replaced with the Shadow Saber, and his Shadow Buster fires three kunai in a spread pattern, causing enemies to bleed.");
+
+            LanguageAPI.Add(prefix + "EXTRA_FOURTH_ULTIMATE_ARMOR_NAME", "Ultimate Armor");
+            LanguageAPI.Add(prefix + "EXTRA_FOURTH_ULTIMATE_ARMOR_DESCRIPTION", "One of the most powerful armors. The Ultimate Buster deals increased damage, and X's DASH is replaced with the <color=#f79902>NOVA STRIKE</color>.");
+
+            LanguageAPI.Add(prefix + "EXTRA_FOURTH_RATHALOS_ARMOR_NAME", "Rathalos Armor");
+            LanguageAPI.Add(prefix + "EXTRA_FOURTH_RATHALOS_ARMOR_DESCRIPTION", "This ancient armor is based on the powerful Flying Wyvern, Rathalos. The buster is designed to channel the monster's fire breath, while his saber delivers powerful blows that crush enemies.");
+
+            LanguageAPI.Add(prefix + "EXTRA_LOCK_ARMOR_NAME", "Lock Armor");
+            LanguageAPI.Add(prefix + "EXTRA_LOCK_ARMOR_DESCRIPTION", "Lock Armor");
 
             #endregion
 
@@ -87,13 +101,34 @@ namespace MegamanXMod.Survivors.X
             #region Primary
 
             LanguageAPI.Add(prefix + "PRIMARY_X_BUSTER_NAME", "X-Buster");
-            LanguageAPI.Add(prefix + "PRIMARY_X_BUSTER_DESCRIPTION", "Shoot with X - Buster, dealing <style=cIsDamage>150 % damage</style>.");
+            LanguageAPI.Add(prefix + "PRIMARY_X_BUSTER_DESCRIPTION", $"Shoot with X - Buster, dealing <style=cIsDamage>{100f * XStaticValues.XBusterDamageCoefficient}% damage</style>.");
 
             LanguageAPI.Add(prefix + "PRIMARY_LIGHT_BUSTER_NAME", "Light-Buster");
             LanguageAPI.Add(prefix + "PRIMARY_LIGHT_BUSTER_DESCRIPTION", "Light-Buster");
 
             LanguageAPI.Add(prefix + "PRIMARY_GIGA_BUSTER_NAME", "Giga-Buster");
             LanguageAPI.Add(prefix + "PRIMARY_GIGA_BUSTER_DESCRIPTION", "Giga-Buster");
+
+            LanguageAPI.Add(prefix + "PRIMARY_MAX_BUSTER_NAME", "Max-Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_MAX_BUSTER_DESCRIPTION", "Max-Buster");
+
+            LanguageAPI.Add(prefix + "PRIMARY_FORCE_BUSTER_NAME", "Force-Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_FORCE_BUSTER_DESCRIPTION", "Force-Buster");
+
+            LanguageAPI.Add(prefix + "PRIMARY_FALCON_BUSTER_NAME", "Falcon-Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_FALCON_BUSTER_DESCRIPTION", "Falcon-Buster");
+
+            LanguageAPI.Add(prefix + "PRIMARY_GAEA_BUSTER_NAME", "Gaea-Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_GAEA_BUSTER_DESCRIPTION", "Gaea-Buster");
+
+            LanguageAPI.Add(prefix + "PRIMARY_SHADOW_BUSTER_NAME", "Shadow-Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_SHADOW_BUSTER_DESCRIPTION", "Shadow-Buster");
+
+            LanguageAPI.Add(prefix + "PRIMARY_ULTIMATE_BUSTER_Name", "Ultimate-Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_ULTIMATE_BUSTER_DESCRIPTION", "Ultimate-Buster");
+
+            LanguageAPI.Add(prefix + "PRIMARY_RATHALOS_BUSTER_NAME", "Rathalos-Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_RATHALOS_BUSTER_DESCRIPTION", "Rathalos-Buster");
 
 
 
@@ -108,19 +143,19 @@ namespace MegamanXMod.Survivors.X
             LanguageAPI.Add(prefix + "SECONDARY_RATHALOS_SABER_DESCRIPTION", "Shoot an IceMissle that pierce enemies, dealing <style=cIsDamage> 200 % damage </style>.");
 
             LanguageAPI.Add(prefix + "SECONDARY_SHOTGUN_ICE_NAME", "ShotgunIce");
-            LanguageAPI.Add(prefix + "SECONDARY_SHOTGUN_ICE_DESCRIPTION", "Shoot an Ice Missile that pierces enemies, dealing <style=cIsDamage>200% damage</style> and <style=cIsUtility>freezing</style> them.");
+            LanguageAPI.Add(prefix + "SECONDARY_SHOTGUN_ICE_DESCRIPTION", $"Shoot an Ice Missile that pierces enemies, dealing <style=cIsDamage>{100f * XStaticValues.XShotgunIceDamageCoefficient}% damage</style> and <style=cIsUtility>freezing</style> them.");
 
             LanguageAPI.Add(prefix + "SECONDARY_SQUEEZE_BOMB_NAME", "Squeeze Bomb");
             LanguageAPI.Add(prefix + "SECONDARY_SQUEEZE_BOMB_DESCRIPTION", "A gravity-based weapon. Creates localized black holes that hold up enemies.");
 
             LanguageAPI.Add(prefix + "SECONDARY_FIRE_WAVE_NAME", "Fire Wave");
-            LanguageAPI.Add(prefix + "SECONDARY_FIRE_WAVE_DESCRIPTION", "X releases a constant stream of flames from his buster");
+            LanguageAPI.Add(prefix + "SECONDARY_FIRE_WAVE_DESCRIPTION", $"X releases a constant stream of flames from his buster, dealing <style=cIsDamage> {100f * XStaticValues.XFireWaveDamageCoefficient}% damage</style>. ");
 
             #endregion
 
             #region Utility
-            LanguageAPI.Add(prefix + "DASH_NAME", "Dash");
-            LanguageAPI.Add(prefix + "DASH_DESCRIPTION", "<style=cIsDamage>Perform a Dash</style>.</style>");
+            LanguageAPI.Add(prefix + "UTILITY_X_DASH_NAME", "Dash");
+            LanguageAPI.Add(prefix + "UTILITY_X_DASH_DESCRIPTION", "The <color=#CCD3E0>Emergency Acceleration System (DASH)</color> temporarily boosts X's speed, making it ideal for repositioning or evading danger.");
 
             LanguageAPI.Add(prefix + "UTILITY_FALCON_DASH_NAME", "Falcon Dash");
             LanguageAPI.Add(prefix + "UTILITY_FALCON_DASH_DESCRIPTION", "<style=cIsDamage>X first surrounds his body with immense energy, then performs an invincible flying tackle</style>.</style>");
@@ -147,19 +182,19 @@ namespace MegamanXMod.Survivors.X
             LanguageAPI.Add(prefix + "SPECIAL_RATHALOS_SLASH_DESCRIPTION", "Shoot a small missle tha follow some targets, dealing <style=cIsDamage> 145 % base damage </style>.");
 
             LanguageAPI.Add(prefix + "SPECIAL_MELTCREEPER_NAME", "Meltcreeper");
-            LanguageAPI.Add(prefix + "SPECIAL_MELTCREEPER_DESCRIPTION", "Shoot a small missle tha follow some targets, dealing <style=cIsDamage> 145 % base damage </style>.");
+            LanguageAPI.Add(prefix + "SPECIAL_MELTCREEPER_DESCRIPTION", $"X sends a wave of flames on the ground from his current position, dealing <style=cIsDamage> {100f * XStaticValues.MeltCreeperDamageCoefficient}% damage</style>.");
 
             LanguageAPI.Add(prefix + "SPECIAL_ACID_BURST_NAME", "Acid Burst R");
-            LanguageAPI.Add(prefix + "SPECIAL_ACID_BURST_DESCRIPTION", "When fired, it creates a glob of acid which, upon contact with any surface, will create acid crystals, dealing <style=cIsDamage> 125 % base damage </style> and poisoning enemies, When charged, X will fire two balls of acid dealing a little more damage");
+            LanguageAPI.Add(prefix + "SPECIAL_ACID_BURST_DESCRIPTION", $"When fired, it creates a glob of acid which, upon contact with any surface, will create acid crystals, dealing <style=cIsDamage> {100f * XStaticValues.AcidBurstDamageCoefficient}% damage </style> and poisoning enemies.");
 
             LanguageAPI.Add(prefix + "SPECIAL_CHAMELEON_STING_NAME", "Chameleon Sting");
-            LanguageAPI.Add(prefix + "SPECIAL_CHAMELEON_STING_DESCRIPTION", "X fires tree beams in a wide angle, dealing <style=cIsDamage> 160 % base damage </style>. When charged, the Chameleon Sting make X temporarily invulnerable");
+            LanguageAPI.Add(prefix + "SPECIAL_CHAMELEON_STING_DESCRIPTION", $"X fires tree beams in a wide angle, dealing <style=cIsDamage> {100f * XStaticValues.ChameleonStingDamageCoefficient}% damage </style>.");
 
             LanguageAPI.Add(prefix + "SPECIAL_HOMMING_TORPEDO_NAME", "Homming Torpedo");
-            LanguageAPI.Add(prefix + "SPECIAL_HOMMING_TORPEDO_DESCRIPTION", "Shoot a small missle tha follow some targets, dealing <style=cIsDamage> 145 % base damage </style>.");
+            LanguageAPI.Add(prefix + "SPECIAL_HOMMING_TORPEDO_DESCRIPTION", $"Shoot a small missle tha follow some targets, dealing <style=cIsDamage> {100f * XStaticValues.HomingTorpedoDamageCoefficient}% damage </style>.");
 
-            LanguageAPI.Add(prefix + "RISINGFIRER_NAME", "Rising Fire R");
-            LanguageAPI.Add(prefix + "RISINGFIRER_DESCRIPTION", "When equipped with this weapon, X raises his arm in the air and shoots firebombs upwards dealing <style=cIsDamage> 200 % base damage </style>.");
+            LanguageAPI.Add(prefix + "SPECIAL_RISING_FIRE_NAME", "Rising Fire R");
+            LanguageAPI.Add(prefix + "SPECIAL_RISING_FIRE_DESCRIPTION", $"When equipped with this weapon, X raises his arm in the air and shoots firebombs upwards dealing <style=cIsDamage> {100f * XStaticValues.RisingFireDamageCoefficient}% damage </style>.");
 
             
 

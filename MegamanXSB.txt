@@ -1,7 +1,7 @@
 Event	ID	Name			Wwise Object Path	Notes
 	143313	Play_X_Falcon_Dash			\Default Work Unit\Play_X_Falcon_Dash	
 	21663534	Stop_X_Charging			\Default Work Unit\Stop_X_Charging	
-	50320752	X_Die			\Default Work Unit\X_Die	
+	77384899	Play_XAwake			\Default Work Unit\Play_XAwake	
 	128191538	Play_X_Slash2_SFX			\Default Work Unit\Play_X_Slash2_SFX	
 	179916425	X_ShotgunIce			\Default Work Unit\X_ShotgunIce	
 	288862286	Play_X_MaxBusterChargeShot_SFX			\Default Work Unit\Play_X_MaxBusterChargeShot_SFX	
@@ -21,7 +21,9 @@ Event	ID	Name			Wwise Object Path	Notes
 	1727730986	Play_X_RathalosBuster_S			\Default Work Unit\Play_X_RathalosBuster_S	
 	1727731002	Play_X_RathalosBuster_C			\Default Work Unit\Play_X_RathalosBuster_C	
 	1879878613	Play_X_NovaStrike_SFX			\Default Work Unit\Play_X_NovaStrike_SFX	
+	1881672346	Play_X_Footstep_X8_SFX			\Default Work Unit\Play_X_Footstep_X8_SFX	
 	1992039356	X_MidBullet			\Default Work Unit\X_MidBullet	
+	2122315112	Play_XDeath			\Default Work Unit\Play_XDeath	
 	2129706662	X_SqueezeBomb			\Default Work Unit\X_SqueezeBomb	
 	2277553633	X_FireWave			\Default Work Unit\X_FireWave	
 	2450744783	Play_X_RisingFire_SFX			\Default Work Unit\Play_X_RisingFire_SFX	
@@ -51,6 +53,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	107575684	X_Rathalos_Swing_SFX	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\X_Rathalos_Swing_SFX_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\X_Rathalos_Swing_SFX		10605
 	111308443	X_AcidBurst_SFX	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\X_AcidBurst_SFX_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\X_AcidBurst_SFX		9824
 	112646909	X_yooh_VSFX	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\X_yooh_VSFX_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\XAttack\X_yooh_VSFX		14898
+	117437956	X_LeaveItToMe_VSFX	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\X_LeaveItToMe_VSFX_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\XAwake\X_LeaveItToMe_VSFX		13963
 	117793793	X_Head_SFX	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\X_Head_SFX_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\X_Head_SFX		21911
 	152199808	XNotDoneYet	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\XNotDoneYet_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\XPassive\XNotDoneYet		16352
 	156095069	X_HMCooldown2_SFX	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\X_HMCooldown2_SFX_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\X_HMCooldown2_SFX		20900
@@ -58,7 +61,10 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	196729377	XHomingTorpedo	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\XHomingTorpedo_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\XHomingTorpedo		7197
 	196765274	XiWontGiveUp	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\XiWontGiveUp_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\XPassive\XiWontGiveUp		15309
 	209118938	X_MeltCreeper_VSFX	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\X_MeltCreeper_VSFX_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\X_MeltCreeper_VSFX		19770
+	235984803	X_Die2_VSFX	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\X_Die2_VSFX_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\XDeath\X_Die2_VSFX		11086
+	242320949	X_Die3_VSFX	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\X_Die3_VSFX_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\XDeath\X_Die3_VSFX		29139
 	304795411	X_MaxBusterChargeShot_SFX	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\X_MaxBusterChargeShot_SFX_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\X_MaxBusterChargeShot_SFX		14748
+	305741630	X_OverHere_VSFX	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\X_OverHere_VSFX_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\XAttack\X_OverHere_VSFX		9890
 	312527344	FullCharge	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\X8ChargeLoop2_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\FullCharge		9103
 	335201293	XFullPower	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\XFullPower_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\XPassive\XFullPower		21081
 	362655958	X_NovaStrike_SFX	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\X_NovaStrike_SFX_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\X_NovaStrike_SFX		7065
@@ -66,10 +72,13 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	398191745	X_RisingFireCharged_SFX	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\X_RisingFireCharged_SFX_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\X_RisingFireCharged_SFX		25645
 	443693579	X_Slash2_SFX	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\X_Slash2_SFX_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\X_Slash2_SFX		5896
 	459209003	XHereWeGo	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\XHereWeGo_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\XPassive\XHereWeGo		17415
-	575757206	XDie	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\XDie_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\XDie		16878
+	532361045	X_BegginingMission_VSFX	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\X_BegginingMission_VSFX_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\XAwake\X_BegginingMission_VSFX		11948
+	545311496	X_roger_VSFX	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\X_roger_VSFX_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\XAwake\X_roger_VSFX		9312
+	575757206	XDie	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\XDie_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\XDeath\XDie		16878
 	581798863	X_RathalosBuster_S	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\X_RathalosBuster_S_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\X_RathalosBuster_S		16147
 	615349031	XFireLoop	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\XFireLoop_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\XFireLoop		17468
 	634094498	X_ChameleonSting_SFX	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\X_ChameleonSting_SFX_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\X_ChameleonSting_SFX		9390
+	664814859	X_Footstep_X8_SFX	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\X_Footstep_X8_SFX_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\X_Footstep_X8_SFX		3736
 	669571034	XIaa	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\XIaa_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\XAttack\XIaa		2874
 	694819933	FireWave	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\FireWave_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\FireWave		5270
 	700939537	XChargeShot	A:\Users\augus\Documents\WwiseProjects\MegamanXV3SB\.cache\Windows\SFX\XChargeShoot_EDCD4836.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Mixxer\XChargeShot		4171

@@ -5,6 +5,7 @@ using MegamanXMod.Survivors.X.Components;
 using RoR2;
 using RoR2.Audio;
 using System;
+using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -23,19 +24,35 @@ namespace MegamanXMod.Modules.BaseContent.BaseStates
 
         private XBaseComponent XBaseComponent;
 
+        
+
         public override void OnEnter()
         {
             base.OnEnter();
 
             XBaseComponent = GetComponent<XBaseComponent>();
 
-            if (!XBaseComponent.GetExtraLife() && characterBody.inventory.GetItemCount(RoR2Content.Items.ExtraLifeConsumed) <= 0)
+            if (!XBaseComponent.GetExtraLife() && characterBody.inventory.GetItemCount(RoR2Content.Items.ExtraLifeConsumed) <= 0 && characterBody.inventory.GetItemCount(RoR2Content.Items.ExtraLife) <= 0)
             {
                 XBaseComponent.SetExtraLife(true);
                 characterBody.inventory.GiveItem(RoR2Content.Items.ExtraLife, 1);
             }
 
+            //if(XConfig.enableXFootstep.Value)
+            //{
+            //    footstepHandler.baseFootstepString = "Play_X_Footstep_SFX";
+            //    footstepHandler.sprintFootstepOverrideString = "Play_X_Footstep_SFX";
+            //}
+            //else
+            //{
+            //    footstepHandler.baseFootstepString = "";
+            //    footstepHandler.sprintFootstepOverrideString = "";
+            //}
+
         }
+
+
+
         public override void OnExit()
         {
             base.OnExit();
@@ -74,7 +91,7 @@ namespace MegamanXMod.Modules.BaseContent.BaseStates
 
             }
             
-
+            
 
 
             //if (ChameleonIvul >= 1.1f)

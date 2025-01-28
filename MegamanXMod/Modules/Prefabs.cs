@@ -8,6 +8,8 @@ using static RoR2.CharacterAI.AISkillDriver;
 using RoR2.Skills;
 using System;
 using System.Linq;
+using MegamanXMod.Survivors.X.Components;
+using MegamanXMod.Survivors.X;
 
 namespace MegamanXMod.Modules
 {
@@ -498,6 +500,8 @@ namespace MegamanXMod.Modules
             FootstepHandler footstepHandler = model.AddComponent<FootstepHandler>();
             footstepHandler.baseFootstepString = "Play_X_Footstep_SFX";
             footstepHandler.sprintFootstepOverrideString = "Play_X_Footstep_SFX";
+            //footstepHandler.baseFootstepString = XConfig.enableXFootstep.Value;
+            //footstepHandler.sprintFootstepOverrideString = XConfig.enableXFootstep.Value;
             footstepHandler.enableFootstepDust = true;
             footstepHandler.footstepDustPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/GenericFootstepDust");
         }

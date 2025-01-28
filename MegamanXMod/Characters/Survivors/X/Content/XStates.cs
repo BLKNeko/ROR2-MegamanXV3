@@ -1,4 +1,5 @@
-﻿using MegamanXMod.Survivors.X.SkillStates;
+﻿using MegamanXMod.Modules.BaseContent.BaseStates;
+using MegamanXMod.Survivors.X.SkillStates;
 
 namespace MegamanXMod.Survivors.X
 {
@@ -32,7 +33,9 @@ namespace MegamanXMod.Survivors.X
             Modules.Content.AddEntityState(typeof(XShotgunIce));
             Modules.Content.AddEntityState(typeof(SqueezeBomb));
             Modules.Content.AddEntityState(typeof(XFireWave));
-            Modules.Content.AddEntityState(typeof(XDash));
+            Modules.Content.AddEntityState(typeof(XFireWave2));
+            Modules.Content.AddEntityState(typeof(XFireWave3));
+            Modules.Content.AddEntityState(typeof(XDash2));
             Modules.Content.AddEntityState(typeof(FalconDash));
             Modules.Content.AddEntityState(typeof(NovaDash));
             Modules.Content.AddEntityState(typeof(NovaStrike));
@@ -44,9 +47,12 @@ namespace MegamanXMod.Survivors.X
             Modules.Content.AddEntityState(typeof(RisingFire));
             Modules.Content.AddEntityState(typeof(AcidBurst));
             Modules.Content.AddEntityState(typeof(ChameleonSting));
+            Modules.Content.AddEntityState(typeof(LockArmor));
             Modules.Content.AddEntityState(typeof(MeltCreeper));
 
-
+            Modules.Content.AddEntityState(typeof(XHeart));
+            Modules.Content.AddEntityState(typeof(SpawnState));
+            Modules.Content.AddEntityState(typeof(DeathState));
 
         }
     }

@@ -11,8 +11,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
     public class XDash : BaseSkillState
     {
         public static float duration = 0.5f;
-        public static float initialSpeedCoefficient = 7f;
-        public static float finalSpeedCoefficient = 6f;
+        public static float initialSpeedCoefficient = 5f;
+        public static float finalSpeedCoefficient = 4f;
 
         public static string dodgeSoundString = "HenryRoll";
         public static float dodgeFOV = global::EntityStates.Commando.DodgeState.dodgeFOV;
@@ -47,10 +47,10 @@ namespace MegamanXMod.Survivors.X.SkillStates
             //    }
             //}
 
-            if (isAuthority && inputBank && characterDirection)
-            {
-                forwardDirection = aimRay.direction;
-            }
+            //if (isAuthority && inputBank && characterDirection)
+            //{
+            //    forwardDirection = aimRay.direction;
+            //}
 
             Vector3 rhs = characterDirection ? characterDirection.forward : forwardDirection;
             Vector3 rhs2 = Vector3.Cross(Vector3.up, rhs);

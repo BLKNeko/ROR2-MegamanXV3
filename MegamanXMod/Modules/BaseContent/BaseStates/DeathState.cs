@@ -27,10 +27,14 @@ namespace MegamanXMod.Modules.BaseContent.BaseStates
 
 
             base.PlayAnimation("FullBody, Override", "Deleted", "attackSpeed", this.duration);
-            AkSoundEngine.PostEvent(XStaticValues.X_die_VSFX, this.gameObject);
+
+            if (XConfig.enableVoiceBool.Value)
+            {
+                AkSoundEngine.PostEvent(XStaticValues.X_die_VSFX, this.gameObject);
+            }
 
 
-            //EffectManager.SimpleMuzzleFlash(Modules.Assets.VfxDeleted, base.gameObject, "CenterMZR", true);
+            EffectManager.SimpleMuzzleFlash(XAssets.XDeathVFX, base.gameObject, "CorePosition", true);
 
             modelTransform = GetModelTransform();
             if ((bool)modelTransform)

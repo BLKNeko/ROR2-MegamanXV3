@@ -27,6 +27,7 @@ namespace MegamanXMod.Survivors.X
         public static GameObject FJetVFX;
         public static GameObject swordSwingEffectY;
         public static GameObject swordSwingEffectR;
+        public static GameObject XDeathVFX;
 
 
 
@@ -240,6 +241,8 @@ namespace MegamanXMod.Survivors.X
 
             swordSwingEffectY = _assetBundle.LoadEffect("HSwordSwingY", true);
             swordSwingEffectR = _assetBundle.LoadEffect("HSwordSwingR", true);
+
+            XDeathVFX = _assetBundle.LoadEffect("XDeathEffect", false);
 
 
         }

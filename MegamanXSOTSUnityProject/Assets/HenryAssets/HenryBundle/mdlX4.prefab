@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 8197651642455072233}
   - component: {fileID: 4542174468670377565}
   - component: {fileID: 5664056050378279192}
-  - component: {fileID: 5331838740462780820}
+  - component: {fileID: 6591800597283724235}
   m_Layer: 0
   m_Name: mdlX4
   m_TagString: Untagged
@@ -479,7 +479,7 @@ MonoBehaviour:
   blinkObject: {fileID: 4568866905455674531}
   blinkObject2: {fileID: 249483324739651410}
   timeBetweenBlink: 2
---- !u!114 &5331838740462780820
+--- !u!114 &6591800597283724235
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -492,7 +492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseFootstepString: Play_X_Footstep_SFX
-  sprintFootstepOverrideString: Play_X_Footstep_SFX
+  sprintFootstepOverrideString: LDashPos
   enableFootstepDust: 0
   footstepDustPrefab: {fileID: 0}
 --- !u!1 &1229944152295442281

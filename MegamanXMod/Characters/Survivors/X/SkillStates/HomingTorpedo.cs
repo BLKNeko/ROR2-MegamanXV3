@@ -104,47 +104,59 @@ namespace MegamanXMod.Survivors.X.SkillStates
         {
             if (!this.hasFired)
             {
-                this.hasFired = true;
-                PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
-
-                //Debug.Log("Create arrow:" + CreateArrowOrb());
-
-                if (XConfig.enableVoiceBool.Value)
-                {
-                    AkSoundEngine.PostEvent(XStaticValues.X_HomingTorpedo_VSFX, this.gameObject);
-                }
-                AkSoundEngine.PostEvent(XStaticValues.X_HomingTorpedo_SFX, this.gameObject);
-
-                GenericDamageOrb genericDamageOrb = this.CreateArrowOrb();
-                genericDamageOrb.damageValue = damageCoefficient * damageStat;
-                genericDamageOrb.isCrit = RollCrit();
-                genericDamageOrb.teamIndex = TeamComponent.GetObjectTeam(base.gameObject);
-                genericDamageOrb.attacker = base.gameObject;
-                genericDamageOrb.procCoefficient = procCoefficient;
-                genericDamageOrb.damageType = DamageType.Generic;
-                genericDamageOrb.damageColorIndex = DamageColorIndex.Default;
                 
-                //genericDamageOrb.damageType = DamageType.ApplyMercExpose;
+                
+                    this.hasFired = true;
+                    PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
 
-                //Debug.Log("GenereciDamageOrb:" + genericDamageOrb);
+                    //Debug.Log("Create arrow:" + CreateArrowOrb());
 
-                HurtBox hurtBox = this.initialOrbTarget;
-                if (hurtBox)
-                {
-                    Transform transform = this.childLocator.FindChild(this.muzzleString);
-                    EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, true);
-                    genericDamageOrb.origin = transform.position;
-                    genericDamageOrb.target = hurtBox;
-                    OrbManager.instance.AddOrb(genericDamageOrb);
-                }
+                    if (XConfig.enableVoiceBool.Value)
+                    {
+                        AkSoundEngine.PostEvent(XStaticValues.X_HomingTorpedo_VSFX, this.gameObject);
+                    }
+                    AkSoundEngine.PostEvent(XStaticValues.X_HomingTorpedo_SFX, this.gameObject);
 
-                //Debug.Log("HurbBox:" + hurtBox);
+                    if (base.isAuthority)
+                    {
+                        if (NetworkServer.active)
+                        {
+                            GenericDamageOrb genericDamageOrb = this.CreateArrowOrb();
+                            genericDamageOrb.damageValue = damageCoefficient * damageStat;
+                            genericDamageOrb.isCrit = RollCrit();
+                            genericDamageOrb.teamIndex = TeamComponent.GetObjectTeam(base.gameObject);
+                            genericDamageOrb.attacker = base.gameObject;
+                            genericDamageOrb.procCoefficient = procCoefficient;
+                            genericDamageOrb.damageType = DamageType.Generic;
+                            genericDamageOrb.damageColorIndex = DamageColorIndex.Default;
+
+                            //genericDamageOrb.damageType = DamageType.ApplyMercExpose;
+
+                            //Debug.Log("GenereciDamageOrb:" + genericDamageOrb);
+
+                            HurtBox hurtBox = this.initialOrbTarget;
+                            if (hurtBox)
+                            {
+                                Transform transform = this.childLocator.FindChild(this.muzzleString);
+                                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, true);
+                                genericDamageOrb.origin = transform.position;
+                                genericDamageOrb.target = hurtBox;
+                                OrbManager.instance.AddOrb(genericDamageOrb);
+                            }
+
+                            //Debug.Log("HurbBox:" + hurtBox);
 
 
 
-                base.characterBody.AddSpreadBloom(0.15f);
-                Ray aimRay = base.GetAimRay();
-                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, false);
+                            base.characterBody.AddSpreadBloom(0.15f);
+                            Ray aimRay = base.GetAimRay();
+                            EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, false);
+                        }
+                    }
+
+                    
+                
+                
             }
         }
 
@@ -152,86 +164,108 @@ namespace MegamanXMod.Survivors.X.SkillStates
         {
             if (!this.hasFired)
             {
-                this.hasFired = true;
-                PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
+                
+                    this.hasFired = true;
+                    PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
 
-                if (XConfig.enableVoiceBool.Value)
-                {
-                    AkSoundEngine.PostEvent(XStaticValues.X_HomingTorpedo_VSFX, this.gameObject);
+                    if (XConfig.enableVoiceBool.Value)
+                    {
+                        AkSoundEngine.PostEvent(XStaticValues.X_HomingTorpedo_VSFX, this.gameObject);
+                    }
+                    AkSoundEngine.PostEvent(XStaticValues.X_HomingTorpedo_SFX, this.gameObject);
+
+                    if (base.isAuthority)
+                    {
+                        if (NetworkServer.active)
+                        {
+                        GenericDamageOrb genericDamageOrb = this.CreateArrowOrb();
+                        genericDamageOrb.damageValue = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat;
+                        genericDamageOrb.isCrit = RollCrit();
+                        genericDamageOrb.teamIndex = TeamComponent.GetObjectTeam(base.gameObject);
+                        genericDamageOrb.attacker = base.gameObject;
+                        genericDamageOrb.procCoefficient = procCoefficient;
+                        genericDamageOrb.damageType = DamageType.Generic;
+                        genericDamageOrb.damageColorIndex = DamageColorIndex.Default;
+                        //genericDamageOrb.damageType = DamageType.ApplyMercExpose;
+
+                        HurtBox hurtBox = this.initialOrbTarget;
+                        if (hurtBox)
+                        {
+                            Transform transform = this.childLocator.FindChild(this.muzzleString);
+                            EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, true);
+                            genericDamageOrb.origin = transform.position;
+                            genericDamageOrb.target = hurtBox;
+                            OrbManager.instance.AddOrb(genericDamageOrb);
+                            OrbManager.instance.AddOrb(genericDamageOrb);
+                        }
+
+
+
+                        base.characterBody.AddSpreadBloom(0.15f);
+                        Ray aimRay = base.GetAimRay();
+                        EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, false);
+                        }
+                    }
+
+                    
                 }
-                AkSoundEngine.PostEvent(XStaticValues.X_HomingTorpedo_SFX, this.gameObject);
-
-                GenericDamageOrb genericDamageOrb = this.CreateArrowOrb();
-                genericDamageOrb.damageValue = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat;
-                genericDamageOrb.isCrit = RollCrit();
-                genericDamageOrb.teamIndex = TeamComponent.GetObjectTeam(base.gameObject);
-                genericDamageOrb.attacker = base.gameObject;
-                genericDamageOrb.procCoefficient = procCoefficient;
-                genericDamageOrb.damageType = DamageType.Generic;
-                genericDamageOrb.damageColorIndex = DamageColorIndex.Default;
-                //genericDamageOrb.damageType = DamageType.ApplyMercExpose;
-
-                HurtBox hurtBox = this.initialOrbTarget;
-                if (hurtBox)
-                {
-                    Transform transform = this.childLocator.FindChild(this.muzzleString);
-                    EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, true);
-                    genericDamageOrb.origin = transform.position;
-                    genericDamageOrb.target = hurtBox;
-                    OrbManager.instance.AddOrb(genericDamageOrb);
-                    OrbManager.instance.AddOrb(genericDamageOrb);
-                }
-
-
-
-                base.characterBody.AddSpreadBloom(0.15f);
-                Ray aimRay = base.GetAimRay();
-                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, false);
-            }
+                
+            
         }
 
         private void FireChargedBullet()
         {
             if (!this.hasFired)
             {
-                this.hasFired = true;
-                PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
+                
+                    this.hasFired = true;
+                    PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
 
-                if (XConfig.enableVoiceBool.Value)
-                {
-                    AkSoundEngine.PostEvent(XStaticValues.X_HomingTorpedo_VSFX, this.gameObject);
-                }
-                AkSoundEngine.PostEvent(XStaticValues.X_HomingTorpedo_SFX, this.gameObject);
+                    if (XConfig.enableVoiceBool.Value)
+                    {
+                        AkSoundEngine.PostEvent(XStaticValues.X_HomingTorpedo_VSFX, this.gameObject);
+                    }
+                    AkSoundEngine.PostEvent(XStaticValues.X_HomingTorpedo_SFX, this.gameObject);
 
-                GenericDamageOrb genericDamageOrb = this.CreateArrowOrb();
-                genericDamageOrb.damageValue = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat;
-                genericDamageOrb.isCrit = RollCrit();
-                genericDamageOrb.teamIndex = TeamComponent.GetObjectTeam(base.gameObject);
-                genericDamageOrb.attacker = base.gameObject;
-                genericDamageOrb.procCoefficient = procCoefficient;
-                genericDamageOrb.damageType = DamageType.Generic;
-                genericDamageOrb.damageColorIndex = DamageColorIndex.Default;
-                //genericDamageOrb.damageType = DamageType.ApplyMercExpose;
+                    if (base.isAuthority)
+                    {
+                        if (NetworkServer.active)
+                        {
+                            GenericDamageOrb genericDamageOrb = this.CreateArrowOrb();
+                            genericDamageOrb.damageValue = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat;
+                            genericDamageOrb.isCrit = RollCrit();
+                            genericDamageOrb.teamIndex = TeamComponent.GetObjectTeam(base.gameObject);
+                            genericDamageOrb.attacker = base.gameObject;
+                            genericDamageOrb.procCoefficient = procCoefficient;
+                            genericDamageOrb.damageType = DamageType.Generic;
+                            genericDamageOrb.damageColorIndex = DamageColorIndex.Default;
+                            //genericDamageOrb.damageType = DamageType.ApplyMercExpose;
 
-                HurtBox hurtBox = this.initialOrbTarget;
-                if (hurtBox)
-                {
-                    Transform transform = this.childLocator.FindChild(this.muzzleString);
-                    EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, true);
-                    genericDamageOrb.origin = transform.position;
-                    genericDamageOrb.target = hurtBox;
-                    OrbManager.instance.AddOrb(genericDamageOrb);
-                    OrbManager.instance.AddOrb(genericDamageOrb);
-                    OrbManager.instance.AddOrb(genericDamageOrb);
-                    OrbManager.instance.AddOrb(genericDamageOrb);
-                    OrbManager.instance.AddOrb(genericDamageOrb);
-                }
+                            HurtBox hurtBox = this.initialOrbTarget;
+                            if (hurtBox)
+                            {
+                                Transform transform = this.childLocator.FindChild(this.muzzleString);
+                                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, true);
+                                genericDamageOrb.origin = transform.position;
+                                genericDamageOrb.target = hurtBox;
+                                OrbManager.instance.AddOrb(genericDamageOrb);
+                                OrbManager.instance.AddOrb(genericDamageOrb);
+                                OrbManager.instance.AddOrb(genericDamageOrb);
+                                OrbManager.instance.AddOrb(genericDamageOrb);
+                                OrbManager.instance.AddOrb(genericDamageOrb);
+                            }
 
 
 
-                base.characterBody.AddSpreadBloom(0.15f);
-                Ray aimRay = base.GetAimRay();
-                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, false);
+                            base.characterBody.AddSpreadBloom(0.15f);
+                            Ray aimRay = base.GetAimRay();
+                            EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, false);
+                        }
+                    }
+
+                    
+                
+                
             }
         }
 

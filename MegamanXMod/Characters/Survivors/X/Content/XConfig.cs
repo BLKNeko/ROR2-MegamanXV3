@@ -6,6 +6,7 @@ namespace MegamanXMod.Survivors.X
     public static class XConfig
     {
         public static ConfigEntry<bool> enableVoiceBool;
+        public static ConfigEntry<int> enableXFootstep;
         public static ConfigEntry<float> midChargeMultiplierFloat;
         public static ConfigEntry<float> fullChargeMultiplierFloat;
 
@@ -24,6 +25,14 @@ namespace MegamanXMod.Survivors.X
                 true,
                 "At certain moments or when using a skill, X may talk or scream. If you prefer to disable this feature, you can turn it off here.");
 
+            enableXFootstep = Config.BindAndOptions(
+                section,
+                "Enable X Footstep",
+                1,
+                0,
+                2,
+                "Megaman X footstep SFX. \n\n 0 = OFF \n\n 1 = Comand Mission SFX \n\n 2 = MegamanX8 SFX");
+
             midChargeMultiplierFloat = Config.BindAndOptions(
                 section,
                 "MidChargeDamageMultiplier",
@@ -35,7 +44,7 @@ namespace MegamanXMod.Survivors.X
             fullChargeMultiplierFloat = Config.BindAndOptions(
                 section,
                 "FullChargeDamageMultiplier",
-                4f,
+                3f,
                 2f,
                 10f,
                 "This is the full charge damage multiplier.");

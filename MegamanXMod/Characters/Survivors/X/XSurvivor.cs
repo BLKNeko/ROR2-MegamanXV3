@@ -1017,7 +1017,7 @@ namespace MegamanXMod.Survivors.X
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "UTILITY_X_DASH_DESCRIPTION",
                 skillIcon = XAssets.IconXDash,
 
-                activationState = new EntityStates.SerializableEntityStateType(typeof(XDash)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(XDash2)),
                 activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
@@ -1210,7 +1210,7 @@ namespace MegamanXMod.Survivors.X
                 activationStateMachineName = "Body",
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
-                baseRechargeInterval = 60f,
+                baseRechargeInterval = 40f,
                 baseMaxStock = 1,
 
                 rechargeStock = 1,
@@ -1407,7 +1407,7 @@ namespace MegamanXMod.Survivors.X
             HomingTorpedoSkillDef.keywordTokens = new string[] {MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"};
             HomingTorpedoSkillDef.activationState = new EntityStates.SerializableEntityStateType(typeof(HomingTorpedo));
             HomingTorpedoSkillDef.activationStateMachineName = "Weapon";
-            HomingTorpedoSkillDef.baseMaxStock = 5;
+            HomingTorpedoSkillDef.baseMaxStock = 10;
             HomingTorpedoSkillDef.baseRechargeInterval = 3f;
             HomingTorpedoSkillDef.beginSkillCooldownOnSkillEnd = false;
             HomingTorpedoSkillDef.canceledFromSprinting = false;
@@ -1891,6 +1891,7 @@ namespace MegamanXMod.Survivors.X
         {
             R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
             On.RoR2.GlobalEventManager.OnHitEnemy += GlobalEventManager_OnHitEnemy;
+            On.RoR2.CharacterModel.Awake += CharacterModel_Awake;
         }
 
         private void GlobalEventManager_OnHitEnemy(On.RoR2.GlobalEventManager.orig_OnHitEnemy orig, GlobalEventManager self, DamageInfo damageInfo, GameObject victim)
@@ -1898,7 +1899,7 @@ namespace MegamanXMod.Survivors.X
             // Verifique se algum objeto é nulo antes de prosseguir
             if (self == null || damageInfo == null || damageInfo.attacker == null || victim == null)
             {
-                Debug.LogWarning("[XSurvivor] Um dos objetos passados para OnHitEnemy é nulo.");
+                //Debug.LogWarning("[XSurvivor] Um dos objetos passados para OnHitEnemy é nulo.");
                 return;
             }
 
@@ -1907,19 +1908,19 @@ namespace MegamanXMod.Survivors.X
             var victimBody = victim.GetComponent<CharacterBody>();
             if (attackerBody == null || victimBody == null)
             {
-                Debug.LogWarning("[XSurvivor] Um dos CharacterBody é nulo.");
+                //Debug.LogWarning("[XSurvivor] Um dos CharacterBody é nulo.");
                 return;
             }
 
             // Verifique se inflictor não é nulo antes de usar
             if (damageInfo.inflictor == null)
             {
-                Debug.LogWarning("[XSurvivor] Inflictor é nulo.");
+                //Debug.LogWarning("[XSurvivor] Inflictor é nulo.");
                 return;
             }
 
             // Log básico para depuração
-            Debug.Log($"[XSurvivor] OnHitEnemy chamado com attacker: {attackerBody.name}, victim: {victimBody.name}, inflictor: {damageInfo.inflictor.name}");
+            //Debug.Log($"[XSurvivor] OnHitEnemy chamado com attacker: {attackerBody.name}, victim: {victimBody.name}, inflictor: {damageInfo.inflictor.name}");
 
             // Verifique as condições específicas antes de executar sua lógica customizada
             if (damageInfo.attacker.name.Contains("XBody") && !victim.name.Contains("XBody") && damageInfo.inflictor.name.Contains("XForceBusterProjectile"))
@@ -1928,7 +1929,7 @@ namespace MegamanXMod.Survivors.X
                 var position = victim.transform.position;
                 if (position == Vector3.zero)
                 {
-                    Debug.LogWarning("[XSurvivor] Posição do victim é inválida.");
+                    //Debug.LogWarning("[XSurvivor] Posição do victim é inválida.");
                     return;
                 }
 
@@ -1946,11 +1947,29 @@ namespace MegamanXMod.Survivors.X
                 };
 
                 ProjectileManager.instance.FireProjectile(XShockSphereProjectile);
-                Debug.Log("[XSurvivor] Projétil XShockSphere criado com sucesso.");
+                //Debug.Log("[XSurvivor] Projétil XShockSphere criado com sucesso.");
             }
 
             // Chame o método original
             orig.Invoke(self, damageInfo, victim);
+        }
+
+        private void CharacterModel_Awake(On.RoR2.CharacterModel.orig_Awake orig, CharacterModel self)
+        {
+            orig(self);
+            if (self)
+            {
+
+                if (self.gameObject.name.Contains("X4"))
+                {
+                    AkSoundEngine.PostEvent(XStaticValues.X_Awake_VSFX, self.gameObject);
+
+                    //I think TeaL used this on DekuMod to make the character select menu audio
+                }
+
+            }
+
+
         }
 
         private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args)
@@ -1963,10 +1982,10 @@ namespace MegamanXMod.Survivors.X
 
             if (sender.HasBuff(XBuffs.LightArmorBuff))
             {
-                args.armorAdd += 40;
-                args.armorAdd *= 1.5f;
+                args.armorAdd += 30;
+                args.armorAdd *= 1.4f;
                 args.healthMultAdd *= 1.5f;
-                args.damageMultAdd *= 1.8f;
+                args.damageMultAdd *= 1.2f;
                 args.attackSpeedMultAdd *= 1.3f;
                 args.regenMultAdd *= 1.3f;
                 args.jumpPowerMultAdd *= 1.2f;
@@ -1977,10 +1996,10 @@ namespace MegamanXMod.Survivors.X
 
             if (sender.HasBuff(XBuffs.SecondArmorBuff))
             {
-                args.armorAdd += 30;
-                args.armorAdd *= 1.3f;
+                args.armorAdd += 20;
+                args.armorAdd *= 1.2f;
                 args.healthMultAdd *= 1.3f;
-                args.damageMultAdd *= 1.5f;
+                args.damageMultAdd *= 1.1f;
                 args.attackSpeedMultAdd *= 1.2f;
                 args.regenMultAdd *= 1.3f;
                 args.jumpPowerMultAdd *= 1.2f;
@@ -1991,10 +2010,10 @@ namespace MegamanXMod.Survivors.X
 
             if (sender.HasBuff(XBuffs.MaxArmorBuff))
             {
-                args.armorAdd += 50;
-                args.armorAdd *= 2f;
+                args.armorAdd += 40;
+                args.armorAdd *= 1.9f;
                 args.healthMultAdd *= 1.8f;
-                args.damageMultAdd *= 1.8f;
+                args.damageMultAdd *= 1.3f;
                 args.attackSpeedMultAdd *= 1.5f;
                 args.regenMultAdd *= 1.8f;
                 args.jumpPowerMultAdd *= 1.4f;
@@ -2005,10 +2024,10 @@ namespace MegamanXMod.Survivors.X
 
             if (sender.HasBuff(XBuffs.FourthArmorBuff))
             {
-                args.armorAdd += 80;
-                args.armorAdd *= 2.2f;
+                args.armorAdd += 70;
+                args.armorAdd *= 2.1f;
                 args.healthMultAdd *= 1.5f;
-                args.damageMultAdd *= 2f;
+                args.damageMultAdd *= 1.5f;
                 args.attackSpeedMultAdd *= 1.4f;
                 args.regenMultAdd *= 1.5f;
                 args.jumpPowerMultAdd *= 1.4f;
@@ -2035,9 +2054,9 @@ namespace MegamanXMod.Survivors.X
             if (sender.HasBuff(XBuffs.GaeaArmorBuff))
             {
                 args.armorAdd += 150;
-                args.armorAdd *= 5f;
+                args.armorAdd *= 4f;
                 args.healthMultAdd *= 3f;
-                args.damageMultAdd *= 1.8f;
+                args.damageMultAdd *= 1.3f;
                 args.attackSpeedMultAdd *= 1f;
                 args.regenMultAdd *= 2f;
                 args.jumpPowerMultAdd *= 1f;
@@ -2048,10 +2067,10 @@ namespace MegamanXMod.Survivors.X
 
             if (sender.HasBuff(XBuffs.ShadowArmorBuff))
             {
-                args.armorAdd += 80;
-                args.armorAdd *= 2.5f;
+                args.armorAdd += 70;
+                args.armorAdd *= 2.4f;
                 args.healthMultAdd *= 2f;
-                args.damageMultAdd *= 2f;
+                args.damageMultAdd *= 1.5f;
                 args.attackSpeedMultAdd *= 2.5f;
                 args.regenMultAdd *= 1.5f;
                 args.jumpPowerMultAdd += 0.5f;
@@ -2066,7 +2085,7 @@ namespace MegamanXMod.Survivors.X
                 args.armorAdd += 100;
                 args.armorAdd *= 2.8f;
                 args.healthMultAdd *= 2f;
-                args.damageMultAdd *= 3f;
+                args.damageMultAdd *= 2.5f;
                 args.attackSpeedMultAdd *= 1.8f;
                 args.regenMultAdd *= 1.8f;
                 args.jumpPowerMultAdd *= 1.8f;
@@ -2080,7 +2099,7 @@ namespace MegamanXMod.Survivors.X
                 args.armorAdd += 100;
                 args.armorAdd *= 3f;
                 args.healthMultAdd *= 2f;
-                args.damageMultAdd *= 3f;
+                args.damageMultAdd *= 2.5f;
                 args.attackSpeedMultAdd *= 1.5f;
                 args.regenMultAdd *= 1.8f;
                 args.jumpPowerMultAdd *= 1.8f;
@@ -2091,7 +2110,7 @@ namespace MegamanXMod.Survivors.X
 
             if (sender.HasBuff(XBuffs.HyperChipBuff))
             {
-                args.armorAdd += 150;
+                args.armorAdd += 140;
                 args.armorAdd *= 2f;
                 args.healthMultAdd *= 2f;
                 args.damageMultAdd *= 2f;

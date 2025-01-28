@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using BepInEx;
+using MegamanXMod.Modules;
 
 namespace MegamanXMod.Survivors.X.Components
 {
@@ -27,6 +28,7 @@ namespace MegamanXMod.Survivors.X.Components
 
         private ChildLocator childLocator;
 
+        private FootstepHandler footstepHandler;
 
 
 
@@ -52,7 +54,33 @@ namespace MegamanXMod.Survivors.X.Components
             giveExtraLife = false;
 
 
+            footstepHandler = XBody.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>().GetComponent<FootstepHandler>();
+
+            //Debug.Log("footstepHandler: " + footstepHandler);
+
+            switch (XConfig.enableXFootstep.Value)
+            {
+                case 0:
+                    footstepHandler.baseFootstepString = "";
+                    footstepHandler.sprintFootstepOverrideString = "";
+                    break;
+                case 1:
+                    footstepHandler.baseFootstepString = "Play_X_Footstep_SFX";
+                    footstepHandler.sprintFootstepOverrideString = "Play_X_Footstep_SFX";
+                    break;
+                case 2:
+                    footstepHandler.baseFootstepString = "Play_X_Footstep_X8_SFX";
+                    footstepHandler.sprintFootstepOverrideString = "Play_X_Footstep_X8_SFX";
+                    break;
+                default:
+                    footstepHandler.baseFootstepString = "";
+                    footstepHandler.sprintFootstepOverrideString = "";
+                    break;
+            }
+
+
         }
+
 
         private void Awake()
         {

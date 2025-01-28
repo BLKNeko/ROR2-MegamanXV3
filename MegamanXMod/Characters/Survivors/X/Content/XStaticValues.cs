@@ -49,7 +49,7 @@ namespace MegamanXMod.Survivors.X
         
         public const float NovaStrikeDamageCoefficient = 8f;
         
-        public const float GigaAttackGaeaDamageCoefficient = 1.5f;
+        public const float GigaAttackGaeaDamageCoefficient = 2f;
         
         public const float XRathalosSlashCombo1DamageCoefficient = 5f;
         
@@ -70,7 +70,7 @@ namespace MegamanXMod.Survivors.X
 
         //SOUND STRINGS
 
-        public static readonly string X_die_VSFX = "X_Die";
+        public static readonly string X_die_VSFX = "Play_XDeath";
 	    public static readonly string X_shotgunIce_VSFX = "X_ShotgunIce";
 	    public static readonly string X_MaxBusterChargeShot_SFX = "Play_X_MaxBusterChargeShot_SFX";
 	    public static readonly string X_Rathalos_Swing_SFX = "Play_X_Rathalos_Swing_SFX";
@@ -108,10 +108,11 @@ namespace MegamanXMod.Survivors.X
         public static readonly string X_HomingTorpedo_SFX = "Play_X_HomingTorpedo_SFX";
         public static readonly string X_ChameleonSting_SFX = "Play_X_ChameleonSting_SFX";
         public static readonly string X_Error_SFX = "Play_X_Error_SFX";
+        public static readonly string X_Awake_VSFX = "Play_XAwake";
 
-        public static readonly string xFootstep = "Play_X_Footstep_SFX";
-        
-        
+
+
+
         public static readonly string xFullPower = "CallXFullPower";
         
         public static readonly string xHurt = "CallXHurt";
@@ -119,8 +120,8 @@ namespace MegamanXMod.Survivors.X
         
         public static readonly string XPassive = "CallXPassive";
 
+        //public static readonly string xFootstep = "Play_X_Footstep_SFX";
 
-        
 
     }
 }
