@@ -30,6 +30,7 @@ namespace MegamanXMod.Survivors.X
         public static GameObject XDeathVFX;
 
 
+        public static GameObject XEmotePrefab;
 
 
 
@@ -155,6 +156,8 @@ namespace MegamanXMod.Survivors.X
 
             swordSwingEffect = _assetBundle.LoadEffect("HenrySwordSwingEffect", true);
             swordHitImpactEffect = _assetBundle.LoadEffect("ImpactHenrySlash");
+
+            XEmotePrefab = _assetBundle.LoadAsset<GameObject>("MegamanXV4_emoteskeleton");
 
             XBodyMesh = _assetBundle.LoadAsset<Mesh>("XBodyMesh");
             LightBodyMesh = _assetBundle.LoadAsset<Mesh>("XLightBodyMesh");

@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using BepInEx;
 using MegamanXMod.Modules;
+using EmotesAPI;
 
 namespace MegamanXMod.Survivors.X.Components
 {
@@ -98,6 +99,9 @@ namespace MegamanXMod.Survivors.X.Components
             //Debug.Log("XHealth: " + XHealth);
             //Debug.Log("XBody: " + XBody);
 
+            //Debug.Log("Xbody: " + XBody.transform.localPosition);
+            //Debug.Log("Xhurtbox: " + XBody.mainHurtBox.transform.localPosition);
+            //Debug.Log("Xmodel: " + XBody.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>().transform.localPosition);
 
             IsXWeak();
         }

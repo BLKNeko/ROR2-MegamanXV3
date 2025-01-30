@@ -119,8 +119,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
                     if (base.isAuthority)
                     {
-                        if (NetworkServer.active)
-                        {
+                        //if (NetworkServer.active)
+                        //{
                             GenericDamageOrb genericDamageOrb = this.CreateArrowOrb();
                             genericDamageOrb.damageValue = damageCoefficient * damageStat;
                             genericDamageOrb.isCrit = RollCrit();
@@ -151,7 +151,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                             base.characterBody.AddSpreadBloom(0.15f);
                             Ray aimRay = base.GetAimRay();
                             EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, false);
-                        }
+                        //}
                     }
 
                     
@@ -176,8 +176,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
                     if (base.isAuthority)
                     {
-                        if (NetworkServer.active)
-                        {
+                        //if (NetworkServer.active)
+                        //{
                         GenericDamageOrb genericDamageOrb = this.CreateArrowOrb();
                         genericDamageOrb.damageValue = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat;
                         genericDamageOrb.isCrit = RollCrit();
@@ -204,7 +204,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                         base.characterBody.AddSpreadBloom(0.15f);
                         Ray aimRay = base.GetAimRay();
                         EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, false);
-                        }
+                        //}
                     }
 
                     
@@ -229,8 +229,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
                     if (base.isAuthority)
                     {
-                        if (NetworkServer.active)
-                        {
+                        //if (NetworkServer.active)
+                        //{
                             GenericDamageOrb genericDamageOrb = this.CreateArrowOrb();
                             genericDamageOrb.damageValue = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat;
                             genericDamageOrb.isCrit = RollCrit();
@@ -260,7 +260,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                             base.characterBody.AddSpreadBloom(0.15f);
                             Ray aimRay = base.GetAimRay();
                             EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, false);
-                        }
+                        //}
                     }
 
                     

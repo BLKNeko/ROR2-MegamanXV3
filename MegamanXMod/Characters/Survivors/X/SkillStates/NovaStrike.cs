@@ -10,8 +10,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
     public class NovaStrike : BaseMeleeAttack2
     {
 
-        public static float initialSpeedCoefficient = 9f;
-        public static float finalSpeedCoefficient = 6f;
+        public static float initialSpeedCoefficient = 8f;
+        public static float finalSpeedCoefficient = 7f;
         public static float dodgeFOV = global::EntityStates.Commando.DodgeState.dodgeFOV;
 
         private float rollSpeed;
@@ -177,6 +177,18 @@ namespace MegamanXMod.Survivors.X.SkillStates
             base.PlayAnimation("FullBody, Override", "NovaStrikeEnd", "attackSpeed", this.duration);
 
             base.OnExit();
+        }
+
+        public override void OnSerialize(NetworkWriter writer)
+        {
+            base.OnSerialize(writer);
+            writer.Write(forwardDirection);
+        }
+
+        public override void OnDeserialize(NetworkReader reader)
+        {
+            base.OnDeserialize(reader);
+            forwardDirection = reader.ReadVector3();
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()

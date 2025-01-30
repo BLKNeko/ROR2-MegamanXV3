@@ -13,6 +13,8 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEngine.ParticleSystem.PlaybackState;
 using MegamanXMod.Modules.BaseContent.BaseStates;
+using EmotesAPI;
+using System.Security.Cryptography;
 
 namespace MegamanXMod.Survivors.X
 {
@@ -22,7 +24,7 @@ namespace MegamanXMod.Survivors.X
         public override string assetBundleName => "megamanxv4bundle"; //if you do not change this, you are giving permission to deprecate the mod
 
         //the name of the prefab we will create. conventionally ending in "Body". must be unique
-        public override string bodyName => "XBody"; //if you do not change this, you get the point by now
+        public override string bodyName => "MegamanXBody"; //if you do not change this, you get the point by now
 
         //name of the ai master for vengeance and goobo. must be unique
         public override string masterName => "XMonsterMaster"; //if you do not
@@ -89,6 +91,8 @@ namespace MegamanXMod.Survivors.X
 
         internal static HuntTrackerSkillDef HomingTorpedoSkillDef;
 
+        internal bool setupEmoteSkeleton = false;
+
 
         public override BodyInfo bodyInfo => new BodyInfo
         {
@@ -105,9 +109,11 @@ namespace MegamanXMod.Survivors.X
 
             maxHealth = 100f,
             armor = 20f,
+            armorGrowth = 1f,
             healthGrowth = 25f,
             healthRegen = 1.5f,
-            damage = 15f,
+            regenGrowth = 0.2f,
+            damage = 10f,
             shieldGrowth = 0.25f,
             jumpPowerGrowth = 0.35f,
             jumpCount = 1
@@ -311,7 +317,7 @@ namespace MegamanXMod.Survivors.X
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseMaxStock = 1,
-                baseRechargeInterval = 10f,
+                baseRechargeInterval = 2f,
 
                 isCombatSkill = false,
                 mustKeyPress = false,
@@ -330,7 +336,7 @@ namespace MegamanXMod.Survivors.X
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseMaxStock = 1,
-                baseRechargeInterval = 10f,
+                baseRechargeInterval = 2f,
 
                 isCombatSkill = false,
                 mustKeyPress = false,
@@ -349,7 +355,7 @@ namespace MegamanXMod.Survivors.X
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseMaxStock = 1,
-                baseRechargeInterval = 15f,
+                baseRechargeInterval = 3f,
 
                 isCombatSkill = false,
                 mustKeyPress = false,
@@ -368,7 +374,7 @@ namespace MegamanXMod.Survivors.X
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseMaxStock = 1,
-                baseRechargeInterval = 15f,
+                baseRechargeInterval = 3f,
 
                 isCombatSkill = false,
                 mustKeyPress = false,
@@ -387,7 +393,7 @@ namespace MegamanXMod.Survivors.X
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseMaxStock = 1,
-                baseRechargeInterval = 20f,
+                baseRechargeInterval = 4f,
 
                 isCombatSkill = false,
                 mustKeyPress = false,
@@ -406,7 +412,7 @@ namespace MegamanXMod.Survivors.X
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseMaxStock = 1,
-                baseRechargeInterval = 20f,
+                baseRechargeInterval = 4f,
 
                 isCombatSkill = false,
                 mustKeyPress = false,
@@ -425,7 +431,7 @@ namespace MegamanXMod.Survivors.X
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseMaxStock = 1,
-                baseRechargeInterval = 25f,
+                baseRechargeInterval = 5f,
 
                 isCombatSkill = false,
                 mustKeyPress = false,
@@ -444,7 +450,7 @@ namespace MegamanXMod.Survivors.X
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseMaxStock = 1,
-                baseRechargeInterval = 25f,
+                baseRechargeInterval = 5f,
 
                 isCombatSkill = false,
                 mustKeyPress = false,
@@ -463,7 +469,7 @@ namespace MegamanXMod.Survivors.X
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseMaxStock = 1,
-                baseRechargeInterval = 25f,
+                baseRechargeInterval = 5f,
 
                 isCombatSkill = false,
                 mustKeyPress = false,
@@ -930,11 +936,11 @@ namespace MegamanXMod.Survivors.X
                 requiredStock = 1,
                 stockToConsume = 1,
 
-                resetCooldownTimerOnUse = true,
+                resetCooldownTimerOnUse = false,
                 fullRestockOnAssign = true,
                 dontAllowPastMaxStocks = false,
                 mustKeyPress = true,
-                beginSkillCooldownOnSkillEnd = false,
+                beginSkillCooldownOnSkillEnd = true,
 
                 isCombatSkill = true,
                 canceledFromSprinting = false,
@@ -964,11 +970,11 @@ namespace MegamanXMod.Survivors.X
                 requiredStock = 1,
                 stockToConsume = 1,
 
-                resetCooldownTimerOnUse = true,
+                resetCooldownTimerOnUse = false,
                 fullRestockOnAssign = true,
                 dontAllowPastMaxStocks = false,
                 mustKeyPress = true,
-                beginSkillCooldownOnSkillEnd = false,
+                beginSkillCooldownOnSkillEnd = true,
 
                 isCombatSkill = true,
                 canceledFromSprinting = false,
@@ -994,13 +1000,13 @@ namespace MegamanXMod.Survivors.X
                 requiredStock = 1,
                 stockToConsume = 1,
 
-                resetCooldownTimerOnUse = true,
+                resetCooldownTimerOnUse = false,
                 fullRestockOnAssign = true,
                 dontAllowPastMaxStocks = false,
                 mustKeyPress = false,
                 beginSkillCooldownOnSkillEnd = false,
 
-                isCombatSkill = true,
+                isCombatSkill = false,
                 canceledFromSprinting = false,
                 cancelSprintingOnActivation = false,
                 forceSprintDuringState = false,
@@ -1021,7 +1027,7 @@ namespace MegamanXMod.Survivors.X
                 activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
-                baseRechargeInterval = 3f,
+                baseRechargeInterval = 5f,
                 baseMaxStock = 1,
 
                 rechargeStock = 1,
@@ -1058,7 +1064,7 @@ namespace MegamanXMod.Survivors.X
                 requiredStock = 1,
                 stockToConsume = 1,
 
-                resetCooldownTimerOnUse = true,
+                resetCooldownTimerOnUse = false,
                 fullRestockOnAssign = true,
                 dontAllowPastMaxStocks = false,
                 mustKeyPress = true,
@@ -1067,7 +1073,7 @@ namespace MegamanXMod.Survivors.X
                 isCombatSkill = false,
                 canceledFromSprinting = false,
                 cancelSprintingOnActivation = false,
-                forceSprintDuringState = true,
+                forceSprintDuringState = false,
             });
 
             XNovaDashSkillDef = Skills.CreateSkillDef<SteppedSkillDef>(new SkillDefInfo
@@ -1081,7 +1087,7 @@ namespace MegamanXMod.Survivors.X
                 activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
-                baseRechargeInterval = 10f,
+                baseRechargeInterval = 8f,
                 baseMaxStock = 1,
 
                 rechargeStock = 1,
@@ -1090,7 +1096,7 @@ namespace MegamanXMod.Survivors.X
 
 
 
-                resetCooldownTimerOnUse = true,
+                resetCooldownTimerOnUse = false,
                 fullRestockOnAssign = true,
                 dontAllowPastMaxStocks = false,
                 mustKeyPress = false,
@@ -1114,7 +1120,7 @@ namespace MegamanXMod.Survivors.X
                 activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
-                baseRechargeInterval = 3f,
+                baseRechargeInterval = 6f,
                 baseMaxStock = 1,
 
                 rechargeStock = 1,
@@ -1123,7 +1129,7 @@ namespace MegamanXMod.Survivors.X
 
 
 
-                resetCooldownTimerOnUse = true,
+                resetCooldownTimerOnUse = false,
                 fullRestockOnAssign = true,
                 dontAllowPastMaxStocks = false,
                 mustKeyPress = false,
@@ -1158,7 +1164,7 @@ namespace MegamanXMod.Survivors.X
                 stockToConsume = 1,
 
                 resetCooldownTimerOnUse = false,
-                fullRestockOnAssign = true,
+                fullRestockOnAssign = false,
                 dontAllowPastMaxStocks = false,
                 mustKeyPress = false,
                 beginSkillCooldownOnSkillEnd = false,
@@ -1188,10 +1194,10 @@ namespace MegamanXMod.Survivors.X
                 stockToConsume = 1,
 
                 resetCooldownTimerOnUse = false,
-                fullRestockOnAssign = true,
+                fullRestockOnAssign = false,
                 dontAllowPastMaxStocks = false,
                 mustKeyPress = false,
-                beginSkillCooldownOnSkillEnd = false,
+                beginSkillCooldownOnSkillEnd = true,
 
                 isCombatSkill = false,
                 canceledFromSprinting = false,
@@ -1218,14 +1224,14 @@ namespace MegamanXMod.Survivors.X
                 stockToConsume = 1,
 
                 resetCooldownTimerOnUse = false,
-                fullRestockOnAssign = true,
+                fullRestockOnAssign = false,
                 dontAllowPastMaxStocks = false,
                 mustKeyPress = false,
-                beginSkillCooldownOnSkillEnd = false,
+                beginSkillCooldownOnSkillEnd = true,
 
-                isCombatSkill = false,
+                isCombatSkill = true,
                 canceledFromSprinting = false,
-                cancelSprintingOnActivation = false,
+                cancelSprintingOnActivation = true,
                 forceSprintDuringState = false,
             });
 
@@ -1285,11 +1291,11 @@ namespace MegamanXMod.Survivors.X
                 requiredStock = 1,
                 stockToConsume = 1,
 
-                resetCooldownTimerOnUse = true,
+                resetCooldownTimerOnUse = false,
                 fullRestockOnAssign = true,
                 dontAllowPastMaxStocks = false,
                 mustKeyPress = true,
-                beginSkillCooldownOnSkillEnd = false,
+                beginSkillCooldownOnSkillEnd = true,
 
                 isCombatSkill = true,
                 canceledFromSprinting = false,
@@ -1319,11 +1325,11 @@ namespace MegamanXMod.Survivors.X
                 requiredStock = 1,
                 stockToConsume = 1,
 
-                resetCooldownTimerOnUse = true,
+                resetCooldownTimerOnUse = false,
                 fullRestockOnAssign = true,
                 dontAllowPastMaxStocks = false,
                 mustKeyPress = true,
-                beginSkillCooldownOnSkillEnd = false,
+                beginSkillCooldownOnSkillEnd = true,
 
                 isCombatSkill = true,
                 canceledFromSprinting = false,
@@ -1353,11 +1359,11 @@ namespace MegamanXMod.Survivors.X
                 requiredStock = 1,
                 stockToConsume = 1,
 
-                resetCooldownTimerOnUse = true,
+                resetCooldownTimerOnUse = false,
                 fullRestockOnAssign = true,
                 dontAllowPastMaxStocks = false,
                 mustKeyPress = true,
-                beginSkillCooldownOnSkillEnd = false,
+                beginSkillCooldownOnSkillEnd = true,
 
                 isCombatSkill = true,
                 canceledFromSprinting = false,
@@ -1387,11 +1393,11 @@ namespace MegamanXMod.Survivors.X
                 requiredStock = 1,
                 stockToConsume = 1,
 
-                resetCooldownTimerOnUse = true,
+                resetCooldownTimerOnUse = false,
                 fullRestockOnAssign = true,
                 dontAllowPastMaxStocks = false,
                 mustKeyPress = true,
-                beginSkillCooldownOnSkillEnd = false,
+                beginSkillCooldownOnSkillEnd = true,
 
                 isCombatSkill = true,
                 canceledFromSprinting = false,
@@ -1892,6 +1898,96 @@ namespace MegamanXMod.Survivors.X
             R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
             On.RoR2.GlobalEventManager.OnHitEnemy += GlobalEventManager_OnHitEnemy;
             On.RoR2.CharacterModel.Awake += CharacterModel_Awake;
+            On.RoR2.SurvivorCatalog.Init += SurvivorCatalog_Init;
+            CustomEmotesAPI.animChanged += CustomEmotesAPI_animChanged;
+        }
+
+        private void CustomEmotesAPI_animChanged(string newAnimation, BoneMapper mapper)
+        {
+            Debug.Log("newAnimation: " + newAnimation);
+            Debug.Log("mapper: " + mapper);
+            Debug.Log("mapper.bodyPrefab.name: " + mapper.bodyPrefab.name);
+
+            if (mapper.bodyPrefab.name.Contains("MegamanXBody"))
+            {
+                if (newAnimation == "none")
+                {
+                    if (mapper.bodyPrefab.GetComponent<CharacterBody>())
+                    {
+
+                        //Debug.Log("ANim changed to NONE");
+
+                        //NA MORAL VOU DEIXAR ISSO TUDO COMENTADO PELO ÓDIO QUE EU SENTI!
+
+
+                        // Mata o personagem atual (sem contar como "morte real")
+                        GameObject.Destroy(mapper.bodyPrefab.GetComponent<CharacterBody>().gameObject);
+
+                        // Força o CharacterMaster a reaparecer o personagem
+                        mapper.bodyPrefab.GetComponent<CharacterBody>().master.Respawn(mapper.bodyPrefab.GetComponent<CharacterBody>().footPosition, Quaternion.identity);
+
+                        //Animator animator = mapper.bodyPrefab.GetComponent<CharacterBody>().characterDirection.modelAnimator;
+                        //if (animator)
+                        //{
+                        //    animator.Rebind(); // Força o reset do Animator
+                        //    animator.Update(0f); // Atualiza a nova posição
+                        //}
+                        //mapper.a1.Rebind();
+                        //mapper.a1.Update(0f);
+                        //mapper.a2.Rebind();
+                        //mapper.a2.Update(0f);
+
+
+                        //// Ajustamos a posição para cima caso ele tenha afundado no chão
+                        //mapper.bodyPrefab.GetComponent<CharacterBody>().characterMotor.Motor.SetPosition(bodyPrefab.GetComponent<CharacterBody>().transform.position + Vector3.up * 0.5f, true);
+
+                        //// Resetamos a velocidade para evitar que ele deslize
+                        //mapper.bodyPrefab.GetComponent<CharacterBody>().characterMotor.velocity = Vector3.zero;
+
+                        //mapper.bodyPrefab.GetComponent<CharacterBody>().GetComponent<ModelLocator>().modelTransform.localPosition = Vector3.zero;
+                        //mapper.bodyPrefab.GetComponent<CharacterBody>().mainHurtBox.transform.localPosition = Vector3.zero;
+
+                        //mapper.bodyPrefab.GetComponent<CharacterBody>().SetBodyStateToPreferredInitialState();
+
+                        //// Tenta forçar a ressincronização do modelo
+                        //mapper.bodyPrefab.GetComponent<CharacterBody>().modelLocator.modelTransform.localPosition = Vector3.zero;
+                        //mapper.bodyPrefab.GetComponent<CharacterBody>().modelLocator.modelTransform.localRotation = Quaternion.identity;
+
+                        //// Ajusta a posição do personagem
+                        //mapper.bodyPrefab.GetComponent<CharacterBody>().characterMotor.Motor.SetPosition(bodyPrefab.GetComponent<CharacterBody>().footPosition, true);
+                        //mapper.bodyPrefab.GetComponent<CharacterBody>().characterMotor.velocity = Vector3.zero;
+
+                        //// Força a atualização do CharacterBody
+                        //mapper.bodyPrefab.GetComponent<CharacterBody>().RecalculateStats();
+                        //mapper.bodyPrefab.GetComponent<CharacterBody>().mainHurtBox.transform.position = bodyPrefab.GetComponent<CharacterBody>().mainHurtBox.transform.position;
+
+
+                    }
+                }
+            }
+        }
+
+        private void SurvivorCatalog_Init(On.RoR2.SurvivorCatalog.orig_Init orig)
+        {
+            orig();
+            if (!setupEmoteSkeleton)
+            {
+                setupEmoteSkeleton = true;
+                foreach (var item in SurvivorCatalog.allSurvivorDefs)
+                {
+                    if (item.bodyPrefab.name == "MegamanXBody")
+                    {
+                        var skele = XAssets.XEmotePrefab;
+                        Debug.Log("Before Emote: " + item.bodyPrefab.transform.position);
+                        CustomEmotesAPI.ImportArmature(item.bodyPrefab, skele);
+                        //skele.GetComponentInChildren<BoneMapper>().scale = 1.05f;
+                        //item.bodyPrefab.GetComponentInChildren<BoneMapper>().scale = 0.5f;
+                        //skele.GetComponentInChildren<BoneMapper>().scale = 0.5f;
+                        Debug.Log("after Emote: " + item.bodyPrefab.transform.position);
+                        Debug.Log("skele pos: " + skele.transform.position);
+                    }
+                }
+            }
         }
 
         private void GlobalEventManager_OnHitEnemy(On.RoR2.GlobalEventManager.orig_OnHitEnemy orig, GlobalEventManager self, DamageInfo damageInfo, GameObject victim)

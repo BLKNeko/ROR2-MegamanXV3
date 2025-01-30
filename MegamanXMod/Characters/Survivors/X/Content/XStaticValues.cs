@@ -49,7 +49,7 @@ namespace MegamanXMod.Survivors.X
         
         public const float NovaStrikeDamageCoefficient = 8f;
         
-        public const float GigaAttackGaeaDamageCoefficient = 2f;
+        public const float GigaAttackGaeaDamageCoefficient = 4f;
         
         public const float XRathalosSlashCombo1DamageCoefficient = 5f;
         
@@ -63,7 +63,7 @@ namespace MegamanXMod.Survivors.X
         
         public const float MeltCreeperDamageCoefficient = 1f;
 
-        public const float HomingTorpedoDamageCoefficient = 1.2f;
+        public const float HomingTorpedoDamageCoefficient = 2f;
 
         public const float XShockSphereDamageCoefficient = 0.25f;
 

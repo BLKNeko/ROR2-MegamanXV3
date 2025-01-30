@@ -99,7 +99,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             EffectManager.SimpleMuzzleFlash(EntityStates.Mage.FlyUpState.muzzleflashEffect, gameObject, FWingL3, true);
 
 
-            PlayAnimation("FullBody, Override", "DashLoop", "DashLoop.playbackRate", duration);
+            PlayAnimation("FullBody, Override", "DashLoop", "attackSpeed", duration);
             AkSoundEngine.PostEvent(XStaticValues.X_Falcon_Dash, this.gameObject);
 
             if (NetworkServer.active)
@@ -168,7 +168,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             if (isAuthority && fixedAge >= duration)
             {
                 base.characterMotor.useGravity = true;
-                PlayAnimation("FullBody, Override", "DashEnd", "DashEnd.playbackRate", duration);
+                PlayAnimation("FullBody, Override", "DashEnd", "attackSpeed", duration);
                 outer.SetNextStateToMain();
                 return;
             }

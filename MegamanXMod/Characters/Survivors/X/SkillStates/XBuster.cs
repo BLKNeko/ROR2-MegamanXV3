@@ -18,7 +18,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             base.OnEnter();
             damageCoefficient = XStaticValues.XBusterDamageCoefficient;
             procCoefficient = 1f;
-            baseDuration = 1f;
+            baseDuration = 0.4f;
             firePercentTime = 0.0f;
             force = 400f;
             recoil = 3f;
@@ -52,7 +52,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 hasFired = true;
 
-                characterBody.AddSpreadBloom(0.8f);
+                characterBody.AddSpreadBloom(0.4f);
                 EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, gameObject, muzzleString, false);
                 Util.PlaySound(XStaticValues.X_Simple_Bullet, gameObject);
                 PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
@@ -60,7 +60,6 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 if (isAuthority)
                 {
                     Ray aimRay = GetAimRay();
-                    AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
 
                     new BulletAttack
                     {
@@ -102,7 +101,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 hasFired = true;
 
-                characterBody.AddSpreadBloom(0.8f);
+                characterBody.AddSpreadBloom(0.6f);
                 EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
                 Util.PlaySound(XStaticValues.X_Mid_Bullet, gameObject);
                 PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
@@ -110,7 +109,6 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 if (isAuthority)
                 {
                     Ray aimRay = GetAimRay();
-                    AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
 
                     FireProjectileInfo XBusterMediumProjectille = new FireProjectileInfo();
                     XBusterMediumProjectille.projectilePrefab = XAssets.xBusterMediumProjectile;

@@ -183,21 +183,31 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
                 PlayAnimation("FullBody, Override", "HyperMode", "HyperMode.playbackRate", duration);
 
-                if (base.isAuthority)
+                if (NetworkServer.active)
                 {
 
-                    if (NetworkServer.active)
-                    {
-
-                        base.characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 8f);
-                        base.characterBody.AddTimedBuff(RoR2Content.Buffs.Intangible, 8f);
-                        base.characterBody.AddTimedBuff(RoR2Content.Buffs.Cloak, 8f);
-                        base.characterBody.AddTimedBuff(RoR2Content.Buffs.CloakSpeed, 8f);
-
-                    }
-
+                    characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 8f);
+                    characterBody.AddTimedBuff(RoR2Content.Buffs.Intangible, 8f);
+                    characterBody.AddTimedBuff(RoR2Content.Buffs.Cloak, 8f);
+                    characterBody.AddTimedBuff(RoR2Content.Buffs.CloakSpeed, 8f);
 
                 }
+
+                //if (base.isAuthority)
+                //{
+
+                //    if (NetworkServer.active)
+                //    {
+
+                //        characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 8f);
+                //        characterBody.AddTimedBuff(RoR2Content.Buffs.Intangible, 8f);
+                //        characterBody.AddTimedBuff(RoR2Content.Buffs.Cloak, 8f);
+                //        characterBody.AddTimedBuff(RoR2Content.Buffs.CloakSpeed, 8f);
+
+                //    }
+
+
+                //}
             }
         }
 

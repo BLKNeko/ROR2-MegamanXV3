@@ -3,6 +3,7 @@ using MegamanXMod.Modules.BaseStates;
 using RoR2;
 using System;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace MegamanXMod.Survivors.X.SkillStates
 {
@@ -186,6 +187,18 @@ namespace MegamanXMod.Survivors.X.SkillStates
             base.PlayAnimation("FullBody, Override", "DashEnd", "attackSpeed", this.duration);
 
             base.OnExit();
+        }
+
+        public override void OnSerialize(NetworkWriter writer)
+        {
+            base.OnSerialize(writer);
+            writer.Write(forwardDirection);
+        }
+
+        public override void OnDeserialize(NetworkReader reader)
+        {
+            base.OnDeserialize(reader);
+            forwardDirection = reader.ReadVector3();
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()
