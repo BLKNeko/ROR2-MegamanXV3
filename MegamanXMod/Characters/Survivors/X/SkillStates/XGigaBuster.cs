@@ -13,7 +13,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
     {
         public static float damageCoefficient = XStaticValues.XGigaBusterDamageCoefficient;
         public static float procCoefficient = 1f;
-        public static float baseDuration = 1f;
+        public static float baseDuration = 0.5f;
         //delay on firing is usually ass-feeling. only set this if you know what you're doing
         public static float firePercentTime = 0.0f;
         public static float force = 500f;
@@ -200,11 +200,11 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     // Isso deve ser executado apenas no lado do servidor para garantir a sincronização
                     if (characterBody.HasBuff(XBuffs.GigaBusterChargeBuff))
                     {
-                        characterBody.RemoveBuff(XBuffs.GigaBusterChargeBuff);
+                        characterBody.RemoveOldestTimedBuff(XBuffs.GigaBusterChargeBuff);
                     }
                     else
                     {
-                        characterBody.AddBuff(XBuffs.GigaBusterChargeBuff);
+                        characterBody.AddTimedBuff(XBuffs.GigaBusterChargeBuff, 20f);
                     }
                 }
 

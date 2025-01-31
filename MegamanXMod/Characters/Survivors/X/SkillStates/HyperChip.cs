@@ -11,7 +11,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
     public class HyperChip : BaseSkillState
     {
         public static float procCoefficient = 1f;
-        public static float baseDuration = 1f;
+        public static float baseDuration = 0.5f;
         //delay on firing is usually ass-feeling. only set this if you know what you're doing
         public static float firePercentTime = 0.0f;
 

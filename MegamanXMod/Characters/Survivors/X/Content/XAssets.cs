@@ -105,6 +105,8 @@ namespace MegamanXMod.Survivors.X
         public static Sprite IconRisingFire;
         public static Sprite IconMeltCreeper;
 
+        public static Sprite IconXEmote;
+
 
         // networked hit sounds
         public static NetworkSoundEventDef swordHitSoundEvent;
@@ -229,6 +231,8 @@ namespace MegamanXMod.Survivors.X
             IconAcidBurst = _assetBundle.LoadAsset<Sprite>("XSkillAcidBurst");
             IconRisingFire = _assetBundle.LoadAsset<Sprite>("XSkillRisingFire");
             IconMeltCreeper = _assetBundle.LoadAsset<Sprite>("XSkillMeltCreeper");
+
+            IconXEmote = _assetBundle.LoadAsset<Sprite>("XEmoteIcon");
 
             HyperModeEffect = _assetBundle.LoadEffect("HyperModeEffect", true);
             GaeaGAVFX = _assetBundle.LoadEffect("GaeaGigaAttackVFX", true);

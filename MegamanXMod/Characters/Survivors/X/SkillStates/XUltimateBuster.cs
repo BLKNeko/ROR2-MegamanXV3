@@ -18,7 +18,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             base.OnEnter();
             damageCoefficient = XStaticValues.XUltimateBusterDamageCoefficient;
             procCoefficient = 1f;
-            baseDuration = 1f;
+            baseDuration = 0.5f;
             firePercentTime = 0.0f;
             force = 400f;
             recoil = 3f;

@@ -15,6 +15,8 @@ using static UnityEngine.ParticleSystem.PlaybackState;
 using MegamanXMod.Modules.BaseContent.BaseStates;
 using EmotesAPI;
 using System.Security.Cryptography;
+using System.Collections;
+using R2API.Utils;
 
 namespace MegamanXMod.Survivors.X
 {
@@ -40,6 +42,9 @@ namespace MegamanXMod.Survivors.X
 
         //internal static SkillDef LightHyperModeSkillDef;
         //internal static SkillDef GaeaHyperModeSkillDef;
+
+        private float xTakeDamageValue = 0f;
+        private CharacterMaster xMaster;
 
         //ARMORS
         internal static SkillDef CoolDownXArmorSkillDef;
@@ -1900,13 +1905,34 @@ namespace MegamanXMod.Survivors.X
             On.RoR2.CharacterModel.Awake += CharacterModel_Awake;
             On.RoR2.SurvivorCatalog.Init += SurvivorCatalog_Init;
             CustomEmotesAPI.animChanged += CustomEmotesAPI_animChanged;
+            On.RoR2.CharacterMaster.OnBodyStart += RestoreHPAfterRespawn;
+        }
+
+        private void RestoreHPAfterRespawn(On.RoR2.CharacterMaster.orig_OnBodyStart orig, CharacterMaster self, CharacterBody newBody)
+        {
+            orig(self, newBody);
+
+            //Debug.Log("xTakeDamageValue: " + xTakeDamageValue);
+            //Debug.Log("xMaster: " + xMaster);
+            //Debug.Log("self: " + self);
+
+            if (self == xMaster) // Certifica-se de que estamos restaurando o HP do personagem correto
+            {
+                float restoredHP = xTakeDamageValue;
+
+                if (newBody && newBody.healthComponent)
+                {
+                    newBody.healthComponent.health = Mathf.Clamp(restoredHP, 1f, newBody.healthComponent.fullHealth);
+                    //Debug.Log($"HP restaurado para {newBody.healthComponent.health}");
+                }
+            }
         }
 
         private void CustomEmotesAPI_animChanged(string newAnimation, BoneMapper mapper)
         {
-            Debug.Log("newAnimation: " + newAnimation);
-            Debug.Log("mapper: " + mapper);
-            Debug.Log("mapper.bodyPrefab.name: " + mapper.bodyPrefab.name);
+            //Debug.Log("newAnimation: " + newAnimation);
+            //Debug.Log("mapper: " + mapper);
+            //Debug.Log("mapper.bodyPrefab.name: " + mapper.bodyPrefab.name);
 
             if (mapper.bodyPrefab.name.Contains("MegamanXBody"))
             {
@@ -1919,12 +1945,23 @@ namespace MegamanXMod.Survivors.X
 
                         //NA MORAL VOU DEIXAR ISSO TUDO COMENTADO PELO ÓDIO QUE EU SENTI!
 
+                        float savedHP = mapper.bodyPrefab.GetComponent<CharacterBody>().healthComponent.health;
+
+                        xTakeDamageValue = savedHP;
+                        xMaster = mapper.bodyPrefab.GetComponent<CharacterBody>().master;
+
+
+                        //Debug.Log("xTakeDamageValue: " + xTakeDamageValue);
 
                         // Mata o personagem atual (sem contar como "morte real")
                         GameObject.Destroy(mapper.bodyPrefab.GetComponent<CharacterBody>().gameObject);
 
                         // Força o CharacterMaster a reaparecer o personagem
                         mapper.bodyPrefab.GetComponent<CharacterBody>().master.Respawn(mapper.bodyPrefab.GetComponent<CharacterBody>().footPosition, Quaternion.identity);
+
+                        //mapper.bodyPrefab.GetComponent<CharacterBody>().healthComponent.health = xTakeDamageValue;
+
+                        //mapper.bodyPrefab.GetComponent<CharacterBody>().healthComponent.health = XH;
 
                         //Animator animator = mapper.bodyPrefab.GetComponent<CharacterBody>().characterDirection.modelAnimator;
                         //if (animator)
@@ -1967,6 +2004,8 @@ namespace MegamanXMod.Survivors.X
             }
         }
 
+        
+
         private void SurvivorCatalog_Init(On.RoR2.SurvivorCatalog.orig_Init orig)
         {
             orig();
@@ -1978,13 +2017,14 @@ namespace MegamanXMod.Survivors.X
                     if (item.bodyPrefab.name == "MegamanXBody")
                     {
                         var skele = XAssets.XEmotePrefab;
-                        Debug.Log("Before Emote: " + item.bodyPrefab.transform.position);
+                        //Debug.Log("Before Emote: " + item.bodyPrefab.transform.position);
                         CustomEmotesAPI.ImportArmature(item.bodyPrefab, skele);
+                        CustomEmotesAPI.CreateNameTokenSpritePair(MEGAMAN_x_PREFIX + "NAME", XAssets.IconXEmote);
                         //skele.GetComponentInChildren<BoneMapper>().scale = 1.05f;
                         //item.bodyPrefab.GetComponentInChildren<BoneMapper>().scale = 0.5f;
                         //skele.GetComponentInChildren<BoneMapper>().scale = 0.5f;
-                        Debug.Log("after Emote: " + item.bodyPrefab.transform.position);
-                        Debug.Log("skele pos: " + skele.transform.position);
+                        //Debug.Log("after Emote: " + item.bodyPrefab.transform.position);
+                        //Debug.Log("skele pos: " + skele.transform.position);
                     }
                 }
             }
@@ -2167,11 +2207,11 @@ namespace MegamanXMod.Survivors.X
                 args.armorAdd *= 2.4f;
                 args.healthMultAdd *= 2f;
                 args.damageMultAdd *= 1.5f;
-                args.attackSpeedMultAdd *= 2.5f;
+                args.attackSpeedMultAdd *= 3f;
                 args.regenMultAdd *= 1.5f;
                 args.jumpPowerMultAdd += 0.5f;
                 args.jumpPowerMultAdd *= 2f;
-                args.moveSpeedMultAdd *= 2.5f;
+                args.moveSpeedMultAdd *= 3f;
                 args.shieldMultAdd *= 1.8f;
                 args.critDamageMultAdd *= 4f;
             }

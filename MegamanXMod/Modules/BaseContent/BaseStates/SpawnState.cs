@@ -1,6 +1,7 @@
 ﻿using EntityStates;
 using MegamanXMod.Modules;
 using MegamanXMod.Survivors.X;
+using MegamanXMod.Survivors.X.Components;
 using RoR2;
 using RoR2.Audio;
 using System;
@@ -21,6 +22,8 @@ namespace MegamanXMod.Modules.BaseContent.BaseStates
             base.OnEnter();
             this.duration = this.baseDuration / this.attackSpeedStat;
 
+            
+
         }
         public override void OnExit()
         {
@@ -36,6 +39,8 @@ namespace MegamanXMod.Modules.BaseContent.BaseStates
 
 
         }
+
+        
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {

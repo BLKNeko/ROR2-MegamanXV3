@@ -4,6 +4,8 @@ using UnityEngine;
 using BepInEx;
 using MegamanXMod.Modules;
 using EmotesAPI;
+using static Rewired.Utils.Classes.Utility.ObjectInstanceTracker;
+using UnityEngine.Networking;
 
 namespace MegamanXMod.Survivors.X.Components
 {
@@ -30,6 +32,10 @@ namespace MegamanXMod.Survivors.X.Components
         private ChildLocator childLocator;
 
         private FootstepHandler footstepHandler;
+
+        private float damageToApply = 0f;
+
+        private bool shoudlAplyDamage = false;
 
 
 
@@ -91,6 +97,7 @@ namespace MegamanXMod.Survivors.X.Components
             //XHealth = this.GetComponent<HealthComponent>();
 
         }
+
 
         void FixedUpdate()
         {
