@@ -52,21 +52,21 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 hasFired = true;
 
-                characterBody.AddSpreadBloom(0.8f);
-                EffectManager.SimpleMuzzleFlash(EntityStates.Mage.Weapon.FireRoller.fireMuzzleflashEffectPrefab, gameObject, muzzleString, false);
-
-                if (XConfig.enableVoiceBool.Value)
-                {
-                    AkSoundEngine.PostEvent(XStaticValues.X_Attack_VSFX, this.gameObject);
-                }
-                AkSoundEngine.PostEvent(XStaticValues.X_RisingFire_SFX, this.gameObject);
-
-                PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
-
                 if (isAuthority)
                 {
+
+                    characterBody.AddSpreadBloom(0.8f);
+                    EffectManager.SimpleMuzzleFlash(EntityStates.Mage.Weapon.FireRoller.fireMuzzleflashEffectPrefab, gameObject, muzzleString, false);
+
+                    if (XConfig.enableVoiceBool.Value)
+                    {
+                        AkSoundEngine.PostEvent(XStaticValues.X_Attack_VSFX, this.gameObject);
+                    }
+                    AkSoundEngine.PostEvent(XStaticValues.X_RisingFire_SFX, this.gameObject);
+
+                    PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
+
                     Ray aimRay = GetAimRay();
-                    AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
 
                     FireProjectileInfo XRisingFireSimpleProjectille = new FireProjectileInfo();
                     XRisingFireSimpleProjectille.projectilePrefab = XAssets.XRFire2Projectile;
@@ -93,21 +93,21 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 hasFired = true;
 
-                characterBody.AddSpreadBloom(0.8f);
-                EffectManager.SimpleMuzzleFlash(EntityStates.Mage.Weapon.FireRoller.fireMuzzleflashEffectPrefab, gameObject, muzzleString, false);
-
-                if (XConfig.enableVoiceBool.Value)
-                {
-                    AkSoundEngine.PostEvent(XStaticValues.X_Attack_VSFX, this.gameObject);
-                }
-                AkSoundEngine.PostEvent(XStaticValues.X_RisingFire_SFX, this.gameObject);
-
-                PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
-
                 if (isAuthority)
                 {
+
+                    characterBody.AddSpreadBloom(0.8f);
+                    EffectManager.SimpleMuzzleFlash(EntityStates.Mage.Weapon.FireRoller.fireMuzzleflashEffectPrefab, gameObject, muzzleString, false);
+
+                    if (XConfig.enableVoiceBool.Value)
+                    {
+                        AkSoundEngine.PostEvent(XStaticValues.X_Attack_VSFX, this.gameObject);
+                    }
+                    AkSoundEngine.PostEvent(XStaticValues.X_RisingFire_SFX, this.gameObject);
+
+                    PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
+
                     Ray aimRay = GetAimRay();
-                    AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
 
                     FireProjectileInfo XRisingFireSimpleProjectille = new FireProjectileInfo();
                     XRisingFireSimpleProjectille.projectilePrefab = XAssets.XRFire2Projectile;

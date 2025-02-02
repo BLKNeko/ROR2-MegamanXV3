@@ -21,7 +21,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             baseDuration = 1f;
             firePercentTime = 0.0f;
             force = 400f;
-            recoil = 3f;
+            recoil = 2f;
             range = 256f;
             muzzleString = "BusterMuzzPos";
 
@@ -53,26 +53,26 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 hasFired = true;
 
-                characterBody.AddSpreadBloom(0.8f);
-                //EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
-
-                EffectManager.SpawnEffect(EntityStates.Mage.Weapon.IceNova.impactEffectPrefab, new EffectData
-                {
-                    origin = childLocator.FindChild(muzzleString).transform.position,
-
-                }, true);
-
-                if (XConfig.enableVoiceBool.Value)
-                {
-                    AkSoundEngine.PostEvent(XStaticValues.X_shotgunIce_VSFX, this.gameObject);
-                }
-
-                PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
-
                 if (isAuthority)
                 {
+
+                    characterBody.AddSpreadBloom(0.8f);
+                    //EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
+
+                    EffectManager.SpawnEffect(EntityStates.Mage.Weapon.IceNova.impactEffectPrefab, new EffectData
+                    {
+                        origin = childLocator.FindChild(muzzleString).transform.position,
+
+                    }, true);
+
+                    if (XConfig.enableVoiceBool.Value)
+                    {
+                        AkSoundEngine.PostEvent(XStaticValues.X_shotgunIce_VSFX, this.gameObject);
+                    }
+
+                    PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
+
                     Ray aimRay = GetAimRay();
-                    AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
 
                     FireProjectileInfo XShotgunIceProjectille = new FireProjectileInfo();
                     XShotgunIceProjectille.projectilePrefab = XAssets.shotgunIceprefab;
@@ -98,26 +98,26 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 hasFired = true;
 
-                characterBody.AddSpreadBloom(0.8f);
-                //EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
-
-                EffectManager.SpawnEffect(EntityStates.Mage.Weapon.IceNova.impactEffectPrefab, new EffectData
-                {
-                    origin = childLocator.FindChild(muzzleString).transform.position,
-
-                }, true);
-
-                if (XConfig.enableVoiceBool.Value)
-                {
-                    AkSoundEngine.PostEvent(XStaticValues.X_shotgunIce_VSFX, this.gameObject);
-                }
-
-                PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
-
                 if (isAuthority)
                 {
+
+                    characterBody.AddSpreadBloom(0.8f);
+                    //EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
+
+                    EffectManager.SpawnEffect(EntityStates.Mage.Weapon.IceNova.impactEffectPrefab, new EffectData
+                    {
+                        origin = childLocator.FindChild(muzzleString).transform.position,
+
+                    }, true);
+
+                    if (XConfig.enableVoiceBool.Value)
+                    {
+                        AkSoundEngine.PostEvent(XStaticValues.X_shotgunIce_VSFX, this.gameObject);
+                    }
+
+                    PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
+
                     Ray aimRay = GetAimRay();
-                    AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
 
                     FireProjectileInfo XShotgunIceProjectille = new FireProjectileInfo();
                     XShotgunIceProjectille.projectilePrefab = XAssets.shotgunIceprefab;
@@ -143,24 +143,25 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 this.hasFired = true;
 
-                base.characterBody.AddSpreadBloom(0.75f);
-                //EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
-
-                EffectManager.SpawnEffect(EntityStates.Mage.Weapon.IceNova.impactEffectPrefab, new EffectData
-                {
-                    origin = childLocator.FindChild(muzzleString).transform.position,
-
-                }, true);
-
-                if (XConfig.enableVoiceBool.Value)
-                {
-                    AkSoundEngine.PostEvent(XStaticValues.X_shotgunIce_VSFX, this.gameObject);
-                }
-
-                PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
-
                 if (isAuthority)
                 {
+
+                    base.characterBody.AddSpreadBloom(0.75f);
+                    //EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
+
+                    EffectManager.SpawnEffect(EntityStates.Mage.Weapon.IceNova.impactEffectPrefab, new EffectData
+                    {
+                        origin = childLocator.FindChild(muzzleString).transform.position,
+
+                    }, true);
+
+                    if (XConfig.enableVoiceBool.Value)
+                    {
+                        AkSoundEngine.PostEvent(XStaticValues.X_shotgunIce_VSFX, this.gameObject);
+                    }
+
+                    PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
+
                     Ray aimRay = GetAimRay();
                     AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
 

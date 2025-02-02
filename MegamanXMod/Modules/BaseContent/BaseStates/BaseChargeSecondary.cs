@@ -73,7 +73,7 @@ namespace MegamanXMod.Modules.BaseStates
             base.FixedUpdate();
 
             // Carregar o ataque
-            if (base.inputBank.skill2.down)
+            if (base.inputBank.skill2.down && base.isAuthority)
             {
                 ChargeShot();
             }

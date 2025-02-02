@@ -61,10 +61,10 @@ namespace MegamanXMod.Survivors.X.SkillStates
             this.huntressTracker = base.GetComponent<HuntressTracker>();
 
 
-            if (this.huntressTracker && base.isAuthority)
-            {
-                this.initialOrbTarget = this.huntressTracker.GetTrackingTarget();
-            }
+            //if (this.huntressTracker && base.isAuthority)
+            //{
+            //    this.initialOrbTarget = this.huntressTracker.GetTrackingTarget();
+            //}
 
             if (this.modelTransform)
             {
@@ -78,12 +78,18 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             //Debug.Log("Tracker:" + huntressTracker);
             //Debug.Log("OrbTarget:" + initialOrbTarget);
+            //Debug.Log("HT2 OrbTarget:" + initialOrbTarget);
 
             //Util.PlaySound(Modules.Sounds.vileFragDrop, base.gameObject);
 
 
             //Util.PlaySound(Sounds.Play_M2UseSFX, base.gameObject);
 
+        }
+
+        public void SetTarget(HurtBox target)
+        {
+            initialOrbTarget = target;
         }
 
         public override void OnExit()
@@ -146,7 +152,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                         OrbManager.instance.AddOrb(genericDamageOrb);
                     }
 
-                    //Debug.Log("HurbBox:" + hurtBox);
+                    //Debug.Log("HurbBox2:" + hurtBox);
 
 
 

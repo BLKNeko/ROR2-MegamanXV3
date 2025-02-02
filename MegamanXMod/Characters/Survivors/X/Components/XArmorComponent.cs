@@ -190,34 +190,51 @@ namespace MegamanXMod.Survivors.X.Components
 
         private void ShouldRemoveGoldTexture()
         {
-            if (XBody.HasBuff(XBuffs.MaxArmorBuff) && !XBody.HasBuff(XBuffs.HyperChipBuff))
+
+            if (NetworkServer.active)
             {
-                if (XModel && XmeshRenderer)
+
+                if (XBody.HasBuff(XBuffs.MaxArmorBuff) && !XBody.HasBuff(XBuffs.HyperChipBuff))
                 {
-                    if (XModel.baseRendererInfos[0].defaultMaterial == XAssets.MatMaxGold)
+                    if (XModel && XmeshRenderer)
                     {
-                        XmeshRenderer.sharedMaterial = XAssets.MatMax;
-                        XModel.baseRendererInfos[0].defaultMaterial = XAssets.MatMax;
+                        if (XModel.baseRendererInfos[0].defaultMaterial == XAssets.MatMaxGold)
+                        {
+                            XmeshRenderer.sharedMaterial = XAssets.MatMax;
+                            XModel.baseRendererInfos[0].defaultMaterial = XAssets.MatMax;
+                        }
                     }
                 }
-                
-                //if (XModel)
-                //{
-                //    if (XModel.temporaryOverlays.Contains(temporaryOverlayInstance))
-                //    {
-                //        temporaryOverlayInstance.RemoveFromCharacterModel();
+                RPCShouldRemoveGoldTexture();
 
-                //        if (temporaryOverlayInstance != null)
-                //        {
-                //            temporaryOverlayInstance.Destroy();
-                //            Debug.Log("DESTROY OVERLAY");
-                //        }
-
-                //        Debug.Log("REMOVE OVERLAY");
-                //    }
-                    
-                //}
             }
+
+            
+        }
+
+        [ClientRpc]
+        private void RPCShouldRemoveGoldTexture()
+        {
+
+            if (NetworkServer.active)
+            {
+
+                if (XBody.HasBuff(XBuffs.MaxArmorBuff) && !XBody.HasBuff(XBuffs.HyperChipBuff))
+                {
+                    if (XModel && XmeshRenderer)
+                    {
+                        if (XModel.baseRendererInfos[0].defaultMaterial == XAssets.MatMaxGold)
+                        {
+                            XmeshRenderer.sharedMaterial = XAssets.MatMax;
+                            XModel.baseRendererInfos[0].defaultMaterial = XAssets.MatMax;
+                            
+                        }
+                    }
+                }
+
+            }
+
+
         }
 
         public void SetXModel(CharacterModel model)

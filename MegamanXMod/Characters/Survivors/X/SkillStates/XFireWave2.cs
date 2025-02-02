@@ -17,7 +17,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
         //delay on firing is usually ass-feeling. only set this if you know what you're doing
         public static float firePercentTime = 0.0f;
         public static float force = 100f;
-        public static float recoil = 3f;
+        public static float recoil = 2f;
         public static float range = 40f;
         public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("prefabs/effects/tracers/TracerEmbers");
         public static GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/FireMeatBallExplosion");
@@ -96,14 +96,15 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 //hasFired = true;
 
-                characterBody.AddSpreadBloom(0.8f);
-                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, gameObject, muzzleString, false);
-                PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
-
                 //Debug.Log("Suposed to fire");
 
                 if (isAuthority)
                 {
+
+                    characterBody.AddSpreadBloom(0.8f);
+                    EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, gameObject, muzzleString, false);
+                    PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
+
                     Ray aimRay = GetAimRay();
                     //AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
 

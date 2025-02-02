@@ -1416,11 +1416,11 @@ namespace MegamanXMod.Survivors.X
             HomingTorpedoSkillDef.skillDescriptionToken = MEGAMAN_x_PREFIX + "SPECIAL_HOMMING_TORPEDO_DESCRIPTION";
             HomingTorpedoSkillDef.icon = XAssets.IconHomingTorpedo;
             HomingTorpedoSkillDef.keywordTokens = new string[] {MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"};
-            HomingTorpedoSkillDef.activationState = new EntityStates.SerializableEntityStateType(typeof(HomingTorpedo));
+            HomingTorpedoSkillDef.activationState = new EntityStates.SerializableEntityStateType(typeof(HomingTorpedo_test));
             HomingTorpedoSkillDef.activationStateMachineName = "Weapon";
             HomingTorpedoSkillDef.baseMaxStock = 10;
             HomingTorpedoSkillDef.baseRechargeInterval = 3f;
-            HomingTorpedoSkillDef.beginSkillCooldownOnSkillEnd = false;
+            HomingTorpedoSkillDef.beginSkillCooldownOnSkillEnd = true;
             HomingTorpedoSkillDef.canceledFromSprinting = false;
             HomingTorpedoSkillDef.forceSprintDuringState = false;
             HomingTorpedoSkillDef.fullRestockOnAssign = true;
@@ -1906,6 +1906,22 @@ namespace MegamanXMod.Survivors.X
             On.RoR2.SurvivorCatalog.Init += SurvivorCatalog_Init;
             CustomEmotesAPI.animChanged += CustomEmotesAPI_animChanged;
             On.RoR2.CharacterMaster.OnBodyStart += RestoreHPAfterRespawn;
+            On.RoR2.CharacterBody.RemoveBuff_BuffDef += CharacterBody_RemoveBuff_BuffDef;
+        }
+
+        private void CharacterBody_RemoveBuff_BuffDef(On.RoR2.CharacterBody.orig_RemoveBuff_BuffDef orig, CharacterBody self, BuffDef buffDef)
+        {
+            orig(self, buffDef);
+
+            if(buffDef == XBuffs.HyperChipBuff)
+            {
+                if (self.HasBuff(XBuffs.MaxArmorBuff))
+                {
+                    
+                }
+            }
+            
+
         }
 
         private void RestoreHPAfterRespawn(On.RoR2.CharacterMaster.orig_OnBodyStart orig, CharacterMaster self, CharacterBody newBody)

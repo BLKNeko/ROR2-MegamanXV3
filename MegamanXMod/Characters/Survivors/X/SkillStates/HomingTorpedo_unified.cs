@@ -9,7 +9,7 @@ using UnityEngine.Networking;
 
 namespace MegamanXMod.Survivors.X.SkillStates
 {
-    public class HomingTorpedoOLD : BaseSkillState
+    public class HomingTorpedo_unified : BaseSkillState
     {
         public static float damageCoefficient = XStaticValues.HomingTorpedoDamageCoefficient;
         public static float procCoefficient = 1f;
@@ -104,13 +104,13 @@ namespace MegamanXMod.Survivors.X.SkillStates
         {
             if (!this.hasFired)
             {
-                
-                
-                    this.hasFired = true;
 
 
-                    if (NetworkServer.active)
-                    {
+                this.hasFired = true;
+
+
+                if (NetworkServer.active)
+                {
                     //if (NetworkServer.active)
                     //{
                     PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
@@ -124,41 +124,41 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     AkSoundEngine.PostEvent(XStaticValues.X_HomingTorpedo_SFX, this.gameObject);
 
                     GenericDamageOrb genericDamageOrb = this.CreateArrowOrb();
-                            genericDamageOrb.damageValue = damageCoefficient * damageStat;
-                            genericDamageOrb.isCrit = RollCrit();
-                            genericDamageOrb.teamIndex = TeamComponent.GetObjectTeam(base.gameObject);
-                            genericDamageOrb.attacker = base.gameObject;
-                            genericDamageOrb.procCoefficient = procCoefficient;
-                            genericDamageOrb.damageType = DamageType.Generic;
-                            genericDamageOrb.damageColorIndex = DamageColorIndex.Default;
+                    genericDamageOrb.damageValue = damageCoefficient * damageStat;
+                    genericDamageOrb.isCrit = RollCrit();
+                    genericDamageOrb.teamIndex = TeamComponent.GetObjectTeam(base.gameObject);
+                    genericDamageOrb.attacker = base.gameObject;
+                    genericDamageOrb.procCoefficient = procCoefficient;
+                    genericDamageOrb.damageType = DamageType.Generic;
+                    genericDamageOrb.damageColorIndex = DamageColorIndex.Default;
 
-                            //genericDamageOrb.damageType = DamageType.ApplyMercExpose;
+                    //genericDamageOrb.damageType = DamageType.ApplyMercExpose;
 
-                            //Debug.Log("GenereciDamageOrb:" + genericDamageOrb);
+                    //Debug.Log("GenereciDamageOrb:" + genericDamageOrb);
 
-                            HurtBox hurtBox = this.initialOrbTarget;
-                            if (hurtBox)
-                            {
-                                Transform transform = this.childLocator.FindChild(this.muzzleString);
-                                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, true);
-                                genericDamageOrb.origin = transform.position;
-                                genericDamageOrb.target = hurtBox;
-                                OrbManager.instance.AddOrb(genericDamageOrb);
-                            }
-
-                            //Debug.Log("HurbBox:" + hurtBox);
-
-
-
-                            base.characterBody.AddSpreadBloom(0.15f);
-                            Ray aimRay = base.GetAimRay();
-                            EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, false);
-                        //}
+                    HurtBox hurtBox = this.initialOrbTarget;
+                    if (hurtBox)
+                    {
+                        Transform transform = this.childLocator.FindChild(this.muzzleString);
+                        EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, true);
+                        genericDamageOrb.origin = transform.position;
+                        genericDamageOrb.target = hurtBox;
+                        OrbManager.instance.AddOrb(genericDamageOrb);
                     }
 
-                    
-                
-                
+                    //Debug.Log("HurbBox:" + hurtBox);
+
+
+
+                    base.characterBody.AddSpreadBloom(0.15f);
+                    Ray aimRay = base.GetAimRay();
+                    EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, false);
+                    //}
+                }
+
+
+
+
             }
         }
 
@@ -166,12 +166,12 @@ namespace MegamanXMod.Survivors.X.SkillStates
         {
             if (!this.hasFired)
             {
-                
-                    this.hasFired = true;
-                    
 
-                    if (NetworkServer.active)
-                    {
+                this.hasFired = true;
+
+
+                if (NetworkServer.active)
+                {
                     //if (NetworkServer.active)
                     //{
 
@@ -184,52 +184,50 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     AkSoundEngine.PostEvent(XStaticValues.X_HomingTorpedo_SFX, this.gameObject);
 
                     GenericDamageOrb genericDamageOrb = this.CreateArrowOrb();
-                        genericDamageOrb.damageValue = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat;
-                        genericDamageOrb.isCrit = RollCrit();
-                        genericDamageOrb.teamIndex = TeamComponent.GetObjectTeam(base.gameObject);
-                        genericDamageOrb.attacker = base.gameObject;
-                        genericDamageOrb.procCoefficient = procCoefficient;
-                        genericDamageOrb.damageType = DamageType.Generic;
-                        genericDamageOrb.damageColorIndex = DamageColorIndex.Default;
-                        //genericDamageOrb.damageType = DamageType.ApplyMercExpose;
+                    genericDamageOrb.damageValue = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat;
+                    genericDamageOrb.isCrit = RollCrit();
+                    genericDamageOrb.teamIndex = TeamComponent.GetObjectTeam(base.gameObject);
+                    genericDamageOrb.attacker = base.gameObject;
+                    genericDamageOrb.procCoefficient = procCoefficient;
+                    genericDamageOrb.damageType = DamageType.Generic;
+                    genericDamageOrb.damageColorIndex = DamageColorIndex.Default;
+                    //genericDamageOrb.damageType = DamageType.ApplyMercExpose;
 
-                        HurtBox hurtBox = this.initialOrbTarget;
-                        if (hurtBox)
-                        {
-                            Transform transform = this.childLocator.FindChild(this.muzzleString);
-                            EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, true);
-                            genericDamageOrb.origin = transform.position;
-                            genericDamageOrb.target = hurtBox;
-                            OrbManager.instance.AddOrb(genericDamageOrb);
-                            OrbManager.instance.AddOrb(genericDamageOrb);
-                        }
-
-
-
-                        base.characterBody.AddSpreadBloom(0.15f);
-                        Ray aimRay = base.GetAimRay();
-                        EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, false);
-                        //}
+                    HurtBox hurtBox = this.initialOrbTarget;
+                    if (hurtBox)
+                    {
+                        Transform transform = this.childLocator.FindChild(this.muzzleString);
+                        EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, true);
+                        genericDamageOrb.origin = transform.position;
+                        genericDamageOrb.target = hurtBox;
+                        OrbManager.instance.AddOrb(genericDamageOrb);
+                        OrbManager.instance.AddOrb(genericDamageOrb);
                     }
 
-                    
+
+
+                    base.characterBody.AddSpreadBloom(0.15f);
+                    Ray aimRay = base.GetAimRay();
+                    EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, false);
+                    //}
                 }
-                
-            
+
+
+            }
+
+
         }
 
         private void FireChargedBullet()
         {
             if (!this.hasFired)
             {
-                
-                    this.hasFired = true;
-                    
 
-                    if (NetworkServer.active)
-                    {
-                    //if (NetworkServer.active)
-                    //{
+                this.hasFired = true;
+
+
+                if (NetworkServer.active)
+                {
 
                     PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
 
@@ -240,40 +238,39 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     AkSoundEngine.PostEvent(XStaticValues.X_HomingTorpedo_SFX, this.gameObject);
 
                     GenericDamageOrb genericDamageOrb = this.CreateArrowOrb();
-                            genericDamageOrb.damageValue = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat;
-                            genericDamageOrb.isCrit = RollCrit();
-                            genericDamageOrb.teamIndex = TeamComponent.GetObjectTeam(base.gameObject);
-                            genericDamageOrb.attacker = base.gameObject;
-                            genericDamageOrb.procCoefficient = procCoefficient;
-                            genericDamageOrb.damageType = DamageType.Generic;
-                            genericDamageOrb.damageColorIndex = DamageColorIndex.Default;
-                            //genericDamageOrb.damageType = DamageType.ApplyMercExpose;
+                    genericDamageOrb.damageValue = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat;
+                    genericDamageOrb.isCrit = RollCrit();
+                    genericDamageOrb.teamIndex = TeamComponent.GetObjectTeam(base.gameObject);
+                    genericDamageOrb.attacker = base.gameObject;
+                    genericDamageOrb.procCoefficient = procCoefficient;
+                    genericDamageOrb.damageType = DamageType.Generic;
+                    genericDamageOrb.damageColorIndex = DamageColorIndex.Default;
+                    //genericDamageOrb.damageType = DamageType.ApplyMercExpose;
 
-                            HurtBox hurtBox = this.initialOrbTarget;
-                            if (hurtBox)
-                            {
-                                Transform transform = this.childLocator.FindChild(this.muzzleString);
-                                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, true);
-                                genericDamageOrb.origin = transform.position;
-                                genericDamageOrb.target = hurtBox;
-                                OrbManager.instance.AddOrb(genericDamageOrb);
-                                OrbManager.instance.AddOrb(genericDamageOrb);
-                                OrbManager.instance.AddOrb(genericDamageOrb);
-                                OrbManager.instance.AddOrb(genericDamageOrb);
-                                OrbManager.instance.AddOrb(genericDamageOrb);
-                            }
-
-
-
-                            base.characterBody.AddSpreadBloom(0.15f);
-                            Ray aimRay = base.GetAimRay();
-                            EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, false);
-                        //}
+                    HurtBox hurtBox = this.initialOrbTarget;
+                    if (hurtBox)
+                    {
+                        Transform transform = this.childLocator.FindChild(this.muzzleString);
+                        EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, true);
+                        genericDamageOrb.origin = transform.position;
+                        genericDamageOrb.target = hurtBox;
+                        OrbManager.instance.AddOrb(genericDamageOrb);
+                        OrbManager.instance.AddOrb(genericDamageOrb);
+                        OrbManager.instance.AddOrb(genericDamageOrb);
+                        OrbManager.instance.AddOrb(genericDamageOrb);
+                        OrbManager.instance.AddOrb(genericDamageOrb);
                     }
 
-                    
-                
-                
+
+
+                    base.characterBody.AddSpreadBloom(0.15f);
+                    Ray aimRay = base.GetAimRay();
+                    EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, false);
+                }
+
+
+
+
             }
         }
 
@@ -299,11 +296,14 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 {
                     FireChargedBullet();
                 }
-                
+
             }
             else if ((base.fixedAge >= this.fireTime || !base.inputBank || !base.inputBank.skill4.down) && chargeLevel == 2 && hasTime == true)
             {
-                FireMediumBullet();
+                if (NetworkServer.active)
+                {
+                    FireMediumBullet();
+                }   
             }
             else if ((base.fixedAge >= this.fireTime || !base.inputBank || !base.inputBank.skill4.down) && chargeLevel == 1 && hasTime == true)
             {
@@ -311,7 +311,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 {
                     FireSimpleBullet();
                 }
-                    
+
             }
 
             if (base.fixedAge >= this.duration && base.isAuthority && hasTime == true)

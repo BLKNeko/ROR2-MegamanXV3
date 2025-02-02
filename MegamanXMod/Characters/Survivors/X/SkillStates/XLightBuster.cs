@@ -22,7 +22,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             baseDuration = 0.5f;
             firePercentTime = 0.0f;
             force = 400f;
-            recoil = 3f;
+            recoil = 2f;
             range = 256f;
             muzzleString = "BusterMuzzPos";
 
@@ -51,17 +51,17 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 hasFired = true;
 
-                characterBody.AddSpreadBloom(0.8f);
-                EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
-
-                AkSoundEngine.PostEvent(XStaticValues.X_Mid_Bullet, this.gameObject);
-
-                PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
-
                 if (isAuthority)
                 {
+
+                    characterBody.AddSpreadBloom(0.8f);
+                    EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
+
+                    AkSoundEngine.PostEvent(XStaticValues.X_Mid_Bullet, this.gameObject);
+
+                    PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
+
                     Ray aimRay = GetAimRay();
-                    AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
 
                     FireProjectileInfo XBusterMediumProjectille = new FireProjectileInfo();
                     XBusterMediumProjectille.projectilePrefab = XAssets.xBusterMediumProjectile;
@@ -85,18 +85,17 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 hasFired = true;
 
-                characterBody.AddSpreadBloom(0.8f);
-                EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, false);
-
-                AkSoundEngine.PostEvent(XStaticValues.X_Charge_Shot, this.gameObject);
-
-                PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
-
                 if (isAuthority)
                 {
 
+                    characterBody.AddSpreadBloom(0.8f);
+                    EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, false);
+
+                    AkSoundEngine.PostEvent(XStaticValues.X_Charge_Shot, this.gameObject);
+
+                    PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
+
                     Ray aimRay = GetAimRay();
-                    AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
 
                     FireProjectileInfo XBusterChargeProjectille = new FireProjectileInfo();
                     XBusterChargeProjectille.projectilePrefab = XAssets.xBusterChargeProjectile;
@@ -123,13 +122,13 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 this.hasFired = true;
 
-                base.characterBody.AddSpreadBloom(0.75f);
-                EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, false);
-
-                AkSoundEngine.PostEvent(XStaticValues.X_LightBuster_C, this.gameObject);
-
                 if (base.isAuthority)
                 {
+
+                    base.characterBody.AddSpreadBloom(0.75f);
+                    EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, false);
+
+                    AkSoundEngine.PostEvent(XStaticValues.X_LightBuster_C, this.gameObject);
 
                     Ray aimRay = GetAimRay();
                     AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
@@ -164,7 +163,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XLightBusterSmallProjectille2.damage = damageCoefficient * damageStat;
                     XLightBusterSmallProjectille2.force = force;
                     XLightBusterSmallProjectille2.crit = RollCrit();
-                    XLightBusterSmallProjectille2.speedOverride = 250f;
+                    XLightBusterSmallProjectille2.speedOverride = 240f;
                     XLightBusterSmallProjectille2.damageColorIndex = DamageColorIndex.Default;
 
                     FireProjectileInfo XLightBusterSmallProjectille3 = new FireProjectileInfo();
@@ -175,7 +174,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XLightBusterSmallProjectille3.damage = damageCoefficient * damageStat;
                     XLightBusterSmallProjectille3.force = force;
                     XLightBusterSmallProjectille3.crit = RollCrit();
-                    XLightBusterSmallProjectille3.speedOverride = 250f;
+                    XLightBusterSmallProjectille3.speedOverride = 230f;
                     XLightBusterSmallProjectille3.damageColorIndex = DamageColorIndex.Default;
 
                     FireProjectileInfo XLightBusterSmallProjectille4 = new FireProjectileInfo();
@@ -186,7 +185,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XLightBusterSmallProjectille4.damage = damageCoefficient * damageStat;
                     XLightBusterSmallProjectille4.force = force;
                     XLightBusterSmallProjectille4.crit = RollCrit();
-                    XLightBusterSmallProjectille4.speedOverride = 250f;
+                    XLightBusterSmallProjectille4.speedOverride = 220f;
                     XLightBusterSmallProjectille4.damageColorIndex = DamageColorIndex.Default;
 
                     FireProjectileInfo XLightBusterSmallProjectille5 = new FireProjectileInfo();
@@ -197,7 +196,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XLightBusterSmallProjectille5.damage = damageCoefficient * damageStat;
                     XLightBusterSmallProjectille5.force = force;
                     XLightBusterSmallProjectille5.crit = RollCrit();
-                    XLightBusterSmallProjectille5.speedOverride = 250f;
+                    XLightBusterSmallProjectille5.speedOverride = 210f;
                     XLightBusterSmallProjectille5.damageColorIndex = DamageColorIndex.Default;
 
                     FireProjectileInfo XLightBusterSmallProjectille6 = new FireProjectileInfo();
@@ -208,7 +207,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XLightBusterSmallProjectille6.damage = damageCoefficient * damageStat;
                     XLightBusterSmallProjectille6.force = force;
                     XLightBusterSmallProjectille6.crit = RollCrit();
-                    XLightBusterSmallProjectille6.speedOverride = 220f;
+                    XLightBusterSmallProjectille6.speedOverride = 200f;
                     XLightBusterSmallProjectille6.damageColorIndex = DamageColorIndex.Default;
 
 

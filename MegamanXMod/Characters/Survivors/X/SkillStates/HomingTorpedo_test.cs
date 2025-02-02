@@ -11,7 +11,7 @@ using UnityEngine.Networking;
 
 namespace MegamanXMod.Survivors.X.SkillStates
 {
-    public class HomingTorpedo : BaseChargeSpecial
+    public class HomingTorpedo_test : BaseChargeSpecial
     {
 
         private HuntressTracker huntressTracker;
@@ -78,6 +78,10 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
                     HomingTorpedo1 HT1 = new HomingTorpedo1();
 
+                    HT1.SetTarget(this.initialOrbTarget);
+
+                    //Debug.Log("HT OrbTarget:" + initialOrbTarget);
+
                     SetNextEntityState(HT1);
 
                 }
@@ -96,6 +100,10 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
                     HomingTorpedo2 HT2 = new HomingTorpedo2();
 
+                    HT2.SetTarget(this.initialOrbTarget);
+
+                    //Debug.Log("2HT OrbTarget:" + initialOrbTarget);
+
                     SetNextEntityState(HT2);
 
                 }
@@ -113,6 +121,10 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 {
 
                     HomingTorpedo3 HT3 = new HomingTorpedo3();
+
+                    HT3.SetTarget(this.initialOrbTarget);
+
+                    //Debug.Log("3HT OrbTarget:" + initialOrbTarget);
 
                     SetNextEntityState(HT3);
 

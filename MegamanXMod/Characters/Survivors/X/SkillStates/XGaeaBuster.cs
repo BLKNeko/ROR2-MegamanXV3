@@ -21,7 +21,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             baseDuration = 0.6f;
             firePercentTime = 0.0f;
             force = 400f;
-            recoil = 3f;
+            recoil = 2f;
             range = 256f;
             muzzleString = "BusterMuzzPos";
 
@@ -50,17 +50,17 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 hasFired = true;
 
-                characterBody.AddSpreadBloom(0.8f);
-                EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
-
-                AkSoundEngine.PostEvent(XStaticValues.X_Mid_Bullet, this.gameObject);
-
-                PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
-
                 if (isAuthority)
                 {
+
+                    characterBody.AddSpreadBloom(0.8f);
+                    EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
+
+                    AkSoundEngine.PostEvent(XStaticValues.X_Mid_Bullet, this.gameObject);
+
+                    PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
+
                     Ray aimRay = GetAimRay();
-                    AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
 
                     FireProjectileInfo XGaeaBusterMediumProjectille = new FireProjectileInfo();
                     XGaeaBusterMediumProjectille.projectilePrefab = XAssets.xGaeaBusterSmallProjectile;
@@ -84,15 +84,15 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 hasFired = true;
 
-                characterBody.AddSpreadBloom(0.8f);
-                EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
-
-                AkSoundEngine.PostEvent(XStaticValues.X_Mid_Bullet, this.gameObject);
-
-                PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
-
                 if (isAuthority)
                 {
+
+                    characterBody.AddSpreadBloom(0.8f);
+                    EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
+
+                    AkSoundEngine.PostEvent(XStaticValues.X_Mid_Bullet, this.gameObject);
+
+                    PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
 
                     Ray aimRay = GetAimRay();
                     AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
@@ -122,15 +122,15 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 this.hasFired = true;
 
-                base.characterBody.AddSpreadBloom(0.75f);
-                EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
-
-                AkSoundEngine.PostEvent(XStaticValues.X_Charge_Shot, this.gameObject);
-
-                PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
-
                 if (base.isAuthority)
                 {
+
+                    base.characterBody.AddSpreadBloom(0.75f);
+                    EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
+
+                    AkSoundEngine.PostEvent(XStaticValues.X_Charge_Shot, this.gameObject);
+
+                    PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
 
                     Ray aimRay = GetAimRay();
                     AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);

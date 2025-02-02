@@ -53,7 +53,8 @@ namespace MegamanXMod.Survivors.X
             Modules.Content.AddEntityState(typeof(ChameleonStingBuffs));
             Modules.Content.AddEntityState(typeof(LockArmor));
             Modules.Content.AddEntityState(typeof(MeltCreeper));
-            Modules.Content.AddEntityState(typeof(HomingTorpedo));
+            Modules.Content.AddEntityState(typeof(HomingTorpedo_unified));
+            Modules.Content.AddEntityState(typeof(HomingTorpedo_test));
             Modules.Content.AddEntityState(typeof(HomingTorpedo1));
             Modules.Content.AddEntityState(typeof(HomingTorpedo2));
             Modules.Content.AddEntityState(typeof(HomingTorpedo3));

@@ -180,7 +180,9 @@ namespace MegamanXMod.Survivors.X.SkillStates
             base.OnExit();
 
             characterMotor.disableAirControlUntilCollision = false;
-            
+
+            PlayAnimation("FullBody, Override", "DashEnd", "attackSpeed", duration);
+
         }
 
         public override void OnSerialize(NetworkWriter writer)

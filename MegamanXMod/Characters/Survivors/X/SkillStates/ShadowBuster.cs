@@ -14,7 +14,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
         //delay on firing is usually ass-feeling. only set this if you know what you're doing
         public static float firePercentTime = 0.0f;
         public static float force = 800f;
-        public static float recoil = 3f;
+        public static float recoil = 1f;
         public static float range = 256f;
         public static GameObject tracerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/TracerGoldGat");
 
@@ -69,15 +69,16 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 hasFired = true;
 
-                characterBody.AddSpreadBloom(0.8f);
-                EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
-
-                //AkSoundEngine.PostEvent(XStaticValues.X_Simple_Bullet, this.gameObject);
-
-                PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
-
                 if (isAuthority)
                 {
+
+                    characterBody.AddSpreadBloom(0.8f);
+                    EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
+
+                    //AkSoundEngine.PostEvent(XStaticValues.X_Simple_Bullet, this.gameObject);
+
+                    PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
+
                     Ray aimRay = GetAimRay();
                     Vector3 raygun1 = new Vector3(aimRay.direction.x + 0.15f, aimRay.direction.y, aimRay.direction.z);
                     Vector3 raygun2 = new Vector3(aimRay.direction.x - 0.15f, aimRay.direction.y, aimRay.direction.z);

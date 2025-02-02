@@ -56,20 +56,20 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 hasFired = true;
 
-                characterBody.AddSpreadBloom(0.8f);
-                EffectManager.SimpleMuzzleFlash(XAssets.MeltCreeperVFX, gameObject, muzzleString, true);
-
-                if (XConfig.enableVoiceBool.Value)
-                {
-                    AkSoundEngine.PostEvent(XStaticValues.X_meltCreeper_VSFX, this.gameObject);
-                }
-
-                PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
-
                 if (isAuthority)
                 {
+
+                    characterBody.AddSpreadBloom(0.8f);
+                    EffectManager.SimpleMuzzleFlash(XAssets.MeltCreeperVFX, gameObject, muzzleString, true);
+
+                    if (XConfig.enableVoiceBool.Value)
+                    {
+                        AkSoundEngine.PostEvent(XStaticValues.X_meltCreeper_VSFX, this.gameObject);
+                    }
+
+                    PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
+
                     Ray aimRay = GetAimRay();
-                    AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
 
                     FireProjectileInfo XMeltCreeperProjectille = new FireProjectileInfo();
                     XMeltCreeperProjectille.projectilePrefab = XAssets.MeltCreeperProjectile;
@@ -96,20 +96,20 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 hasFired = true;
 
-                characterBody.AddSpreadBloom(0.8f);
-                EffectManager.SimpleMuzzleFlash(XAssets.MeltCreeperVFX, gameObject, muzzleString, true);
-
-                if (XConfig.enableVoiceBool.Value)
-                {
-                    AkSoundEngine.PostEvent(XStaticValues.X_meltCreeper_VSFX, this.gameObject);
-                }
-
-                PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
-
                 if (isAuthority)
                 {
+
+                    characterBody.AddSpreadBloom(0.8f);
+                    EffectManager.SimpleMuzzleFlash(XAssets.MeltCreeperVFX, gameObject, muzzleString, true);
+
+                    if (XConfig.enableVoiceBool.Value)
+                    {
+                        AkSoundEngine.PostEvent(XStaticValues.X_meltCreeper_VSFX, this.gameObject);
+                    }
+
+                    PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
+
                     Ray aimRay = GetAimRay();
-                    AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
 
                     FireProjectileInfo XMeltCreeperProjectille = new FireProjectileInfo();
                     XMeltCreeperProjectille.projectilePrefab = XAssets.MeltCreeperProjectile;
@@ -136,18 +136,19 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 this.hasFired = true;
 
-                base.characterBody.AddSpreadBloom(0.75f);
-                EffectManager.SimpleMuzzleFlash(XAssets.MeltCreeperChargeVFX, gameObject, muzzleString, true);
-
-                if (XConfig.enableVoiceBool.Value)
-                {
-                    AkSoundEngine.PostEvent(XStaticValues.X_meltCreeper_VSFX, this.gameObject);
-                }
-
-                PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
-
                 if (isAuthority)
                 {
+
+                    base.characterBody.AddSpreadBloom(0.75f);
+                    EffectManager.SimpleMuzzleFlash(XAssets.MeltCreeperChargeVFX, gameObject, muzzleString, true);
+
+                    if (XConfig.enableVoiceBool.Value)
+                    {
+                        AkSoundEngine.PostEvent(XStaticValues.X_meltCreeper_VSFX, this.gameObject);
+                    }
+
+                    PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
+
                     Ray aimRay = GetAimRay();
                     AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
 

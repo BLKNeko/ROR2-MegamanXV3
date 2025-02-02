@@ -14,7 +14,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
         //delay on firing is usually ass-feeling. only set this if you know what you're doing
         public static float firePercentTime = 0.0f;
         public static float force = 800f;
-        public static float recoil = 3f;
+        public static float recoil = 2f;
         public static float range = 256f;
 
         private float duration;
@@ -64,18 +64,19 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 hasFired = true;
 
-                characterBody.AddSpreadBloom(1f);
-                EffectManager.SimpleMuzzleFlash(muzzleObject, gameObject, muzzleString, false);
-
-                if (XConfig.enableVoiceBool.Value)
-                {
-                    AkSoundEngine.PostEvent(XStaticValues.X_squeezeBomb_VSFX, this.gameObject);
-                }
-
-                AkSoundEngine.PostEvent(XStaticValues.X_Squeezebomb_SFX, this.gameObject);
-
                 if (isAuthority)
                 {
+
+                    characterBody.AddSpreadBloom(1f);
+                    EffectManager.SimpleMuzzleFlash(muzzleObject, gameObject, muzzleString, false);
+
+                    if (XConfig.enableVoiceBool.Value)
+                    {
+                        AkSoundEngine.PostEvent(XStaticValues.X_squeezeBomb_VSFX, this.gameObject);
+                    }
+
+                    AkSoundEngine.PostEvent(XStaticValues.X_Squeezebomb_SFX, this.gameObject);
+
                     Ray aimRay = GetAimRay();
                     AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
 

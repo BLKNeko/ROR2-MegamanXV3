@@ -188,6 +188,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
                 SetNextEntityState(CSBuff);
 
+                //PELO VISTO, O SERVIDOR NAO CONSEGUE REPLICAR O BUFF COM A SKILL CARREGADA, ENTAO CRIEI OUTRO STATE SO PARA APLICAR OS BUFFS
+
                 //AkSoundEngine.PostEvent(XStaticValues.X_Squeezebomb_SFX, this.gameObject);
 
                 //PlayAnimation("FullBody, Override", "HyperMode", "HyperMode.playbackRate", duration);
@@ -209,17 +211,6 @@ namespace MegamanXMod.Survivors.X.SkillStates
             }
         }
 
-        [ClientRpc]
-        private void RPCApplyCSBuffs()
-        {
-            if (NetworkServer.active)
-            {
-                characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 8f);
-                characterBody.AddTimedBuff(RoR2Content.Buffs.Intangible, 8f);
-                characterBody.AddTimedBuff(RoR2Content.Buffs.Cloak, 8f);
-                characterBody.AddTimedBuff(RoR2Content.Buffs.CloakSpeed, 8f);
-            }
-        }
 
 
 
