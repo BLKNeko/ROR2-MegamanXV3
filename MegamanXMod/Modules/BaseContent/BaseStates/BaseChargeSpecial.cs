@@ -71,7 +71,7 @@ namespace MegamanXMod.Modules.BaseStates
             base.FixedUpdate();
 
             // Carregar o ataque
-            if (base.inputBank.skill4.down)
+            if (base.inputBank.skill4.down && base.isAuthority)
             {
                 ChargeShot();
             }
@@ -93,7 +93,7 @@ namespace MegamanXMod.Modules.BaseStates
                 FireSimpleBullet();
             }
 
-            if (base.fixedAge >= this.duration && base.isAuthority && hasTime == true)
+            if (base.fixedAge >= this.duration && base.isAuthority && hasTime && hasFired)
             {
                 hasTime = false;
 

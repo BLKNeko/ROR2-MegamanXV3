@@ -1,6 +1,7 @@
 ﻿using EntityStates;
 using MegamanXMod.Modules.BaseStates;
 using MegamanXMod.Survivors.X;
+using MegamanXMod.Survivors.X.Components;
 using R2API;
 using RoR2;
 using RoR2.Projectile;
@@ -12,6 +13,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 {
     public class ChameleonSting : BaseChargeSpecial
     {
+        XBaseComponent xbase;
 
         public override void OnEnter()
         {
@@ -19,7 +21,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             damageCoefficient = XStaticValues.ChameleonStingDamageCoefficient;
             procCoefficient = 1f;
-            baseDuration = 1f;
+            baseDuration = 0.6f;
             firePercentTime = 0.0f;
             force = 400f;
             recoil = 3f;
@@ -32,12 +34,13 @@ namespace MegamanXMod.Survivors.X.SkillStates
             hitEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/ImpactEffects/HitsparkCommandoFMJ");
             muzzleEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/MuzzleFlashes/MuzzleflashBanditShotgun");
 
-
+            xbase = GetComponent<XBaseComponent>();
 
         }
 
         public override void OnExit()
         {
+
             base.OnExit();
         }
 
@@ -53,19 +56,19 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 hasFired = true;
 
-                characterBody.AddSpreadBloom(0.8f);
-                EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
-
-                if (XConfig.enableVoiceBool.Value)
-                {
-                    AkSoundEngine.PostEvent(XStaticValues.X_ChameleonSting_VSFX, this.gameObject);
-                }
-                AkSoundEngine.PostEvent(XStaticValues.X_ChameleonSting_SFX, this.gameObject);
-
-                PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
-
                 if (isAuthority)
                 {
+                    characterBody.AddSpreadBloom(0.8f);
+                    EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
+
+                    if (XConfig.enableVoiceBool.Value)
+                    {
+                        AkSoundEngine.PostEvent(XStaticValues.X_ChameleonSting_VSFX, this.gameObject);
+                    }
+                    AkSoundEngine.PostEvent(XStaticValues.X_ChameleonSting_SFX, this.gameObject);
+
+                    PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
+
                     Ray aimRay = GetAimRay();
                     AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
 
@@ -116,19 +119,21 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 hasFired = true;
 
-                characterBody.AddSpreadBloom(0.8f);
-                EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
-
-                if (XConfig.enableVoiceBool.Value)
-                {
-                    AkSoundEngine.PostEvent(XStaticValues.X_ChameleonSting_VSFX, this.gameObject);
-                }
-                AkSoundEngine.PostEvent(XStaticValues.X_ChameleonSting_SFX, this.gameObject);
-
-                PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
 
                 if (isAuthority)
                 {
+
+                    characterBody.AddSpreadBloom(0.8f);
+                    EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
+
+                    if (XConfig.enableVoiceBool.Value)
+                    {
+                        AkSoundEngine.PostEvent(XStaticValues.X_ChameleonSting_VSFX, this.gameObject);
+                    }
+                    AkSoundEngine.PostEvent(XStaticValues.X_ChameleonSting_SFX, this.gameObject);
+
+                    PlayAnimation("Gesture, Override", "XBusterAttack", "attackSpeed", this.duration);
+
                     Ray aimRay = GetAimRay();
                     AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
 
@@ -179,37 +184,43 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 this.hasFired = true;
 
-                AkSoundEngine.PostEvent(XStaticValues.X_Squeezebomb_SFX, this.gameObject);
+                ChameleonStingBuffs CSBuff = new ChameleonStingBuffs();
 
-                PlayAnimation("FullBody, Override", "HyperMode", "HyperMode.playbackRate", duration);
+                SetNextEntityState(CSBuff);
 
-                if (NetworkServer.active)
-                {
+                //AkSoundEngine.PostEvent(XStaticValues.X_Squeezebomb_SFX, this.gameObject);
 
-                    characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 8f);
-                    characterBody.AddTimedBuff(RoR2Content.Buffs.Intangible, 8f);
-                    characterBody.AddTimedBuff(RoR2Content.Buffs.Cloak, 8f);
-                    characterBody.AddTimedBuff(RoR2Content.Buffs.CloakSpeed, 8f);
+                //PlayAnimation("FullBody, Override", "HyperMode", "HyperMode.playbackRate", duration);
 
-                }
+                //xbase.SetCSBuff(true);
 
-                //if (base.isAuthority)
+                //if (NetworkServer.active)
                 //{
-
-                //    if (NetworkServer.active)
-                //    {
-
-                //        characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 8f);
-                //        characterBody.AddTimedBuff(RoR2Content.Buffs.Intangible, 8f);
-                //        characterBody.AddTimedBuff(RoR2Content.Buffs.Cloak, 8f);
-                //        characterBody.AddTimedBuff(RoR2Content.Buffs.CloakSpeed, 8f);
-
-                //    }
-
-
+                //    RPCApplyCSBuffs();
                 //}
+                //else
+                //{
+                //    characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 8f);
+                //    characterBody.AddTimedBuff(RoR2Content.Buffs.Intangible, 8f);
+                //    characterBody.AddTimedBuff(RoR2Content.Buffs.Cloak, 8f);
+                //    characterBody.AddTimedBuff(RoR2Content.Buffs.CloakSpeed, 8f);
+                //}
+
             }
         }
+
+        [ClientRpc]
+        private void RPCApplyCSBuffs()
+        {
+            if (NetworkServer.active)
+            {
+                characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 8f);
+                characterBody.AddTimedBuff(RoR2Content.Buffs.Intangible, 8f);
+                characterBody.AddTimedBuff(RoR2Content.Buffs.Cloak, 8f);
+                characterBody.AddTimedBuff(RoR2Content.Buffs.CloakSpeed, 8f);
+            }
+        }
+
 
 
     }

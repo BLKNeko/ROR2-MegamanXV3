@@ -103,8 +103,15 @@ namespace MegamanXMod.Survivors.X.SkillStates
             if (base.fixedAge >= this.duration && base.isAuthority && hasTime == true)
             {
                 hasTime = false;
-                
-                this.outer.SetNextStateToMain();
+
+                if(chargeLevel == 3 || characterBody.HasBuff(XBuffs.GigaBusterChargeBuff))
+                {
+                    XGigaBusterBuff XGB = new XGigaBusterBuff();
+                    this.outer.SetNextState(XGB);
+                }
+                else
+                    this.outer.SetNextStateToMain();
+
             }
 
         }
@@ -188,30 +195,17 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 this.hasFired = true;
 
-                base.characterBody.AddSpreadBloom(0.75f);
-                EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
 
-                AkSoundEngine.PostEvent(XStaticValues.X_Charge_Shot, this.gameObject);
-
-                PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
-
-                if (NetworkServer.active)
-                {
-                    // Isso deve ser executado apenas no lado do servidor para garantir a sincronização
-                    if (characterBody.HasBuff(XBuffs.GigaBusterChargeBuff))
-                    {
-                        characterBody.RemoveOldestTimedBuff(XBuffs.GigaBusterChargeBuff);
-                    }
-                    else
-                    {
-                        characterBody.AddTimedBuff(XBuffs.GigaBusterChargeBuff, 20f);
-                    }
-                }
 
                 if (base.isAuthority)
                 {
 
-                    
+                    base.characterBody.AddSpreadBloom(0.75f);
+                    EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, true);
+
+                    AkSoundEngine.PostEvent(XStaticValues.X_Charge_Shot, this.gameObject);
+
+                    PlayAnimation("Gesture, Override", "XBusterChargeAttack", "attackSpeed", this.duration);
 
                     Ray aimRay = GetAimRay();
                     AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
@@ -315,7 +309,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.PrioritySkill;
+            return InterruptPriority.Frozen;
         }
     }
 }

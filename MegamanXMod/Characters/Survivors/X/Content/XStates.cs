@@ -1,4 +1,6 @@
 ﻿using MegamanXMod.Modules.BaseContent.BaseStates;
+using MegamanXMod.Modules.BaseStates;
+using MegamanXMod.Survivors.X.Components;
 using MegamanXMod.Survivors.X.SkillStates;
 
 namespace MegamanXMod.Survivors.X
@@ -21,6 +23,7 @@ namespace MegamanXMod.Survivors.X
             Modules.Content.AddEntityState(typeof(XBuster));
             Modules.Content.AddEntityState(typeof(XLightBuster));
             Modules.Content.AddEntityState(typeof(XGigaBuster));
+            Modules.Content.AddEntityState(typeof(XGigaBusterBuff));
             Modules.Content.AddEntityState(typeof(XMaxBuster));
             Modules.Content.AddEntityState(typeof(XForceBuster));
             Modules.Content.AddEntityState(typeof(XFalconBuster));
@@ -47,12 +50,29 @@ namespace MegamanXMod.Survivors.X
             Modules.Content.AddEntityState(typeof(RisingFire));
             Modules.Content.AddEntityState(typeof(AcidBurst));
             Modules.Content.AddEntityState(typeof(ChameleonSting));
+            Modules.Content.AddEntityState(typeof(ChameleonStingBuffs));
             Modules.Content.AddEntityState(typeof(LockArmor));
             Modules.Content.AddEntityState(typeof(MeltCreeper));
+            Modules.Content.AddEntityState(typeof(HomingTorpedo));
+            Modules.Content.AddEntityState(typeof(HomingTorpedo1));
+            Modules.Content.AddEntityState(typeof(HomingTorpedo2));
+            Modules.Content.AddEntityState(typeof(HomingTorpedo3));
 
             Modules.Content.AddEntityState(typeof(XHeart));
             Modules.Content.AddEntityState(typeof(SpawnState));
             Modules.Content.AddEntityState(typeof(DeathState));
+            Modules.Content.AddEntityState(typeof(BaseChargePrimary));
+            Modules.Content.AddEntityState(typeof(BaseChargeSecondary));
+            Modules.Content.AddEntityState(typeof(BaseChargeSpecial));
+            Modules.Content.AddEntityState(typeof(BaseMeleeAttack));
+            Modules.Content.AddEntityState(typeof(BaseMeleeAttack2));
+
+            Modules.Content.AddEntityState(typeof(XBaseComponent));
+            Modules.Content.AddEntityState(typeof(XArmorComponent));
+            Modules.Content.AddEntityState(typeof(XHoverComponent));
+            Modules.Content.AddEntityState(typeof(XMeltCreeperComponent));
+            Modules.Content.AddEntityState(typeof(XMeltCreeperChargeComponent));
+            Modules.Content.AddEntityState(typeof(XShockSphereComponent));
 
         }
     }

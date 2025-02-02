@@ -33,9 +33,7 @@ namespace MegamanXMod.Survivors.X.Components
 
         private FootstepHandler footstepHandler;
 
-        private float damageToApply = 0f;
-
-        private bool shoudlAplyDamage = false;
+        private bool shoudlAplyCSBuffs = false;
 
 
 
@@ -110,7 +108,30 @@ namespace MegamanXMod.Survivors.X.Components
             //Debug.Log("Xhurtbox: " + XBody.mainHurtBox.transform.localPosition);
             //Debug.Log("Xmodel: " + XBody.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>().transform.localPosition);
 
+            if (shoudlAplyCSBuffs)
+            {
+                CSBuffs();
+            }
+
             IsXWeak();
+        }
+
+        private void CSBuffs()
+        {
+            if (NetworkServer.active)
+            {
+                XBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 8f);
+                XBody.AddTimedBuff(RoR2Content.Buffs.Intangible, 8f);
+                XBody.AddTimedBuff(RoR2Content.Buffs.Cloak, 8f);
+                XBody.AddTimedBuff(RoR2Content.Buffs.CloakSpeed, 8f);
+            }
+
+            shoudlAplyCSBuffs = false;
+        }
+
+        public void SetCSBuff(bool b)
+        {
+            shoudlAplyCSBuffs = b;
         }
 
         public CharacterBody GetXBody()

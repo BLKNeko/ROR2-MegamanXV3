@@ -252,8 +252,8 @@ namespace MegamanXMod.Survivors.X
             bodyPrefab.GetComponent<CharacterDeathBehavior>().deathState = new EntityStates.SerializableEntityStateType(typeof(DeathState));
             bodyPrefab.GetComponent<EntityStateMachine>().initialStateType = new EntityStates.SerializableEntityStateType(typeof(SpawnState));
 
-            Prefabs.AddEntityStateMachine(bodyPrefab, "Weapon");
-            Prefabs.AddEntityStateMachine(bodyPrefab, "Weapon2");
+            Prefabs.AddEntityStateMachine(bodyPrefab, "Weapon", typeof(XHeart), typeof(EntityStates.GenericCharacterMain));
+            Prefabs.AddEntityStateMachine(bodyPrefab, "Weapon2", typeof(XHeart), typeof(EntityStates.GenericCharacterMain));
         }
 
         #region skills
@@ -1354,7 +1354,7 @@ namespace MegamanXMod.Survivors.X
                 },
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ChameleonSting)),
-                activationStateMachineName = "Weapon",
+                activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseRechargeInterval = 5f,
