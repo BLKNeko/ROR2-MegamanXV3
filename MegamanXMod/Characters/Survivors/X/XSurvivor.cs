@@ -17,6 +17,7 @@ using EmotesAPI;
 using System.Security.Cryptography;
 using System.Collections;
 using R2API.Utils;
+using UnityEngine.Networking;
 
 namespace MegamanXMod.Survivors.X
 {
@@ -1191,7 +1192,7 @@ namespace MegamanXMod.Survivors.X
                 activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
-                baseRechargeInterval = 30f,
+                baseRechargeInterval = 3f,
                 baseMaxStock = 1,
 
                 rechargeStock = 1,
@@ -1906,21 +1907,74 @@ namespace MegamanXMod.Survivors.X
             On.RoR2.SurvivorCatalog.Init += SurvivorCatalog_Init;
             CustomEmotesAPI.animChanged += CustomEmotesAPI_animChanged;
             On.RoR2.CharacterMaster.OnBodyStart += RestoreHPAfterRespawn;
-            On.RoR2.CharacterBody.RemoveBuff_BuffDef += CharacterBody_RemoveBuff_BuffDef;
+            //On.RoR2.CharacterBody.RemoveBuff_BuffDef += CharacterBody_RemoveBuff_BuffDef;
+            On.RoR2.CharacterBody.RemoveBuff_BuffIndex += CharacterBody_RemoveBuff_BuffIndex;
         }
 
-        private void CharacterBody_RemoveBuff_BuffDef(On.RoR2.CharacterBody.orig_RemoveBuff_BuffDef orig, CharacterBody self, BuffDef buffDef)
+        private void CharacterBody_RemoveBuff_BuffIndex(On.RoR2.CharacterBody.orig_RemoveBuff_BuffIndex orig, CharacterBody self, BuffIndex buffType)
         {
-            orig(self, buffDef);
+            orig(self, buffType);
 
-            if(buffDef == XBuffs.HyperChipBuff)
+            //Debug.Log("Buff Removed : " + buffType);
+
+            if (buffType == XBuffs.HyperChipBuff.buffIndex)
             {
+                //Debug.Log("Hyper-Chip Buff Removed");
                 if (self.HasBuff(XBuffs.MaxArmorBuff))
                 {
-                    
+                    //Debug.Log("Max Armor is ON");
+
+                    if (self.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>())
+                    {
+                        //Debug.Log("Character model:" + self.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>());
+
+                        if (self.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>().mainSkinnedMeshRenderer)
+                        {
+                            //Debug.Log("Mesh Render: " + self.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>().mainSkinnedMeshRenderer);
+
+                            if (self.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>().baseRendererInfos[0].defaultMaterial == XAssets.MatMaxGold)
+                            {
+                                //Debug.Log("Changin MAT");
+                                self.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>().mainSkinnedMeshRenderer.sharedMaterial = XAssets.MatMax;
+                                self.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>().baseRendererInfos[0].defaultMaterial = XAssets.MatMax;
+                            }
+
+                        }
+                    }
+
                 }
             }
-            
+
+            if (NetworkServer.active)
+            {
+                if (buffType == XBuffs.HyperChipBuff.buffIndex)
+                {
+                    //Debug.Log("Hyper-Chip Buff Removed");
+                    if (self.HasBuff(XBuffs.MaxArmorBuff))
+                    {
+                        //Debug.Log("Max Armor is ON");
+
+                        if (self.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>())
+                        {
+                            //Debug.Log("Character model:" + self.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>());
+
+                            if (self.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>().mainSkinnedMeshRenderer)
+                            {
+                                //Debug.Log("Mesh Render: " + self.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>().mainSkinnedMeshRenderer);
+
+                                if (self.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>().baseRendererInfos[0].defaultMaterial == XAssets.MatMaxGold)
+                                {
+                                    //Debug.Log("Changin MAT");
+                                    self.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>().mainSkinnedMeshRenderer.sharedMaterial = XAssets.MatMax;
+                                    self.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>().baseRendererInfos[0].defaultMaterial = XAssets.MatMax;
+                                }
+
+                            }
+                        }
+
+                    }
+                }
+            }
 
         }
 

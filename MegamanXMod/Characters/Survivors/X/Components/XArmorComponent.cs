@@ -112,7 +112,7 @@ namespace MegamanXMod.Survivors.X.Components
 
             FalconDashReset();
             ShouldRemoveHyperChipBuff();
-            ShouldRemoveGoldTexture();
+            //ShouldRemoveGoldTexture();
             //SholdApplyGoldenArmorTexture();
 
             if (!secondArmorUnlock)

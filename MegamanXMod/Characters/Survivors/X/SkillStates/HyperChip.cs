@@ -114,7 +114,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             if (NetworkServer.active)
             {
-                characterBody.AddTimedBuff(XBuffs.HyperChipBuff, 20f);
+                characterBody.AddTimedBuff(XBuffs.HyperChipBuff, 10f);
             }
 
             
