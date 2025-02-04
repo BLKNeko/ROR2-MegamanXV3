@@ -1192,7 +1192,7 @@ namespace MegamanXMod.Survivors.X
                 activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
-                baseRechargeInterval = 3f,
+                baseRechargeInterval = 30f,
                 baseMaxStock = 1,
 
                 rechargeStock = 1,

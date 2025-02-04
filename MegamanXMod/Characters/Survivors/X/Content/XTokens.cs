@@ -104,10 +104,10 @@ namespace MegamanXMod.Survivors.X
             LanguageAPI.Add(prefix + "PRIMARY_X_BUSTER_DESCRIPTION", $"Shoot with X - Buster, dealing <style=cIsDamage>{100f * XStaticValues.XBusterDamageCoefficient}% damage</style>.");
 
             LanguageAPI.Add(prefix + "PRIMARY_LIGHT_BUSTER_NAME", "Light-Buster");
-            LanguageAPI.Add(prefix + "PRIMARY_LIGHT_BUSTER_DESCRIPTION", "Light-Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_LIGHT_BUSTER_DESCRIPTION", $"Light-Buster, X-Charge shot will be stronger and followed by extra 6 small projectiles, dealing <style=cIsDamage>{100f * (XStaticValues.XLightBusterDamageCoefficient) }% damage</style> and <style=cIsDamage>{100f * (XStaticValues.XLightBusterDamageCoefficient / XStaticValues.XFullChargeDamageCoefficient)}% x6 damage</style>.");
 
             LanguageAPI.Add(prefix + "PRIMARY_GIGA_BUSTER_NAME", "Giga-Buster");
-            LanguageAPI.Add(prefix + "PRIMARY_GIGA_BUSTER_DESCRIPTION", "Giga-Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_GIGA_BUSTER_DESCRIPTION", $"Giga-Buster, This buster can stock one charge and dealing <style=cIsDamage>{100f * XStaticValues.XGigaBusterDamageCoefficient}% damage</style>.");
 
             LanguageAPI.Add(prefix + "PRIMARY_MAX_BUSTER_NAME", "Max-Buster");
             LanguageAPI.Add(prefix + "PRIMARY_MAX_BUSTER_DESCRIPTION", "Max-Buster");

@@ -8,17 +8,18 @@ namespace MegamanXMod.Survivors.X.SkillStates
     public class XRathalosSlashCombo1 : BaseMeleeAttack2
     {
 
-        
+        private bool rathalosExplosionVFXplayed = false;
+        private float rathalosexplosiontimer = 0f;
 
         public override void OnEnter()
         {
             hitboxGroupName = "ShadowSaberGroup";
 
-            damageType = DamageType.Generic;
+            damageType = DamageType.IgniteOnHit;
             damageCoefficient = XStaticValues.XRathalosSlashCombo1DamageCoefficient;
             procCoefficient = 1f;
-            pushForce = 300f;
-            bonusForce = Vector3.zero;
+            pushForce = 800f;
+            bonusForce = Vector3.up;
             baseDuration = 1f;            
 
             //0-1 multiplier of baseduration, used to time when the hitbox is out (usually based on the run time of the animation)
@@ -48,6 +49,10 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             SetHitReset(true, 3);
 
+            rathalosExplosionVFXplayed = false;
+            rathalosexplosiontimer = 0f;
+
+            EffectManager.SimpleMuzzleFlash(XAssets.RathalosFlamesVFX, base.gameObject, "SwordBasePos", true);
 
             base.OnEnter();
         }
@@ -74,12 +79,31 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             //characterMotor.velocity *= 1.5f;
 
+            if (!rathalosExplosionVFXplayed)
+                rathalosexplosiontimer += Time.fixedDeltaTime;
+
+            if (rathalosexplosiontimer > duration * 0.75f && !rathalosExplosionVFXplayed)
+            {
+                rathalosExplosionVFXplayed = true;
+                rathalosexplosiontimer = 0f;
+
+                if (isAuthority)
+                {
+                    EffectManager.SimpleMuzzleFlash(XAssets.RathalosExplosionVFX, gameObject, "MeltCreeperFrontPos", true);
+                    AkSoundEngine.PostEvent(XStaticValues.X_RathalosBusterCharge_SFX, this.gameObject);
+                }
+                    
+
+            }
+
         }
 
         public override void OnExit()
         {
 
             base.PlayAnimation("FullBody, Override", "BufferEmpty", "attackSpeed", this.duration);
+
+            rathalosExplosionVFXplayed = false;
 
             base.OnExit();
         }

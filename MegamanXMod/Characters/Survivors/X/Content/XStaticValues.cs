@@ -51,9 +51,9 @@ namespace MegamanXMod.Survivors.X
         
         public const float GigaAttackGaeaDamageCoefficient = 4f;
         
-        public const float XRathalosSlashCombo1DamageCoefficient = 5f;
+        public const float XRathalosSlashCombo1DamageCoefficient = 8f;
         
-        public const float XRathalosSlashCombo2DamageCoefficient = 5f;
+        public const float XRathalosSlashCombo2DamageCoefficient = 7f;
         
         public const float RisingFireDamageCoefficient = 4f;
         
