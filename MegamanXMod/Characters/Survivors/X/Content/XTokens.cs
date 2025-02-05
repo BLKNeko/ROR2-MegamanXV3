@@ -100,35 +100,36 @@ namespace MegamanXMod.Survivors.X
 
             #region Primary
 
-            LanguageAPI.Add(prefix + "PRIMARY_X_BUSTER_NAME", "X-Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_X_BUSTER_NAME", "X Buster");
             LanguageAPI.Add(prefix + "PRIMARY_X_BUSTER_DESCRIPTION", $"Shoot with X - Buster, dealing <style=cIsDamage>{100f * XStaticValues.XBusterDamageCoefficient}% damage</style>.");
 
-            LanguageAPI.Add(prefix + "PRIMARY_LIGHT_BUSTER_NAME", "Light-Buster");
-            LanguageAPI.Add(prefix + "PRIMARY_LIGHT_BUSTER_DESCRIPTION", $"Light-Buster, X-Charge shot will be stronger and followed by extra 6 small projectiles, dealing <style=cIsDamage>{100f * (XStaticValues.XLightBusterDamageCoefficient) }% damage</style> and <style=cIsDamage>{100f * (XStaticValues.XLightBusterDamageCoefficient / XStaticValues.XFullChargeDamageCoefficient)}% x6 damage</style>.");
+            LanguageAPI.Add(prefix + "PRIMARY_LIGHT_BUSTER_NAME", "Light Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_LIGHT_BUSTER_DESCRIPTION", $"The Light Buster enhances X's Charge Shot, making it stronger and followed by six additional small projectiles. Deals <style=cIsDamage>{100f * (XStaticValues.XLightBusterDamageCoefficient)}% damage</style> on the main shot and <style=cIsDamage>{100f * (XStaticValues.XLightBusterDamageCoefficient / XStaticValues.XFullChargeDamageCoefficient)}% damage per projectile (x6)</style>.");
 
-            LanguageAPI.Add(prefix + "PRIMARY_GIGA_BUSTER_NAME", "Giga-Buster");
-            LanguageAPI.Add(prefix + "PRIMARY_GIGA_BUSTER_DESCRIPTION", $"Giga-Buster, This buster can stock one charge and dealing <style=cIsDamage>{100f * XStaticValues.XGigaBusterDamageCoefficient}% damage</style>.");
 
-            LanguageAPI.Add(prefix + "PRIMARY_MAX_BUSTER_NAME", "Max-Buster");
-            LanguageAPI.Add(prefix + "PRIMARY_MAX_BUSTER_DESCRIPTION", "Max-Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_GIGA_BUSTER_NAME", "Giga Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_GIGA_BUSTER_DESCRIPTION", $"The Giga Buster can store one charge, allowing for a powerful shot that deals <style=cIsDamage>{100f * XStaticValues.XGigaBusterDamageCoefficient}% damage</style>.");
 
-            LanguageAPI.Add(prefix + "PRIMARY_FORCE_BUSTER_NAME", "Force-Buster");
-            LanguageAPI.Add(prefix + "PRIMARY_FORCE_BUSTER_DESCRIPTION", "Force-Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_MAX_BUSTER_NAME", "Max Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_MAX_BUSTER_DESCRIPTION", $"The Max Buster enhances X's Charge Shot, making it stronger and followed by eight additional small projectiles in a short spread area. Deals <style=cIsDamage>{100f * (XStaticValues.XMaxBusterDamageCoefficient)}% damage</style> on the main shot and <style=cIsDamage>{100f * (XStaticValues.XMaxBusterDamageCoefficient / XStaticValues.XFullChargeDamageCoefficient)}% damage per projectile (x8)</style>.");
 
-            LanguageAPI.Add(prefix + "PRIMARY_FALCON_BUSTER_NAME", "Falcon-Buster");
-            LanguageAPI.Add(prefix + "PRIMARY_FALCON_BUSTER_DESCRIPTION", "Falcon-Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_FORCE_BUSTER_NAME", "Force Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_FORCE_BUSTER_DESCRIPTION", $"This powerful buster delivers devastating attacks, dealing <style=cIsDamage>{100f * XStaticValues.XForceBusterDamageCoefficient}% damage</style>. On hit, it leaves behind a shock sphere that continuously deals <style=cIsDamage>{100f * XStaticValues.XShockSphereDamageCoefficient}% damage</style> over time.");
 
-            LanguageAPI.Add(prefix + "PRIMARY_GAEA_BUSTER_NAME", "Gaea-Buster");
-            LanguageAPI.Add(prefix + "PRIMARY_GAEA_BUSTER_DESCRIPTION", "Gaea-Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_FALCON_BUSTER_NAME", "Falcon Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_FALCON_BUSTER_DESCRIPTION", $"This buster fires slightly faster but deals less damage compared to others, inflicting <style=cIsDamage>{100f * XStaticValues.XFalconBusterDamageCoefficient}% damage</style>.");
 
-            LanguageAPI.Add(prefix + "PRIMARY_SHADOW_BUSTER_NAME", "Shadow-Buster");
-            LanguageAPI.Add(prefix + "PRIMARY_SHADOW_BUSTER_DESCRIPTION", "Shadow-Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_GAEA_BUSTER_NAME", "Gaea Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_GAEA_BUSTER_DESCRIPTION", $"The Gaea Buster unleashes powerful attacks that can <color=#044005>poison</color> enemies, dealing <style=cIsDamage>{100f * XStaticValues.XGaeaBusterDamageCoefficient}% damage</style>.");
 
-            LanguageAPI.Add(prefix + "PRIMARY_ULTIMATE_BUSTER_Name", "Ultimate-Buster");
-            LanguageAPI.Add(prefix + "PRIMARY_ULTIMATE_BUSTER_DESCRIPTION", "Ultimate-Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_SHADOW_BUSTER_NAME", "Shadow Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_SHADOW_BUSTER_DESCRIPTION", $"The Shadow Buster is a fast and powerful weapon, firing three kunai in a spread pattern, each dealing <style=cIsDamage>{100f * XStaticValues.ShadowBusterDamageCoefficient}% damage</style> and causing <color=#6b0202>bleeding</color> to enemies.");
 
-            LanguageAPI.Add(prefix + "PRIMARY_RATHALOS_BUSTER_NAME", "Rathalos-Buster");
-            LanguageAPI.Add(prefix + "PRIMARY_RATHALOS_BUSTER_DESCRIPTION", "Rathalos-Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_ULTIMATE_BUSTER_Name", "Ultimate Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_ULTIMATE_BUSTER_DESCRIPTION", $"This ultimate powerful buster delivers devastating attacks, dealing <style=cIsDamage>{100f * XStaticValues.XUltimateBusterDamageCoefficient}% damage</style>. On hit, it leaves behind a shock sphere that continuously deals <style=cIsDamage>{100f * XStaticValues.XUltimateBusterDamageCoefficient}% damage</style> over time.");
+
+            LanguageAPI.Add(prefix + "PRIMARY_RATHALOS_BUSTER_NAME", "Rathalos Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_RATHALOS_BUSTER_DESCRIPTION", $"This buster harnesses the powerful flames of the wyvern Rathalos, dealing <style=cIsDamage>{100f * XStaticValues.XRathalosBusterDamageCoefficient}% damage</style> and <color=#a63b05>igniting</color> enemies.");
 
 
 
@@ -136,11 +137,11 @@ namespace MegamanXMod.Survivors.X
 
             #region Secondary
 
-            LanguageAPI.Add(prefix + "SECONDARY_SHADOW_SABER_NAME", "Shadow-Saber");
-            LanguageAPI.Add(prefix + "SECONDARY_SHADOW_SABER_DESCRIPTION", "Shoot an IceMissle that pierce enemies, dealing <style=cIsDamage> 200 % damage </style>.");
+            LanguageAPI.Add(prefix + "SECONDARY_SHADOW_SABER_NAME", "Shadow Saber");
+            LanguageAPI.Add(prefix + "SECONDARY_SHADOW_SABER_DESCRIPTION", $"Perform a slash with the Shadow Saber, dealing <style=cIsDamage>{100f * XStaticValues.XSSlashComboDamageCoefficient}% damage</style>.");
 
             LanguageAPI.Add(prefix + "SECONDARY_RATHALOS_SABER_NAME", "Rathalos Slash");
-            LanguageAPI.Add(prefix + "SECONDARY_RATHALOS_SABER_DESCRIPTION", "Shoot an IceMissle that pierce enemies, dealing <style=cIsDamage> 200 % damage </style>.");
+            LanguageAPI.Add(prefix + "SECONDARY_RATHALOS_SABER_DESCRIPTION", $"Perform a slash with the Rathalos Saber, dealing <style=cIsDamage>{100f * XStaticValues.XRSlashComboDamageCoefficient}% damage</style>.");
 
             LanguageAPI.Add(prefix + "SECONDARY_SHOTGUN_ICE_NAME", "ShotgunIce");
             LanguageAPI.Add(prefix + "SECONDARY_SHOTGUN_ICE_DESCRIPTION", $"Shoot an Ice Missile that pierces enemies, dealing <style=cIsDamage>{100f * XStaticValues.XShotgunIceDamageCoefficient}% damage</style> and <style=cIsUtility>freezing</style> them.");
@@ -158,7 +159,7 @@ namespace MegamanXMod.Survivors.X
             LanguageAPI.Add(prefix + "UTILITY_X_DASH_DESCRIPTION", "The <color=#CCD3E0>Emergency Acceleration System (DASH)</color> temporarily boosts X's speed, making it ideal for repositioning or evading danger.");
 
             LanguageAPI.Add(prefix + "UTILITY_FALCON_DASH_NAME", "Falcon Dash");
-            LanguageAPI.Add(prefix + "UTILITY_FALCON_DASH_DESCRIPTION", "<style=cIsDamage>X first surrounds his body with immense energy, then performs an invincible flying tackle</style>.</style>");
+            LanguageAPI.Add(prefix + "UTILITY_FALCON_DASH_DESCRIPTION", "The advanced form of the <color=#CCD3E0>Emergency Acceleration System (DASH)</color>, allowing X to use it up to 5 times, with the ability to refresh when X lands on any surface.");
 
             LanguageAPI.Add(prefix + "UTILITY_NOVA_DASH_NAME", "Nova Dash");
             LanguageAPI.Add(prefix + "UTILITY_NOVA_DASH_DESCRIPTION", "<style=cIsDamage>X first surrounds his body with immense energy, then performs an invincible flying tackle</style>.</style>");
@@ -169,17 +170,17 @@ namespace MegamanXMod.Survivors.X
 
             #region Special
 
-            LanguageAPI.Add(prefix + "SPECIAL_HEAD_SCANNER_NAME", "Head-Scanner");
-            LanguageAPI.Add(prefix + "SPECIAL_HEAD_SCANNER_DESCRIPTION", "fires a small missile that seeks out enemies, dealing <style=cIsDamage> 145 % base damage </style>.");
+            LanguageAPI.Add(prefix + "SPECIAL_HEAD_SCANNER_NAME", "Head Scanner");
+            LanguageAPI.Add(prefix + "SPECIAL_HEAD_SCANNER_DESCRIPTION", "X uses the scanner on his helmet to reveal the location of important items on the map.");
 
-            LanguageAPI.Add(prefix + "SPECIAL_HYPER_CHIP_NAME", "Hyper-Chip");
-            LanguageAPI.Add(prefix + "SPECIAL_HYPER_CHIP_DESCRIPTION", "fires a small missile that seeks out enemies, dealing <style=cIsDamage> 145 % base damage </style>.");
+            LanguageAPI.Add(prefix + "SPECIAL_HYPER_CHIP_NAME", "Hyper Chip");
+            LanguageAPI.Add(prefix + "SPECIAL_HYPER_CHIP_DESCRIPTION", "This chip unlocks the true potential of the MAX ARMOR, granting a significant buff to X's combat stats.");
 
-            LanguageAPI.Add(prefix + "SPECIAL_GIGA_ATTACK_GAEA_NAME", "Giga-Attack: Gaea Armor");
-            LanguageAPI.Add(prefix + "SPECIAL_GIGA_ATTACK_GAEA_DESCRIPTION", "fires a small missile that seeks out enemies, dealing <style=cIsDamage> 145 % base damage </style>.");
+            LanguageAPI.Add(prefix + "SPECIAL_GIGA_ATTACK_GAEA_NAME", "Giga Attack: Gaea Armor");
+            LanguageAPI.Add(prefix + "SPECIAL_GIGA_ATTACK_GAEA_DESCRIPTION", $"X concentrates a great amount of energy in his buster, then creates a massive sphere of energy, dealing <style=cIsDamage>{100f * XStaticValues.GigaAttackGaeaDamageCoefficient}% damage</style> over time, while covering the armor and granting immunity during the skill's duration.");
 
             LanguageAPI.Add(prefix + "SPECIAL_RATHALOS_SLASH_NAME", "True Rathalos Slash");
-            LanguageAPI.Add(prefix + "SPECIAL_RATHALOS_SLASH_DESCRIPTION", "Shoot a small missle tha follow some targets, dealing <style=cIsDamage> 145 % base damage </style>.");
+            LanguageAPI.Add(prefix + "SPECIAL_RATHALOS_SLASH_DESCRIPTION", $"X concentrates the power of the wyvern Rathalos in his sword, unleashing a devastating blow that deals <style=cIsDamage>{100f * XStaticValues.XRathalosSlashCombo1DamageCoefficient}% damage</style> and <color=#a63b05>ignites</color> enemies.");
 
             LanguageAPI.Add(prefix + "SPECIAL_MELTCREEPER_NAME", "Meltcreeper");
             LanguageAPI.Add(prefix + "SPECIAL_MELTCREEPER_DESCRIPTION", $"X sends a wave of flames on the ground from his current position, dealing <style=cIsDamage> {100f * XStaticValues.MeltCreeperDamageCoefficient}% damage</style>.");
