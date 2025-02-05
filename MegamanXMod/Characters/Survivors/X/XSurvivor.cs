@@ -2284,6 +2284,7 @@ namespace MegamanXMod.Survivors.X
                 args.moveSpeedMultAdd *= 3f;
                 args.shieldMultAdd *= 1.8f;
                 args.critDamageMultAdd *= 4f;
+                args.critAdd *= 1.25f;
             }
 
             if (sender.HasBuff(XBuffs.UltimateArmorBuff))
