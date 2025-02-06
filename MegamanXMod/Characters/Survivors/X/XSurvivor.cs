@@ -150,9 +150,9 @@ namespace MegamanXMod.Survivors.X
                 //}
         };
 
-        public override UnlockableDef characterUnlockableDef => HenryUnlockables.characterUnlockableDef;
+        public override UnlockableDef characterUnlockableDef => XUnlockables.characterUnlockableDef;
         
-        public override ItemDisplaysBase itemDisplays => new HenryItemDisplays();
+        public override ItemDisplaysBase itemDisplays => new XItemDisplays();
 
         //set in base classes
         public override AssetBundle assetBundle { get; protected set; }
@@ -177,7 +177,7 @@ namespace MegamanXMod.Survivors.X
         public override void InitializeCharacter()
         {
             //need the character unlockable before you initialize the survivordef
-            HenryUnlockables.Init();
+            XUnlockables.Init();
 
             base.InitializeCharacter();
 
@@ -1893,7 +1893,7 @@ namespace MegamanXMod.Survivors.X
             //Modules.Prefabs.CloneDopplegangerMaster(bodyPrefab, masterName, "Merc");
 
             //how to set up AI in code
-            HenryAI.Init(bodyPrefab, masterName);
+            XAI.Init(bodyPrefab, masterName);
 
             //how to load a master set up in unity, can be an empty gameobject with just AISkillDriver components
             //assetBundle.LoadMaster(bodyPrefab, masterName);
