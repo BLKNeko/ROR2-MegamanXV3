@@ -12,7 +12,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
         {
             hitboxGroupName = "ShadowSaberGroup";
 
-            damageType = DamageType.Generic;
+            damageType |= DamageType.Generic;
+            damageType |= DamageTypeCombo.GenericSecondary;
             damageCoefficient = XStaticValues.XRSlashComboDamageCoefficient;
             procCoefficient = 1f;
             pushForce = 300f;

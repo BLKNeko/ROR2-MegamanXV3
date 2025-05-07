@@ -118,6 +118,9 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     XRisingFireSimpleProjectille.force = force;
                     XRisingFireSimpleProjectille.crit = RollCrit();
                     XRisingFireSimpleProjectille.damageColorIndex = DamageColorIndex.Luminous;
+                    XRisingFireSimpleProjectille.damageTypeOverride |= DamageTypeCombo.GenericSpecial;
+                    XRisingFireSimpleProjectille.damageTypeOverride |= DamageType.IgniteOnHit;
+
 
 
 

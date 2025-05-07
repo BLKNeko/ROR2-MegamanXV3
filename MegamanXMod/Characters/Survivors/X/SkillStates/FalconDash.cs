@@ -10,8 +10,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
 {
     public class FalconDash : BaseSkillState
     {
-        public static float duration = 0.5f;
-        public static float initialSpeedCoefficient = 6f;
+        public static float duration = 0.7f;
+        public static float initialSpeedCoefficient = 8f;
         public static float finalSpeedCoefficient = 5f;
 
         public static string dodgeSoundString = "HenryRoll";
@@ -66,25 +66,13 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             if (isAuthority && inputBank && characterDirection)
             {
-                forwardDirection = aimRay.direction;
+                forwardDirection = aimRay.direction.normalized;
             }
-
-            Vector3 rhs = characterDirection ? characterDirection.forward : forwardDirection;
-            Vector3 rhs2 = Vector3.Cross(Vector3.up, rhs);
-
-            float num = Vector3.Dot(forwardDirection, rhs);
-            float num2 = Vector3.Dot(forwardDirection, rhs2);
-
-            RecalculateRollSpeed();
 
             if (characterMotor && characterDirection)
             {
-                //characterMotor.velocity.y = 0f;
-                characterMotor.velocity = forwardDirection * rollSpeed;
+                characterMotor.velocity = forwardDirection.normalized * moveSpeedStat * initialSpeedCoefficient;
             }
-
-            Vector3 b = characterMotor ? characterMotor.velocity : Vector3.zero;
-            previousPosition = transform.position - b;
 
             base.characterMotor.useGravity = false;
 
@@ -109,15 +97,9 @@ namespace MegamanXMod.Survivors.X.SkillStates
             }
         }
 
-        private void RecalculateRollSpeed()
-        {
-            rollSpeed = moveSpeedStat * Mathf.Lerp(initialSpeedCoefficient, finalSpeedCoefficient, fixedAge / duration);
-        }
-
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            RecalculateRollSpeed();
 
             //EffectManager.SimpleMuzzleFlash(EntityStates.Mage.FlyUpState.muzzleflashEffect, gameObject, FWingR1, true);
             //EffectManager.SimpleMuzzleFlash(EntityStates.Mage.FlyUpState.muzzleflashEffect, gameObject, FWingR2, true);
@@ -127,35 +109,15 @@ namespace MegamanXMod.Survivors.X.SkillStates
             //EffectManager.SimpleMuzzleFlash(EntityStates.Mage.FlyUpState.muzzleflashEffect, gameObject, FWingL3, true);
 
             if (characterDirection) characterDirection.forward = forwardDirection;
-            if (cameraTargetParams) cameraTargetParams.fovOverride = Mathf.Lerp(dodgeFOV, 60f, fixedAge / duration);
 
-            Vector3 normalized = (transform.position - previousPosition).normalized;
-            if (characterMotor && characterDirection && normalized != Vector3.zero)
+            if (cameraTargetParams)
+                cameraTargetParams.fovOverride = Mathf.Lerp(dodgeFOV, 60f, fixedAge / duration);
+
+
+            if (characterMotor && characterDirection)
             {
-                Vector3 vector = normalized * rollSpeed;
-                float d = Mathf.Max(Vector3.Dot(vector, forwardDirection), 0f);
-                vector = forwardDirection * d;
-
-                //if(inputBank.moveVector != Vector3.zero)
-                //{
-                //   vector = forwardDirection * d;
-                //}
-                //else
-                //{
-                //    //vector = Vector3.zero;
-                //    // forwardDirection = Vector3.zero;
-                //    float num4 = base.characterMotor.velocity.y;
-                //    num4 = Mathf.MoveTowards(num4, hoverVelocity, hoverAcceleration * base.GetDeltaTime());
-                //    //base.characterMotor.velocity = new Vector3(base.characterMotor.velocity.x, num4, base.characterMotor.velocity.z);
-                //    vector = new Vector3(base.characterMotor.velocity.x, num4, base.characterMotor.velocity.z);
-                //}
-
-                //vector = forwardDirection * d;
-                //vector.y = 0f;
-
-                characterMotor.velocity = vector;
+                characterMotor.velocity = forwardDirection.normalized * moveSpeedStat * Mathf.Lerp(initialSpeedCoefficient, finalSpeedCoefficient, fixedAge / duration);
             }
-            previousPosition = transform.position;
 
             if (isAuthority && fixedAge >= duration && base.inputBank.skill3.down && base.skillLocator.utility.stock >= 1)
             {

@@ -48,6 +48,8 @@ Well since X now have 9 ARMORS this will cover skins, so this is it.
 
 
 # Changelog
+- V 4.0.2 Fix update, Fixed Dash skills not working properly.
+- V 4.0.1 Fix Luminous Shot not working with X primary attacks.
 - V 4.0.0 Remake the whole project for the SOTS update, added ARMOR MECHANICS, EMOTEAPI compatibility, Risk Of Option compatibility and fixes, well, hope you enjoy!
 - V 3.0.0 Remake of the mod bacause it went broken after the void update, some effects now are visualy better, hope you enjoy!
 - V 2.1.2 Remake of the mod bacause it went deprecated, some effects now are visualy better, hope you enjoy!
@@ -73,6 +75,13 @@ Well since X now have 9 ARMORS this will cover skins, so this is it.
 - Please remember that this mod is FREE and will always be. I made it hoping that you would enjoy and have fun!
 
 - But if you are feeling generous to pay me a coffee, click >  <a href='https://ko-fi.com/M4M1LVGAO' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi1.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+
+# CHECK OUT MY OTHER MODS !
+- Zero from Megaman X
+https://thunderstore.io/package/BLKNeko/MegamanXZeroMod/
+
+- Haseo from .Hack//G.U
+https://thunderstore.io/package/BLKNeko/HaseoMod/
 
 
 # CREDITS

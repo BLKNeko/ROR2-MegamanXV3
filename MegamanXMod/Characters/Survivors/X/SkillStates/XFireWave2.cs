@@ -61,6 +61,12 @@ namespace MegamanXMod.Survivors.X.SkillStates
             base.OnExit();
         }
 
+        internal static readonly DamageTypeCombo FireWDamageCombo = new DamageTypeCombo
+        {
+            damageType = DamageType.Generic | DamageType.IgniteOnHit,
+            damageSource = DamageSource.Secondary,
+        };
+
         public override void FixedUpdate()
         {
             base.FixedUpdate();
@@ -125,7 +131,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     origin = aimRay.origin,
                     damage = (damageCoefficient * XStaticValues.XMidChargeDamageCoefficient) * damageStat,
                     damageColorIndex = DamageColorIndex.Default,
-                    damageType = DamageType.IgniteOnHit,
+                    damageType = FireWDamageCombo,
                     falloffModel = BulletAttack.FalloffModel.None,
                     maxDistance = range,
                     force = force,

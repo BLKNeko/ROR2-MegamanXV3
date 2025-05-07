@@ -131,7 +131,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     genericDamageOrb.teamIndex = TeamComponent.GetObjectTeam(base.gameObject);
                     genericDamageOrb.attacker = base.gameObject;
                     genericDamageOrb.procCoefficient = procCoefficient;
-                    genericDamageOrb.damageType = DamageType.Generic;
+                    genericDamageOrb.damageType |= DamageType.Generic;
+                    genericDamageOrb.damageType |= DamageTypeCombo.GenericSpecial;
                     genericDamageOrb.damageColorIndex = DamageColorIndex.Default;
 
                     //genericDamageOrb.damageType = DamageType.ApplyMercExpose;

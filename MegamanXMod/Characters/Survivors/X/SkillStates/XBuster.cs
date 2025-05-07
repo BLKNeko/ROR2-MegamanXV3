@@ -7,6 +7,7 @@ using RoR2.Projectile;
 using System;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UIElements.StyleSheets;
 
 namespace MegamanXMod.Survivors.X.SkillStates
 {
@@ -69,7 +70,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                         origin = aimRay.origin,
                         damage = damageCoefficient * damageStat,
                         damageColorIndex = DamageColorIndex.Default,
-                        damageType = DamageType.Generic,
+                        damageType = DamageTypeCombo.GenericPrimary,
                         falloffModel = BulletAttack.FalloffModel.None,
                         maxDistance = range,
                         force = force,

@@ -140,6 +140,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     gaeaBlastAttack.damageType |= DamageType.WeakOnHit;
                     gaeaBlastAttack.damageType |= DamageType.BypassArmor;
                     gaeaBlastAttack.damageType |= DamageType.SlowOnHit;
+                    gaeaBlastAttack.damageType |= DamageTypeCombo.GenericSpecial;
                     gaeaBlastAttack.damageColorIndex = DamageColorIndex.Poison;
 
                     gaeaBlastAttack.Fire();

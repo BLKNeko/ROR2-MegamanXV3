@@ -382,7 +382,8 @@ namespace MegamanXMod.Survivors.X
             // just setting the numbers to 1 as the entitystate will take care of those
             shurikenProjectilePrefab.GetComponent<ProjectileDamage>().damage = 1f;
             shurikenProjectilePrefab.GetComponent<ProjectileController>().procCoefficient = 1f;
-            shurikenProjectilePrefab.GetComponent<ProjectileDamage>().damageType = DamageType.BleedOnHit;
+            shurikenProjectilePrefab.GetComponent<ProjectileDamage>().damageType |= DamageType.BleedOnHit;
+            shurikenProjectilePrefab.GetComponent<ProjectileDamage>().damageType |= DamageTypeCombo.GenericPrimary;
             shurikenProjectilePrefab.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Bleed;
 
             // register it for networking
@@ -400,13 +401,15 @@ namespace MegamanXMod.Survivors.X
         private static void CreateShurikenProjectile2()
         {
             // clone FMJ's syringe projectile prefab here to use as our own projectile
-            shurikenProjectilePrefab2 = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("Prefabs/Projectiles/Bandit2ShivProjectile"), "Prefabs/Projectiles/Bandit2ShivProjectile", true, "C:\\Users\\test\\Documents\\ror2mods\\MegamanX\\MegamanX\\MegamanX\\MegamanX.cs", "RegisterCharacter", 155);
-            //shurikenProjectilePrefab2 = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/projectiles/Bandit2ShivProjectile"), "XShurikenProjectile2");
+            //shurikenProjectilePrefab2 = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("Prefabs/Projectiles/Bandit2ShivProjectile"), "Prefabs/Projectiles/Bandit2ShivProjectile", true, "C:\\Users\\test\\Documents\\ror2mods\\MegamanX\\MegamanX\\MegamanX\\MegamanX.cs", "RegisterCharacter", 155);
+            shurikenProjectilePrefab2 = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/projectiles/Bandit2ShivProjectile"), "XShurikenProjectile2");
 
             // just setting the numbers to 1 as the entitystate will take care of those
             shurikenProjectilePrefab2.GetComponent<ProjectileDamage>().damage = 1f;
             shurikenProjectilePrefab2.GetComponent<ProjectileController>().procCoefficient = 1f;
-            shurikenProjectilePrefab2.GetComponent<ProjectileDamage>().damageType = DamageType.BleedOnHit;
+            shurikenProjectilePrefab2.GetComponent<ProjectileDamage>().damageType |= DamageType.BleedOnHit;
+            shurikenProjectilePrefab2.GetComponent<ProjectileDamage>().damageType |= DamageTypeCombo.GenericPrimary;
+            shurikenProjectilePrefab2.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Bleed;
 
             // register it for networking
             //if (shurikenProjectilePrefab2) PrefabAPI.RegisterNetworkPrefab(shurikenProjectilePrefab2);
@@ -441,7 +444,7 @@ namespace MegamanXMod.Survivors.X
             // just setting the numbers to 1 as the entitystate will take care of those
             xBusterMediumProjectile.GetComponent<ProjectileDamage>().damage = 1f;
             xBusterMediumProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
-            xBusterMediumProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
+            xBusterMediumProjectile.GetComponent<ProjectileDamage>().damageType = DamageTypeCombo.GenericPrimary;
             xBusterMediumProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
 
             // register it for networking
@@ -478,7 +481,7 @@ namespace MegamanXMod.Survivors.X
             // just setting the numbers to 1 as the entitystate will take care of those
             xBusterChargeProjectile.GetComponent<ProjectileDamage>().damage = 1f;
             xBusterChargeProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
-            xBusterChargeProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
+            xBusterChargeProjectile.GetComponent<ProjectileDamage>().damageType = DamageTypeCombo.GenericPrimary;
             xBusterChargeProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
 
             // register it for networking
@@ -515,7 +518,7 @@ namespace MegamanXMod.Survivors.X
             // just setting the numbers to 1 as the entitystate will take care of those
             xLightBusterChargeProjectile.GetComponent<ProjectileDamage>().damage = 1f;
             xLightBusterChargeProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
-            xLightBusterChargeProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
+            xLightBusterChargeProjectile.GetComponent<ProjectileDamage>().damageType = DamageTypeCombo.GenericPrimary;
             xLightBusterChargeProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
 
             // register it for networking
@@ -552,7 +555,7 @@ namespace MegamanXMod.Survivors.X
             // just setting the numbers to 1 as the entitystate will take care of those
             xLightBusterSmallProjectile.GetComponent<ProjectileDamage>().damage = 1f;
             xLightBusterSmallProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
-            xLightBusterSmallProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
+            xLightBusterSmallProjectile.GetComponent<ProjectileDamage>().damageType = DamageTypeCombo.GenericPrimary;
             xLightBusterSmallProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
 
             // register it for networking
@@ -589,7 +592,7 @@ namespace MegamanXMod.Survivors.X
             // just setting the numbers to 1 as the entitystate will take care of those
             xMaxBusterChargeProjectile.GetComponent<ProjectileDamage>().damage = 1f;
             xMaxBusterChargeProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
-            xMaxBusterChargeProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
+            xMaxBusterChargeProjectile.GetComponent<ProjectileDamage>().damageType = DamageTypeCombo.GenericPrimary;
             xMaxBusterChargeProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
 
             // register it for networking
@@ -626,7 +629,7 @@ namespace MegamanXMod.Survivors.X
             // just setting the numbers to 1 as the entitystate will take care of those
             xMaxBusterSmallProjectile.GetComponent<ProjectileDamage>().damage = 1f;
             xMaxBusterSmallProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
-            xMaxBusterSmallProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
+            xMaxBusterSmallProjectile.GetComponent<ProjectileDamage>().damageType = DamageTypeCombo.GenericPrimary;
             xMaxBusterSmallProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
 
             // register it for networking
@@ -667,7 +670,7 @@ namespace MegamanXMod.Survivors.X
             // just setting the numbers to 1 as the entitystate will take care of those
             xForceBusterProjectile.GetComponent<ProjectileDamage>().damage = 1f;
             xForceBusterProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
-            xForceBusterProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
+            xForceBusterProjectile.GetComponent<ProjectileDamage>().damageType = DamageTypeCombo.GenericPrimary;
             xForceBusterProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
 
             // register it for networking
@@ -750,7 +753,7 @@ namespace MegamanXMod.Survivors.X
             // just setting the numbers to 1 as the entitystate will take care of those
             xFalconBusterChargeProjectile.GetComponent<ProjectileDamage>().damage = 1f;
             xFalconBusterChargeProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
-            xFalconBusterChargeProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
+            xFalconBusterChargeProjectile.GetComponent<ProjectileDamage>().damageType = DamageTypeCombo.GenericPrimary;
             xFalconBusterChargeProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
 
             // register it for networking
@@ -787,7 +790,8 @@ namespace MegamanXMod.Survivors.X
             // just setting the numbers to 1 as the entitystate will take care of those
             xGaeaBusterChargeProjectile.GetComponent<ProjectileDamage>().damage = 1f;
             xGaeaBusterChargeProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
-            xGaeaBusterChargeProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.PoisonOnHit;
+            xGaeaBusterChargeProjectile.GetComponent<ProjectileDamage>().damageType |= DamageType.PoisonOnHit;
+            xGaeaBusterChargeProjectile.GetComponent<ProjectileDamage>().damageType |= DamageTypeCombo.GenericPrimary;
             xGaeaBusterChargeProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Poison;
 
             // register it for networking
@@ -824,7 +828,8 @@ namespace MegamanXMod.Survivors.X
             // just setting the numbers to 1 as the entitystate will take care of those
             xGaeaBusterSmallProjectile.GetComponent<ProjectileDamage>().damage = 1f;
             xGaeaBusterSmallProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
-            xGaeaBusterSmallProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.PoisonOnHit;
+            xGaeaBusterSmallProjectile.GetComponent<ProjectileDamage>().damageType |= DamageType.PoisonOnHit;
+            xGaeaBusterSmallProjectile.GetComponent<ProjectileDamage>().damageType |= DamageTypeCombo.GenericPrimary;
             xGaeaBusterSmallProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Poison;
 
             // register it for networking
@@ -854,7 +859,8 @@ namespace MegamanXMod.Survivors.X
             // just setting the numbers to 1 as the entitystate will take care of those
             shotgunIceprefab.GetComponent<ProjectileDamage>().damage = 1f;
             shotgunIceprefab.GetComponent<ProjectileController>().procCoefficient = 1f;
-            shotgunIceprefab.GetComponent<ProjectileDamage>().damageType = DamageType.Freeze2s;
+            shotgunIceprefab.GetComponent<ProjectileDamage>().damageType |= DamageType.Freeze2s;
+            shotgunIceprefab.GetComponent<ProjectileDamage>().damageType |= DamageTypeCombo.GenericSecondary;
 
             // register it for networking
             //if (shotgunIceprefab) PrefabAPI.RegisterNetworkPrefab(shotgunIceprefab);
@@ -891,7 +897,8 @@ namespace MegamanXMod.Survivors.X
             // just setting the numbers to 1 as the entitystate will take care of those
             XRFireProjectile.GetComponent<ProjectileDamage>().damage = 1f;
             XRFireProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
-            XRFireProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.IgniteOnHit;
+            XRFireProjectile.GetComponent<ProjectileDamage>().damageType |= DamageType.IgniteOnHit;
+            XRFireProjectile.GetComponent<ProjectileDamage>().damageType |= DamageTypeCombo.GenericPrimary;
             XRFireProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
 
             // register it for networking
@@ -928,7 +935,8 @@ namespace MegamanXMod.Survivors.X
             // just setting the numbers to 1 as the entitystate will take care of those
             XRFire2Projectile.GetComponent<ProjectileDamage>().damage = 1f;
             XRFire2Projectile.GetComponent<ProjectileController>().procCoefficient = 1f;
-            XRFire2Projectile.GetComponent<ProjectileDamage>().damageType = DamageType.IgniteOnHit;
+            XRFire2Projectile.GetComponent<ProjectileDamage>().damageType |= DamageType.IgniteOnHit;
+            XRFire2Projectile.GetComponent<ProjectileDamage>().damageType |= DamageTypeCombo.GenericPrimary;
             XRFire2Projectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
 
 
@@ -969,6 +977,7 @@ namespace MegamanXMod.Survivors.X
             AcidBurstProjectile.GetComponent<ProjectileDamage>().damageType |= DamageType.BypassArmor;
             AcidBurstProjectile.GetComponent<ProjectileDamage>().damageType |= DamageType.BypassBlock;
             AcidBurstProjectile.GetComponent<ProjectileDamage>().damageType |= DamageType.SlowOnHit;
+            AcidBurstProjectile.GetComponent<ProjectileDamage>().damageType |= DamageTypeCombo.GenericSpecial;
             AcidBurstProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Poison;
 
 
@@ -1014,7 +1023,8 @@ namespace MegamanXMod.Survivors.X
             // just setting the numbers to 1 as the entitystate will take care of those
             MeltCreeperProjectile.GetComponent<ProjectileDamage>().damage = 1f;
             MeltCreeperProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
-            MeltCreeperProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.IgniteOnHit;
+            MeltCreeperProjectile.GetComponent<ProjectileDamage>().damageType |= DamageType.IgniteOnHit;
+            MeltCreeperProjectile.GetComponent<ProjectileDamage>().damageType |= DamageTypeCombo.GenericSpecial;
             MeltCreeperProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
 
             
@@ -1041,7 +1051,8 @@ namespace MegamanXMod.Survivors.X
             // just setting the numbers to 1 as the entitystate will take care of those
             MeltCreeperChargeProjectile.GetComponent<ProjectileDamage>().damage = 1f;
             MeltCreeperChargeProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
-            MeltCreeperChargeProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.IgniteOnHit;
+            MeltCreeperChargeProjectile.GetComponent<ProjectileDamage>().damageType |= DamageType.IgniteOnHit;
+            MeltCreeperChargeProjectile.GetComponent<ProjectileDamage>().damageType |= DamageTypeCombo.GenericSpecial;
             MeltCreeperChargeProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
 
 
@@ -1066,6 +1077,7 @@ namespace MegamanXMod.Survivors.X
             ChameleonStingProjectile.GetComponent<ProjectileDamage>().damageType |= DamageType.BonusToLowHealth;
             ChameleonStingProjectile.GetComponent<ProjectileDamage>().damageType |= DamageType.BypassArmor;
             ChameleonStingProjectile.GetComponent<ProjectileDamage>().damageType |= DamageType.BypassBlock;
+            ChameleonStingProjectile.GetComponent<ProjectileDamage>().damageType |= DamageTypeCombo.GenericSpecial;
             ChameleonStingProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Luminous;
 
 
