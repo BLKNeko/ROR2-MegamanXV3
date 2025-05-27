@@ -1416,7 +1416,7 @@ namespace MegamanXMod.Survivors.X
             HomingTorpedoSkillDef.skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_HOMMING_TORPEDO_NAME";
             HomingTorpedoSkillDef.skillDescriptionToken = MEGAMAN_x_PREFIX + "SPECIAL_HOMMING_TORPEDO_DESCRIPTION";
             HomingTorpedoSkillDef.icon = XAssets.IconHomingTorpedo;
-            HomingTorpedoSkillDef.keywordTokens = new string[] {MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"};
+            HomingTorpedoSkillDef.keywordTokens = new string[] { MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE" };
             HomingTorpedoSkillDef.activationState = new EntityStates.SerializableEntityStateType(typeof(HomingTorpedo_test));
             HomingTorpedoSkillDef.activationStateMachineName = "Weapon";
             HomingTorpedoSkillDef.baseMaxStock = 10;
@@ -1902,12 +1902,16 @@ namespace MegamanXMod.Survivors.X
         private void AddHooks()
         {
             R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
+
+            //Esse Hook que esta causando o problema de proc com a Huntress
             On.RoR2.GlobalEventManager.OnHitEnemy += GlobalEventManager_OnHitEnemy;
+
+
             On.RoR2.CharacterModel.Awake += CharacterModel_Awake;
             On.RoR2.SurvivorCatalog.Init += SurvivorCatalog_Init;
             CustomEmotesAPI.animChanged += CustomEmotesAPI_animChanged;
             On.RoR2.CharacterMaster.OnBodyStart += RestoreHPAfterRespawn;
-            //On.RoR2.CharacterBody.RemoveBuff_BuffDef += CharacterBody_RemoveBuff_BuffDef;
+            ////On.RoR2.CharacterBody.RemoveBuff_BuffDef += CharacterBody_RemoveBuff_BuffDef;
             On.RoR2.CharacterBody.RemoveBuff_BuffIndex += CharacterBody_RemoveBuff_BuffIndex;
         }
 
@@ -2102,62 +2106,67 @@ namespace MegamanXMod.Survivors.X
 
         private void GlobalEventManager_OnHitEnemy(On.RoR2.GlobalEventManager.orig_OnHitEnemy orig, GlobalEventManager self, DamageInfo damageInfo, GameObject victim)
         {
-            // Verifique se algum objeto é nulo antes de prosseguir
-            if (self == null || damageInfo == null || damageInfo.attacker == null || victim == null)
-            {
-                //Debug.LogWarning("[XSurvivor] Um dos objetos passados para OnHitEnemy é nulo.");
-                return;
-            }
+            orig(self, damageInfo, victim);
 
-            // Verifique se attacker e victim possuem CharacterBody
+            if (self == null || damageInfo == null || damageInfo.attacker == null || victim == null)
+                return;
+
             var attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
             var victimBody = victim.GetComponent<CharacterBody>();
-            if (attackerBody == null || victimBody == null)
-            {
-                //Debug.LogWarning("[XSurvivor] Um dos CharacterBody é nulo.");
+            var attackerController = damageInfo.attacker.GetComponent<XBaseComponent>();
+
+            //Debug.Log("Teste X ShockSpheare");
+
+            //Debug.Log("attackerController:" + attackerController);
+            //Debug.Log("victimBody:" + victimBody);
+            //Debug.Log("attackerBody:" + attackerBody);
+            //Debug.Log("damageInfo.attacker.GetComponent<XBaseComponent>():" + damageInfo.attacker.GetComponent<XBaseComponent>());
+
+            if (attackerController == null || attackerBody == null || victimBody == null)
                 return;
-            }
 
-            // Verifique se inflictor não é nulo antes de usar
-            if (damageInfo.inflictor == null)
-            {
-                //Debug.LogWarning("[XSurvivor] Inflictor é nulo.");
+            //Debug.Log("attackerController:" + attackerController);
+            //Debug.Log("victimBody:" + victimBody);
+            //Debug.Log("attackerBody:" + attackerBody);
+            //Debug.Log("damageInfo.attacker.GetComponent<XBaseComponent>():" + damageInfo.attacker.GetComponent<XBaseComponent>());
+
+            //Debug.Log("-------------- ok - 1 -------------");
+
+            //Debug.Log("damageInfo.inflictor:" + damageInfo.inflictor);
+
+            var inflictorProjectile = damageInfo.inflictor;
+            if (inflictorProjectile == null)
                 return;
-            }
 
-            // Log básico para depuração
-            //Debug.Log($"[XSurvivor] OnHitEnemy chamado com attacker: {attackerBody.name}, victim: {victimBody.name}, inflictor: {damageInfo.inflictor.name}");
+            //Debug.Log("inflictorProjectile: " + inflictorProjectile);
 
-            // Verifique as condições específicas antes de executar sua lógica customizada
-            if (damageInfo.attacker.name.Contains("XBody") && !victim.name.Contains("XBody") && damageInfo.inflictor.name.Contains("XForceBusterProjectile"))
+            //Debug.Log("-------------- ok - 2 -------------");
+
+            //Debug.Log("inflictorProjectile.GetComponent<ProjectileController>(): " + inflictorProjectile.GetComponent<ProjectileController>());
+            //Debug.Log("inflictorProjectile.GetComponent<ProjectileController>().Ghost: " + inflictorProjectile.GetComponent<ProjectileController>().gameObject);
+            //Debug.Log("projectileController.gameObject.GetComponent<XForceBusterIdentifier>(): " + inflictorProjectile.GetComponent<ProjectileController>().gameObject.GetComponent<XForceBusterIdentifier>());
+
+            // Verifica se foi causado pelo XForceBusterProjectile
+            var projectileController = inflictorProjectile.GetComponent<ProjectileController>();
+            var projectileXForceBusterIdentifier = projectileController.gameObject.GetComponent<XForceBusterIdentifier>();
+            if (projectileController == null || projectileXForceBusterIdentifier == null)
+                return;
+
+            //Debug.Log("-------------- ok - 3 -------------");
+
+            // Cria o ShockSphere
+            ProjectileManager.instance.FireProjectile(new FireProjectileInfo
             {
-                // Crie o projétil
-                var position = victim.transform.position;
-                if (position == Vector3.zero)
-                {
-                    //Debug.LogWarning("[XSurvivor] Posição do victim é inválida.");
-                    return;
-                }
-
-                var XShockSphereProjectile = new FireProjectileInfo
-                {
-                    projectilePrefab = XAssets.xShockSphereProjectile,
-                    position = position,
-                    rotation = Util.QuaternionSafeLookRotation(position),
-                    owner = damageInfo.attacker,
-                    damage = 1f,
-                    force = 200f,
-                    crit = Util.CheckRoll(attackerBody.crit),
-                    speedOverride = 0f,
-                    damageColorIndex = DamageColorIndex.Default
-                };
-
-                ProjectileManager.instance.FireProjectile(XShockSphereProjectile);
-                //Debug.Log("[XSurvivor] Projétil XShockSphere criado com sucesso.");
-            }
-
-            // Chame o método original
-            orig.Invoke(self, damageInfo, victim);
+                projectilePrefab = XAssets.xShockSphereProjectile,
+                position = victim.transform.position,
+                rotation = Quaternion.identity,
+                owner = damageInfo.attacker,
+                damage = 1f,
+                force = 200f,
+                crit = Util.CheckRoll(attackerBody.crit),
+                speedOverride = 0f,
+                damageColorIndex = DamageColorIndex.Default
+            });
         }
 
         private void CharacterModel_Awake(On.RoR2.CharacterModel.orig_Awake orig, CharacterModel self)
@@ -2189,144 +2198,142 @@ namespace MegamanXMod.Survivors.X
             if (sender.HasBuff(XBuffs.LightArmorBuff))
             {
                 args.armorAdd += 30;
-                args.armorAdd *= 1.4f;
-                args.healthMultAdd *= 1.5f;
-                args.damageMultAdd *= 1.2f;
-                args.attackSpeedMultAdd *= 1.3f;
-                args.regenMultAdd *= 1.3f;
-                args.jumpPowerMultAdd *= 1.2f;
-                args.moveSpeedMultAdd *= 1.2f;
-                args.shieldMultAdd *= 1.4f;
-                args.critDamageMultAdd *= 1f;
+                args.armorAdd += sender.baseArmor * 0.4f;
+                args.healthMultAdd += 0.5f;
+                args.damageMultAdd += 0.2f;
+                args.attackSpeedMultAdd += 0.15f;
+                args.regenMultAdd += 0.3f;
+                args.jumpPowerMultAdd += 0.1f;
+                args.moveSpeedMultAdd += 0.1f;
+                args.shieldMultAdd += 0.4f;
+                args.critDamageMultAdd += 1f;
             }
 
             if (sender.HasBuff(XBuffs.SecondArmorBuff))
             {
                 args.armorAdd += 20;
-                args.armorAdd *= 1.2f;
-                args.healthMultAdd *= 1.3f;
-                args.damageMultAdd *= 1.1f;
-                args.attackSpeedMultAdd *= 1.2f;
-                args.regenMultAdd *= 1.3f;
-                args.jumpPowerMultAdd *= 1.2f;
-                args.moveSpeedMultAdd *= 1.25f;
-                args.shieldMultAdd *= 1f;
-                args.critDamageMultAdd *= 1.3f;
+                args.armorAdd += sender.baseArmor * 0.2f;
+                args.healthMultAdd += 0.3f;
+                args.damageMultAdd += 0.1f;
+                args.attackSpeedMultAdd += 0.1f;
+                args.regenMultAdd += 0.3f;
+                args.jumpPowerMultAdd += 0.1f;
+                args.moveSpeedMultAdd += 0.15f;
+                args.shieldMultAdd += 1f;
+                args.critDamageMultAdd += 0.3f;
             }
 
             if (sender.HasBuff(XBuffs.MaxArmorBuff))
             {
                 args.armorAdd += 40;
-                args.armorAdd *= 1.9f;
-                args.healthMultAdd *= 1.8f;
-                args.damageMultAdd *= 1.3f;
-                args.attackSpeedMultAdd *= 1.5f;
-                args.regenMultAdd *= 1.8f;
-                args.jumpPowerMultAdd *= 1.4f;
-                args.moveSpeedMultAdd *= 1.4f;
-                args.shieldMultAdd *= 1.7f;
-                args.critDamageMultAdd *= 1.5f;
+                args.armorAdd += sender.baseArmor * 0.9f;
+                args.healthMultAdd += 0.8f;
+                args.damageMultAdd += 0.2f;
+                args.attackSpeedMultAdd += 0.2f;
+                args.regenMultAdd += 0.8f;
+                args.jumpPowerMultAdd += 0.2f;
+                args.moveSpeedMultAdd += 0.2f;
+                args.shieldMultAdd += 0.7f;
+                args.critDamageMultAdd += 0.5f;
             }
 
             if (sender.HasBuff(XBuffs.FourthArmorBuff))
             {
                 args.armorAdd += 70;
-                args.armorAdd *= 2.1f;
-                args.healthMultAdd *= 1.5f;
-                args.damageMultAdd *= 1.5f;
-                args.attackSpeedMultAdd *= 1.4f;
-                args.regenMultAdd *= 1.5f;
-                args.jumpPowerMultAdd *= 1.4f;
-                args.moveSpeedMultAdd *= 1.4f;
-                args.shieldMultAdd *= 1.5f;
-                args.critDamageMultAdd *= 2f;
+                args.armorAdd += sender.baseArmor * 1.1f;
+                args.healthMultAdd += 0.5f;
+                args.damageMultAdd += 0.4f;
+                args.attackSpeedMultAdd += 0.2f;
+                args.regenMultAdd += 0.5f;
+                args.jumpPowerMultAdd += 0.2f;
+                args.moveSpeedMultAdd += 0.15f;
+                args.shieldMultAdd += 0.5f;
+                args.critDamageMultAdd += 0.8f;
             }
 
             if (sender.HasBuff(XBuffs.FalconArmorBuff))
             {
                 args.armorAdd += 20;
-                args.armorAdd *= 1.1f;
-                args.healthMultAdd *= 1.1f;
-                args.damageMultAdd *= 1f;
-                args.attackSpeedMultAdd *= 2f;
-                args.regenMultAdd *= 1.4f;
-                args.jumpPowerMultAdd += 0.25f;
-                args.jumpPowerMultAdd *= 1.5f;
-                args.moveSpeedMultAdd *= 2.5f;
-                args.shieldMultAdd *= 1.2f;
-                args.critDamageMultAdd *= 2f;
+                args.armorAdd += sender.baseArmor * 0.1f;
+                args.healthMultAdd += 0.1f;
+                args.damageMultAdd -= 0.2f;
+                args.attackSpeedMultAdd += 0.4f;
+                args.regenMultAdd += 0.4f;
+                args.jumpPowerMultAdd += 0.4f;
+                args.moveSpeedMultAdd += 0.5f;
+                args.shieldMultAdd += 0.2f;
+                args.critDamageMultAdd += 0.8f;
             }
 
             if (sender.HasBuff(XBuffs.GaeaArmorBuff))
             {
                 args.armorAdd += 150;
-                args.armorAdd *= 4f;
-                args.healthMultAdd *= 3f;
-                args.damageMultAdd *= 1.3f;
-                args.attackSpeedMultAdd *= 1f;
-                args.regenMultAdd *= 2f;
-                args.jumpPowerMultAdd *= 1f;
-                args.moveSpeedMultAdd *= 0.9f;
-                args.shieldMultAdd *= 3f;
-                args.critDamageMultAdd *= 2f;
+                args.armorAdd += sender.baseArmor * 4f;
+                args.healthMultAdd += 3f;
+                args.damageMultAdd += 0.4f;
+                args.attackSpeedMultAdd -= 0.1f;
+                args.regenMultAdd += 1f;
+                args.jumpPowerMultAdd += 0.1f;
+                args.moveSpeedMultAdd -= 0.1f;
+                args.shieldMultAdd += 3f;
+                args.critDamageMultAdd += 1f;
             }
 
             if (sender.HasBuff(XBuffs.ShadowArmorBuff))
             {
                 args.armorAdd += 70;
-                args.armorAdd *= 2.4f;
-                args.healthMultAdd *= 2f;
-                args.damageMultAdd *= 1.5f;
-                args.attackSpeedMultAdd *= 3f;
-                args.regenMultAdd *= 1.5f;
-                args.jumpPowerMultAdd += 0.5f;
-                args.jumpPowerMultAdd *= 2f;
-                args.moveSpeedMultAdd *= 3f;
-                args.shieldMultAdd *= 1.8f;
-                args.critDamageMultAdd *= 4f;
-                args.critAdd *= 1.25f;
+                args.armorAdd += sender.baseArmor * 2.4f;
+                args.healthMultAdd += 1f;
+                args.damageMultAdd += 0.7f;
+                args.attackSpeedMultAdd += 0.4f;
+                args.regenMultAdd += 0.5f;
+                args.jumpPowerMultAdd += 0.8f;
+                args.moveSpeedMultAdd += 0.5f;
+                args.shieldMultAdd += 0.8f;
+                args.critDamageMultAdd += 2f;
+                args.critAdd += 25f;
             }
 
             if (sender.HasBuff(XBuffs.UltimateArmorBuff))
             {
                 args.armorAdd += 100;
-                args.armorAdd *= 2.8f;
-                args.healthMultAdd *= 2f;
-                args.damageMultAdd *= 2.5f;
-                args.attackSpeedMultAdd *= 1.8f;
-                args.regenMultAdd *= 1.8f;
-                args.jumpPowerMultAdd *= 1.8f;
-                args.moveSpeedMultAdd *= 1.8f;
-                args.shieldMultAdd *= 2f;
-                args.critDamageMultAdd *= 3f;
+                args.armorAdd += sender.baseArmor * 2.8f;
+                args.healthMultAdd += 1f;
+                args.damageMultAdd += 0.85f;
+                args.attackSpeedMultAdd += 0.3f;
+                args.regenMultAdd += 0.8f;
+                args.jumpPowerMultAdd += 0.3f;
+                args.moveSpeedMultAdd += 0.3f;
+                args.shieldMultAdd += 2f;
+                args.critDamageMultAdd += 1f;
             }
 
             if (sender.HasBuff(XBuffs.RathalosArmorBuff))
             {
                 args.armorAdd += 100;
-                args.armorAdd *= 3f;
-                args.healthMultAdd *= 2f;
-                args.damageMultAdd *= 2.5f;
-                args.attackSpeedMultAdd *= 1.5f;
-                args.regenMultAdd *= 1.8f;
-                args.jumpPowerMultAdd *= 1.8f;
-                args.moveSpeedMultAdd *= 1.5f;
-                args.shieldMultAdd *= 2f;
-                args.critDamageMultAdd *= 3f;
+                args.armorAdd += sender.baseArmor * 3f;
+                args.healthMultAdd += 1f;
+                args.damageMultAdd += 0.85f;
+                args.attackSpeedMultAdd += 0.2f;
+                args.regenMultAdd += 0.8f;
+                args.jumpPowerMultAdd += 0.25f;
+                args.moveSpeedMultAdd += 0.2f;
+                args.shieldMultAdd += 2f;
+                args.critDamageMultAdd += 1f;
             }
 
             if (sender.HasBuff(XBuffs.HyperChipBuff))
             {
                 args.armorAdd += 140;
-                args.armorAdd *= 2f;
-                args.healthMultAdd *= 2f;
-                args.damageMultAdd *= 2f;
-                args.attackSpeedMultAdd *= 2f;
-                args.regenMultAdd *= 3f;
-                args.jumpPowerMultAdd *= 1.6f;
-                args.moveSpeedMultAdd *= 1.8f;
-                args.shieldMultAdd *= 2f;
-                args.critDamageMultAdd *= 2f;
+                args.armorAdd += sender.baseArmor * 2f;
+                args.healthMultAdd += 1f;
+                args.damageMultAdd += 1f;
+                args.attackSpeedMultAdd += 0.2f;
+                args.regenMultAdd += 2f;
+                args.jumpPowerMultAdd += 0.2f;
+                args.moveSpeedMultAdd += 0.2f;
+                args.shieldMultAdd += 2f;
+                args.critDamageMultAdd += 1f;
             }
 
 

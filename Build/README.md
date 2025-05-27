@@ -48,6 +48,7 @@ Well since X now have 9 ARMORS this will cover skins, so this is it.
 
 
 # Changelog
+- V 4.0.3 Fix Huntress and Acrid not procing correctly.
 - V 4.0.2 Fix update, Fixed Dash skills not working properly.
 - V 4.0.1 Fix Luminous Shot not working with X primary attacks.
 - V 4.0.0 Remake the whole project for the SOTS update, added ARMOR MECHANICS, EMOTEAPI compatibility, Risk Of Option compatibility and fixes, well, hope you enjoy!

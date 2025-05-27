@@ -18,6 +18,7 @@ namespace MegamanXMod.Survivors.X.Components
         private float timer = 0f;
         private float timeLimit = 0.2f;
         private float damageCoeficient;
+        private float damagebonus = 1f;
 
         private BlastAttack blastAttack;
 
@@ -42,6 +43,12 @@ namespace MegamanXMod.Survivors.X.Components
 
         void FixedUpdate()
         {
+
+            if (projectileController.owner.GetComponent<CharacterBody>().HasBuff(XBuffs.UltimateArmorBuff))
+                damagebonus = 2f;
+            else
+                damagebonus = 1f;
+
             if(overlapAttack != null)
             {
                 timer += Time.deltaTime;
@@ -50,7 +57,7 @@ namespace MegamanXMod.Survivors.X.Components
                 blastAttack.attacker = base.gameObject;
                 blastAttack.inflictor = base.gameObject;
                 blastAttack.teamIndex = TeamComponent.GetObjectTeam(projectileController.owner);
-                blastAttack.baseDamage = damageCoeficient * projectileController.owner.GetComponent<CharacterBody>().damage;
+                blastAttack.baseDamage = (damageCoeficient * projectileController.owner.GetComponent<CharacterBody>().damage) * damagebonus;
                 blastAttack.baseForce = 10f;
                 blastAttack.position = gameObject.transform.position;
                 blastAttack.radius = 5f;

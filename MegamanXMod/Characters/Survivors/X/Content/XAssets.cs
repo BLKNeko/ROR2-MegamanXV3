@@ -663,7 +663,7 @@ namespace MegamanXMod.Survivors.X
             XForceBusterExplosion.timerAfterImpact = true;
             XForceBusterExplosion.lifetimeAfterImpact = 5f;
 
-            //xForceBusterProjectile.AddComponent<XForceBusterComponent>(); // Adicionar o script
+            xForceBusterProjectile.AddComponent<XForceBusterIdentifier>(); // Adicionar o script de identificacao.
 
 
 
