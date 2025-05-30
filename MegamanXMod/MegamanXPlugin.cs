@@ -24,7 +24,7 @@ namespace MegamanXMod
         //   this shouldn't even have to be said
         public const string MODUID = "com.BLKNeko.MegamanXMod";
         public const string MODNAME = "MegamanXMod";
-        public const string MODVERSION = "4.0.3";
+        public const string MODVERSION = "4.0.4";
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
         public const string DEVELOPER_PREFIX = "BLKNeko";

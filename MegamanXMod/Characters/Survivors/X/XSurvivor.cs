@@ -2147,9 +2147,13 @@ namespace MegamanXMod.Survivors.X
             //Debug.Log("projectileController.gameObject.GetComponent<XForceBusterIdentifier>(): " + inflictorProjectile.GetComponent<ProjectileController>().gameObject.GetComponent<XForceBusterIdentifier>());
 
             // Verifica se foi causado pelo XForceBusterProjectile
+
             var projectileController = inflictorProjectile.GetComponent<ProjectileController>();
-            var projectileXForceBusterIdentifier = projectileController.gameObject.GetComponent<XForceBusterIdentifier>();
-            if (projectileController == null || projectileXForceBusterIdentifier == null)
+            if (projectileController == null)
+                return;
+
+            var projectileXForceBusterIdentifier = projectileController.GetComponent<XForceBusterIdentifier>();
+            if (projectileXForceBusterIdentifier == null)
                 return;
 
             //Debug.Log("-------------- ok - 3 -------------");
