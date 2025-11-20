@@ -34,6 +34,11 @@ namespace MegamanXMod.Survivors.X.SkillStates
         public static float hoverVelocity = -3f;
         public static float hoverAcceleration = 0.5f;
 
+        private float afterImageTimer = 0f;
+        private Transform modelTransform;
+        private CharacterModel characterModel;
+        private ChildLocator childLocator;
+
         private XHoverComponent hoverComponent;
 
         public override void OnEnter()
@@ -76,6 +81,12 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             base.characterMotor.useGravity = false;
 
+            modelTransform = base.GetModelTransform();
+            characterModel = characterBody.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>();
+            childLocator = base.GetModelTransform().GetComponent<ChildLocator>();
+
+            CreateAfterImage();
+
 
             EffectManager.SimpleMuzzleFlash(EntityStates.Mage.FlyUpState.muzzleflashEffect, gameObject, LDashPos, true);
             EffectManager.SimpleMuzzleFlash(EntityStates.Mage.FlyUpState.muzzleflashEffect, gameObject, RDashPos, true);
@@ -97,6 +108,66 @@ namespace MegamanXMod.Survivors.X.SkillStates
             }
         }
 
+        private void CreateAfterImage()
+        {
+
+            //Debug.LogWarning("ChieldLocator: " + childLocator);
+            //Debug.LogWarning("characterModel: " + characterModel);
+            //Debug.LogWarning("childLocator.FindChildGameObject(MMZZeroBodyMesh): " + childLocator.FindChildGameObject("MMZZeroBodyMesh"));
+            //Debug.LogWarning("childLocator.FindChildGameObject(MMZZeroBodyMesh)SkinnedMeshRenderer: " + childLocator.FindChildGameObject("MMZZeroBodyMesh").GetComponent<SkinnedMeshRenderer>());
+
+            if (modelTransform)
+            {
+                TemporaryOverlayInstance temporaryOverlayInstance = TemporaryOverlayManager.AddOverlay(this.modelTransform.gameObject);
+                temporaryOverlayInstance.duration = 0.5f;
+                temporaryOverlayInstance.animateShaderAlpha = true;
+                temporaryOverlayInstance.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+                temporaryOverlayInstance.destroyComponentOnEnd = true;
+                temporaryOverlayInstance.originalMaterial = LegacyResourcesAPI.Load<Material>("Materials/matGhostEffect");
+                temporaryOverlayInstance.inspectorCharacterModel = characterModel;
+                temporaryOverlayInstance.AddToCharacterModel(modelTransform.GetComponent<CharacterModel>());
+            }
+
+            if (!characterBody || !characterBody.modelLocator || !characterBody.modelLocator.modelTransform)
+            {
+                Debug.LogWarning("CreateAfterImage: characterBody or modelLocator is null");
+                return;
+            }
+
+            var skinnedRenderer = childLocator.FindChildGameObject("XBodyMesh").GetComponent<SkinnedMeshRenderer>();
+            if (!skinnedRenderer)
+            {
+                Debug.LogWarning("CreateAfterImage: SkinnedMeshRenderer not found");
+                return;
+            }
+
+            var mesh = new Mesh();
+            skinnedRenderer.BakeMesh(mesh);
+
+            GameObject ghostObject = new GameObject("AfterImageGhost");
+            ghostObject.transform.position = skinnedRenderer.transform.position;
+            ghostObject.transform.rotation = skinnedRenderer.transform.rotation;
+            ghostObject.transform.localScale = skinnedRenderer.transform.lossyScale;
+
+            var meshFilter = ghostObject.AddComponent<MeshFilter>();
+            meshFilter.sharedMesh = mesh;
+
+            var meshRenderer = ghostObject.AddComponent<MeshRenderer>();
+            var ghostMat = LegacyResourcesAPI.Load<Material>("Materials/matGhostEffect");
+            if (!ghostMat)
+            {
+                Debug.LogWarning("CreateAfterImage: matGhostEffect not found");
+                return;
+            }
+
+            meshRenderer.material = ghostMat;
+
+            // Fade e destruição automática
+            ghostObject.AddComponent<DestroyGhost>().Initialize(1f);
+
+
+        }
+
         public override void FixedUpdate()
         {
             base.FixedUpdate();
@@ -107,6 +178,16 @@ namespace MegamanXMod.Survivors.X.SkillStates
             //EffectManager.SimpleMuzzleFlash(EntityStates.Mage.FlyUpState.muzzleflashEffect, gameObject, FWingL1, true);
             //EffectManager.SimpleMuzzleFlash(EntityStates.Mage.FlyUpState.muzzleflashEffect, gameObject, FWingL2, true);
             //EffectManager.SimpleMuzzleFlash(EntityStates.Mage.FlyUpState.muzzleflashEffect, gameObject, FWingL3, true);
+
+            if (isAuthority)
+            {
+                afterImageTimer -= Time.fixedDeltaTime;
+                if (afterImageTimer <= 0f)
+                {
+                    CreateAfterImage();
+                    afterImageTimer = 0.045f; // intervalo entre fantasmas
+                }
+            }
 
             if (characterDirection) characterDirection.forward = forwardDirection;
 

@@ -244,10 +244,19 @@ namespace MegamanXMod.Survivors.X
             //omit all this if you want to just keep theirs
             Prefabs.ClearEntityStateMachines(bodyPrefab);
 
+
             //the main "Body" state machine has some special properties
             //Prefabs.AddMainEntityStateMachine(bodyPrefab, "Body", typeof(EntityStates.GenericCharacterMain), typeof(EntityStates.SpawnTeleporterState));
             //if you set up a custom main characterstate, set it up here
             //don't forget to register custom entitystates in your HenryStates.cs
+
+            //Prefabs.AddMainEntityStateMachine(bodyPrefab, "VehicleSeated", typeof(EntityStates.GenericCharacterVehicleSeated), typeof(EntityStates.GenericCharacterVehicleSeated));
+
+            CharacterBody body = bodyPrefab.GetComponent<CharacterBody>();
+            if (body)
+            {
+                body.vehicleIdleStateMachine = null;
+            }
 
             Prefabs.AddMainEntityStateMachine(bodyPrefab, "Body", typeof(XHeart), typeof(EntityStates.GenericCharacterMain));
             bodyPrefab.GetComponent<CharacterDeathBehavior>().deathState = new EntityStates.SerializableEntityStateType(typeof(DeathState));
