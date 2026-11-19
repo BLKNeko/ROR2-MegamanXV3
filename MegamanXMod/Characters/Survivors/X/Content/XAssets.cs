@@ -355,8 +355,11 @@ namespace MegamanXMod.Survivors.X
             ProjectileController bombController = bombProjectilePrefab.GetComponent<ProjectileController>();
 
             if (_assetBundle.LoadAsset<GameObject>("HenryBombGhost") != null)
+            {
                 bombController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("HenryBombGhost");
-            
+                bombController.ghostPrefabAddress = null;
+            }
+
             bombController.startSound = "";
         }
 
@@ -393,7 +396,11 @@ namespace MegamanXMod.Survivors.X
             ProjectileController XShurikenController = shurikenProjectilePrefab.GetComponent<ProjectileController>();
 
             if (_assetBundle.LoadAsset<GameObject>("XShurikenGhost") != null)
+            {
                 XShurikenController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("XShurikenGhost");
+                XShurikenController.ghostPrefabAddress = null;
+
+            }
 
             XShurikenController.startSound = "";
         }
@@ -454,7 +461,11 @@ namespace MegamanXMod.Survivors.X
             ProjectileController XBusterMediumController = xBusterMediumProjectile.GetComponent<ProjectileController>();
 
             if (_assetBundle.LoadAsset<GameObject>("XBusterHalfChargeProjectille") != null)
+            {
+
                 XBusterMediumController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("XBusterHalfChargeProjectille");
+                XBusterMediumController.ghostPrefabAddress = null;
+            }
 
             XBusterMediumController.startSound = "";
         }
@@ -491,7 +502,11 @@ namespace MegamanXMod.Survivors.X
             ProjectileController XBusterChargeController = xBusterChargeProjectile.GetComponent<ProjectileController>();
 
             if (_assetBundle.LoadAsset<GameObject>("XBusterChargeProjectille") != null)
+            {
                 XBusterChargeController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("XBusterChargeProjectille");
+                XBusterChargeController.ghostPrefabAddress = null;
+
+            }
 
             XBusterChargeController.startSound = "";
         }
@@ -528,7 +543,11 @@ namespace MegamanXMod.Survivors.X
             ProjectileController XLightBusterChargeController = xLightBusterChargeProjectile.GetComponent<ProjectileController>();
 
             if (_assetBundle.LoadAsset<GameObject>("LightBusterChargeProjectille") != null)
+            {
                 XLightBusterChargeController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("LightBusterChargeProjectille");
+                XLightBusterChargeController.ghostPrefabAddress = null;
+
+            }
 
             XLightBusterChargeController.startSound = "";
         }
@@ -565,7 +584,11 @@ namespace MegamanXMod.Survivors.X
             ProjectileController XLightBusterSmallController = xLightBusterSmallProjectile.GetComponent<ProjectileController>();
 
             if (_assetBundle.LoadAsset<GameObject>("LightBusterSmallProjectille") != null)
+            {
                 XLightBusterSmallController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("LightBusterSmallProjectille");
+                XLightBusterSmallController.ghostPrefabAddress = null;
+
+            }
 
             XLightBusterSmallController.startSound = "";
         }
@@ -602,7 +625,11 @@ namespace MegamanXMod.Survivors.X
             ProjectileController XMaxBusterChargeController = xMaxBusterChargeProjectile.GetComponent<ProjectileController>();
 
             if (_assetBundle.LoadAsset<GameObject>("MaxBusterChargeProjectille") != null)
+            {
                 XMaxBusterChargeController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("MaxBusterChargeProjectille");
+                XMaxBusterChargeController.ghostPrefabAddress = null;
+
+            }
 
             XMaxBusterChargeController.startSound = "";
         }
@@ -639,7 +666,12 @@ namespace MegamanXMod.Survivors.X
             ProjectileController XMaxBusterSmallController = xMaxBusterSmallProjectile.GetComponent<ProjectileController>();
 
             if (_assetBundle.LoadAsset<GameObject>("MaxBusterSmallProjectille") != null)
+            {
                 XMaxBusterSmallController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("MaxBusterSmallProjectille");
+                XMaxBusterSmallController.ghostPrefabAddress = null;
+
+            }
+
 
             XMaxBusterSmallController.startSound = "";
         }
@@ -682,7 +714,11 @@ namespace MegamanXMod.Survivors.X
 
 
             if (_assetBundle.LoadAsset<GameObject>("UltimateBusterChargeProjectille") != null)
+            {
                 XForceBusterController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("UltimateBusterChargeProjectille");
+                XForceBusterController.ghostPrefabAddress = null;
+
+            }
 
             XForceBusterController.startSound = "";
         }
@@ -725,7 +761,11 @@ namespace MegamanXMod.Survivors.X
 
 
             if (_assetBundle.LoadAsset<GameObject>("ShockSphere") != null)
+            {
                 XShockSphereController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("ShockSphere");
+                XShockSphereController.ghostPrefabAddress = null;
+
+            }
 
             XShockSphereController.startSound = "";
             XShockSphereController.shouldPlaySounds = false;
@@ -763,7 +803,11 @@ namespace MegamanXMod.Survivors.X
             ProjectileController XFalconBusterChargeController = xFalconBusterChargeProjectile.GetComponent<ProjectileController>();
 
             if (_assetBundle.LoadAsset<GameObject>("XFalconBusterProjectille") != null)
+            {
                 XFalconBusterChargeController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("XFalconBusterProjectille");
+                XFalconBusterChargeController.ghostPrefabAddress = null;
+
+            }
 
             XFalconBusterChargeController.startSound = "";
         }
@@ -801,7 +845,11 @@ namespace MegamanXMod.Survivors.X
             ProjectileController XGaeaBusterChargeController = xGaeaBusterChargeProjectile.GetComponent<ProjectileController>();
 
             if (_assetBundle.LoadAsset<GameObject>("GaeaBusterChargeProjectille") != null)
+            {
                 XGaeaBusterChargeController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("GaeaBusterChargeProjectille");
+                XGaeaBusterChargeController.ghostPrefabAddress = null;
+
+            }
 
             XGaeaBusterChargeController.startSound = "";
         }
@@ -839,7 +887,11 @@ namespace MegamanXMod.Survivors.X
             ProjectileController XGaeaBusterSmallController = xGaeaBusterSmallProjectile.GetComponent<ProjectileController>();
 
             if (_assetBundle.LoadAsset<GameObject>("GaeaBusterSmallProjectille") != null)
+            {
                 XGaeaBusterSmallController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("GaeaBusterSmallProjectille");
+                XGaeaBusterSmallController.ghostPrefabAddress = null;
+
+            }
 
             XGaeaBusterSmallController.startSound = "";
         }
@@ -947,7 +999,11 @@ namespace MegamanXMod.Survivors.X
             ProjectileController XRFire2Controller = XRFire2Projectile.GetComponent<ProjectileController>();
 
             if (_assetBundle.LoadAsset<GameObject>("RathalosBusterChargeProjectille") != null)
+            {
                 XRFire2Controller.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("RathalosBusterChargeProjectille");
+                XRFire2Controller.ghostPrefabAddress = null;
+
+            }
 
             XRFire2Controller.startSound = "";
         }
@@ -1038,7 +1094,11 @@ namespace MegamanXMod.Survivors.X
             MeltCreeperProjectile.AddComponent<XMeltCreeperComponent>();
 
             if (_assetBundle.LoadAsset<GameObject>("MCSmallVFX") != null)
+            {
                 MeltCreeperController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("MCSmallVFX");
+                MeltCreeperController.ghostPrefabAddress = null;
+
+            }
 
             MeltCreeperController.startSound = "";
         }
@@ -1061,7 +1121,11 @@ namespace MegamanXMod.Survivors.X
             MeltCreeperChargeProjectile.AddComponent<XMeltCreeperChargeComponent>();
 
             if (_assetBundle.LoadAsset<GameObject>("MCSmallVFX") != null)
+            {
                 MeltCreeperChargeController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("MCSmallVFX");
+                MeltCreeperChargeController.ghostPrefabAddress = null;
+
+            }
 
             MeltCreeperChargeController.startSound = "";
         }

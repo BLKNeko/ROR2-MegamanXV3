@@ -151,8 +151,10 @@ namespace MegamanXMod.Survivors.X
         };
 
         public override UnlockableDef characterUnlockableDef => XUnlockables.characterUnlockableDef;
-        
-        public override ItemDisplaysBase itemDisplays => new XItemDisplays();
+
+        //public override ItemDisplaysBase itemDisplays => new XItemDisplays();
+        [Obsolete("will be deprecated with Hallowed Concepts update. move to using IDRSJson from KingEnderBrine")]
+        public override ItemDisplaysBase itemDisplays => null;// new HenryItemDisplays();
 
         //set in base classes
         public override AssetBundle assetBundle { get; protected set; }
@@ -249,14 +251,6 @@ namespace MegamanXMod.Survivors.X
             //Prefabs.AddMainEntityStateMachine(bodyPrefab, "Body", typeof(EntityStates.GenericCharacterMain), typeof(EntityStates.SpawnTeleporterState));
             //if you set up a custom main characterstate, set it up here
             //don't forget to register custom entitystates in your HenryStates.cs
-
-            //Prefabs.AddMainEntityStateMachine(bodyPrefab, "VehicleSeated", typeof(EntityStates.GenericCharacterVehicleSeated), typeof(EntityStates.GenericCharacterVehicleSeated));
-
-            CharacterBody body = bodyPrefab.GetComponent<CharacterBody>();
-            if (body)
-            {
-                body.vehicleIdleStateMachine = null;
-            }
 
             Prefabs.AddMainEntityStateMachine(bodyPrefab, "Body", typeof(XHeart), typeof(EntityStates.GenericCharacterMain));
             bodyPrefab.GetComponent<CharacterDeathBehavior>().deathState = new EntityStates.SerializableEntityStateType(typeof(DeathState));

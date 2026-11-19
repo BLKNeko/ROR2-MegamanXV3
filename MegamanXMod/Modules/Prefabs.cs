@@ -634,6 +634,12 @@ namespace MegamanXMod.Modules
                 deathBehavior.idleStateMachine = Array.Empty<EntityStateMachine>();
             }
 
+            CharacterBody body = bodyPrefab.GetComponent<CharacterBody>();
+            if (body)
+            {
+                body.vehicleIdleStateMachine = Array.Empty<EntityStateMachine>();
+            }
+
             SetStateOnHurt setStateOnHurt = bodyPrefab.GetComponent<SetStateOnHurt>();
             if (setStateOnHurt)
             {
@@ -693,6 +699,15 @@ namespace MegamanXMod.Modules
             if (setStateOnHurt && addToHurt)
             {
                 setStateOnHurt.idleStateMachine = setStateOnHurt.idleStateMachine.Append(entityStateMachine).ToArray();
+            }
+
+            //Add to the array of "idle" StateMachines.
+            //Same as CharacterDeathBehavior but for entering a vehicle.
+            //note only the non-body states are added to this. there is no equivelent for the "main" statemachine in the AddMainEntityStateMachine function below
+            CharacterBody body = prefab.GetComponent<CharacterBody>();
+            if (body)
+            {
+                body.vehicleIdleStateMachine = body.vehicleIdleStateMachine.Append(entityStateMachine).ToArray();
             }
 
             return entityStateMachine;
