@@ -402,6 +402,14 @@ namespace MegamanXMod.Survivors.X.Components
                 }
             }
 
+            if (XBody.HasBuff(XBuffs.UltimateCMArmorBuff))
+            {
+                if (NetworkServer.active)
+                {
+                    XBody.RemoveBuff(XBuffs.UltimateCMArmorBuff);
+                }
+            }
+
 
 
 
@@ -413,6 +421,7 @@ namespace MegamanXMod.Survivors.X.Components
             extraskillLocator.extraFirst.UnsetSkillOverride(extraskillLocator.extraFirst, XSurvivor.CoolDownXArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             extraskillLocator.extraFirst.UnsetSkillOverride(extraskillLocator.extraFirst, XSurvivor.HyperModeLightArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             extraskillLocator.extraFirst.UnsetSkillOverride(extraskillLocator.extraFirst, XSurvivor.HyperModeSecondArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            extraskillLocator.extraFirst.UnsetSkillOverride(extraskillLocator.extraFirst, XSurvivor.HyperModeXFireSkillDef, GenericSkill.SkillOverridePriority.Contextual);
 
             
         }
@@ -434,6 +443,7 @@ namespace MegamanXMod.Survivors.X.Components
             extraskillLocator.extraThird.UnsetSkillOverride(extraskillLocator.extraThird, XSurvivor.CoolDownXArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             extraskillLocator.extraThird.UnsetSkillOverride(extraskillLocator.extraThird, XSurvivor.HyperModeFalconArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             extraskillLocator.extraThird.UnsetSkillOverride(extraskillLocator.extraThird, XSurvivor.HyperModeGaeaArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            extraskillLocator.extraThird.UnsetSkillOverride(extraskillLocator.extraThird, XSurvivor.HyperModeBladeArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
         }
 
         public void UnsetAllExtraFourthSkills()
@@ -443,6 +453,7 @@ namespace MegamanXMod.Survivors.X.Components
             extraskillLocator.extraFourth.UnsetSkillOverride(extraskillLocator.extraFourth, XSurvivor.CoolDownXArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             extraskillLocator.extraFourth.UnsetSkillOverride(extraskillLocator.extraFourth, XSurvivor.HyperModeShadowArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             extraskillLocator.extraFourth.UnsetSkillOverride(extraskillLocator.extraFourth, XSurvivor.HyperModeUltimateArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            extraskillLocator.extraFourth.UnsetSkillOverride(extraskillLocator.extraFourth, XSurvivor.HyperModeUltimateArmorCMSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             extraskillLocator.extraFourth.UnsetSkillOverride(extraskillLocator.extraFourth, XSurvivor.HyperModeRathalosArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
         }
 
@@ -459,6 +470,9 @@ namespace MegamanXMod.Survivors.X.Components
             XBody.skillLocator.primary.UnsetSkillOverride(XBody.skillLocator.primary, XSurvivor.XShadowBusterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             XBody.skillLocator.primary.UnsetSkillOverride(XBody.skillLocator.primary, XSurvivor.XUltimateBusterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             XBody.skillLocator.primary.UnsetSkillOverride(XBody.skillLocator.primary, XSurvivor.XRathalosBusterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            XBody.skillLocator.primary.UnsetSkillOverride(XBody.skillLocator.primary, XSurvivor.XFireBusterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            XBody.skillLocator.primary.UnsetSkillOverride(XBody.skillLocator.primary, XSurvivor.XBladeSlashSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            XBody.skillLocator.primary.UnsetSkillOverride(XBody.skillLocator.primary, XSurvivor.XUltimateCMMissileSkillDef, GenericSkill.SkillOverridePriority.Contextual);
         }
 
         public void UnsetAllSecondarySkills()
@@ -469,6 +483,8 @@ namespace MegamanXMod.Survivors.X.Components
             XBody.skillLocator.secondary.UnsetSkillOverride(XBody.skillLocator.secondary, XSurvivor.XShotgunIceSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             XBody.skillLocator.secondary.UnsetSkillOverride(XBody.skillLocator.secondary, XSurvivor.XSqueezeBombSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             XBody.skillLocator.secondary.UnsetSkillOverride(XBody.skillLocator.secondary, XSurvivor.XFireWaveSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            XBody.skillLocator.secondary.UnsetSkillOverride(XBody.skillLocator.secondary, XSurvivor.XBladeEdgeSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            XBody.skillLocator.secondary.UnsetSkillOverride(XBody.skillLocator.secondary, XSurvivor.XUltimateCMBigMissileSkillDef, GenericSkill.SkillOverridePriority.Contextual);
 
         }
 
@@ -479,7 +495,8 @@ namespace MegamanXMod.Survivors.X.Components
             XBody.skillLocator.utility.UnsetSkillOverride(XBody.skillLocator.utility, XSurvivor.XFalconDashSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             XBody.skillLocator.utility.UnsetSkillOverride(XBody.skillLocator.utility, XSurvivor.XNovaDashSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             XBody.skillLocator.utility.UnsetSkillOverride(XBody.skillLocator.utility, XSurvivor.XNovaStrikeSkillDef, GenericSkill.SkillOverridePriority.Contextual);
-            
+            XBody.skillLocator.utility.UnsetSkillOverride(XBody.skillLocator.utility, XSurvivor.XUltimateCMBurstSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+
         }
 
         public void UnsetAllSpecialSkills()
@@ -493,6 +510,9 @@ namespace MegamanXMod.Survivors.X.Components
             XBody.skillLocator.special.UnsetSkillOverride(XBody.skillLocator.special, XSurvivor.XAcidBurstSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             XBody.skillLocator.special.UnsetSkillOverride(XBody.skillLocator.special, XSurvivor.XChameleonStingSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             XBody.skillLocator.special.UnsetSkillOverride(XBody.skillLocator.special, XSurvivor.XMeltCreeperSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            XBody.skillLocator.special.UnsetSkillOverride(XBody.skillLocator.special, XSurvivor.XChargeColliderSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            XBody.skillLocator.special.UnsetSkillOverride(XBody.skillLocator.special, XSurvivor.XBladeHeavySlashSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            XBody.skillLocator.special.UnsetSkillOverride(XBody.skillLocator.special, XSurvivor.XUltimateCMBarrageSkillDef, GenericSkill.SkillOverridePriority.Contextual);
 
         }
 

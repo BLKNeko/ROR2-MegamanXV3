@@ -20,6 +20,8 @@ namespace MegamanXMod.Survivors.X
 
         public static BuffDef GigaBusterChargeBuff;
         public static BuffDef HyperChipBuff;
+        public static BuffDef BladeEdgeBuff;
+        public static BuffDef UltimateCMArmorBuff;
 
         public static void Init(AssetBundle assetBundle)
         {
@@ -92,6 +94,20 @@ namespace MegamanXMod.Survivors.X
             HyperChipBuff = Modules.Content.CreateAndAddBuff("HyperChipBuff",
                 XAssets.IconHyperChip,
                 Color.white,
+                false,
+                false);
+
+            // Ultimate Armor CM: lenta, muito dano e muita armadura
+            UltimateCMArmorBuff = Modules.Content.CreateAndAddBuff("UltimateCMArmorBuff",
+                XAssets.IconUltimate, // TODO: ícone próprio
+                new Color(0.6f, 0.6f, 1f),
+                false,
+                false);
+
+            // Blade Armor - secundária: mais dano, roubo de vida e reflete projéteis
+            BladeEdgeBuff = Modules.Content.CreateAndAddBuff("BladeEdgeBuff",
+                XAssets.IconShadowSaber, // TODO: ícone próprio
+                new Color(0.4f, 0.9f, 1f),
                 false,
                 false);
 

@@ -468,6 +468,8 @@ MonoBehaviour:
     transform: {fileID: 6845744381143781067}
   - name: XFireBuster
     transform: {fileID: 5962671202743250170}
+  - name: XBladeSaber
+    transform: {fileID: 2368825071465682565}
 --- !u!114 &5664056050378279192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -510,7 +512,6 @@ GameObject:
   - component: {fileID: 6649028187840787374}
   - component: {fileID: 4323300025532929158}
   - component: {fileID: 5460173451141080646}
-  - component: {fileID: 6333400362550741900}
   m_Layer: 0
   m_Name: Blade2
   m_TagString: Untagged
@@ -583,20 +584,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6333400362550741900
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1131005606652045599}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1229944152295442281
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,7 +627,6 @@ GameObject:
   - component: {fileID: 6576274302412066007}
   - component: {fileID: 2599776121423809236}
   - component: {fileID: 8283074469700592997}
-  - component: {fileID: 3502386227148571034}
   m_Layer: 0
   m_Name: Blade1
   m_TagString: Untagged
@@ -713,20 +699,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3502386227148571034
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1388078866204568534}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1439380717707164146
 GameObject:
   m_ObjectHideFlags: 0
@@ -2547,7 +2519,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7642441685242937032
 Transform:
   m_ObjectHideFlags: 0
@@ -3243,7 +3215,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2368825071465682565
 Transform:
   m_ObjectHideFlags: 0
@@ -3558,7 +3530,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: bf7bc11bd4db4ec44b14408c33353dff,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf7bc11bd4db4ec44b14408c33353dff, type: 3}

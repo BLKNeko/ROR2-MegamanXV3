@@ -69,8 +69,11 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     meshRenderer.sharedMesh = XAssets.UltimateBodyMesh;
                     meshRenderer.sharedMaterial = XAssets.MatUltimate;
                     characterModel.baseRendererInfos[0].defaultMaterial = XAssets.MatUltimate;
+                    characterModel.baseRendererInfos[1].defaultMaterial = null;
                     childLocator.FindChildGameObject("XShadowSaber").SetActive(false);
                     childLocator.FindChildGameObject("XRathalosSaber").SetActive(false);
+                    childLocator.FindChildGameObject("XBladeSaber").SetActive(false);
+                    childLocator.FindChildGameObject("XFireBuster").SetActive(false);
 
                 }
             }

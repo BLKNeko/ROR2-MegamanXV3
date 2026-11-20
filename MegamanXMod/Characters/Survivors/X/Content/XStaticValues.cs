@@ -67,6 +67,25 @@ namespace MegamanXMod.Survivors.X
 
         public const float XShockSphereDamageCoefficient = 0.25f;
 
+        public const float ChargeColliderDamageCoefficient = 1.5f; // por hit
+
+        // BLADE ARMOR (HyperMode)
+        public const float XBladeSlashDamageCoefficient = 3f;
+        public const float XBladeHeavySlashDamageCoefficient = 8f;
+        public const float XBladeWaveDamageCoefficient = 1.5f;     // por hit de cada onda
+        public const float BladeEdgeDuration = 8f;
+        public const float BladeEdgeDamageBonus = 0.5f;            // +50% de dano
+        public const float BladeEdgeLifeSteal = 0.05f;             // 5% do dano vira cura
+        public const float BladeEdgeReflectDamageCoefficient = 3f; // dano mínimo do projétil refletido
+
+        // ULTIMATE ARMOR CM (HyperMode)
+        public const float UltimateCMSmallMissileDamageCoefficient = 1.2f;
+        public const float UltimateCMBigMissileDamageCoefficient = 5f;
+        public const float UltimateCMBigMissileBlastRadius = 8f;
+        public const float UltimateCMBurstDamageCoefficient = 3f;   // por pulso
+        public const int UltimateCMBurstPulses = 5;                 // 4 elementos + pulso final com todos
+        public const float UltimateCMBurstRadius = 14f;
+
 
         //SOUND STRINGS
 

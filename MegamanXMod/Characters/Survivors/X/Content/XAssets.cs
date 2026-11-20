@@ -37,6 +37,8 @@ namespace MegamanXMod.Survivors.X
 
 
         public static Mesh XBodyMesh;
+        public static Mesh XCMBodyMesh;
+        public static Mesh XFireBodyMesh;
         public static Mesh LightBodyMesh;
         public static Mesh SecondBodyMesh;
         public static Mesh MaxBodyMesh;
@@ -44,12 +46,16 @@ namespace MegamanXMod.Survivors.X
         public static Mesh FalconBodyMesh;
         public static Mesh GaeaBodyMesh;
         public static Mesh ShadowBodyMesh;
+        public static Mesh BladeBodyMesh;
         public static Mesh UltimateBodyMesh;
+        public static Mesh UltimateCMBodyMesh;
         public static Mesh RathalosBodyMesh;
 
 
 
         public static Material MatX;
+        public static Material MatXCM;
+        public static Material MatXFire;
         public static Material MatLight;
         public static Material MatSecond;
         public static Material MatMax;
@@ -58,7 +64,10 @@ namespace MegamanXMod.Survivors.X
         public static Material MatFalcon;
         public static Material MatGaea;
         public static Material MatShadow;
+        public static Material MatBlade;
         public static Material MatUltimate;
+        public static Material MatUltimateCM;
+        public static Material MatGlass;
         public static Material MatRathalos;
 
         public static Sprite IconX;
@@ -138,6 +147,9 @@ namespace MegamanXMod.Survivors.X
         public static GameObject MeltCreeperChargeProjectile;
         public static GameObject AcidBurstProjectile;
         public static GameObject ChameleonStingProjectile;
+        public static GameObject BladeWaveProjectile;
+        public static GameObject UltimateCMSmallMissileProjectile;
+        public static GameObject UltimateCMBigMissileProjectile;
 
         private static AssetBundle _assetBundle;
 
@@ -164,6 +176,8 @@ namespace MegamanXMod.Survivors.X
             XEmotePrefab = _assetBundle.LoadAsset<GameObject>("MegamanXV4_emoteskeleton");
 
             XBodyMesh = _assetBundle.LoadAsset<Mesh>("XBodyMesh");
+            XCMBodyMesh = _assetBundle.LoadAsset<Mesh>("XCMBodyMesh");
+            XFireBodyMesh = _assetBundle.LoadAsset<Mesh>("XFireBodyMesh");
             LightBodyMesh = _assetBundle.LoadAsset<Mesh>("XLightBodyMesh");
             SecondBodyMesh = _assetBundle.LoadAsset<Mesh>("XSecondBodyMesh");
             MaxBodyMesh = _assetBundle.LoadAsset<Mesh>("XMaxBodyMesh");
@@ -171,20 +185,27 @@ namespace MegamanXMod.Survivors.X
             FalconBodyMesh = _assetBundle.LoadAsset<Mesh>("XFalconBodyMesh");
             GaeaBodyMesh = _assetBundle.LoadAsset<Mesh>("XGaeaBodyMesh");
             ShadowBodyMesh = _assetBundle.LoadAsset<Mesh>("XShadowBodyMesh");
+            BladeBodyMesh = _assetBundle.LoadAsset<Mesh>("XBladeArmorBodyMesh");
             UltimateBodyMesh = _assetBundle.LoadAsset<Mesh>("XUltimateBodyMesh");
+            UltimateCMBodyMesh = _assetBundle.LoadAsset<Mesh>("XCMULBodyMesh");
             RathalosBodyMesh = _assetBundle.LoadAsset<Mesh>("XRathalosBodyMesh");
 
-            MatX = _assetBundle.LoadAsset<Material>("matX");
-            MatLight = _assetBundle.LoadAsset<Material>("matLight");
-            MatSecond = _assetBundle.LoadAsset<Material>("matSecond");
-            MatMax = _assetBundle.LoadAsset<Material>("matMax");
-            MatMaxGold = _assetBundle.LoadAsset<Material>("matMaxG");
-            MatFourth = _assetBundle.LoadAsset<Material>("matFourth");
-            MatFalcon = _assetBundle.LoadAsset<Material>("matFalcon");
-            MatGaea = _assetBundle.LoadAsset<Material>("matGaea");
-            MatShadow = _assetBundle.LoadAsset<Material>("matShadowX");
-            MatUltimate = _assetBundle.LoadAsset<Material>("matUltimate");
-            MatRathalos = _assetBundle.LoadAsset<Material>("matXRathalos");
+            MatX = _assetBundle.LoadMaterial("matX");
+            MatXCM = _assetBundle.LoadMaterial("matCMX");
+            MatXFire = _assetBundle.LoadMaterial("matXFire");
+            MatLight = _assetBundle.LoadMaterial("matLight");
+            MatSecond = _assetBundle.LoadMaterial("matSecond");
+            MatMax = _assetBundle.LoadMaterial("matMax");
+            MatMaxGold = _assetBundle.LoadMaterial("matMaxG");
+            MatFourth = _assetBundle.LoadMaterial("matFourth");
+            MatFalcon = _assetBundle.LoadMaterial("matFalcon");
+            MatGaea = _assetBundle.LoadMaterial("matGaea");
+            MatShadow = _assetBundle.LoadMaterial("matShadowX");
+            MatBlade = _assetBundle.LoadMaterial("matBlade");
+            MatUltimate = _assetBundle.LoadMaterial("matUltimate");
+            MatUltimateCM = _assetBundle.LoadMaterial("matCMUL");
+            MatGlass = _assetBundle.LoadMaterial("Glass");
+            MatRathalos = _assetBundle.LoadMaterial("matXRathalos");
 
             IconX = _assetBundle.LoadAsset<Sprite>("XIcon");
             IconLight = _assetBundle.LoadAsset<Sprite>("XLightIcon");
@@ -307,6 +328,8 @@ namespace MegamanXMod.Survivors.X
             CreateMeltCreeperChargeProjectile();
             CreateXAcidBurstProjectile();
             CreateChameleonStingProjectile();
+            CreateBladeWaveProjectile();
+            CreateUltimateCMMissileProjectiles();
 
 
             Content.AddProjectilePrefab(bombProjectilePrefab);
@@ -331,6 +354,9 @@ namespace MegamanXMod.Survivors.X
             Content.AddProjectilePrefab(MeltCreeperChargeProjectile);
             Content.AddProjectilePrefab(AcidBurstProjectile);
             Content.AddProjectilePrefab(ChameleonStingProjectile);
+            Content.AddProjectilePrefab(BladeWaveProjectile);
+            Content.AddProjectilePrefab(UltimateCMSmallMissileProjectile);
+            Content.AddProjectilePrefab(UltimateCMBigMissileProjectile);
         }
 
         private static void CreateBombProjectile()
@@ -1151,6 +1177,101 @@ namespace MegamanXMod.Survivors.X
             //    MeltCreeperController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("MCSmallVFX");
 
             ChameleonStingController.startSound = "";
+        }
+
+        private static void CreateBladeWaveProjectile()
+        {
+            // Onda de corte da Blade Armor: anda reto, atravessa inimigos e acerta várias vezes
+            BladeWaveProjectile = Asset.CloneProjectilePrefab("FMJ", "XBladeWaveProjectile");
+
+            // Mais larga que alta, como uma meia-lua de corte (escala também o hitbox)
+            BladeWaveProjectile.transform.localScale = new Vector3(6f, 1.5f, 2f);
+
+            ProjectileSimple waveSimple = BladeWaveProjectile.GetComponent<ProjectileSimple>();
+            if (waveSimple)
+            {
+                waveSimple.desiredForwardSpeed = 60f;
+                waveSimple.lifetime = 1.2f;
+            }
+
+            ProjectileOverlapAttack waveOverlap = BladeWaveProjectile.GetComponent<ProjectileOverlapAttack>();
+            if (waveOverlap)
+            {
+                waveOverlap.resetInterval = 0.15f; // multihit enquanto a onda passa pelo inimigo
+                waveOverlap.overlapProcCoefficient = 0.5f;
+            }
+
+            BladeWaveProjectile.GetComponent<ProjectileDamage>().damage = 1f;
+            BladeWaveProjectile.GetComponent<ProjectileController>().procCoefficient = 0.5f;
+            BladeWaveProjectile.GetComponent<ProjectileDamage>().damageType = DamageTypeCombo.GenericSpecial;
+            BladeWaveProjectile.GetComponent<ProjectileDamage>().damageColorIndex = DamageColorIndex.Default;
+
+            ProjectileController BladeWaveController = BladeWaveProjectile.GetComponent<ProjectileController>();
+
+            // TODO: criar o ghost da onda de corte no Unity bundle (ex.: "BladeWaveGhost")
+            if (_assetBundle.LoadAsset<GameObject>("BladeWaveGhost") != null)
+            {
+                BladeWaveController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("BladeWaveGhost");
+                BladeWaveController.ghostPrefabAddress = null;
+            }
+
+            BladeWaveController.startSound = "";
+        }
+
+        private static void CreateUltimateCMMissileProjectiles()
+        {
+            // MÍSSIL PEQUENO: clone do míssil do ATG, rápido e teleguiado (MissileController)
+            UltimateCMSmallMissileProjectile = Asset.CloneProjectilePrefab("MissileProjectile", "XUltimateCMSmallMissile");
+
+            MissileController smallMissile = UltimateCMSmallMissileProjectile.GetComponent<MissileController>();
+            if (smallMissile)
+            {
+                smallMissile.maxVelocity = 60f;
+                smallMissile.acceleration = 6f;
+                smallMissile.delayTimer = 0.1f;
+                smallMissile.giveupTimer = 6f;
+                smallMissile.deathTimer = 8f;
+            }
+
+            UltimateCMSmallMissileProjectile.GetComponent<ProjectileDamage>().damage = 1f;
+            UltimateCMSmallMissileProjectile.GetComponent<ProjectileController>().procCoefficient = 0.6f;
+            UltimateCMSmallMissileProjectile.GetComponent<ProjectileDamage>().damageType = DamageTypeCombo.GenericPrimary;
+            UltimateCMSmallMissileProjectile.GetComponent<ProjectileController>().startSound = "";
+
+            // MÍSSIL GRANDE: mais lento, maior e explode em área
+            UltimateCMBigMissileProjectile = Asset.CloneProjectilePrefab("MissileProjectile", "XUltimateCMBigMissile");
+            UltimateCMBigMissileProjectile.transform.localScale = Vector3.one * 2f;
+
+            MissileController bigMissile = UltimateCMBigMissileProjectile.GetComponent<MissileController>();
+            if (bigMissile)
+            {
+                bigMissile.maxVelocity = 40f;
+                bigMissile.acceleration = 4f;
+                bigMissile.delayTimer = 0.2f;
+                bigMissile.giveupTimer = 6f;
+                bigMissile.deathTimer = 8f;
+            }
+
+            // Troca o impacto de alvo único por uma explosão em área
+            ProjectileSingleTargetImpact singleImpact = UltimateCMBigMissileProjectile.GetComponent<ProjectileSingleTargetImpact>();
+            if (singleImpact)
+                UnityEngine.Object.DestroyImmediate(singleImpact);
+
+            ProjectileImpactExplosion bigExplosion = UltimateCMBigMissileProjectile.AddComponent<ProjectileImpactExplosion>();
+            bigExplosion.blastRadius = XStaticValues.UltimateCMBigMissileBlastRadius;
+            bigExplosion.blastDamageCoefficient = 1f;
+            bigExplosion.blastProcCoefficient = 1f;
+            bigExplosion.falloffModel = BlastAttack.FalloffModel.None;
+            bigExplosion.destroyOnEnemy = true;
+            bigExplosion.destroyOnWorld = true;
+            bigExplosion.lifetime = 8f;
+            bigExplosion.timerAfterImpact = false;
+            bigExplosion.impactEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OmniEffect/OmniExplosionVFX");
+
+            UltimateCMBigMissileProjectile.GetComponent<ProjectileDamage>().damage = 1f;
+            UltimateCMBigMissileProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
+            UltimateCMBigMissileProjectile.GetComponent<ProjectileDamage>().damageType = DamageTypeCombo.GenericSecondary;
+            UltimateCMBigMissileProjectile.GetComponent<ProjectileController>().startSound = "";
         }
 
 

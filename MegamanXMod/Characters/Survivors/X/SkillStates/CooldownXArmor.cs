@@ -63,14 +63,37 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 this.characterModel = this.modelTransform.GetComponent<CharacterModel>();
                 if(this.characterModel != null)
                 {
-                    childLocator = this.characterModel.GetComponent<ChildLocator>();
 
-                    meshRenderer = childLocator.FindChildGameObject("XBodyMesh").GetComponent<SkinnedMeshRenderer>();
-                    meshRenderer.sharedMesh = XAssets.XBodyMesh;
-                    meshRenderer.sharedMaterial = XAssets.MatX;
-                    characterModel.baseRendererInfos[0].defaultMaterial = XAssets.MatX;
-                    childLocator.FindChildGameObject("XShadowSaber").SetActive(false);
-                    childLocator.FindChildGameObject("XRathalosSaber").SetActive(false);
+                    if (characterBody.skinIndex == 0) 
+                    {
+                        childLocator = this.characterModel.GetComponent<ChildLocator>();
+
+                        meshRenderer = childLocator.FindChildGameObject("XBodyMesh").GetComponent<SkinnedMeshRenderer>();
+                        meshRenderer.sharedMesh = XAssets.XBodyMesh;
+                        meshRenderer.sharedMaterial = XAssets.MatX;
+                        characterModel.baseRendererInfos[0].defaultMaterial = XAssets.MatX;
+                        characterModel.baseRendererInfos[1].defaultMaterial = null;
+                        childLocator.FindChildGameObject("XShadowSaber").SetActive(false);
+                        childLocator.FindChildGameObject("XRathalosSaber").SetActive(false);
+                        childLocator.FindChildGameObject("XBladeSaber").SetActive(false);
+                        childLocator.FindChildGameObject("XFireBuster").SetActive(false);
+                    }
+                    else
+                    {
+                        childLocator = this.characterModel.GetComponent<ChildLocator>();
+
+                        meshRenderer = childLocator.FindChildGameObject("XBodyMesh").GetComponent<SkinnedMeshRenderer>();
+                        meshRenderer.sharedMesh = XAssets.XCMBodyMesh;
+                        meshRenderer.sharedMaterial = XAssets.MatXCM;
+                        characterModel.baseRendererInfos[0].defaultMaterial = XAssets.MatXCM;
+                        characterModel.baseRendererInfos[1].defaultMaterial = null;
+                        childLocator.FindChildGameObject("XShadowSaber").SetActive(false);
+                        childLocator.FindChildGameObject("XRathalosSaber").SetActive(false);
+                        childLocator.FindChildGameObject("XBladeSaber").SetActive(false);
+                        childLocator.FindChildGameObject("XFireBuster").SetActive(false);
+                    }
+
+                    
 
                 }
             }

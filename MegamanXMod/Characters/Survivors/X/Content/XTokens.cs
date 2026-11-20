@@ -126,6 +126,9 @@ namespace MegamanXMod.Survivors.X
             LanguageAPI.Add(prefix + "PRIMARY_SHADOW_BUSTER_DESCRIPTION", $"The Shadow Buster is a fast and powerful weapon, firing three kunai in a spread pattern, each dealing <style=cIsDamage>{100f * XStaticValues.ShadowBusterDamageCoefficient}% damage</style> and causing <color=#6b0202>bleeding</color> to enemies.");
 
             LanguageAPI.Add(prefix + "PRIMARY_ULTIMATE_BUSTER_Name", "Ultimate Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_FIRE_BUSTER_NAME", "Fire Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_FIRE_BUSTER_DESCRIPTION", $"Fire a blazing shot that deals <style=cIsDamage>{100f * XStaticValues.gunDamageCoefficient}% damage</style> and explodes on impact for <style=cIsDamage>{100f * SkillStates.FireBuster.XBlastDamageCoefficient}% damage</style>, <color=#a63b05>igniting</color> enemies.");
+
             LanguageAPI.Add(prefix + "PRIMARY_ULTIMATE_BUSTER_DESCRIPTION", $"This ultimate powerful buster delivers devastating attacks, dealing <style=cIsDamage>{100f * XStaticValues.XUltimateBusterDamageCoefficient}% damage</style>. On hit, it leaves behind a shock sphere that continuously deals <style=cIsDamage>{100f * XStaticValues.XUltimateBusterDamageCoefficient}% damage</style> over time.");
 
             LanguageAPI.Add(prefix + "PRIMARY_RATHALOS_BUSTER_NAME", "Rathalos Buster");
@@ -193,6 +196,30 @@ namespace MegamanXMod.Survivors.X
 
             LanguageAPI.Add(prefix + "SPECIAL_HOMMING_TORPEDO_NAME", "Homming Torpedo");
             LanguageAPI.Add(prefix + "SPECIAL_HOMMING_TORPEDO_DESCRIPTION", $"Shoot a small missle tha follow some targets, dealing <style=cIsDamage> {100f * XStaticValues.HomingTorpedoDamageCoefficient}% damage </style>.");
+
+            LanguageAPI.Add(prefix + "PRIMARY_BLADE_SLASH_NAME", "Blade Saber");
+            LanguageAPI.Add(prefix + "PRIMARY_BLADE_SLASH_DESCRIPTION", $"Slash with the Blade Saber for <style=cIsDamage>{100f * XStaticValues.XBladeSlashDamageCoefficient}% damage</style>.");
+
+            LanguageAPI.Add(prefix + "SECONDARY_BLADE_EDGE_NAME", "Blade Edge");
+            LanguageAPI.Add(prefix + "SECONDARY_BLADE_EDGE_DESCRIPTION", $"Energize the Blade Saber for {XStaticValues.BladeEdgeDuration} seconds, gaining <style=cIsDamage>+{100f * XStaticValues.BladeEdgeDamageBonus}% damage</style>, <style=cIsHealing>healing for {100f * XStaticValues.BladeEdgeLifeSteal}% of damage dealt</style> and <style=cIsUtility>reflecting enemy projectiles</style>.");
+
+            LanguageAPI.Add(prefix + "SPECIAL_BLADE_HEAVY_SLASH_NAME", "Blade Wave");
+            LanguageAPI.Add(prefix + "SPECIAL_BLADE_HEAVY_SLASH_DESCRIPTION", $"A heavy slash dealing <style=cIsDamage>{100f * XStaticValues.XBladeHeavySlashDamageCoefficient}% damage</style> that releases piercing sword waves, each hitting multiple times for <style=cIsDamage>{100f * XStaticValues.XBladeWaveDamageCoefficient}% damage</style>.");
+
+            LanguageAPI.Add(prefix + "PRIMARY_ULTIMATE_CM_MISSILE_NAME", "Micro Missiles");
+            LanguageAPI.Add(prefix + "PRIMARY_ULTIMATE_CM_MISSILE_DESCRIPTION", $"Launch two fast homing missiles at the target, each dealing <style=cIsDamage>{100f * XStaticValues.UltimateCMSmallMissileDamageCoefficient}% damage</style>.");
+
+            LanguageAPI.Add(prefix + "SECONDARY_ULTIMATE_CM_BIG_MISSILE_NAME", "Heavy Missile");
+            LanguageAPI.Add(prefix + "SECONDARY_ULTIMATE_CM_BIG_MISSILE_DESCRIPTION", $"Launch a large homing missile that explodes for <style=cIsDamage>{100f * XStaticValues.UltimateCMBigMissileDamageCoefficient}% damage</style> in a {XStaticValues.UltimateCMBigMissileBlastRadius}m radius.");
+
+            LanguageAPI.Add(prefix + "UTILITY_ULTIMATE_CM_BURST_NAME", "Elemental Burst");
+            LanguageAPI.Add(prefix + "UTILITY_ULTIMATE_CM_BURST_DESCRIPTION", $"Become invulnerable and release {XStaticValues.UltimateCMBurstPulses} explosions around you, each dealing <style=cIsDamage>{100f * XStaticValues.UltimateCMBurstDamageCoefficient}% damage</style>. The pulses cycle through <color=#a63b05>fire</color>, <style=cIsUtility>ice</style>, <style=cIsUtility>shock</style> and <style=cIsHealing>poison</style>, and the last one unleashes all of them.");
+
+            LanguageAPI.Add(prefix + "SPECIAL_ULTIMATE_CM_BARRAGE_NAME", "Missile Barrage");
+            LanguageAPI.Add(prefix + "SPECIAL_ULTIMATE_CM_BARRAGE_DESCRIPTION", $"Requires a target. Unleash a rapid barrage of 5 small and 5 large missiles that <color=#a63b05>ignite</color> the target.");
+
+            LanguageAPI.Add(prefix + "SPECIAL_CHARGE_COLLIDER_NAME", "Charge Collider");
+            LanguageAPI.Add(prefix + "SPECIAL_CHARGE_COLLIDER_DESCRIPTION", $"Requires a target. Hold to charge, release to dash into the target and unleash a flurry of fiery blasts, each dealing <style=cIsDamage>{100f * XStaticValues.ChargeColliderDamageCoefficient}% damage</style>, <color=#a63b05>igniting</color> and <style=cIsUtility>shocking</style> enemies. The final blast knocks the target away. Charging increases the number of hits.");
 
             LanguageAPI.Add(prefix + "SPECIAL_RISING_FIRE_NAME", "Rising Fire R");
             LanguageAPI.Add(prefix + "SPECIAL_RISING_FIRE_DESCRIPTION", $"When equipped with this weapon, X raises his arm in the air and shoots firebombs upwards dealing <style=cIsDamage> {100f * XStaticValues.RisingFireDamageCoefficient}% damage </style>.");

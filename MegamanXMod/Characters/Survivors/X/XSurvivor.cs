@@ -51,12 +51,15 @@ namespace MegamanXMod.Survivors.X
         internal static SkillDef CoolDownXArmorSkillDef;
         internal static SkillDef HyperModeLightArmorSkillDef;
         internal static SkillDef HyperModeSecondArmorSkillDef;
+        internal static SkillDef HyperModeXFireSkillDef;
         internal static SkillDef HyperModeMaxArmorSkillDef;
         internal static SkillDef HyperModeFourthArmorSkillDef;
         internal static SkillDef HyperModeFalconArmorSkillDef;
         internal static SkillDef HyperModeGaeaArmorSkillDef;
         internal static SkillDef HyperModeShadowArmorSkillDef;
+        internal static SkillDef HyperModeBladeArmorSkillDef;
         internal static SkillDef HyperModeUltimateArmorSkillDef;
+        internal static SkillDef HyperModeUltimateArmorCMSkillDef;
         internal static SkillDef HyperModeRathalosArmorSkillDef;
         internal static SkillDef LockArmorSkillDef;
 
@@ -70,6 +73,7 @@ namespace MegamanXMod.Survivors.X
         internal static SkillDef XGaeaBusterSkillDef;
         internal static SkillDef XShadowBusterSkillDef;
         internal static SkillDef XUltimateBusterSkillDef;
+        internal static SkillDef XFireBusterSkillDef;
         internal static SkillDef XRathalosBusterSkillDef;
 
         //SECONDARY
@@ -91,6 +95,14 @@ namespace MegamanXMod.Survivors.X
         internal static SkillDef XGaeaGigaAttackSkillDef;
         internal static SkillDef XRathalosSlashSkillDef;
         internal static SkillDef XRisingFireSkillDef;
+        internal static HuntTrackerSkillDef XChargeColliderSkillDef;
+        internal static SteppedSkillDef XBladeSlashSkillDef;
+        internal static SkillDef XBladeEdgeSkillDef;
+        internal static SkillDef XBladeHeavySlashSkillDef;
+        internal static SkillDef XUltimateCMMissileSkillDef;
+        internal static SkillDef XUltimateCMBigMissileSkillDef;
+        internal static SkillDef XUltimateCMBurstSkillDef;
+        internal static HuntTrackerSkillDef XUltimateCMBarrageSkillDef;
         internal static SkillDef XAcidBurstSkillDef;
         internal static SkillDef XChameleonStingSkillDef;
         internal static SkillDef XMeltCreeperSkillDef;
@@ -209,6 +221,7 @@ namespace MegamanXMod.Survivors.X
             bodyPrefab.AddComponent<XBaseComponent>();
             bodyPrefab.AddComponent<XArmorComponent>();
             bodyPrefab.AddComponent<XHoverComponent>();
+            bodyPrefab.AddComponent<XBladeDeflectComponent>();
 
             bodyPrefab.AddComponent<HuntressTracker>();
             HuntressTracker huntressTracker = bodyPrefab.GetComponent<HuntressTracker>();
@@ -351,6 +364,25 @@ namespace MegamanXMod.Survivors.X
                 mustKeyPress = false,
             });
 
+            HyperModeXFireSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "HyperModeXFire",
+                skillNameToken = MEGAMAN_x_PREFIX + "EXTRA_FIRST_X_FIRE_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "EXTRA_FIRST_X_FIRE_DESCRIPTION",
+                //skillIcon = XAssets.IconSecond,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.HyperModeXFire)),
+                //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
+                activationStateMachineName = "Body",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseMaxStock = 1,
+                baseRechargeInterval = 2f,
+
+                isCombatSkill = false,
+                mustKeyPress = false,
+            });
+
             HyperModeMaxArmorSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "HyperModeMaxArmor",
@@ -427,6 +459,25 @@ namespace MegamanXMod.Survivors.X
                 mustKeyPress = false,
             });
 
+            HyperModeBladeArmorSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "HyperModeBladeArmor",
+                skillNameToken = MEGAMAN_x_PREFIX + "EXTRA_THIRD_BLADE_ARMOR_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "EXTRA_THIRD_BLADE_ARMOR_DESCRIPTION",
+                //skillIcon = XAssets.IconGaea,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.HyperModeBladeArmor)),
+                //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
+                activationStateMachineName = "Body",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseMaxStock = 1,
+                baseRechargeInterval = 4f,
+
+                isCombatSkill = false,
+                mustKeyPress = false,
+            });
+
             HyperModeShadowArmorSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "HyperModeShadowArmor",
@@ -454,6 +505,25 @@ namespace MegamanXMod.Survivors.X
                 skillIcon = XAssets.IconUltimate,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.HyperModeUltimateArmor)),
+                //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
+                activationStateMachineName = "Body",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseMaxStock = 1,
+                baseRechargeInterval = 5f,
+
+                isCombatSkill = false,
+                mustKeyPress = false,
+            });
+
+            HyperModeUltimateArmorCMSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "HyperModeUltimateArmorCM",
+                skillNameToken = MEGAMAN_x_PREFIX + "EXTRA_FOURTH_ULTIMATE_ARMOR_CM_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "EXTRA_FOURTH_ULTIMATE_ARMOR_CM_DESCRIPTION",
+                skillIcon = XAssets.IconUltimate,
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.HyperModeUltimateArmorCM)),
                 //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
                 activationStateMachineName = "Body",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
@@ -812,6 +882,37 @@ namespace MegamanXMod.Survivors.X
                 isCombatSkill = true,
                 canceledFromSprinting = false,
                 cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+
+            // XFire - Fire Buster (só usado como override no modo XFire)
+            XFireBusterSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "FireBuster",
+                skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_FIRE_BUSTER_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_FIRE_BUSTER_DESCRIPTION",
+                skillIcon = XAssets.IconFireWave, // TODO: trocar pelo ícone do Fire Buster
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(FireBuster)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Any,
+
+                baseRechargeInterval = 0f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 0,
+                stockToConsume = 0,
+
+                resetCooldownTimerOnUse = false,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = false,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = true,
                 forceSprintDuringState = false,
             });
 
@@ -1414,6 +1515,255 @@ namespace MegamanXMod.Survivors.X
                 forceSprintDuringState = false,
             });
 
+            // BLADE ARMOR (só usados como override no HyperMode Blade Armor)
+            XBladeSlashSkillDef = Skills.CreateSkillDef<SteppedSkillDef>(new SkillDefInfo
+            {
+                skillName = "BladeSlash",
+                skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_BLADE_SLASH_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_BLADE_SLASH_DESCRIPTION",
+                skillIcon = XAssets.IconShadowSaber, // TODO: ícone próprio
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(XBladeSlashCombo)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Any,
+
+                baseRechargeInterval = 0f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 0,
+                stockToConsume = 0,
+
+                resetCooldownTimerOnUse = false,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = false,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = true,
+                forceSprintDuringState = false,
+            });
+            XBladeSlashSkillDef.stepCount = 2;
+            XBladeSlashSkillDef.stepGraceDuration = 0.5f;
+
+            XBladeEdgeSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "BladeEdge",
+                skillNameToken = MEGAMAN_x_PREFIX + "SECONDARY_BLADE_EDGE_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "SECONDARY_BLADE_EDGE_DESCRIPTION",
+                skillIcon = XAssets.IconShadowSaber, // TODO: ícone próprio
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(XBladeEdge)),
+                activationStateMachineName = "Weapon2",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseRechargeInterval = 16f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = false,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = true,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = false,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+
+            XBladeHeavySlashSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "BladeHeavySlash",
+                skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_BLADE_HEAVY_SLASH_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "SPECIAL_BLADE_HEAVY_SLASH_DESCRIPTION",
+                skillIcon = XAssets.IconTrueRathalosSlash, // TODO: ícone próprio
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(XBladeHeavySlash)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+
+                baseRechargeInterval = 8f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = false,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = true,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = true,
+                forceSprintDuringState = false,
+            });
+
+            // ULTIMATE ARMOR CM (só usados como override no HyperMode Ultimate Armor CM)
+            XUltimateCMMissileSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "UltimateCMMissile",
+                skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_ULTIMATE_CM_MISSILE_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_ULTIMATE_CM_MISSILE_DESCRIPTION",
+                skillIcon = XAssets.IconUltimateBuster, // TODO: ícone próprio
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(UltimateCMMissile)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Any,
+
+                baseRechargeInterval = 0f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 0,
+                stockToConsume = 0,
+
+                resetCooldownTimerOnUse = false,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = false,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = true,
+                forceSprintDuringState = false,
+            });
+
+            XUltimateCMBigMissileSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "UltimateCMBigMissile",
+                skillNameToken = MEGAMAN_x_PREFIX + "SECONDARY_ULTIMATE_CM_BIG_MISSILE_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "SECONDARY_ULTIMATE_CM_BIG_MISSILE_DESCRIPTION",
+                skillIcon = XAssets.IconUltimateBuster, // TODO: ícone próprio
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(UltimateCMBigMissile)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseRechargeInterval = 4f,
+                baseMaxStock = 2,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = false,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = false,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = true,
+                forceSprintDuringState = false,
+            });
+
+            XUltimateCMBurstSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "UltimateCMBurst",
+                skillNameToken = MEGAMAN_x_PREFIX + "UTILITY_ULTIMATE_CM_BURST_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "UTILITY_ULTIMATE_CM_BURST_DESCRIPTION",
+                skillIcon = XAssets.IconXNovaStrike, // TODO: ícone próprio
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(UltimateCMElementBurst)),
+                activationStateMachineName = "Body",
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+
+                baseRechargeInterval = 18f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = false,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = true,
+                beginSkillCooldownOnSkillEnd = true,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = true,
+                forceSprintDuringState = false,
+            });
+
+            XUltimateCMBarrageSkillDef = Skills.CreateSkillDef<HuntTrackerSkillDef>(new SkillDefInfo
+            {
+                skillName = "UltimateCMBarrage",
+                skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_ULTIMATE_CM_BARRAGE_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "SPECIAL_ULTIMATE_CM_BARRAGE_DESCRIPTION",
+                skillIcon = XAssets.IconHomingTorpedo, // TODO: ícone próprio
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(UltimateCMBarrage)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+
+                baseRechargeInterval = 12f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = false,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = true,
+                beginSkillCooldownOnSkillEnd = true,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = true,
+                forceSprintDuringState = false,
+            });
+
+            // XFire - Charge Collider (só usado como override no modo XFire)
+            XChargeColliderSkillDef = Skills.CreateSkillDef<HuntTrackerSkillDef>(new SkillDefInfo
+            {
+                skillName = "ChargeCollider",
+                skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_CHARGE_COLLIDER_NAME",
+                skillDescriptionToken = MEGAMAN_x_PREFIX + "SPECIAL_CHARGE_COLLIDER_DESCRIPTION",
+                skillIcon = XAssets.IconRisingFire, // TODO: trocar pelo ícone do Charge Collider
+                keywordTokens = new string[]
+                {
+                    MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"
+                },
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(ChargeCollider)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseRechargeInterval = 8f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = false,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = true,
+                beginSkillCooldownOnSkillEnd = true,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+
             HomingTorpedoSkillDef = ScriptableObject.CreateInstance<HuntTrackerSkillDef>();
             HomingTorpedoSkillDef.skillName = MEGAMAN_x_PREFIX + "SPECIAL_HOMMING_TORPEDO_NAME";
             HomingTorpedoSkillDef.skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_HOMMING_TORPEDO_NAME";
@@ -1684,6 +2034,7 @@ namespace MegamanXMod.Survivors.X
 
             Skills.AddFirstExtraSkill(bodyPrefab, HyperModeLightArmorSkillDef);
             Skills.AddFirstExtraSkill(bodyPrefab, HyperModeSecondArmorSkillDef);
+            Skills.AddFirstExtraSkill(bodyPrefab, HyperModeXFireSkillDef);
         }
 
         private void AddExtraSecondSkills()
@@ -1738,6 +2089,7 @@ namespace MegamanXMod.Survivors.X
 
             Skills.AddThirdExtraSkill(bodyPrefab, HyperModeFalconArmorSkillDef);
             Skills.AddThirdExtraSkill(bodyPrefab, HyperModeGaeaArmorSkillDef);
+            Skills.AddThirdExtraSkill(bodyPrefab, HyperModeBladeArmorSkillDef);
         }
 
         private void AddExtraFourthSkills()
@@ -1767,6 +2119,7 @@ namespace MegamanXMod.Survivors.X
             Skills.AddFourthExtraSkill(bodyPrefab, HyperModeShadowArmorSkillDef);
             Skills.AddFourthExtraSkill(bodyPrefab, HyperModeUltimateArmorSkillDef);
             Skills.AddFourthExtraSkill(bodyPrefab, HyperModeRathalosArmorSkillDef);
+            Skills.AddFourthExtraSkill(bodyPrefab, HyperModeUltimateArmorCMSkillDef);
         }
 
         #region skins
@@ -1814,25 +2167,26 @@ namespace MegamanXMod.Survivors.X
             skins.Add(defaultSkin);
             #endregion
 
-            ////creating a new skindef as we did before
-            //SkinDef masterySkin = Modules.Skins.CreateSkinDef(MEGAMAN_x_PREFIX + "MASTERY_SKIN_NAME",
-            //    assetBundle.LoadAsset<Sprite>("texMasteryAchievement"),
-            //    defaultRendererinfos,
-            //    prefabCharacterModel.gameObject);
+            //creating a new skindef as we did before
+            SkinDef cmSkin = Modules.Skins.CreateSkinDef(MEGAMAN_x_PREFIX + "CM_SKIN_NAME",
+                assetBundle.LoadAsset<Sprite>("texMasteryAchievement"),
+                defaultRendererinfos,
+                prefabCharacterModel.gameObject);
 
-            ////adding the mesh replacements as above. 
-            ////if you don't want to replace the mesh (for example, you only want to replace the material), pass in null so the order is preserved
-            //masterySkin.meshReplacements = Modules.Skins.getMeshReplacements(assetBundle, defaultRendererinfos,
-            //    "XGaeaBodyMeshF",
-            //    null);
+            //adding the mesh replacements as above. 
+            //if you don't want to replace the mesh (for example, you only want to replace the material), pass in null so the order is preserved
+            cmSkin.meshReplacements = Modules.Skins.getMeshReplacements(assetBundle, defaultRendererinfos,
+                "XCMBodyMesh",
+                null,
+                null);
 
-            ////masterySkin has a new set of RendererInfos (based on default rendererinfos)
-            ////you can simply access the RendererInfos' materials and set them to the new materials for your skin.
-            //masterySkin.rendererInfos[0].defaultMaterial = assetBundle.LoadMaterial("matGaea");
-            ////masterySkin.rendererInfos[1].defaultMaterial = assetBundle.LoadMaterial("matGaea");
+            //cmSkin has a new set of RendererInfos (based on default rendererinfos)
+            //you can simply access the RendererInfos' materials and set them to the new materials for your skin.
+            cmSkin.rendererInfos[0].defaultMaterial = XAssets.MatXCM;
+            cmSkin.rendererInfos[1].defaultMaterial = null;
 
-            ////here's a barebones example of using gameobjectactivations that could probably be streamlined or rewritten entirely, truthfully, but it works
-            //masterySkin.gameObjectActivations = new SkinDef.GameObjectActivation[]
+            //here's a barebones example of using gameobjectactivations that could probably be streamlined or rewritten entirely, truthfully, but it works
+            //cmSkin.gameObjectActivations = new SkinDef.GameObjectActivation[]
             //{
             //    new SkinDef.GameObjectActivation
             //    {
@@ -1840,16 +2194,16 @@ namespace MegamanXMod.Survivors.X
             //        shouldActivate = false,
             //    }
             //};
-            ////simply find an object on your child locator you want to activate/deactivate and set if you want to activate/deacitvate it with this skin
+            //simply find an object on your child locator you want to activate/deactivate and set if you want to activate/deacitvate it with this skin
 
-            ////skins.Add(masterySkin);
+            skins.Add(cmSkin);
 
 
             //uncomment this when you have a mastery skin
             #region MasterySkin
 
             ////creating a new skindef as we did before
-            //SkinDef masterySkin = Modules.Skins.CreateSkinDef(MEGAMAN_x_PREFIX + "MASTERY_SKIN_NAME",
+            //SkinDef cmSkin = Modules.Skins.CreateSkinDef(MEGAMAN_x_PREFIX + "MASTERY_SKIN_NAME",
             //    assetBundle.LoadAsset<Sprite>("texMasteryAchievement"),
             //    defaultRendererinfos,
             //    prefabCharacterModel.gameObject,
@@ -1857,19 +2211,19 @@ namespace MegamanXMod.Survivors.X
 
             ////adding the mesh replacements as above. 
             ////if you don't want to replace the mesh (for example, you only want to replace the material), pass in null so the order is preserved
-            //masterySkin.meshReplacements = Modules.Skins.getMeshReplacements(assetBundle, defaultRendererinfos,
+            //cmSkin.meshReplacements = Modules.Skins.getMeshReplacements(assetBundle, defaultRendererinfos,
             //    "meshHenrySwordAlt",
             //    null,//no gun mesh replacement. use same gun mesh
             //    "meshHenryAlt");
 
-            ////masterySkin has a new set of RendererInfos (based on default rendererinfos)
+            ////cmSkin has a new set of RendererInfos (based on default rendererinfos)
             ////you can simply access the RendererInfos' materials and set them to the new materials for your skin.
-            //masterySkin.rendererInfos[0].defaultMaterial = assetBundle.LoadMaterial("matHenryAlt");
-            //masterySkin.rendererInfos[1].defaultMaterial = assetBundle.LoadMaterial("matHenryAlt");
-            //masterySkin.rendererInfos[2].defaultMaterial = assetBundle.LoadMaterial("matHenryAlt");
+            //cmSkin.rendererInfos[0].defaultMaterial = assetBundle.LoadMaterial("matHenryAlt");
+            //cmSkin.rendererInfos[1].defaultMaterial = assetBundle.LoadMaterial("matHenryAlt");
+            //cmSkin.rendererInfos[2].defaultMaterial = assetBundle.LoadMaterial("matHenryAlt");
 
             ////here's a barebones example of using gameobjectactivations that could probably be streamlined or rewritten entirely, truthfully, but it works
-            //masterySkin.gameObjectActivations = new SkinDef.GameObjectActivation[]
+            //cmSkin.gameObjectActivations = new SkinDef.GameObjectActivation[]
             //{
             //    new SkinDef.GameObjectActivation
             //    {
@@ -1879,7 +2233,7 @@ namespace MegamanXMod.Survivors.X
             //};
             ////simply find an object on your child locator you want to activate/deactivate and set if you want to activate/deacitvate it with this skin
 
-            //skins.Add(masterySkin);
+            //skins.Add(cmSkin);
 
             #endregion
 
@@ -2128,6 +2482,12 @@ namespace MegamanXMod.Survivors.X
             if (attackerController == null || attackerBody == null || victimBody == null)
                 return;
 
+            // Blade Edge: roubo de vida (OnHitEnemy roda só no servidor)
+            if (attackerBody.HasBuff(XBuffs.BladeEdgeBuff) && damageInfo.procCoefficient > 0f && attackerBody.healthComponent)
+            {
+                attackerBody.healthComponent.Heal(damageInfo.damage * XStaticValues.BladeEdgeLifeSteal, damageInfo.procChainMask);
+            }
+
             //Debug.Log("attackerController:" + attackerController);
             //Debug.Log("victimBody:" + victimBody);
             //Debug.Log("attackerBody:" + attackerBody);
@@ -2327,6 +2687,24 @@ namespace MegamanXMod.Survivors.X
                 args.moveSpeedMultAdd += 0.2f;
                 args.shieldMultAdd += 2f;
                 args.critDamageMultAdd += 1f;
+            }
+
+            if (sender.HasBuff(XBuffs.UltimateCMArmorBuff))
+            {
+                args.armorAdd += 150;
+                args.armorAdd += sender.baseArmor * 3f;
+                args.healthMultAdd += 1.2f;
+                args.damageMultAdd += 1.2f;
+                args.regenMultAdd += 0.8f;
+                args.moveSpeedReductionMultAdd += 0.3f; // lenta
+                args.jumpPowerMultAdd -= 0.1f;
+                args.shieldMultAdd += 2f;
+                args.critDamageMultAdd += 1f;
+            }
+
+            if (sender.HasBuff(XBuffs.BladeEdgeBuff))
+            {
+                args.damageMultAdd += XStaticValues.BladeEdgeDamageBonus;
             }
 
             if (sender.HasBuff(XBuffs.HyperChipBuff))
