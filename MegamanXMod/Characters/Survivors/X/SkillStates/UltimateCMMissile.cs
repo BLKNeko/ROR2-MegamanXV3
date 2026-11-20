@@ -31,7 +31,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             if (isAuthority)
                 target = UltimateCMMissileHelper.GetTarget(gameObject);
 
-            PlayAnimation("Gesture, Override", "XBusterChargeAttack", "ShootGun.playbackRate", duration);
+            PlayAnimation("Gesture, Override", "ULCM_Shoot1", "ShootGun.playbackRate", duration);
         }
 
         public override void FixedUpdate()

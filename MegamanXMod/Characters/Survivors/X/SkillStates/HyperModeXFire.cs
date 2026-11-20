@@ -138,16 +138,16 @@ namespace MegamanXMod.Survivors.X.SkillStates
             armorComponent.UnsetAllSpecialSkills();
 
 
-            //RESET ALL EXTRA SKILLS AND SET FOURTH EXTRA TO COOLDOWN X
-            extraskillLocator.extraFirst.SetSkillOverride(extraskillLocator.extraFirst, armorComponent.GetPrimaryArmorSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
+            //RESET ALL EXTRA SKILLS AND SET FIRST EXTRA TO COOLDOWN X (XFire fica no primeiro slot)
+            extraskillLocator.extraFirst.SetSkillOverride(extraskillLocator.extraFirst, XSurvivor.CoolDownXArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             extraskillLocator.extraSecond.SetSkillOverride(extraskillLocator.extraSecond, armorComponent.GetSecondaryArmorSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
             extraskillLocator.extraThird.SetSkillOverride(extraskillLocator.extraThird, armorComponent.GetThirdArmorSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
-            extraskillLocator.extraFourth.SetSkillOverride(extraskillLocator.extraFourth, XSurvivor.CoolDownXArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            extraskillLocator.extraFourth.SetSkillOverride(extraskillLocator.extraFourth, armorComponent.GetFourthArmorSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
 
             //RESET ALL NORMAL SKILLS AND SET THE PRIMARY AND UTILITY FOR ULTIMATE
             characterBody.skillLocator.primary.SetSkillOverride(characterBody.skillLocator.primary, XSurvivor.XFireBusterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             characterBody.skillLocator.secondary.SetSkillOverride(characterBody.skillLocator.secondary, armorComponent.GetSecondaryBaseSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
-            characterBody.skillLocator.utility.SetSkillOverride(characterBody.skillLocator.utility, XSurvivor.XNovaStrikeSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            characterBody.skillLocator.utility.SetSkillOverride(characterBody.skillLocator.utility, XSurvivor.XDashSkillDef, GenericSkill.SkillOverridePriority.Contextual);
             characterBody.skillLocator.special.SetSkillOverride(characterBody.skillLocator.special, XSurvivor.XChargeColliderSkillDef, GenericSkill.SkillOverridePriority.Contextual);
 
             setSkills = true;

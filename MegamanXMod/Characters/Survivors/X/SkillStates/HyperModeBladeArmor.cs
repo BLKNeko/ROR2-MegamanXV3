@@ -138,11 +138,11 @@ namespace MegamanXMod.Survivors.X.SkillStates
             armorComponent.UnsetAllSpecialSkills();
 
 
-            //RESET ALL EXTRA SKILLS AND SET FOURTH EXTRA TO COOLDOWN X
+            //RESET ALL EXTRA SKILLS AND SET THIRD EXTRA TO COOLDOWN X (Blade Armor fica no terceiro slot)
             extraskillLocator.extraFirst.SetSkillOverride(extraskillLocator.extraFirst, armorComponent.GetPrimaryArmorSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
             extraskillLocator.extraSecond.SetSkillOverride(extraskillLocator.extraSecond, armorComponent.GetSecondaryArmorSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
-            extraskillLocator.extraThird.SetSkillOverride(extraskillLocator.extraThird, armorComponent.GetThirdArmorSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
-            extraskillLocator.extraFourth.SetSkillOverride(extraskillLocator.extraFourth, XSurvivor.CoolDownXArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            extraskillLocator.extraThird.SetSkillOverride(extraskillLocator.extraThird, XSurvivor.CoolDownXArmorSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            extraskillLocator.extraFourth.SetSkillOverride(extraskillLocator.extraFourth, armorComponent.GetFourthArmorSkillDef(), GenericSkill.SkillOverridePriority.Contextual);
 
             //RESET ALL NORMAL SKILLS AND SET THE PRIMARY AND UTILITY FOR ULTIMATE
             characterBody.skillLocator.primary.SetSkillOverride(characterBody.skillLocator.primary, XSurvivor.XBladeSlashSkillDef, GenericSkill.SkillOverridePriority.Contextual);

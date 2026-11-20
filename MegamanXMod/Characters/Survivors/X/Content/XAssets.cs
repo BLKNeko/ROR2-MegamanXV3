@@ -27,6 +27,7 @@ namespace MegamanXMod.Survivors.X
         public static GameObject FJetVFX;
         public static GameObject swordSwingEffectY;
         public static GameObject swordSwingEffectR;
+        public static GameObject swordSwingEffectB;
         public static GameObject XDeathVFX;
         public static GameObject RathalosExplosionVFX;
         public static GameObject RathalosFlamesVFX;
@@ -271,6 +272,7 @@ namespace MegamanXMod.Survivors.X
 
             swordSwingEffectY = _assetBundle.LoadEffect("HSwordSwingY", true);
             swordSwingEffectR = _assetBundle.LoadEffect("HSwordSwingR", true);
+            swordSwingEffectB = _assetBundle.LoadEffect("SwordSwingBlue", true);
 
             XDeathVFX = _assetBundle.LoadEffect("XDeathEffect", false);
 

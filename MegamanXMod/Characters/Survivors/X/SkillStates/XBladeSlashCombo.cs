@@ -18,7 +18,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             procCoefficient = 1f;
             pushForce = 300f;
             bonusForce = Vector3.zero;
-            baseDuration = 0.5f;
+            baseDuration = 0.7f;
 
             attackStartPercentTime = 0.2f;
             attackEndPercentTime = 0.6f;
@@ -32,7 +32,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             hitSoundString = "";
             muzzleString = swingIndex % 2 == 0 ? "SwordMuzzLPos" : "SwordMuzzRPos";
             playbackRateParam = "attackSpeed";
-            swingEffectPrefab = XAssets.swordSwingEffectY;
+            swingEffectPrefab = XAssets.swordSwingEffectB;
             hitEffectPrefab = XAssets.swordHitImpactEffect;
 
             impactSound = XAssets.swordHitSoundEvent.index;

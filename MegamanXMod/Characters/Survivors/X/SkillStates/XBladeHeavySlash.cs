@@ -50,7 +50,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
         protected override void PlayAttackAnimation()
         {
             // Reaproveita a animação do corte pesado do Rathalos
-            PlayAnimation("FullBody, Override", "XRSlash1", "attackSpeed", duration);
+            PlayAnimation("FullBody, Override", "GigaBladeStart", "attackSpeed", duration);
         }
 
         public override void FixedUpdate()
@@ -94,7 +94,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
         public override void OnExit()
         {
-            PlayAnimation("FullBody, Override", "BufferEmpty", "attackSpeed", duration);
+            PlayAnimation("FullBody, Override", "GigaBladeEnd", "attackSpeed", duration);
             base.OnExit();
         }
 

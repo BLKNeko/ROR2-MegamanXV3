@@ -48,6 +48,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             EffectManager.SimpleMuzzleFlash(XAssets.HyperModeEffect, gameObject, "CorePosition", false);
             AkSoundEngine.PostEvent(XStaticValues.X_Charge_Shot, gameObject);
+            PlayAnimation("FullBody, Override", "ULCM_Explosion_Loop", "ShootGun.playbackRate", duration);
+
         }
 
         private static void LoadEffects()
@@ -156,6 +158,15 @@ namespace MegamanXMod.Survivors.X.SkillStates
             }
 
             AkSoundEngine.PostEvent(XStaticValues.X_FireWave_SFX, gameObject);
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+
+            PlayAnimation("FullBody, Override", "BufferEmpty", "ShootGun.playbackRate", duration);
+
+
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()

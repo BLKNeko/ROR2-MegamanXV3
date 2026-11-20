@@ -1660,7 +1660,7 @@ namespace MegamanXMod.Survivors.X
                 resetCooldownTimerOnUse = false,
                 fullRestockOnAssign = true,
                 dontAllowPastMaxStocks = false,
-                mustKeyPress = false,
+                mustKeyPress = true, // um míssil por clique (segurar não dispara as cargas em sequência)
                 beginSkillCooldownOnSkillEnd = false,
 
                 isCombatSkill = true,

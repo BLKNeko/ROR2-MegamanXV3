@@ -76,9 +76,31 @@ namespace MegamanXMod.Survivors.X.SkillStates
             if (characterMotor)
                 characterMotor.Motor.ForceUnground(0.1f);
 
-            EffectManager.SimpleMuzzleFlash(XAssets.NovaStrikeVFX, gameObject, "NovaDashPos", false);
+            // Mesmo visual do XDash: propulsores nos pés, animação DashLoop e rastro holográfico
+            EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, gameObject, "LDashPos", false);
+            EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, gameObject, "RDashPos", false);
             AkSoundEngine.PostEvent(XStaticValues.X_Dash_SFX, gameObject);
-            PlayAnimation("FullBody, Override", "NovaStrikeStart", "attackSpeed", maxDashDuration);
+            PlayAnimation("FullBody, Override", "DashLoop", "attackSpeed", maxDashDuration);
+            AddDashOverlay();
+        }
+
+        private void AddDashOverlay()
+        {
+            Transform modelTransform = GetModelTransform();
+            if (!modelTransform)
+                return;
+
+            CharacterModel characterModel = modelTransform.GetComponent<CharacterModel>();
+            if (!characterModel)
+                return;
+
+            TemporaryOverlayInstance overlay = TemporaryOverlayManager.AddOverlay(modelTransform.gameObject);
+            overlay.duration = 0.5f;
+            overlay.animateShaderAlpha = true;
+            overlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+            overlay.destroyComponentOnEnd = true;
+            overlay.originalMaterial = LegacyResourcesAPI.Load<Material>("Materials/matMercHologram");
+            overlay.AddToCharacterModel(characterModel);
         }
 
         public override void FixedUpdate()
@@ -222,10 +244,11 @@ namespace MegamanXMod.Survivors.X.SkillStates
             if (newPhase == Phase.Hits)
             {
                 hitTimer = 0f; // primeiro hit imediato
+                PlayAnimation("FullBody, Override", "DashEnd", "attackSpeed", hitInterval * hitCount);
             }
             else if (newPhase == Phase.Recoil)
             {
-                PlayAnimation("FullBody, Override", "NovaStrikeEnd", "attackSpeed", recoilDuration);
+                PlayAnimation("FullBody, Override", "DashEnd", "attackSpeed", recoilDuration);
 
                 if (characterMotor)
                 {
@@ -244,6 +267,10 @@ namespace MegamanXMod.Survivors.X.SkillStates
             // Evita sair "voando" se o estado for interrompido no meio do dash
             if (characterMotor && phase == Phase.Dash)
                 characterMotor.velocity *= 0.2f;
+
+            // Saída igual à do XDash se o dash for interrompido antes dos hits
+            if (phase == Phase.Dash)
+                PlayAnimation("FullBody, Override", "DashEnd", "attackSpeed", 0.3f);
 
             base.OnExit();
         }

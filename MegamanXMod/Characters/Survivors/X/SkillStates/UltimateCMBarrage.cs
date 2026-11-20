@@ -34,6 +34,9 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 target = UltimateCMMissileHelper.GetTarget(gameObject);
 
             AkSoundEngine.PostEvent(XStaticValues.X_Charge_Shot, gameObject);
+
+            PlayAnimation("Gesture, Override", "ULCM_Barrage_Start", "ShootGun.playbackRate", duration);
+
         }
 
         public override void FixedUpdate()
@@ -56,7 +59,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             bool big = missilesFired % 2 == 1;
 
             AkSoundEngine.PostEvent(XStaticValues.X_Mid_Bullet, gameObject);
-            PlayAnimation("Gesture, Override", "XBusterChargeAttack", "ShootGun.playbackRate", fireInterval * 2f);
+            //PlayAnimation("Gesture, Override", "XBusterChargeAttack", "ShootGun.playbackRate", fireInterval * 2f);
 
             if (isAuthority)
             {
@@ -76,7 +79,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
         public override void OnExit()
         {
-            PlayCrossfade("Gesture, Override", "BufferEmpty", "ShootGun.playbackRate", 0.2f, 0.03f);
+            // O ULCM_Barrage_End já tem transição própria para BufferEmpty no Animator
+            PlayCrossfade("Gesture, Override", "ULCM_Barrage_End", 0.1f);
             base.OnExit();
         }
 

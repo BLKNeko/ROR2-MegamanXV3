@@ -18,7 +18,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             characterBody.SetAimTimer(2f);
 
             AkSoundEngine.PostEvent(XStaticValues.X_Charge_Shot, gameObject);
-            PlayAnimation("Gesture, Override", "XBusterChargeAttack", "ShootGun.playbackRate", duration);
+            PlayAnimation("Gesture, Override", "ULCM_Shoot2", "ShootGun.playbackRate", duration);
 
             if (isAuthority)
             {
@@ -44,7 +44,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.Skill;
+            // Não pode ser cortado pela primária nem por ele mesmo durante o disparo
+            return InterruptPriority.PrioritySkill;
         }
     }
 }
