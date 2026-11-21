@@ -12,6 +12,24 @@ namespace MegamanXMod.Survivors.X.SkillStates
         public static float upOffset = 0.8f;
         public static float launchUpAngle = 25f; // lança um pouco para cima antes de curvar para o alvo
 
+        public const string MuzzleRight = "CMULMuzzR";
+        public const string MuzzleLeft = "CMULMuzzL";
+
+        public static string GetMuzzle(int index)
+        {
+            return (index % 2 == 0) ? MuzzleRight : MuzzleLeft;
+        }
+
+        private static Transform FindMuzzle(GameObject owner, string muzzle)
+        {
+            ModelLocator modelLocator = owner.GetComponent<ModelLocator>();
+            if (!modelLocator || !modelLocator.modelTransform)
+                return null;
+
+            ChildLocator childLocator = modelLocator.modelTransform.GetComponent<ChildLocator>();
+            return childLocator ? childLocator.FindChild(muzzle) : null;
+        }
+
         public static HurtBox GetTarget(GameObject owner)
         {
             HuntressTracker tracker = owner.GetComponent<HuntressTracker>();
@@ -23,7 +41,16 @@ namespace MegamanXMod.Survivors.X.SkillStates
         {
             Vector3 right = Vector3.Cross(Vector3.up, aimRay.direction).normalized;
             float side = (index % 2 == 0) ? 1f : -1f;
-            Vector3 position = aimRay.origin + right * sideOffset * side + Vector3.up * upOffset;
+
+            // Sai dos lançadores da armadura (CMULMuzzR / CMULMuzzL), alternando direita/esquerda.
+            // Se o muzzle não existir (ex.: modelo sem os pontos), cai no offset relativo à mira.
+            string muzzle = GetMuzzle(index);
+            Transform muzzleTransform = FindMuzzle(owner, muzzle);
+            Vector3 position = muzzleTransform
+                ? muzzleTransform.position
+                : aimRay.origin + right * sideOffset * side + Vector3.up * upOffset;
+
+            EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, owner, muzzle, true);
 
             // Abre um pouco para os lados e para cima, o MissileController corrige até o alvo
             Vector3 direction = Quaternion.AngleAxis(-launchUpAngle, right) * aimRay.direction;

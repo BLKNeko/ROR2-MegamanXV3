@@ -369,7 +369,7 @@ namespace MegamanXMod.Survivors.X
                 skillName = "HyperModeXFire",
                 skillNameToken = MEGAMAN_x_PREFIX + "EXTRA_FIRST_X_FIRE_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "EXTRA_FIRST_X_FIRE_DESCRIPTION",
-                //skillIcon = XAssets.IconSecond,
+                skillIcon = XAssets.IconXFire,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.HyperModeXFire)),
                 //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
@@ -464,7 +464,7 @@ namespace MegamanXMod.Survivors.X
                 skillName = "HyperModeBladeArmor",
                 skillNameToken = MEGAMAN_x_PREFIX + "EXTRA_THIRD_BLADE_ARMOR_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "EXTRA_THIRD_BLADE_ARMOR_DESCRIPTION",
-                //skillIcon = XAssets.IconGaea,
+                skillIcon = XAssets.IconXBlade,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.HyperModeBladeArmor)),
                 //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
@@ -521,7 +521,7 @@ namespace MegamanXMod.Survivors.X
                 skillName = "HyperModeUltimateArmorCM",
                 skillNameToken = MEGAMAN_x_PREFIX + "EXTRA_FOURTH_ULTIMATE_ARMOR_CM_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "EXTRA_FOURTH_ULTIMATE_ARMOR_CM_DESCRIPTION",
-                skillIcon = XAssets.IconUltimate,
+                skillIcon = XAssets.IconUltimateCM,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.HyperModeUltimateArmorCM)),
                 //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
@@ -891,7 +891,7 @@ namespace MegamanXMod.Survivors.X
                 skillName = "FireBuster",
                 skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_FIRE_BUSTER_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_FIRE_BUSTER_DESCRIPTION",
-                skillIcon = XAssets.IconFireWave, // TODO: trocar pelo ícone do Fire Buster
+                skillIcon = XAssets.IconXFireBuster,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(FireBuster)),
                 activationStateMachineName = "Weapon",
@@ -1521,7 +1521,7 @@ namespace MegamanXMod.Survivors.X
                 skillName = "BladeSlash",
                 skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_BLADE_SLASH_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_BLADE_SLASH_DESCRIPTION",
-                skillIcon = XAssets.IconShadowSaber, // TODO: ícone próprio
+                skillIcon = XAssets.IconBladeSaber,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(XBladeSlashCombo)),
                 activationStateMachineName = "Weapon",
@@ -1553,7 +1553,7 @@ namespace MegamanXMod.Survivors.X
                 skillName = "BladeEdge",
                 skillNameToken = MEGAMAN_x_PREFIX + "SECONDARY_BLADE_EDGE_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "SECONDARY_BLADE_EDGE_DESCRIPTION",
-                skillIcon = XAssets.IconShadowSaber, // TODO: ícone próprio
+                skillIcon = XAssets.IconBladeEdge,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(XBladeEdge)),
                 activationStateMachineName = "Weapon2",
@@ -1583,7 +1583,7 @@ namespace MegamanXMod.Survivors.X
                 skillName = "BladeHeavySlash",
                 skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_BLADE_HEAVY_SLASH_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "SPECIAL_BLADE_HEAVY_SLASH_DESCRIPTION",
-                skillIcon = XAssets.IconTrueRathalosSlash, // TODO: ícone próprio
+                skillIcon = XAssets.IconGigaBlade,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(XBladeHeavySlash)),
                 activationStateMachineName = "Weapon",
@@ -1614,7 +1614,7 @@ namespace MegamanXMod.Survivors.X
                 skillName = "UltimateCMMissile",
                 skillNameToken = MEGAMAN_x_PREFIX + "PRIMARY_ULTIMATE_CM_MISSILE_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "PRIMARY_ULTIMATE_CM_MISSILE_DESCRIPTION",
-                skillIcon = XAssets.IconUltimateBuster, // TODO: ícone próprio
+                skillIcon = XAssets.IconCMMisle,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(UltimateCMMissile)),
                 activationStateMachineName = "Weapon",
@@ -1644,7 +1644,7 @@ namespace MegamanXMod.Survivors.X
                 skillName = "UltimateCMBigMissile",
                 skillNameToken = MEGAMAN_x_PREFIX + "SECONDARY_ULTIMATE_CM_BIG_MISSILE_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "SECONDARY_ULTIMATE_CM_BIG_MISSILE_DESCRIPTION",
-                skillIcon = XAssets.IconUltimateBuster, // TODO: ícone próprio
+                skillIcon = XAssets.IconCMHeavyMissile,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(UltimateCMBigMissile)),
                 activationStateMachineName = "Weapon",
@@ -1674,7 +1674,7 @@ namespace MegamanXMod.Survivors.X
                 skillName = "UltimateCMBurst",
                 skillNameToken = MEGAMAN_x_PREFIX + "UTILITY_ULTIMATE_CM_BURST_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "UTILITY_ULTIMATE_CM_BURST_DESCRIPTION",
-                skillIcon = XAssets.IconXNovaStrike, // TODO: ícone próprio
+                skillIcon = XAssets.IconGigaBurst,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(UltimateCMElementBurst)),
                 activationStateMachineName = "Body",
@@ -1704,7 +1704,7 @@ namespace MegamanXMod.Survivors.X
                 skillName = "UltimateCMBarrage",
                 skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_ULTIMATE_CM_BARRAGE_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "SPECIAL_ULTIMATE_CM_BARRAGE_DESCRIPTION",
-                skillIcon = XAssets.IconHomingTorpedo, // TODO: ícone próprio
+                skillIcon = XAssets.IconMisleBarrage,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(UltimateCMBarrage)),
                 activationStateMachineName = "Weapon",
@@ -1735,7 +1735,7 @@ namespace MegamanXMod.Survivors.X
                 skillName = "ChargeCollider",
                 skillNameToken = MEGAMAN_x_PREFIX + "SPECIAL_CHARGE_COLLIDER_NAME",
                 skillDescriptionToken = MEGAMAN_x_PREFIX + "SPECIAL_CHARGE_COLLIDER_DESCRIPTION",
-                skillIcon = XAssets.IconRisingFire, // TODO: trocar pelo ícone do Charge Collider
+                skillIcon = XAssets.IconChargeCollider,
                 keywordTokens = new string[]
                 {
                     MEGAMAN_x_PREFIX + "X_KEYWORD_CHARGE"
@@ -2169,7 +2169,7 @@ namespace MegamanXMod.Survivors.X
 
             //creating a new skindef as we did before
             SkinDef cmSkin = Modules.Skins.CreateSkinDef(MEGAMAN_x_PREFIX + "CM_SKIN_NAME",
-                assetBundle.LoadAsset<Sprite>("texMasteryAchievement"),
+                XAssets.IconXCM,
                 defaultRendererinfos,
                 prefabCharacterModel.gameObject);
 
@@ -2590,6 +2590,20 @@ namespace MegamanXMod.Survivors.X
                 args.critDamageMultAdd += 0.3f;
             }
 
+            if (sender.HasBuff(XBuffs.XFireBuff))
+            {
+                args.armorAdd += 40;
+                args.armorAdd += sender.baseArmor * 0.4f;
+                args.healthMultAdd += 0.4f;
+                args.damageMultAdd += 0.3f;
+                args.attackSpeedMultAdd += 0.2f;
+                args.regenMultAdd += 0.3f;
+                args.jumpPowerMultAdd += 0.15f;
+                args.moveSpeedMultAdd += 0.2f;
+                args.shieldMultAdd += 1.2f;
+                args.critDamageMultAdd += 0.8f;
+            }
+
             if (sender.HasBuff(XBuffs.MaxArmorBuff))
             {
                 args.armorAdd += 40;
@@ -2661,6 +2675,21 @@ namespace MegamanXMod.Survivors.X
                 args.critAdd += 25f;
             }
 
+            if (sender.HasBuff(XBuffs.BladeArmorBuff))
+            {
+                args.armorAdd += 90;
+                args.armorAdd += sender.baseArmor * 2.5f;
+                args.healthMultAdd += 1.2f;
+                args.damageMultAdd += 0.8f;
+                args.attackSpeedMultAdd += 0.2f;
+                args.regenMultAdd += 0.6f;
+                args.jumpPowerMultAdd += 0.4f;
+                args.moveSpeedMultAdd += 0.25f;
+                args.shieldMultAdd += 0.9f;
+                args.critDamageMultAdd += 1f;
+                args.critAdd += 20f;
+            }
+
             if (sender.HasBuff(XBuffs.UltimateArmorBuff))
             {
                 args.armorAdd += 100;
@@ -2691,11 +2720,10 @@ namespace MegamanXMod.Survivors.X
 
             if (sender.HasBuff(XBuffs.UltimateCMArmorBuff))
             {
-                args.armorAdd += 150;
-                args.armorAdd += sender.baseArmor * 3f;
-                args.healthMultAdd += 1.2f;
-                args.damageMultAdd += 1.2f;
-                args.regenMultAdd += 0.8f;
+                args.armorAdd += 100;
+                args.armorAdd += sender.baseArmor * 1.5f;
+                args.damageMultAdd += 1.25f;
+                args.regenMultAdd += 0.5f;
                 args.moveSpeedReductionMultAdd += 0.3f; // lenta
                 args.jumpPowerMultAdd -= 0.1f;
                 args.shieldMultAdd += 2f;

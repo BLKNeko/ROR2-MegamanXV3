@@ -10,11 +10,13 @@ namespace MegamanXMod.Survivors.X
 
         public static BuffDef LightArmorBuff;
         public static BuffDef SecondArmorBuff;
+        public static BuffDef XFireBuff;
         public static BuffDef MaxArmorBuff;
         public static BuffDef FourthArmorBuff;
         public static BuffDef FalconArmorBuff;
         public static BuffDef GaeaArmorBuff;
         public static BuffDef ShadowArmorBuff;
+        public static BuffDef BladeArmorBuff;
         public static BuffDef UltimateArmorBuff;
         public static BuffDef RathalosArmorBuff;
 
@@ -39,6 +41,12 @@ namespace MegamanXMod.Survivors.X
 
             SecondArmorBuff = Modules.Content.CreateAndAddBuff("GigaArmorBuff",
                 XAssets.IconSecond,
+                Color.white,
+                false,
+                false);
+
+            XFireBuff = Modules.Content.CreateAndAddBuff("XFireBuff",
+                XAssets.IconXFire,
                 Color.white,
                 false,
                 false);
@@ -73,6 +81,12 @@ namespace MegamanXMod.Survivors.X
                 false,
                 false);
 
+            BladeArmorBuff = Modules.Content.CreateAndAddBuff("BladeArmorBuff",
+                XAssets.IconXBlade,
+                Color.white,
+                false,
+                false);
+
             UltimateArmorBuff = Modules.Content.CreateAndAddBuff("UltimateArmorBuff",
                 XAssets.IconUltimate,
                 Color.white,
@@ -99,14 +113,14 @@ namespace MegamanXMod.Survivors.X
 
             // Ultimate Armor CM: lenta, muito dano e muita armadura
             UltimateCMArmorBuff = Modules.Content.CreateAndAddBuff("UltimateCMArmorBuff",
-                XAssets.IconUltimate, // TODO: ícone próprio
+                XAssets.IconUltimateCM, // TODO: ícone próprio
                 new Color(0.6f, 0.6f, 1f),
                 false,
                 false);
 
             // Blade Armor - secundária: mais dano, roubo de vida e reflete projéteis
             BladeEdgeBuff = Modules.Content.CreateAndAddBuff("BladeEdgeBuff",
-                XAssets.IconShadowSaber, // TODO: ícone próprio
+                XAssets.IconBladeEdge, // TODO: ícone próprio
                 new Color(0.4f, 0.9f, 1f),
                 false,
                 false);

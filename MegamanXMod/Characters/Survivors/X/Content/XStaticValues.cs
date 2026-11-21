@@ -67,12 +67,18 @@ namespace MegamanXMod.Survivors.X
 
         public const float XShockSphereDamageCoefficient = 0.25f;
 
+        // X FIRE (HyperMode)
+        public const float XFireBusterDamageCoefficient = 4.2f;
+        public const float XFireBusterBlastDamageCoefficient = 1f;  // explosão de fogo no impacto
+        public const float XFireBusterBlastRadius = 6f;
+        public const float XFireBusterBlastProcCoefficient = 0.5f;
+
         public const float ChargeColliderDamageCoefficient = 1.5f; // por hit
 
         // BLADE ARMOR (HyperMode)
         public const float XBladeSlashDamageCoefficient = 3f;
         public const float XBladeHeavySlashDamageCoefficient = 8f;
-        public const float XBladeWaveDamageCoefficient = 1.5f;     // por hit de cada onda
+        public const float XBladeWaveDamageCoefficient = 3f;       // por hit da onda (era 1,5 com 3 ondas)
         public const float BladeEdgeDuration = 8f;
         public const float BladeEdgeDamageBonus = 0.5f;            // +50% de dano
         public const float BladeEdgeLifeSteal = 0.05f;             // 5% do dano vira cura

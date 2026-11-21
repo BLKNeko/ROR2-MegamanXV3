@@ -470,6 +470,10 @@ MonoBehaviour:
     transform: {fileID: 5962671202743250170}
   - name: XBladeSaber
     transform: {fileID: 2368825071465682565}
+  - name: CMULMuzzR
+    transform: {fileID: 3246591349512532514}
+  - name: CMULMuzzL
+    transform: {fileID: 3596886319113870616}
 --- !u!114 &5664056050378279192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -762,6 +766,37 @@ Transform:
   m_Father: {fileID: 12697502017373228}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 20.81217}
+--- !u!1 &1761286504147254064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3596886319113870616}
+  m_Layer: 0
+  m_Name: CMULMuzzL
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3596886319113870616
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761286504147254064}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.765, y: -0.03, z: 0.087}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7966611009081402792}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2038542916495223461
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,6 +962,7 @@ Transform:
   - {fileID: 7642441685242937032}
   - {fileID: 5677237481418362890}
   - {fileID: 6845744381143781067}
+  - {fileID: 3246591349512532514}
   m_Father: {fileID: 123251089486746989}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 4.6097965, y: -118.76187, z: -165.08736}
@@ -1400,6 +1436,7 @@ Transform:
   - {fileID: 447936450852704859}
   - {fileID: 8319154050820043140}
   - {fileID: 857854140563038602}
+  - {fileID: 3596886319113870616}
   m_Father: {fileID: 6876580796142893065}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -78.21879, y: -100.04498, z: 96.49074}
@@ -3136,6 +3173,37 @@ Transform:
   m_Father: {fileID: 8047915640692607039}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -86.30159, y: 30.148483, z: 59.851753}
+--- !u!1 &8381161850717442030
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3246591349512532514}
+  m_Layer: 0
+  m_Name: CMULMuzzR
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3246591349512532514
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8381161850717442030}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.799, y: -0.029, z: -0.12}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8645381199305097482}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8482999595344939431
 GameObject:
   m_ObjectHideFlags: 0

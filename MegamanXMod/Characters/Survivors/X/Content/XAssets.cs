@@ -72,6 +72,8 @@ namespace MegamanXMod.Survivors.X
         public static Material MatRathalos;
 
         public static Sprite IconX;
+        public static Sprite IconXCM;
+        public static Sprite IconXFire;
         public static Sprite IconLight;
         public static Sprite IconSecond;
         public static Sprite IconMax;
@@ -79,20 +81,26 @@ namespace MegamanXMod.Survivors.X
         public static Sprite IconFalcon;
         public static Sprite IconGaea;
         public static Sprite IconXShadow;
+        public static Sprite IconXBlade;
         public static Sprite IconUltimate;
+        public static Sprite IconUltimateCM;
         public static Sprite IconXRathalos;
 
         public static Sprite IconXBuster;
+        public static Sprite IconXFireBuster;
         public static Sprite IconLightBuster;
         public static Sprite IconGigaBuster;
         public static Sprite IconMaxBuster;
         public static Sprite IconFalconBuster;
         public static Sprite IconGaeaBuster;
         public static Sprite IconShadowBuster;
+        public static Sprite IconBladeSaber;
         public static Sprite IconUltimateBuster;
+        public static Sprite IconCMMisle;
         public static Sprite IconRathalosBuster;
 
         public static Sprite IconShadowSaber;
+        public static Sprite IconBladeEdge;
         public static Sprite IconRathalosSlash;
         public static Sprite IconShotgunIce;
         public static Sprite IconFireWave;
@@ -102,6 +110,7 @@ namespace MegamanXMod.Survivors.X
         public static Sprite IconXDash;
         public static Sprite IconXNovaDash;
         public static Sprite IconXNovaStrike;
+        public static Sprite IconGigaBurst;
 
         public static Sprite IconSkillLock;
 
@@ -112,10 +121,14 @@ namespace MegamanXMod.Survivors.X
         public static Sprite IconGigaAttackGaea;
         public static Sprite IconTrueRathalosSlash;
         public static Sprite IconHomingTorpedo;
+        public static Sprite IconCMHeavyMissile;
+        public static Sprite IconChargeCollider;
         public static Sprite IconChameleonSting;
         public static Sprite IconAcidBurst;
         public static Sprite IconRisingFire;
         public static Sprite IconMeltCreeper;
+        public static Sprite IconGigaBlade;
+        public static Sprite IconMisleBarrage;
 
         public static Sprite IconXEmote;
 
@@ -209,6 +222,8 @@ namespace MegamanXMod.Survivors.X
             MatRathalos = _assetBundle.LoadMaterial("matXRathalos");
 
             IconX = _assetBundle.LoadAsset<Sprite>("XIcon");
+            IconXCM = _assetBundle.LoadAsset<Sprite>("XCMIcon");
+            IconXFire = _assetBundle.LoadAsset<Sprite>("XFireIcon");
             IconLight = _assetBundle.LoadAsset<Sprite>("XLightIcon");
             IconSecond = _assetBundle.LoadAsset<Sprite>("XSecondIcon");
             IconMax = _assetBundle.LoadAsset<Sprite>("XMaxIcon");
@@ -216,7 +231,9 @@ namespace MegamanXMod.Survivors.X
             IconFalcon = _assetBundle.LoadAsset<Sprite>("XFalconIcon");
             IconGaea = _assetBundle.LoadAsset<Sprite>("XGaeaIcon");
             IconXShadow = _assetBundle.LoadAsset<Sprite>("XShadowIcon");
+            IconXBlade = _assetBundle.LoadAsset<Sprite>("XBladeIcon");
             IconUltimate = _assetBundle.LoadAsset<Sprite>("XUltimateIcon");
+            IconUltimateCM = _assetBundle.LoadAsset<Sprite>("XUltimateCMIcon");
             IconXRathalos = _assetBundle.LoadAsset<Sprite>("XRathalosIcon");
 
             IconXBuster = _assetBundle.LoadAsset<Sprite>("XBusterIcon");
@@ -228,6 +245,9 @@ namespace MegamanXMod.Survivors.X
             IconShadowBuster = _assetBundle.LoadAsset<Sprite>("ShadowBusterIcon");
             IconUltimateBuster = _assetBundle.LoadAsset<Sprite>("UltimateBusterIcon");
             IconRathalosBuster = _assetBundle.LoadAsset<Sprite>("RathalosBusterIcon");
+            IconXFireBuster = _assetBundle.LoadAsset<Sprite>("FireBusterIcon");
+            IconBladeSaber = _assetBundle.LoadAsset<Sprite>("XSkillBladeSaber");
+            IconCMMisle = _assetBundle.LoadAsset<Sprite>("XSkillCMMisle");
 
 
             IconShadowSaber = _assetBundle.LoadAsset<Sprite>("XSkillShadowSaber");
@@ -235,12 +255,14 @@ namespace MegamanXMod.Survivors.X
             IconShotgunIce = _assetBundle.LoadAsset<Sprite>("XSkillShotgunIce");
             IconFireWave = _assetBundle.LoadAsset<Sprite>("XSkillFireWave");
             IconSqueezeBomb = _assetBundle.LoadAsset<Sprite>("XSkillSqueezeBomb");
+            IconBladeEdge = _assetBundle.LoadAsset<Sprite>("XSkillBladeEdge");
 
 
             IconXDash = _assetBundle.LoadAsset<Sprite>("XSkillDash");
             IconFalconDash = _assetBundle.LoadAsset<Sprite>("XSkillFalconDash");
             IconXNovaDash = _assetBundle.LoadAsset<Sprite>("XSkillNovaDash");
             IconXNovaStrike = _assetBundle.LoadAsset<Sprite>("XSkillNovaStrike");
+            IconGigaBurst = _assetBundle.LoadAsset<Sprite>("XSkillGigaBurst");
 
             IconSkillLock = _assetBundle.LoadAsset<Sprite>("XSkillLock");
 
@@ -251,6 +273,10 @@ namespace MegamanXMod.Survivors.X
             IconGigaAttackGaea = _assetBundle.LoadAsset<Sprite>("XSkillGigaAttackGaea");
             IconTrueRathalosSlash = _assetBundle.LoadAsset<Sprite>("XSkillTrueRathalosSlash");
             IconHomingTorpedo = _assetBundle.LoadAsset<Sprite>("XSkillHomingTorpedo");
+            IconCMHeavyMissile = _assetBundle.LoadAsset<Sprite>("XSkillCMHeavyMissile");
+            IconChargeCollider = _assetBundle.LoadAsset<Sprite>("XSkillChargeCollider");
+            IconGigaBlade = _assetBundle.LoadAsset<Sprite>("XSKillGigaBlade");
+            IconMisleBarrage = _assetBundle.LoadAsset<Sprite>("XSkillMisleBarrage");
             IconChameleonSting = _assetBundle.LoadAsset<Sprite>("XSkillChameleonSting");
             IconAcidBurst = _assetBundle.LoadAsset<Sprite>("XSkillAcidBurst");
             IconRisingFire = _assetBundle.LoadAsset<Sprite>("XSkillRisingFire");
@@ -1181,13 +1207,36 @@ namespace MegamanXMod.Survivors.X
             ChameleonStingController.startSound = "";
         }
 
+        // Onda grande da Blade Armor. O VFX base (escala 1) tem ~7 m de largura x 1,8 m de altura;
+        // com a escala abaixo fica ~8,4 m x 5,4 m, e o hitbox acompanha essas medidas.
+        private static readonly Vector3 BladeWaveGhostScale = new Vector3(1.2f, 3f, 1.2f);
+        private static readonly Vector3 BladeWaveHitBoxSize = new Vector3(8f, 5.4f, 2.5f);
+        private static readonly Vector3 BladeWaveHitBoxCenter = new Vector3(0f, 0f, -0.4f);
+
         private static void CreateBladeWaveProjectile()
         {
             // Onda de corte da Blade Armor: anda reto, atravessa inimigos e acerta várias vezes
             BladeWaveProjectile = Asset.CloneProjectilePrefab("FMJ", "XBladeWaveProjectile");
 
-            // Mais larga que alta, como uma meia-lua de corte (escala também o hitbox)
-            BladeWaveProjectile.transform.localScale = new Vector3(6f, 1.5f, 2f);
+            // Não escalamos a raiz: o tamanho do hitbox interno do FMJ é desconhecido, e escalar a raiz
+            // multiplicaria esse tamanho. Em vez disso, o hitbox recebe o tamanho exato da onda, em metros.
+            BladeWaveProjectile.transform.localScale = Vector3.one;
+
+            HitBoxGroup waveHitBoxGroup = BladeWaveProjectile.GetComponent<HitBoxGroup>();
+            if (waveHitBoxGroup && waveHitBoxGroup.hitBoxes != null)
+            {
+                foreach (HitBox hitBox in waveHitBoxGroup.hitBoxes)
+                {
+                    if (!hitBox) continue;
+                    hitBox.transform.localPosition = BladeWaveHitBoxCenter;
+                    hitBox.transform.localRotation = Quaternion.identity;
+                    hitBox.transform.localScale = BladeWaveHitBoxSize;
+                }
+            }
+            else
+            {
+                Log.Error("XBladeWaveProjectile: HitBoxGroup do FMJ não encontrado, a onda não vai acertar nada.");
+            }
 
             ProjectileSimple waveSimple = BladeWaveProjectile.GetComponent<ProjectileSimple>();
             if (waveSimple)
@@ -1210,10 +1259,26 @@ namespace MegamanXMod.Survivors.X
 
             ProjectileController BladeWaveController = BladeWaveProjectile.GetComponent<ProjectileController>();
 
-            // TODO: criar o ghost da onda de corte no Unity bundle (ex.: "BladeWaveGhost")
+            // Ghost gerado no Unity por MegamanX > VFX > Build Blade Wave Ghost (BladeWaveVFXBuilder)
             if (_assetBundle.LoadAsset<GameObject>("BladeWaveGhost") != null)
             {
-                BladeWaveController.ghostPrefab = _assetBundle.CreateProjectileGhostPrefab("BladeWaveGhost");
+                GameObject bladeWaveGhost = _assetBundle.CreateProjectileGhostPrefab("BladeWaveGhost");
+
+                // Visual na mesma proporção do hitbox (as partículas usam Scaling Mode = Hierarchy)
+                bladeWaveGhost.transform.localScale = BladeWaveGhostScale;
+                bladeWaveGhost.GetComponent<ProjectileGhostController>().inheritScaleFromProjectile = false;
+
+                // Rastros (afterimages, speed lines, estilhaços) se soltam e terminam de sumir
+                // em vez de desaparecer de uma vez quando o projétil acaba
+                foreach (ParticleSystem ps in bladeWaveGhost.GetComponentsInChildren<ParticleSystem>(true))
+                {
+                    if (ps.main.simulationSpace != ParticleSystemSimulationSpace.World)
+                        continue;
+                    if (!ps.GetComponent<DetachParticleOnDestroyAndEndEmission>())
+                        ps.gameObject.AddComponent<DetachParticleOnDestroyAndEndEmission>().particleSystem = ps;
+                }
+
+                BladeWaveController.ghostPrefab = bladeWaveGhost;
                 BladeWaveController.ghostPrefabAddress = null;
             }
 

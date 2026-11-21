@@ -44,6 +44,7 @@ namespace MegamanXMod.Survivors.X
             #region Skins
             LanguageAPI.Add(prefix + "DEFAULT_SKIN_NAME", "Default");
             LanguageAPI.Add(prefix + "MASTERY_SKIN_NAME", "Alternate");
+            LanguageAPI.Add(prefix + "CM_SKIN_NAME", "Command Mission");
             #endregion
 
             LanguageAPI.Add(prefix + "X_KEYWORD_CHARGE", "[CHARGE]\nHold the skill key to charge the attack. Charging increases damage or triggers a different action!");
@@ -56,6 +57,9 @@ namespace MegamanXMod.Survivors.X
 
             LanguageAPI.Add(prefix + "EXTRA_FIRST_LIGHT_ARMOR_NAME", "Light Armor");
             LanguageAPI.Add(prefix + "EXTRA_FIRST_LIGHT_ARMOR_DESCRIPTION", "X's first armor. The Light Buster can hit enemies multiple times, and this armor provides a small boost to X's stats.");
+
+            LanguageAPI.Add(prefix + "EXTRA_FIRST_X_FIRE_NAME", "X Fire");
+            LanguageAPI.Add(prefix + "EXTRA_FIRST_X_FIRE_DESCRIPTION", "X's hyper mode from Command Mission. The <color=#f79902>FIRE BUSTER</color> explodes on impact, <color=#a63b05>igniting</color> enemies, and X's special skill is replaced with the <color=#f79902>CHARGE COLLIDER</color>, a charged dash into the target.");
 
             LanguageAPI.Add(prefix + "EXTRA_FIRST_SECOND_ARMOR_NAME", "Giga Armor");
             LanguageAPI.Add(prefix + "EXTRA_FIRST_SECOND_ARMOR_DESCRIPTION", "X's second armor. The Giga Buster can store an additional charge, and the helmet replaces X's special skill with the <color=#f79902>HEAD SCANNER</color>.");
@@ -72,11 +76,17 @@ namespace MegamanXMod.Survivors.X
             LanguageAPI.Add(prefix + "EXTRA_THIRD_GAEA_ARMOR_NAME", "Gaea Armor");
             LanguageAPI.Add(prefix + "EXTRA_THIRD_GAEA_ARMOR_DESCRIPTION", "This armor is extremely heavy, providing a massive boost to defense. The Gaea Buster can poison enemies, and X's special skill is replaced with the <color=#012906>GAEA GIGA ATTACK</color>.");
 
+            LanguageAPI.Add(prefix + "EXTRA_THIRD_BLADE_ARMOR_NAME", "Blade Armor");
+            LanguageAPI.Add(prefix + "EXTRA_THIRD_BLADE_ARMOR_DESCRIPTION", "This armor is focused entirely on sword techniques. X fights with the <color=#f79902>BLADE SABER</color>, can empower it with <color=#f79902>BLADE EDGE</color> to deflect projectiles and steal life, and his special skill becomes the <color=#f79902>BLADE WAVE</color>, a heavy slash that releases a giant piercing wave.");
+
             LanguageAPI.Add(prefix + "EXTRA_FOURTH_SHADOW_ARMOR_NAME", "Shadow Armor");
             LanguageAPI.Add(prefix + "EXTRA_FOURTH_SHADOW_ARMOR_DESCRIPTION", "This armor is both fast and powerful. While equipped, X's secondary skill is replaced with the Shadow Saber, and his Shadow Buster fires three kunai in a spread pattern, causing enemies to bleed.");
 
             LanguageAPI.Add(prefix + "EXTRA_FOURTH_ULTIMATE_ARMOR_NAME", "Ultimate Armor");
             LanguageAPI.Add(prefix + "EXTRA_FOURTH_ULTIMATE_ARMOR_DESCRIPTION", "One of the most powerful armors. The Ultimate Buster deals increased damage, and X's DASH is replaced with the <color=#f79902>NOVA STRIKE</color>.");
+
+            LanguageAPI.Add(prefix + "EXTRA_FOURTH_ULTIMATE_ARMOR_CM_NAME", "Ultimate Armor CM");
+            LanguageAPI.Add(prefix + "EXTRA_FOURTH_ULTIMATE_ARMOR_CM_DESCRIPTION", "The Ultimate Armor from Command Mission. Slow and heavily armored, it deals massive damage: all of X's skills are replaced with homing <color=#f79902>MICRO MISSILES</color>, the explosive <color=#f79902>HEAVY MISSILE</color>, the <color=#f79902>ELEMENTAL BURST</color> and a devastating <color=#f79902>MISSILE BARRAGE</color>.");
 
             LanguageAPI.Add(prefix + "EXTRA_FOURTH_RATHALOS_ARMOR_NAME", "Rathalos Armor");
             LanguageAPI.Add(prefix + "EXTRA_FOURTH_RATHALOS_ARMOR_DESCRIPTION", "This ancient armor is based on the powerful Flying Wyvern, Rathalos. The buster is designed to channel the monster's fire breath, while his saber delivers powerful blows that crush enemies.");
@@ -125,9 +135,9 @@ namespace MegamanXMod.Survivors.X
             LanguageAPI.Add(prefix + "PRIMARY_SHADOW_BUSTER_NAME", "Shadow Buster");
             LanguageAPI.Add(prefix + "PRIMARY_SHADOW_BUSTER_DESCRIPTION", $"The Shadow Buster is a fast and powerful weapon, firing three kunai in a spread pattern, each dealing <style=cIsDamage>{100f * XStaticValues.ShadowBusterDamageCoefficient}% damage</style> and causing <color=#6b0202>bleeding</color> to enemies.");
 
-            LanguageAPI.Add(prefix + "PRIMARY_ULTIMATE_BUSTER_Name", "Ultimate Buster");
+            LanguageAPI.Add(prefix + "PRIMARY_ULTIMATE_BUSTER_NAME", "Ultimate Buster");
             LanguageAPI.Add(prefix + "PRIMARY_FIRE_BUSTER_NAME", "Fire Buster");
-            LanguageAPI.Add(prefix + "PRIMARY_FIRE_BUSTER_DESCRIPTION", $"Fire a blazing shot that deals <style=cIsDamage>{100f * XStaticValues.gunDamageCoefficient}% damage</style> and explodes on impact for <style=cIsDamage>{100f * SkillStates.FireBuster.XBlastDamageCoefficient}% damage</style>, <color=#a63b05>igniting</color> enemies.");
+            LanguageAPI.Add(prefix + "PRIMARY_FIRE_BUSTER_DESCRIPTION", $"Fire a blazing shot that deals <style=cIsDamage>{100f * XStaticValues.XFireBusterDamageCoefficient}% damage</style> and explodes on impact for <style=cIsDamage>{100f * XStaticValues.XFireBusterBlastDamageCoefficient}% damage</style>, <color=#a63b05>igniting</color> enemies.");
 
             LanguageAPI.Add(prefix + "PRIMARY_ULTIMATE_BUSTER_DESCRIPTION", $"This ultimate powerful buster delivers devastating attacks, dealing <style=cIsDamage>{100f * XStaticValues.XUltimateBusterDamageCoefficient}% damage</style>. On hit, it leaves behind a shock sphere that continuously deals <style=cIsDamage>{100f * XStaticValues.XUltimateBusterDamageCoefficient}% damage</style> over time.");
 
@@ -204,7 +214,7 @@ namespace MegamanXMod.Survivors.X
             LanguageAPI.Add(prefix + "SECONDARY_BLADE_EDGE_DESCRIPTION", $"Energize the Blade Saber for {XStaticValues.BladeEdgeDuration} seconds, gaining <style=cIsDamage>+{100f * XStaticValues.BladeEdgeDamageBonus}% damage</style>, <style=cIsHealing>healing for {100f * XStaticValues.BladeEdgeLifeSteal}% of damage dealt</style> and <style=cIsUtility>reflecting enemy projectiles</style>.");
 
             LanguageAPI.Add(prefix + "SPECIAL_BLADE_HEAVY_SLASH_NAME", "Blade Wave");
-            LanguageAPI.Add(prefix + "SPECIAL_BLADE_HEAVY_SLASH_DESCRIPTION", $"A heavy slash dealing <style=cIsDamage>{100f * XStaticValues.XBladeHeavySlashDamageCoefficient}% damage</style> that releases piercing sword waves, each hitting multiple times for <style=cIsDamage>{100f * XStaticValues.XBladeWaveDamageCoefficient}% damage</style>.");
+            LanguageAPI.Add(prefix + "SPECIAL_BLADE_HEAVY_SLASH_DESCRIPTION", $"A heavy slash dealing <style=cIsDamage>{100f * XStaticValues.XBladeHeavySlashDamageCoefficient}% damage</style> that releases a giant piercing sword wave, hitting multiple times for <style=cIsDamage>{100f * XStaticValues.XBladeWaveDamageCoefficient}% damage</style>.");
 
             LanguageAPI.Add(prefix + "PRIMARY_ULTIMATE_CM_MISSILE_NAME", "Micro Missiles");
             LanguageAPI.Add(prefix + "PRIMARY_ULTIMATE_CM_MISSILE_DESCRIPTION", $"Launch two fast homing missiles at the target, each dealing <style=cIsDamage>{100f * XStaticValues.UltimateCMSmallMissileDamageCoefficient}% damage</style>.");

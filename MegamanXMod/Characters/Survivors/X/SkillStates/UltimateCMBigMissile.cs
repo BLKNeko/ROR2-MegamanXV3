@@ -9,6 +9,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
     {
         public static float baseDuration = 0.6f;
 
+        private static int launcherIndex;
+
         private float duration;
 
         public override void OnEnter()
@@ -24,7 +26,9 @@ namespace MegamanXMod.Survivors.X.SkillStates
             {
                 HurtBox target = UltimateCMMissileHelper.GetTarget(gameObject);
                 UltimateCMMissileHelper.FireMissile(gameObject, GetAimRay(), XAssets.UltimateCMBigMissileProjectile,
-                    damageStat * XStaticValues.UltimateCMBigMissileDamageCoefficient, RollCrit(), target, 0);
+                    damageStat * XStaticValues.UltimateCMBigMissileDamageCoefficient, RollCrit(), target, launcherIndex);
+
+                launcherIndex++; // alterna lançador direito/esquerdo a cada disparo
             }
         }
 

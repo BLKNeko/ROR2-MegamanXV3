@@ -9,15 +9,15 @@ namespace MegamanXMod.Survivors.X.SkillStates
 {
     public class FireBuster : GenericBulletBaseState
     {
-        public static float XDamageCoefficient = XStaticValues.gunDamageCoefficient;
+        public static float XDamageCoefficient = XStaticValues.XFireBusterDamageCoefficient;
         public static float XBaseDuration = 1f;
         public static float XForce = 1000f;
         public static float XRange = 300f;
 
         // Explosão de fogo no impacto
-        public static float XBlastDamageCoefficient = 1f; // multiplicador sobre o dano do personagem
-        public static float XBlastRadius = 6f;
-        public static float XBlastProcCoefficient = 0.5f;
+        public static float XBlastDamageCoefficient = XStaticValues.XFireBusterBlastDamageCoefficient;
+        public static float XBlastRadius = XStaticValues.XFireBusterBlastRadius;
+        public static float XBlastProcCoefficient = XStaticValues.XFireBusterBlastProcCoefficient;
         public static float XBlastForce = 500f;
 
         private static GameObject blastEffectPrefab;

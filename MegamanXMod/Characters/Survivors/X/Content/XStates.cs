@@ -61,6 +61,7 @@ namespace MegamanXMod.Survivors.X
             Modules.Content.AddEntityState(typeof(XRathalosSlashCombo1));
             Modules.Content.AddEntityState(typeof(XRathalosSlashCombo2));
             Modules.Content.AddEntityState(typeof(RisingFire));
+            Modules.Content.AddEntityState(typeof(RisingFireCharge));
             Modules.Content.AddEntityState(typeof(AcidBurst));
             Modules.Content.AddEntityState(typeof(ChameleonSting));
             Modules.Content.AddEntityState(typeof(ChameleonStingBuffs));
