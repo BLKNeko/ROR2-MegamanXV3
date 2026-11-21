@@ -77,7 +77,7 @@ namespace MegamanXMod.Survivors.X
             LanguageAPI.Add(prefix + "EXTRA_THIRD_GAEA_ARMOR_DESCRIPTION", "This armor is extremely heavy, providing a massive boost to defense. The Gaea Buster can poison enemies, and X's special skill is replaced with the <color=#012906>GAEA GIGA ATTACK</color>.");
 
             LanguageAPI.Add(prefix + "EXTRA_THIRD_BLADE_ARMOR_NAME", "Blade Armor");
-            LanguageAPI.Add(prefix + "EXTRA_THIRD_BLADE_ARMOR_DESCRIPTION", "This armor is focused entirely on sword techniques. X fights with the <color=#f79902>BLADE SABER</color>, can empower it with <color=#f79902>BLADE EDGE</color> to deflect projectiles and steal life, and his special skill becomes the <color=#f79902>BLADE WAVE</color>, a heavy slash that releases a giant piercing wave.");
+            LanguageAPI.Add(prefix + "EXTRA_THIRD_BLADE_ARMOR_DESCRIPTION", "This armor is focused entirely on sword techniques. X fights with the <color=#f79902>BLADE SABER</color>, can empower it with <color=#f79902>BLADE EDGE</color> to deflect projectiles and steal life, and his special skill becomes the <color=#f79902>GIGA BLADE</color>, a heavy slash that releases a giant piercing wave.");
 
             LanguageAPI.Add(prefix + "EXTRA_FOURTH_SHADOW_ARMOR_NAME", "Shadow Armor");
             LanguageAPI.Add(prefix + "EXTRA_FOURTH_SHADOW_ARMOR_DESCRIPTION", "This armor is both fast and powerful. While equipped, X's secondary skill is replaced with the Shadow Saber, and his Shadow Buster fires three kunai in a spread pattern, causing enemies to bleed.");
@@ -86,7 +86,7 @@ namespace MegamanXMod.Survivors.X
             LanguageAPI.Add(prefix + "EXTRA_FOURTH_ULTIMATE_ARMOR_DESCRIPTION", "One of the most powerful armors. The Ultimate Buster deals increased damage, and X's DASH is replaced with the <color=#f79902>NOVA STRIKE</color>.");
 
             LanguageAPI.Add(prefix + "EXTRA_FOURTH_ULTIMATE_ARMOR_CM_NAME", "Ultimate Armor CM");
-            LanguageAPI.Add(prefix + "EXTRA_FOURTH_ULTIMATE_ARMOR_CM_DESCRIPTION", "The Ultimate Armor from Command Mission. Slow and heavily armored, it deals massive damage: all of X's skills are replaced with homing <color=#f79902>MICRO MISSILES</color>, the explosive <color=#f79902>HEAVY MISSILE</color>, the <color=#f79902>ELEMENTAL BURST</color> and a devastating <color=#f79902>MISSILE BARRAGE</color>.");
+            LanguageAPI.Add(prefix + "EXTRA_FOURTH_ULTIMATE_ARMOR_CM_DESCRIPTION", "The Ultimate Armor from Command Mission. Slow and heavily armored, it deals massive damage: all of X's skills are replaced with homing <color=#f79902>MICRO MISSILES</color>, the explosive <color=#f79902>HEAVY MISSILE</color>, the <color=#f79902>GIGA BURST</color> and a devastating <color=#f79902>MISSILE BARRAGE</color>.");
 
             LanguageAPI.Add(prefix + "EXTRA_FOURTH_RATHALOS_ARMOR_NAME", "Rathalos Armor");
             LanguageAPI.Add(prefix + "EXTRA_FOURTH_RATHALOS_ARMOR_DESCRIPTION", "This ancient armor is based on the powerful Flying Wyvern, Rathalos. The buster is designed to channel the monster's fire breath, while his saber delivers powerful blows that crush enemies.");
