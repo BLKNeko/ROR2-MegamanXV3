@@ -92,8 +92,17 @@ namespace MegamanXMod.Survivors.X.Components
         }
 
 
+        // Conjunto de regras vazio, usado quando a opção "Show Item Displays" está desligada
+        private static ItemDisplayRuleSet emptyItemDisplayRuleSet;
+
         private void Awake()
         {
+            // "Show Item Displays" desligada: o modelo deste X passa a usar um conjunto de regras vazio,
+            // então nenhum item aparece nele, venha a regra de onde vier (template, .idrsjson, outro mod).
+            // Vale a cada spawn (cada fase recria o corpo), sem precisar reiniciar o jogo.
+            if (!XConfig.showItemDisplays.Value)
+                HideItemDisplays();
+
             //any funny custom behavior you want here
             //for example, enforcer uses a component like this to change his guns depending on selected skill
             //XAnim = this.GetComponent<Animator>();
@@ -163,6 +172,26 @@ namespace MegamanXMod.Survivors.X.Components
             }
 
             shoudlAplyCSBuffs = false;
+        }
+
+        private void HideItemDisplays()
+        {
+            ModelLocator modelLocator = GetComponent<ModelLocator>();
+            CharacterModel characterModel = modelLocator && modelLocator.modelTransform
+                ? modelLocator.modelTransform.GetComponent<CharacterModel>()
+                : null;
+            if (!characterModel)
+                return;
+
+            if (!emptyItemDisplayRuleSet)
+            {
+                emptyItemDisplayRuleSet = ScriptableObject.CreateInstance<ItemDisplayRuleSet>();
+                emptyItemDisplayRuleSet.name = "idrsMegamanXHidden";
+                emptyItemDisplayRuleSet.keyAssetRuleGroups = new ItemDisplayRuleSet.KeyAssetRuleGroup[0];
+                emptyItemDisplayRuleSet.GenerateRuntimeValues();
+            }
+
+            characterModel.itemDisplayRuleSet = emptyItemDisplayRuleSet;
         }
 
         public void SetCSBuff(bool b)

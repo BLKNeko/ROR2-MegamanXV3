@@ -55,6 +55,32 @@ namespace MegamanXMod.Modules
             return configEntry;
         }
 
+        /// <summary>
+        /// Ícone e descrição do mod na tela de opções do RiskOfOptions.
+        /// Passa o GUID e o nome do plugin explicitamente: a versão sem esses parâmetros tenta descobrir o mod
+        /// pela assembly que chamou, o que pode falhar e deixar o ícone padrão.
+        /// </summary>
+        public static void SetModIconAndDescription(Sprite icon, string description)
+        {
+            if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rune580.riskofoptions"))
+                return;
+
+            SetModIconAndDescriptionInternal(icon, description);
+        }
+
+        // Separado e sem inline: só toca nos tipos do RiskOfOptions se ele estiver instalado
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private static void SetModIconAndDescriptionInternal(Sprite icon, string description)
+        {
+            if (icon)
+                ModSettingsManager.SetModIcon(icon, MegamanXPlugin.MODUID, MegamanXPlugin.MODNAME);
+            else
+                Log.Warning("Ícone do RiskOfOptions não encontrado no asset bundle.");
+
+            if (!string.IsNullOrEmpty(description))
+                ModSettingsManager.SetModDescription(description, MegamanXPlugin.MODUID, MegamanXPlugin.MODNAME);
+        }
+
         //back compat
         public static ConfigEntry<float> BindAndOptionsSlider(string section, string name, float defaultValue, string description, float min = 0, float max = 20, bool restartRequired = false) =>
             BindAndOptions<float>(section, name, defaultValue, min, max, description, restartRequired);

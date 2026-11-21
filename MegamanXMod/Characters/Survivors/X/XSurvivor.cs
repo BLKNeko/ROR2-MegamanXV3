@@ -200,13 +200,11 @@ namespace MegamanXMod.Survivors.X
 
             XConfig.Init();
 
-            // Item displays (opcional): as posições não foram configuradas para o X,
-            // então usamos as regras do Commando presas nos ossos do X
-            if (XConfig.showItemDisplays.Value)
-            {
-                RoR2.ContentManagement.ContentManager.onContentPacksAssigned += _ =>
-                    XItemDisplayTemplate.Apply(prefabCharacterModel.itemDisplayRuleSet);
-            }
+            // Item displays: as posições não foram configuradas para o X, então o conjunto de regras
+            // do X recebe as do Commando presas nos ossos do X. A opção "Show Item Displays" decide,
+            // a cada spawn, se o modelo usa esse conjunto ou um vazio (ver XBaseComponent).
+            RoR2.ContentManagement.ContentManager.onContentPacksAssigned += _ =>
+                XItemDisplayTemplate.Apply(prefabCharacterModel.itemDisplayRuleSet);
             XStates.Init();
             XTokens.Init();
 

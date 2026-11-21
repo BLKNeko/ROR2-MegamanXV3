@@ -30,6 +30,11 @@ namespace MegamanXMod.Survivors.X
 
         public static void Init()
         {
+            // Ícone do X na lista de mods do RiskOfOptions (sprite "XIcon" do asset bundle)
+            Config.SetModIconAndDescription(
+                XSurvivor.instance.assetBundle.LoadAsset<UnityEngine.Sprite>("XIcon"),
+                "Megaman X survivor - time to hunt some maverick monsters! Armors, skins, unlocks and item display options.");
+
             string section = "X";
 
             enableVoiceBool = Config.BindAndOptions(
@@ -90,7 +95,7 @@ namespace MegamanXMod.Survivors.X
 
             showItemDisplays = Config.BindAndOptions("Item Displays", "Show Item Displays", false,
                 "Shows the items you pick up on X's model. WARNING: item positions were NOT configured for X; " +
-                "they are borrowed from Commando, so many items will look out of place. Requires a game restart.", true);
+                "they are borrowed from Commando, so many items will look out of place. Applies the next time X spawns (next stage or run).");
         }
 
         private static void InitUnlocks()
