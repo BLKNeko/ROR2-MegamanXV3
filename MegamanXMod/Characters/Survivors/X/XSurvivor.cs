@@ -199,6 +199,14 @@ namespace MegamanXMod.Survivors.X
             base.InitializeCharacter();
 
             XConfig.Init();
+
+            // Item displays (opcional): as posições não foram configuradas para o X,
+            // então usamos as regras do Commando presas nos ossos do X
+            if (XConfig.showItemDisplays.Value)
+            {
+                RoR2.ContentManagement.ContentManager.onContentPacksAssigned += _ =>
+                    XItemDisplayTemplate.Apply(prefabCharacterModel.itemDisplayRuleSet);
+            }
             XStates.Init();
             XTokens.Init();
 

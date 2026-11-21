@@ -1,7 +1,7 @@
 # Overview
 Megaman X survivor for Risk Of Rain 2, time to hunt some maverick monsters!
 This mod contais the classics SFX for shot and charge shot and voice for some skills!
-This also covers 9 armors for X!
+This also covers 12 armors for X, a Command Mission skin and achievements to unlock them!
 
 # Instructions for install:
 place the dll in your plugins folder or extract to a folder inside plugins.
@@ -27,6 +27,30 @@ place the dll in your plugins folder or extract to a folder inside plugins.
 | SHADOW ARMOR ![](https://i.imgur.com/YYGmfc6.png)| This armor is both fast and powerful. While equipped, X's secondary skill is replaced with the Shadow Saber, and his Shadow Buster fires three kunai in a spread pattern, causing enemies to bleed.<br>Significantly boosts armor, health, damage, and attack speed, while greatly enhancing movement, jump height, and regeneration. Critical chance increases by 25%, and critical damage is quadrupled.| Primary: Shadow Buster<br> Secondary: Shadow Saber  | LVL 4 |
 | ULTIMATE ARMOR ![](https://i.imgur.com/EsP8m2d.png)| One of the most powerful armors. The Ultimate Buster deals increased damage, and X's DASH is replaced with the NOVA STRIKE.<br>Greatly increases armor, health, damage, and attack speed, while also boosting regeneration, shield, jump, and movement. Armor gains a 180% bonus, and critical damage is tripled.| Primary: Ultimate Buster<br> Utility: Nova Strike  | LVL 4 |
 | RATHALOS ARMOR ![](https://i.imgur.com/iWAqj8p.png)| This ancient armor is based on the powerful Flying Wyvern, Rathalos. The buster is designed to channel the monster's fire breath, while his saber delivers powerful blows that crush enemies.<br>Massively increases armor, health, damage, and attack speed, while enhancing regeneration, shield, jump, and movement. Armor receives a 200% bonus, and critical damage is tripled.| Primary: Rathalos Buster<br> Secondary: Rathalos Slash<br> Special: True Rathalos Slash  | LVL 4 |
+| X-FIRE | X's hyper mode from Command Mission. The Fire Buster explodes on impact, igniting enemies, and X's special skill is replaced with the CHARGE COLLIDER: hold to charge, then dash into the target unleashing a flurry of fiery, electric blasts.<br>Increases armor, health, damage, and attack speed, while also improving regeneration, shield, jump, and movement. Armor gains an additional 40% bonus, and critical damage is increased by 80%.| Primary: Fire Buster<br> Special: Charge Collider | LVL 1 |
+| BLADE ARMOR | This armor is focused entirely on sword techniques. X fights with the BLADE SABER, can empower it with BLADE EDGE to deflect attacks coming from the front and steal life, and his special skill becomes the BLADE WAVE, a heavy slash that releases a giant piercing wave.<br>Significantly increases armor, health, damage, and regeneration, while also boosting shield, jump, movement, and attack speed. Armor gains a 250% bonus, critical chance increases by 20%, and critical damage is doubled.| Primary: Blade Saber<br> Secondary: Blade Edge<br> Special: Blade Wave | LVL 3 |
+| ULTIMATE ARMOR CM | The Ultimate Armor from Command Mission. Slow and heavily armored, it trades mobility for massive firepower: homing MICRO MISSILES, the explosive HEAVY MISSILE, the ELEMENTAL BURST and a devastating MISSILE BARRAGE.<br>Greatly increases armor, damage, and shield, with improved regeneration. Armor gains a 150% bonus, damage is more than doubled, and critical damage is doubled, but movement speed is reduced by 30% and jump height is lowered.| Primary: Micro Missiles<br> Secondary: Heavy Missile<br> Utility: Elemental Burst<br> Special: Missile Barrage | LVL 4 |
+
+# Achievements
+
+Some armors and skins start locked. Complete the achievement to unlock them!
+
+| Achievement | How to complete | Unlocks |
+|:---------------:|:---------------:|:---------------:|
+| Commanding the Mission | As Megaman X, defeat a boss without using any armor. | Command Mission Skin |
+| Capsule Hunter | As Megaman X, hold at least 20 items in a single run. | Giga Armor |
+| Electric Heat | As Megaman X, complete Abyssal Depths wearing the Command Mission skin. | X-Fire |
+| Heavy Lifting | Unlock the Loader. | Gaea Armor |
+| Shadow Hunter | As Megaman X, kill 100 enemies with the Shadow Armor's saber in a single run. | Blade Armor |
+| Ultimate Mastery | As Megaman X, beat the game or obliterate on Monsoon. | Ultimate Armor |
+| Wyvern Slayer | As Megaman X, defeat a Magma Worm. | Rathalos Armor |
+| Final Mission | As Megaman X, beat the game or obliterate on Monsoon wearing the Command Mission skin with X-Fire equipped. | Ultimate Armor CM |
+
+- Electric Heat appears after Commanding the Mission, and Final Mission appears after Electric Heat.
+- Don't want to grind? Every unlock has its own option in the mod settings (section **Unlocks**) to unlock it without completing the achievement. It requires a game restart, and in multiplayer every player should use the same settings.
+
+# Item Displays
+- Items are **hidden on X by default**. You can turn them on in the mod settings (section **Item Displays**), but item positions were not configured for X, so many items will look out of place.
 
 
 
@@ -43,11 +67,14 @@ place the dll in your plugins folder or extract to a folder inside plugins.
 # Skins:
 ~~Sorry, i really tried but i can't make skins work properly.~~
 
-Well since X now have 9 ARMORS this will cover skins, so this is it.
+Well since X now have 12 ARMORS this will cover skins, but now there is also a real skin:
+- **Command Mission** - Megaman X from Megaman X: Command Mission. Unlocked with the achievement "Commanding the Mission".
 
 
 
 # Changelog
+- V 4.1.0 Updated for the Hallowed Concepts update! Added the Command Mission skin, 3 new armors (X-Fire, Blade Armor and Ultimate Armor CM) with their own skills, and achievements to unlock skins and armors (with options to unlock them in the settings).
+- V 4.0.5 Probably Fix for Alloy Collective update.
 - V 4.0.4 Fix another error on hit Hook, and removed unnecessary dependencies.
 - V 4.0.3 Fix Huntress and Acrid not procing correctly.
 - V 4.0.2 Fix update, Fixed Dash skills not working properly.
@@ -89,3 +116,13 @@ https://thunderstore.io/package/BLKNeko/HaseoMod/
 # CREDITS
 MEGAMAN X MODEL ORIGINAL CREDITS!!!
 https://drive.google.com/drive/folders/1rg-ong734AY7Oo-N3EnK76pH-MCgakry
+
+X-FIRE CUSTOM MODEL CREDITS!!!
+https://models.spriters-resource.com/custom_edited/megamanxcustoms/asset/470711/
+- Uploaded by: [Keiang](https://models.spriters-resource.com/profile/keiang/)
+- Contributors: [Virtue3D](https://models.spriters-resource.com/profile/virtue3d/)
+
+BLADE ARMOR CUSTOM MODEL CREDITS!!!
+https://models.spriters-resource.com/custom_edited/megamanxcustoms/asset/359308/
+- Uploaded by: [Keiang](https://models.spriters-resource.com/profile/keiang/)
+- Contributors: [NONE_Dragon](https://models.spriters-resource.com/profile/none_dragon/), baretto
