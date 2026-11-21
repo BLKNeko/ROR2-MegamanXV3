@@ -50,6 +50,11 @@ namespace MegamanXMod.Survivors.X
         public static Mesh BladeBodyMesh;
         public static Mesh UltimateBodyMesh;
         public static Mesh UltimateCMBodyMesh;
+        public static Mesh UltimateCMGlassMesh;          // gerado por MegamanX > Model > Build Ultimate CM Glass
+        public static Material MatUltimateCMGlass;
+        public static GameObject BladeSaberVFX;          // gerado por MegamanX > VFX > Build Blade Saber VFX
+        public static Material MatSaberLightning;        // gerado junto do BladeSaberVFX
+        public static GameObject RocketMuzzleFlash;      // flash de foguete do Commando
         public static Mesh RathalosBodyMesh;
 
 
@@ -202,6 +207,14 @@ namespace MegamanXMod.Survivors.X
             BladeBodyMesh = _assetBundle.LoadAsset<Mesh>("XBladeArmorBodyMesh");
             UltimateBodyMesh = _assetBundle.LoadAsset<Mesh>("XUltimateBodyMesh");
             UltimateCMBodyMesh = _assetBundle.LoadAsset<Mesh>("XCMULBodyMesh");
+            UltimateCMGlassMesh = _assetBundle.LoadAsset<Mesh>("XCMULGlassMesh");
+            // Sem LoadMaterial: o shader de vidro é transparente e não pode virar o Hopoo (opaco)
+            MatUltimateCMGlass = _assetBundle.LoadAsset<Material>("matCMULGlass");
+            BladeSaberVFX = _assetBundle.LoadAsset<GameObject>("BladeSaberVFX");
+            RocketMuzzleFlash = LoadRocketMuzzleFlash();
+            MatSaberLightning = _assetBundle.LoadAsset<Material>("matSaberLightning");
+            if (!UltimateCMGlassMesh || !MatUltimateCMGlass) Log.Warning("Vidro da Ultimate CM não encontrado no bundle (XCMULGlassMesh / matCMULGlass).");
+            if (!BladeSaberVFX) Log.Warning("BladeSaberVFX não encontrado no bundle.");
             RathalosBodyMesh = _assetBundle.LoadAsset<Mesh>("XRathalosBodyMesh");
 
             MatX = _assetBundle.LoadMaterial("matX");
@@ -1216,6 +1229,24 @@ namespace MegamanXMod.Survivors.X
         private static readonly float BladeWaveSpeed = 54f;            // era 60 (-10%)
         private static readonly float BladeWaveAfterimageLifetime = 0.4f; // era 0,2 no prefab
 
+        // Flash de foguete do Commando. Tenta o caminho legado (Resources) e depois o Addressables;
+        // o FireRocket.effectPrefab estático fica null porque o state do Commando nunca é carregado.
+        private static GameObject LoadRocketMuzzleFlash()
+        {
+            GameObject flash = null;
+            try { flash = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/MuzzleFlashes/MuzzleflashFMJ"); } catch { }
+            if (!flash)
+            {
+                try { flash = UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Commando/MuzzleflashFMJ.prefab").WaitForCompletion(); } catch { }
+            }
+            if (!flash)
+            {
+                Log.Warning("MuzzleflashFMJ não encontrado, usando OmniExplosionVFX no lugar.");
+                flash = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OmniEffect/OmniExplosionVFX");
+            }
+            return flash;
+        }
+
         private static void CreateBladeWaveProjectile()
         {
             // Onda de corte da Blade Armor: anda reto, atravessa inimigos e acerta várias vezes
@@ -1284,15 +1315,8 @@ namespace MegamanXMod.Survivors.X
                     main.startLifetime = BladeWaveAfterimageLifetime;
                 }
 
-                // Rastros (afterimages, speed lines, estilhaços) se soltam e terminam de sumir
-                // em vez de desaparecer de uma vez quando o projétil acaba
-                foreach (ParticleSystem ps in bladeWaveGhost.GetComponentsInChildren<ParticleSystem>(true))
-                {
-                    if (ps.main.simulationSpace != ParticleSystemSimulationSpace.World)
-                        continue;
-                    if (!ps.GetComponent<DetachParticleOnDestroyAndEndEmission>())
-                        ps.gameObject.AddComponent<DetachParticleOnDestroyAndEndEmission>().particleSystem = ps;
-                }
+                // Obs.: não usar DetachParticleOnDestroyAndEndEmission aqui. O ghost é reaproveitado (pool) e o
+                // detach arranca os sistemas do ghost na primeira vez; no reuso as afterimages não existem mais.
 
                 BladeWaveController.ghostPrefab = bladeWaveGhost;
                 BladeWaveController.ghostPrefabAddress = null;

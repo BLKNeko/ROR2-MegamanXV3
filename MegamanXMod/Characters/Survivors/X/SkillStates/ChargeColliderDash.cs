@@ -77,8 +77,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 characterMotor.Motor.ForceUnground(0.1f);
 
             // Mesmo visual do XDash: propulsores nos pés, animação DashLoop e rastro holográfico
-            EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, gameObject, "LDashPos", false);
-            EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, gameObject, "RDashPos", false);
+            EffectManager.SimpleMuzzleFlash(XAssets.RocketMuzzleFlash, gameObject, "LDashPos", false);
+            EffectManager.SimpleMuzzleFlash(XAssets.RocketMuzzleFlash, gameObject, "RDashPos", false);
             AkSoundEngine.PostEvent(XStaticValues.X_Dash_SFX, gameObject);
             PlayAnimation("FullBody, Override", "DashLoop", "attackSpeed", maxDashDuration);
             AddDashOverlay();

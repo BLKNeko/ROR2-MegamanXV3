@@ -222,6 +222,7 @@ namespace MegamanXMod.Survivors.X
             bodyPrefab.AddComponent<XArmorComponent>();
             bodyPrefab.AddComponent<XHoverComponent>();
             bodyPrefab.AddComponent<XBladeDeflectComponent>();
+            bodyPrefab.AddComponent<XArmorVisualsComponent>();
 
             bodyPrefab.AddComponent<HuntressTracker>();
             HuntressTracker huntressTracker = bodyPrefab.GetComponent<HuntressTracker>();
@@ -2123,10 +2124,53 @@ namespace MegamanXMod.Survivors.X
         }
 
         #region skins
+        // O XCMULBodyMesh tem 2 submeshes (corpo + vidro), mas o CharacterModel só aplica 1 material por renderer.
+        // Então o vidro vira um SkinnedMeshRenderer separado, com os mesmos ossos do XBodyMesh.
+        // Fica desligado; o XArmorVisualsComponent liga enquanto o corpo usa o mesh da Ultimate CM.
+        private void AddUltimateCMGlassRenderer(ChildLocator childLocator)
+        {
+            if (!XAssets.UltimateCMGlassMesh || !XAssets.MatUltimateCMGlass)
+                return;
+
+            Transform bodyMesh = childLocator.FindChild("XBodyMesh");
+            SkinnedMeshRenderer bodyRenderer = bodyMesh ? bodyMesh.GetComponent<SkinnedMeshRenderer>() : null;
+            if (!bodyRenderer)
+                return;
+
+            GameObject glassObject = new GameObject(XArmorVisualsComponent.GlassObjectName);
+            glassObject.transform.SetParent(bodyMesh.parent, false);
+            glassObject.transform.localPosition = bodyMesh.localPosition;
+            glassObject.transform.localRotation = bodyMesh.localRotation;
+            glassObject.transform.localScale = bodyMesh.localScale;
+
+            SkinnedMeshRenderer glass = glassObject.AddComponent<SkinnedMeshRenderer>();
+            glass.sharedMesh = XAssets.UltimateCMGlassMesh;
+            glass.bones = bodyRenderer.bones;
+            glass.rootBone = bodyRenderer.rootBone;
+            glass.localBounds = bodyRenderer.localBounds;
+            glass.updateWhenOffscreen = bodyRenderer.updateWhenOffscreen;
+            glass.sharedMaterial = XAssets.MatUltimateCMGlass;
+            glass.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+            glassObject.SetActive(false);
+
+            List<CharacterModel.RendererInfo> infos = new List<CharacterModel.RendererInfo>(prefabCharacterModel.baseRendererInfos);
+            infos.Add(new CharacterModel.RendererInfo
+            {
+                renderer = glass,
+                defaultMaterial = XAssets.MatUltimateCMGlass,
+                defaultShadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off,
+                ignoreOverlays = true,
+            });
+            prefabCharacterModel.baseRendererInfos = infos.ToArray();
+        }
+
         public override void InitializeSkins()
         {
             ModelSkinController skinController = prefabCharacterModel.gameObject.AddComponent<ModelSkinController>();
             ChildLocator childLocator = prefabCharacterModel.GetComponent<ChildLocator>();
+
+            // Precisa vir antes de ler os RendererInfos, para o vidro entrar em todas as skins
+            AddUltimateCMGlassRenderer(childLocator);
 
             CharacterModel.RendererInfo[] defaultRendererinfos = prefabCharacterModel.baseRendererInfos;
 

@@ -104,7 +104,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             if (NetworkServer.active)
             {
-                //characterBody.AddBuff(XBuffs.UltimateArmorBuff);
+                characterBody.AddBuff(XBuffs.XFireBuff);
             }
 
         }

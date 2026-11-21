@@ -7,8 +7,17 @@ using UnityEngine;
 namespace MegamanXMod.Survivors.X.SkillStates
 {
     // Special da Blade Armor: um corte pesado que solta uma onda de corte gigante em linha reta (multihit).
+    //
+    // Sincronia (tudo escala com attack speed):
+    //   0%  -> 40%  GigaBladeStart (preparo). O clipe é esticado para terminar exatamente no momento do corte.
+    //   40%         corte: hitbox melee + onda + GigaBladeEnd (continuação do golpe)
+    //   40% -> 55%  janela do hitbox melee
+    // O estado GigaBladeStart/End no Animator usa o parâmetro "Slash.playbackRate" como multiplicador de velocidade,
+    // então o hitstop do BaseMeleeAttack2 também congela a animação.
     public class XBladeHeavySlash : BaseMeleeAttack2
     {
+        public static float slashPercentTime = 0.4f;   // momento do corte (fim do GigaBladeStart)
+        public static float baseEndAnimDuration = 0.35f; // duração do GigaBladeEnd
 
         private bool firedWaves;
 
@@ -23,7 +32,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             bonusForce = Vector3.zero;
             baseDuration = 1.1f;
 
-            attackStartPercentTime = 0.35f;
+            attackStartPercentTime = slashPercentTime;
             attackEndPercentTime = 0.55f;
             earlyExitPercentTime = 0.9f;
 
@@ -33,7 +42,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             swingSoundString = XStaticValues.X_Rathalos_Swing_SFX;
             hitSoundString = "";
-            muzzleString = "SwordMuzzPos";
+            muzzleString = "SwordMuzzRPos";
             playbackRateParam = "Slash.playbackRate";
             swingEffectPrefab = EntityStates.Merc.WhirlwindBase.swingEffectPrefab;
             hitEffectPrefab = XAssets.swordHitImpactEffect;
@@ -49,7 +58,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
         // Antes do base.OnEnter() a duration ainda é 0 e o RoR2 ignora PlayAnimation com duração zero.
         protected override void PlayAttackAnimation()
         {
-            PlayAnimation("FullBody, Override", "GigaBladeStart", "attackSpeed", duration);
+            PlayAnimation("FullBody, Override", "GigaBladeStart", playbackRateParam, duration * slashPercentTime);
         }
 
         public override void FixedUpdate()
@@ -59,6 +68,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
             if (!firedWaves && stopwatch >= duration * attackStartPercentTime)
             {
                 firedWaves = true;
+                PlayAnimation("FullBody, Override", "GigaBladeEnd", playbackRateParam, baseEndAnimDuration / attackSpeedStat);
                 FireWaves();
             }
         }
@@ -85,7 +95,10 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
         public override void OnExit()
         {
-            PlayAnimation("FullBody, Override", "GigaBladeEnd", "attackSpeed", duration);
+            // Se foi interrompido antes do corte, limpa a pose. Senão o GigaBladeEnd volta sozinho para o BufferEmpty.
+            if (!firedWaves)
+                PlayCrossfade("FullBody, Override", "BufferEmpty", 0.1f);
+
             base.OnExit();
         }
 

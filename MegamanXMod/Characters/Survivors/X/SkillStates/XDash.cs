@@ -72,8 +72,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
             previousPosition = transform.position - b;
 
 
-            EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, gameObject, LDashPos, true);
-            EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, gameObject, RDashPos, true);
+            EffectManager.SimpleMuzzleFlash(XAssets.RocketMuzzleFlash, gameObject, LDashPos, true);
+            EffectManager.SimpleMuzzleFlash(XAssets.RocketMuzzleFlash, gameObject, RDashPos, true);
             PlayAnimation("FullBody, Override", "DashLoop", "DashLoop.playbackRate", duration);
             AkSoundEngine.PostEvent(XStaticValues.X_Dash_SFX, this.gameObject);
 

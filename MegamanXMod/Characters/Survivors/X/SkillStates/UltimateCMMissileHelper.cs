@@ -56,7 +56,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                 ? muzzleTransform.position
                 : aimRay.origin + right * sideOffset * side + Vector3.up * upOffset;
 
-            EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, owner, muzzle, true);
+            EffectManager.SimpleMuzzleFlash(XAssets.RocketMuzzleFlash, owner, muzzle, true);
 
             // Abre um pouco para os lados e para cima, o MissileController corrige até o alvo
             Vector3 direction = Quaternion.AngleAxis(-launchUpAngle, right) * aimRay.direction;

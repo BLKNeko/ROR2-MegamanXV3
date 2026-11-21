@@ -72,8 +72,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             //impactSound = XAssets.swordHitSoundEvent.index;
 
-            EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, gameObject, LDashPos, true);
-            EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, gameObject, RDashPos, true);
+            EffectManager.SimpleMuzzleFlash(XAssets.RocketMuzzleFlash, gameObject, LDashPos, true);
+            EffectManager.SimpleMuzzleFlash(XAssets.RocketMuzzleFlash, gameObject, RDashPos, true);
             AkSoundEngine.PostEvent(XStaticValues.X_Dash_SFX, this.gameObject);
 
             //XRathalosSlashCombo2 xRathalosSlashCombo2 = new XRathalosSlashCombo2();

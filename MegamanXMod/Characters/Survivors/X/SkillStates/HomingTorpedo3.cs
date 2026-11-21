@@ -145,7 +145,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     if (hurtBox)
                     {
                         Transform transform = this.childLocator.FindChild(this.muzzleString);
-                        EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, true);
+                        EffectManager.SimpleMuzzleFlash(XAssets.RocketMuzzleFlash, base.gameObject, this.muzzleString, true);
                         genericDamageOrb.origin = transform.position;
                         genericDamageOrb.target = hurtBox;
                         OrbManager.instance.AddOrb(genericDamageOrb);
@@ -161,7 +161,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
                     base.characterBody.AddSpreadBloom(0.15f);
                     Ray aimRay = base.GetAimRay();
-                    EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireRocket.effectPrefab, base.gameObject, this.muzzleString, false);
+                    EffectManager.SimpleMuzzleFlash(XAssets.RocketMuzzleFlash, base.gameObject, this.muzzleString, false);
                 }
 
                     

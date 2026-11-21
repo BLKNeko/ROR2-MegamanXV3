@@ -104,7 +104,8 @@ namespace MegamanXMod.Modules
 
             for (int i = 0; i < defaultRendererInfos.Length; i++)
             {
-                if (string.IsNullOrEmpty(meshes[i]))
+                // Renderers extras no fim (ex.: vidro da Ultimate CM) não precisam de nome de mesh
+                if (i >= meshes.Length || string.IsNullOrEmpty(meshes[i]))
                     continue;
 
                 meshReplacements.Add(

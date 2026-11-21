@@ -402,6 +402,22 @@ namespace MegamanXMod.Survivors.X.Components
                 }
             }
 
+            if (XBody.HasBuff(XBuffs.XFireBuff))
+            {
+                if (NetworkServer.active)
+                {
+                    XBody.RemoveBuff(XBuffs.XFireBuff);
+                }
+            }
+
+            if (XBody.HasBuff(XBuffs.BladeArmorBuff))
+            {
+                if (NetworkServer.active)
+                {
+                    XBody.RemoveBuff(XBuffs.BladeArmorBuff);
+                }
+            }
+
             if (XBody.HasBuff(XBuffs.UltimateCMArmorBuff))
             {
                 if (NetworkServer.active)
