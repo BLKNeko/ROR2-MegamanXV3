@@ -20,6 +20,12 @@ namespace MegamanXMod.Survivors.X.SkillStates
             return (index % 2 == 0) ? MuzzleRight : MuzzleLeft;
         }
 
+        // Mesma paridade do muzzle: índice par = lançador direito / Shoot1, ímpar = esquerdo / Shoot2
+        public static string GetShootAnimation(int index)
+        {
+            return (index % 2 == 0) ? "ULCM_Shoot1" : "ULCM_Shoot2";
+        }
+
         private static Transform FindMuzzle(GameObject owner, string muzzle)
         {
             ModelLocator modelLocator = owner.GetComponent<ModelLocator>();

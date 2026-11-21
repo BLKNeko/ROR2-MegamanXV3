@@ -42,14 +42,14 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             firedWaves = false;
 
-            PlayAnimation("FullBody, Override", "GigaBladeStart", "attackSpeed", duration);
-
             base.OnEnter();
         }
 
+        // Chamado pelo base.OnEnter() depois de calcular a duration.
+        // Antes do base.OnEnter() a duration ainda é 0 e o RoR2 ignora PlayAnimation com duração zero.
         protected override void PlayAttackAnimation()
         {
-            //PlayAnimation("FullBody, Override", "GigaBladeStart", "attackSpeed", duration);
+            PlayAnimation("FullBody, Override", "GigaBladeStart", "attackSpeed", duration);
         }
 
         public override void FixedUpdate()

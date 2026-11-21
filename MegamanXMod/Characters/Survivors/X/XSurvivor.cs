@@ -2260,6 +2260,9 @@ namespace MegamanXMod.Survivors.X
         {
             R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
 
+            // Blade Edge: bloqueia tiros hitscan
+            On.RoR2.BulletAttack.DefaultHitCallbackImplementation += Components.XBladeDeflectComponent.BlockBullet;
+
             //Esse Hook que esta causando o problema de proc com a Huntress
             On.RoR2.GlobalEventManager.OnHitEnemy += GlobalEventManager_OnHitEnemy;
 

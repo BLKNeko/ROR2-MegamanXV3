@@ -79,7 +79,7 @@ namespace MegamanXMod.Survivors.X
         public const float XBladeSlashDamageCoefficient = 3f;
         public const float XBladeHeavySlashDamageCoefficient = 8f;
         public const float XBladeWaveDamageCoefficient = 3f;       // por hit da onda (era 1,5 com 3 ondas)
-        public const float BladeEdgeDuration = 8f;
+        public const float BladeEdgeDuration = 10f;
         public const float BladeEdgeDamageBonus = 0.5f;            // +50% de dano
         public const float BladeEdgeLifeSteal = 0.05f;             // 5% do dano vira cura
         public const float BladeEdgeReflectDamageCoefficient = 3f; // dano mínimo do projétil refletido

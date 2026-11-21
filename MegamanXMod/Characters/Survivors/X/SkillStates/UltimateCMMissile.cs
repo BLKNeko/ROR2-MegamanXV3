@@ -7,7 +7,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
     // Primária da Ultimate Armor CM: dois mísseis pequenos e rápidos que seguem o alvo.
     public class UltimateCMMissile : BaseSkillState
     {
-        public static float baseDuration = 0.45f;
+        public static float baseDuration = 0.8f;
         public static int missilesPerShot = 2;
 
         private float duration;
@@ -21,7 +21,7 @@ namespace MegamanXMod.Survivors.X.SkillStates
         {
             base.OnEnter();
             duration = baseDuration / attackSpeedStat;
-            fireInterval = duration * 0.4f / missilesPerShot;
+            fireInterval = duration / missilesPerShot; // espaça os mísseis para cada um ter sua animação
             fireTimer = 0f;
             missilesFired = 0;
 
@@ -30,8 +30,6 @@ namespace MegamanXMod.Survivors.X.SkillStates
 
             if (isAuthority)
                 target = UltimateCMMissileHelper.GetTarget(gameObject);
-
-            PlayAnimation("Gesture, Override", "ULCM_Shoot1", "ShootGun.playbackRate", duration);
         }
 
         public override void FixedUpdate()
@@ -52,6 +50,9 @@ namespace MegamanXMod.Survivors.X.SkillStates
         private void FireOne()
         {
             AkSoundEngine.PostEvent(XStaticValues.X_Mid_Bullet, gameObject);
+
+            // Cada míssil toca a animação do seu lançador (Shoot1 = CMULMuzzR, Shoot2 = CMULMuzzL)
+            PlayAnimation("Gesture, Override", UltimateCMMissileHelper.GetShootAnimation(missilesFired), "ShootGun.playbackRate", fireInterval);
 
             if (isAuthority)
             {

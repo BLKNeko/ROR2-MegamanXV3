@@ -5,13 +5,16 @@ using UnityEngine.Networking;
 
 namespace MegamanXMod.Survivors.X.Components
 {
-    // Enquanto o X tem o BladeEdgeBuff, reflete projéteis inimigos que chegam perto dele.
-    // Roda só no servidor: troca o time e o dono do projétil e o manda na direção da mira.
-    // Obs.: tiros hitscan (bullets/lasers) não são objetos e não podem ser refletidos.
+    // Blade Edge (BladeEdgeBuff ativo):
+    //  - Projéteis inimigos que chegam perto do X são rebatidos de volta para quem os lançou.
+    //    O projétil passa a ser do X, então causa dano no atirador se o atingir.
+    //  - Tiros hitscan (BulletAttack) não são objetos e não podem ser rebatidos: o X apenas bloqueia o tiro
+    //    (ver BlockBullet, registrado em XSurvivor.AddHooks).
     public class XBladeDeflectComponent : MonoBehaviour
     {
         public static float deflectRadius = 5f;
         public static float checkInterval = 0.05f;
+        public static float minReflectSpeed = 40f;
 
         private CharacterBody body;
         private InputBankTest inputBank;
@@ -48,27 +51,34 @@ namespace MegamanXMod.Survivors.X.Components
                 if (!projectile || !projectile.teamFilter || projectile.teamFilter.teamIndex == myTeam)
                     continue;
 
-                Reflect(projectile, myTeam, center);
+                Reflect(projectile, myTeam);
             }
         }
 
-        private void Reflect(ProjectileController projectile, TeamIndex myTeam, Vector3 center)
+        private void Reflect(ProjectileController projectile, TeamIndex myTeam)
         {
-            Vector3 direction = inputBank ? inputBank.aimDirection : transform.forward;
+            // Guarda quem lançou antes de trocar o dono
+            GameObject shooter = projectile.owner;
+            CharacterBody shooterBody = shooter ? shooter.GetComponent<CharacterBody>() : null;
+
+            Vector3 position = projectile.transform.position;
+            Vector3 direction;
+            if (shooterBody && shooterBody.healthComponent && shooterBody.healthComponent.alive)
+                direction = (shooterBody.corePosition - position).normalized;
+            else
+                direction = inputBank ? inputBank.aimDirection : transform.forward; // atirador morto: manda para a mira
 
             projectile.teamFilter.teamIndex = myTeam;
             projectile.owner = gameObject;
 
             ProjectileDamage projectileDamage = projectile.GetComponent<ProjectileDamage>();
             if (projectileDamage)
-            {
                 projectileDamage.damage = Mathf.Max(projectileDamage.damage, body.damage * XStaticValues.BladeEdgeReflectDamageCoefficient);
-            }
 
-            // Projéteis teleguiados não devem voltar para o X
+            // Teleguiados passam a perseguir quem os lançou
             ProjectileTargetComponent targetComponent = projectile.GetComponent<ProjectileTargetComponent>();
             if (targetComponent)
-                targetComponent.target = null;
+                targetComponent.target = shooterBody ? shooterBody.coreTransform : null;
 
             // ProjectileSimple usa o forward do transform para a velocidade
             projectile.transform.rotation = Util.QuaternionSafeLookRotation(direction);
@@ -76,12 +86,30 @@ namespace MegamanXMod.Survivors.X.Components
             Rigidbody rb = projectile.rigidbody ? projectile.rigidbody : projectile.GetComponent<Rigidbody>();
             if (rb)
             {
-                float speed = Mathf.Max(rb.velocity.magnitude, 40f);
+                float speed = Mathf.Max(rb.velocity.magnitude, minReflectSpeed);
                 rb.velocity = direction * speed;
             }
 
-            EffectManager.SimpleEffect(XAssets.swordHitImpactEffect, projectile.transform.position, Quaternion.identity, true);
-            EffectManager.SimpleSoundEffect(XAssets.swordHitSoundEvent.index, projectile.transform.position, true);
+            EffectManager.SimpleEffect(XAssets.swordHitImpactEffect, position, Quaternion.identity, true);
+            EffectManager.SimpleSoundEffect(XAssets.swordHitSoundEvent.index, position, true);
+        }
+
+        // Hook de BulletAttack: tiro hitscan que acertaria o X com Blade Edge é bloqueado (sem dano).
+        public static bool BlockBullet(On.RoR2.BulletAttack.orig_DefaultHitCallbackImplementation orig,
+            BulletAttack bulletAttack, ref BulletAttack.BulletHit hitInfo)
+        {
+            HurtBox hurtBox = hitInfo.hitHurtBox;
+            CharacterBody victim = hurtBox && hurtBox.healthComponent ? hurtBox.healthComponent.body : null;
+
+            if (victim && victim.HasBuff(XBuffs.BladeEdgeBuff) && bulletAttack.owner
+                && TeamComponent.GetObjectTeam(bulletAttack.owner) != victim.teamComponent.teamIndex)
+            {
+                EffectManager.SimpleEffect(XAssets.swordHitImpactEffect, hitInfo.point, Quaternion.identity, true);
+                EffectManager.SimpleSoundEffect(XAssets.swordHitSoundEvent.index, hitInfo.point, true);
+                return true; // o tiro para na espada
+            }
+
+            return orig(bulletAttack, ref hitInfo);
         }
     }
 }

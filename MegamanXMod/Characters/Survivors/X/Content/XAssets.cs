@@ -1207,11 +1207,14 @@ namespace MegamanXMod.Survivors.X
             ChameleonStingController.startSound = "";
         }
 
-        // Onda grande da Blade Armor. O VFX base (escala 1) tem ~7 m de largura x 1,8 m de altura;
-        // com a escala abaixo fica ~8,4 m x 5,4 m, e o hitbox acompanha essas medidas.
-        private static readonly Vector3 BladeWaveGhostScale = new Vector3(1.2f, 3f, 1.2f);
-        private static readonly Vector3 BladeWaveHitBoxSize = new Vector3(8f, 5.4f, 2.5f);
+        // Onda vertical da Blade Armor. O VFX base (escala 1) é uma meia-lua de ~7 m de arco x 1,8 m de espessura.
+        // Os filhos do ghost são girados 90° no eixo Z, então o arco fica em pé: o eixo Y da escala abaixo
+        // controla a altura (arco) e o X a espessura. Resultado: ~8,4 m de altura x ~1,1 m de espessura.
+        private static readonly Vector3 BladeWaveGhostScale = new Vector3(0.6f, 1.2f, 1.2f);
+        private static readonly Vector3 BladeWaveHitBoxSize = new Vector3(2f, 8f, 2.5f);
         private static readonly Vector3 BladeWaveHitBoxCenter = new Vector3(0f, 0f, -0.4f);
+        private static readonly float BladeWaveSpeed = 54f;            // era 60 (-10%)
+        private static readonly float BladeWaveAfterimageLifetime = 0.4f; // era 0,2 no prefab
 
         private static void CreateBladeWaveProjectile()
         {
@@ -1241,7 +1244,7 @@ namespace MegamanXMod.Survivors.X
             ProjectileSimple waveSimple = BladeWaveProjectile.GetComponent<ProjectileSimple>();
             if (waveSimple)
             {
-                waveSimple.desiredForwardSpeed = 60f;
+                waveSimple.desiredForwardSpeed = BladeWaveSpeed;
                 waveSimple.lifetime = 1.2f;
             }
 
@@ -1267,6 +1270,19 @@ namespace MegamanXMod.Survivors.X
                 // Visual na mesma proporção do hitbox (as partículas usam Scaling Mode = Hierarchy)
                 bladeWaveGhost.transform.localScale = BladeWaveGhostScale;
                 bladeWaveGhost.GetComponent<ProjectileGhostController>().inheritScaleFromProjectile = false;
+
+                // Deixa a meia-lua em pé (o ProjectileGhostController controla a rotação da raiz, por isso giramos os filhos)
+                foreach (Transform child in bladeWaveGhost.transform)
+                    child.localRotation = Quaternion.Euler(0f, 0f, 90f);
+
+                // Imagens residuais duram mais
+                foreach (ParticleSystem ps in bladeWaveGhost.GetComponentsInChildren<ParticleSystem>(true))
+                {
+                    if (!ps.name.StartsWith("Afterimage"))
+                        continue;
+                    var main = ps.main;
+                    main.startLifetime = BladeWaveAfterimageLifetime;
+                }
 
                 // Rastros (afterimages, speed lines, estilhaços) se soltam e terminam de sumir
                 // em vez de desaparecer de uma vez quando o projétil acaba
