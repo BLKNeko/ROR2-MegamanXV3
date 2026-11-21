@@ -142,7 +142,7 @@ namespace MegamanXMod.Modules
         }
 
 
-        internal static void AddFirstExtraSkill(GameObject targetPrefab, SkillDef skillDef)
+        internal static void AddFirstExtraSkill(GameObject targetPrefab, SkillDef skillDef, UnlockableDef unlockableDef = null)
         {
             ExtraSkillLocator skillLocator = targetPrefab.GetComponent<ExtraSkillLocator>();
             if (skillLocator)
@@ -153,13 +153,13 @@ namespace MegamanXMod.Modules
                 skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant
                 {
                     skillDef = skillDef,
-                    unlockableName = "",
+                    unlockableDef = unlockableDef, // null = liberada desde o começo
                     viewableNode = new ViewablesCatalog.Node(skillDef.skillNameToken, false, null)
                 };
             }
         }
 
-        internal static void AddSecondExtraSkill(GameObject targetPrefab, SkillDef skillDef)
+        internal static void AddSecondExtraSkill(GameObject targetPrefab, SkillDef skillDef, UnlockableDef unlockableDef = null)
         {
             ExtraSkillLocator skillLocator = targetPrefab.GetComponent<ExtraSkillLocator>();
             if (skillLocator)
@@ -170,13 +170,13 @@ namespace MegamanXMod.Modules
                 skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant
                 {
                     skillDef = skillDef,
-                    unlockableName = "",
+                    unlockableDef = unlockableDef, // null = liberada desde o começo
                     viewableNode = new ViewablesCatalog.Node(skillDef.skillNameToken, false, null)
                 };
             }
         }
 
-        internal static void AddThirdExtraSkill(GameObject targetPrefab, SkillDef skillDef)
+        internal static void AddThirdExtraSkill(GameObject targetPrefab, SkillDef skillDef, UnlockableDef unlockableDef = null)
         {
             ExtraSkillLocator skillLocator = targetPrefab.GetComponent<ExtraSkillLocator>();
             if (skillLocator)
@@ -187,13 +187,13 @@ namespace MegamanXMod.Modules
                 skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant
                 {
                     skillDef = skillDef,
-                    unlockableName = "",
+                    unlockableDef = unlockableDef, // null = liberada desde o começo
                     viewableNode = new ViewablesCatalog.Node(skillDef.skillNameToken, false, null)
                 };
             }
         }
 
-        internal static void AddFourthExtraSkill(GameObject targetPrefab, SkillDef skillDef)
+        internal static void AddFourthExtraSkill(GameObject targetPrefab, SkillDef skillDef, UnlockableDef unlockableDef = null)
         {
             ExtraSkillLocator skillLocator = targetPrefab.GetComponent<ExtraSkillLocator>();
             if (skillLocator)
@@ -204,7 +204,7 @@ namespace MegamanXMod.Modules
                 skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant
                 {
                     skillDef = skillDef,
-                    unlockableName = "",
+                    unlockableDef = unlockableDef, // null = liberada desde o começo
                     viewableNode = new ViewablesCatalog.Node(skillDef.skillNameToken, false, null)
                 };
             }

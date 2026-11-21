@@ -240,12 +240,38 @@ namespace MegamanXMod.Survivors.X
             #endregion
 
             #region Achievements
+            LanguageAPI.Add(Modules.Tokens.GetAchievementNameToken(Achievements.XBossNormalFormAchievement.identifier), "Megaman X: Commanding the Mission");
+            LanguageAPI.Add(Modules.Tokens.GetAchievementDescriptionToken(Achievements.XBossNormalFormAchievement.identifier), "As Megaman X, defeat a boss without using any armor.");
+
+            LanguageAPI.Add(Modules.Tokens.GetAchievementNameToken(Achievements.XShadowSaberKillsAchievement.identifier), "Megaman X: Shadow Hunter");
+            LanguageAPI.Add(Modules.Tokens.GetAchievementDescriptionToken(Achievements.XShadowSaberKillsAchievement.identifier), $"As Megaman X, kill {Achievements.XShadowSaberKillsAchievement.requiredKills} enemies with the Shadow Armor's saber in a single run.");
+
+            AddAchievement(Achievements.XCapsuleHunterAchievement.identifier, "Megaman X: Capsule Hunter",
+                $"As Megaman X, hold at least {Achievements.XCapsuleHunterAchievement.requiredItems} items in a single run.");
+            AddAchievement(Achievements.XElectricHeatAchievement.identifier, "Megaman X: Electric Heat",
+                "As Megaman X, complete Abyssal Depths wearing the Command Mission skin.");
+            AddAchievement(Achievements.XHeavyLiftingAchievement.identifier, "Megaman X: Heavy Lifting",
+                "Unlock the Loader.");
+            AddAchievement(Achievements.XUltimateMasteryAchievement.identifier, "Megaman X: Ultimate Mastery",
+                "As Megaman X, beat the game or obliterate on Monsoon.");
+            AddAchievement(Achievements.XWyvernSlayerAchievement.identifier, "Megaman X: Wyvern Slayer",
+                "As Megaman X, defeat a Magma Worm.");
+            AddAchievement(Achievements.XFinalMissionAchievement.identifier, "Megaman X: Final Mission",
+                "As Megaman X, beat the game or obliterate on Monsoon wearing the Command Mission skin with X-Fire equipped.");
+
             LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_NAME", "Henry: Mastery");
             LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_DESC", "As Henry, beat the game or obliterate on Monsoon.");
             LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_UNLOCKABLE_NAME", "Henry: Mastery");
             #endregion
 
 
+        }
+
+        // Tokens que o RoR2 usa para um achievement: ACHIEVEMENT_{IDENTIFIER}_NAME / _DESCRIPTION
+        private static void AddAchievement(string identifier, string name, string description)
+        {
+            LanguageAPI.Add(Modules.Tokens.GetAchievementNameToken(identifier), name);
+            LanguageAPI.Add(Modules.Tokens.GetAchievementDescriptionToken(identifier), description);
         }
 
         public static void AddHenryTokens()

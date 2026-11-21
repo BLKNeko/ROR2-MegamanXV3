@@ -15,7 +15,7 @@ namespace MegamanXMod.Modules.BaseStates
 
         protected string hitboxGroupName = "SwordGroup";
 
-        protected DamageType damageType = DamageType.Generic;
+        protected DamageTypeCombo damageType = DamageType.Generic; // Combo guarda também a origem (Primary/Secondary...), usada por achievements e itens
         protected float damageCoefficient = 3.5f;
         protected float procCoefficient = 1f;
         protected float pushForce = 300f;

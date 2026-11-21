@@ -52,6 +52,9 @@ namespace MegamanXMod.Survivors.X
         internal static SkillDef HyperModeLightArmorSkillDef;
         internal static SkillDef HyperModeSecondArmorSkillDef;
         internal static SkillDef HyperModeXFireSkillDef;
+
+        // Índice da skin Command Mission no ModelSkinController (definido em InitializeSkins)
+        public static int CMSkinIndex = -1;
         internal static SkillDef HyperModeMaxArmorSkillDef;
         internal static SkillDef HyperModeFourthArmorSkillDef;
         internal static SkillDef HyperModeFalconArmorSkillDef;
@@ -2034,8 +2037,8 @@ namespace MegamanXMod.Survivors.X
             //});
 
             Skills.AddFirstExtraSkill(bodyPrefab, HyperModeLightArmorSkillDef);
-            Skills.AddFirstExtraSkill(bodyPrefab, HyperModeSecondArmorSkillDef);
-            Skills.AddFirstExtraSkill(bodyPrefab, HyperModeXFireSkillDef);
+            Skills.AddFirstExtraSkill(bodyPrefab, HyperModeSecondArmorSkillDef, XUnlockables.SecondArmor);
+            Skills.AddFirstExtraSkill(bodyPrefab, HyperModeXFireSkillDef, XUnlockables.XFire);
         }
 
         private void AddExtraSecondSkills()
@@ -2089,8 +2092,8 @@ namespace MegamanXMod.Survivors.X
             //});
 
             Skills.AddThirdExtraSkill(bodyPrefab, HyperModeFalconArmorSkillDef);
-            Skills.AddThirdExtraSkill(bodyPrefab, HyperModeGaeaArmorSkillDef);
-            Skills.AddThirdExtraSkill(bodyPrefab, HyperModeBladeArmorSkillDef);
+            Skills.AddThirdExtraSkill(bodyPrefab, HyperModeGaeaArmorSkillDef, XUnlockables.GaeaArmor);
+            Skills.AddThirdExtraSkill(bodyPrefab, HyperModeBladeArmorSkillDef, XUnlockables.BladeArmor);
         }
 
         private void AddExtraFourthSkills()
@@ -2118,9 +2121,9 @@ namespace MegamanXMod.Survivors.X
 
             //Skills.AddFourthExtraSkill(bodyPrefab, FESSkillDef);
             Skills.AddFourthExtraSkill(bodyPrefab, HyperModeShadowArmorSkillDef);
-            Skills.AddFourthExtraSkill(bodyPrefab, HyperModeUltimateArmorSkillDef);
-            Skills.AddFourthExtraSkill(bodyPrefab, HyperModeRathalosArmorSkillDef);
-            Skills.AddFourthExtraSkill(bodyPrefab, HyperModeUltimateArmorCMSkillDef);
+            Skills.AddFourthExtraSkill(bodyPrefab, HyperModeUltimateArmorSkillDef, XUnlockables.UltimateArmor);
+            Skills.AddFourthExtraSkill(bodyPrefab, HyperModeRathalosArmorSkillDef, XUnlockables.RathalosArmor);
+            Skills.AddFourthExtraSkill(bodyPrefab, HyperModeUltimateArmorCMSkillDef, XUnlockables.UltimateArmorCM);
         }
 
         #region skins
@@ -2215,7 +2218,8 @@ namespace MegamanXMod.Survivors.X
             SkinDef cmSkin = Modules.Skins.CreateSkinDef(MEGAMAN_x_PREFIX + "CM_SKIN_NAME",
                 XAssets.IconXCM,
                 defaultRendererinfos,
-                prefabCharacterModel.gameObject);
+                prefabCharacterModel.gameObject,
+                XUnlockables.CMSkin);
 
             //adding the mesh replacements as above. 
             //if you don't want to replace the mesh (for example, you only want to replace the material), pass in null so the order is preserved
@@ -2240,6 +2244,7 @@ namespace MegamanXMod.Survivors.X
             //};
             //simply find an object on your child locator you want to activate/deactivate and set if you want to activate/deacitvate it with this skin
 
+            CMSkinIndex = skins.Count; // usado pelos achievements para saber se a skin CM está equipada
             skins.Add(cmSkin);
 
 

@@ -8,6 +8,9 @@ namespace MegamanXMod.Modules.Achievements
         public abstract string RequiredCharacterBody { get; }
         public abstract float RequiredDifficultyCoefficient { get; }
 
+        // Condições extras (ex.: skin ou armadura no loadout). Padrão: nenhuma.
+        protected virtual bool MeetsExtraRequirements() => true;
+
         public override BodyIndex LookUpRequiredBodyIndex()
         {
             return BodyCatalog.FindBodyIndex(RequiredCharacterBody);
@@ -42,7 +45,7 @@ namespace MegamanXMod.Modules.Achievements
                     bool isInferno = difficultyDef.nameToken == "INFERNO_NAME";
                     bool isEclipse = difficultyIndex >= DifficultyIndex.Eclipse1 && difficultyIndex <= DifficultyIndex.Eclipse8;
 
-                    if (isDifficulty || isInferno || isEclipse)
+                    if ((isDifficulty || isInferno || isEclipse) && MeetsExtraRequirements())
                     {
                         base.Grant();
                     }

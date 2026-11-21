@@ -8,6 +8,8 @@ using System.Security.Permissions;
 
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
+// Necessário para o RoR2 encontrar os [RegisterAchievement] deste mod (sem isso nenhum achievement é registrado)
+[assembly: HG.Reflection.SearchableAttribute.OptIn]
 
 //rename this namespace
 namespace MegamanXMod

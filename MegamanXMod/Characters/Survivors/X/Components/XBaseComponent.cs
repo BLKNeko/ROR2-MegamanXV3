@@ -35,6 +35,11 @@ namespace MegamanXMod.Survivors.X.Components
 
         private bool shoudlAplyCSBuffs = false;
 
+        // Passiva X-Heart: com HP baixo, ganha escudo e buffs. Cooldown fica aqui (1 por X, dura a partida toda).
+        public static float xHeartCooldown = 200f;
+        public static float xHeartBuffDuration = 5.8f;
+        private float xHeartCooldownTimer;
+
 
 
         private void Start()
@@ -114,6 +119,37 @@ namespace MegamanXMod.Survivors.X.Components
             }
 
             IsXWeak();
+
+            if (XBody && XBody.hasEffectiveAuthority)
+                UpdateXHeart();
+        }
+
+        private void UpdateXHeart()
+        {
+            if (xHeartCooldownTimer > 0f)
+            {
+                xHeartCooldownTimer -= Time.fixedDeltaTime;
+                return;
+            }
+
+            if (!XHealth || !XHealth.alive)
+                return;
+
+            float minHp = 0.3f + XBody.level / 200f;
+            if (XHealth.combinedHealthFraction >= minHp)
+                return;
+
+            xHeartCooldownTimer = xHeartCooldown;
+
+            if (XConfig.enableVoiceBool.Value)
+                AkSoundEngine.PostEvent(XStaticValues.X_Passive_VSFX, gameObject);
+
+            XHealth.AddBarrierAuthority(XHealth.fullHealth / 2f);
+
+            // Versão "Authority" funciona também para clientes (a anterior só aplicava os buffs no host)
+            XBody.AddTimedBuffAuthority(RoR2Content.Buffs.LifeSteal.buffIndex, xHeartBuffDuration);
+            XBody.AddTimedBuffAuthority(RoR2Content.Buffs.FullCrit.buffIndex, xHeartBuffDuration);
+            XBody.AddTimedBuffAuthority(RoR2Content.Buffs.SmallArmorBoost.buffIndex, xHeartBuffDuration);
         }
 
         private void CSBuffs()

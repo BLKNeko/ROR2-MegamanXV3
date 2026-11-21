@@ -61,35 +61,9 @@ namespace MegamanXMod.Modules.BaseContent.BaseStates
         {
             base.FixedUpdate();
 
-            if(isAuthority)
-            {
-                if(Timer > 0)
-                    Timer -= Time.fixedDeltaTime;
-
-                MinHP = 0.3 + (base.characterBody.level / 200);
-
-                if (base.characterBody.healthComponent.combinedHealthFraction < MinHP && Timer < 1f)
-                {
-                    
-                    if (XConfig.enableVoiceBool.Value)
-                    {
-                        AkSoundEngine.PostEvent(XStaticValues.X_Passive_VSFX, this.gameObject);
-                    }
-                    //EffectManager.SimpleMuzzleFlash(Modules.Assets.CrystalEffect, base.gameObject, "Crystal", true);
-                    base.healthComponent.AddBarrierAuthority(base.characterBody.healthComponent.fullHealth / 2f);
-                    if (NetworkServer.active)
-                    {
-                        // base.characterBody.AddTimedBuff(BuffIndex.LifeSteal, 5.8f);
-                        base.characterBody.AddTimedBuff(RoR2Content.Buffs.LifeSteal, 5.8f);
-                        // base.characterBody.AddTimedBuff(BuffIndex.FullCrit, 9.5f);
-                        base.characterBody.AddTimedBuff(RoR2Content.Buffs.FullCrit, 5.8f);
-                        base.characterBody.AddTimedBuff(RoR2Content.Buffs.SmallArmorBoost, 5.8f);
-                    }
-                    Timer = 200f;
-
-                }
-
-            }
+            // A parte de HP baixo da passiva (escudo + buffs + cooldown) fica no XBaseComponent.
+            // Aqui o cooldown se perdia: este state é recriado toda vez que uma skill termina
+            // e roda em 3 state machines ao mesmo tempo (Body, Weapon e Weapon2).
             
             
 

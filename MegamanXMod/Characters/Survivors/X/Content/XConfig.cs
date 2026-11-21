@@ -14,6 +14,16 @@ namespace MegamanXMod.Survivors.X
         public static ConfigEntry<float> thirdArmorSlotLvl;
         public static ConfigEntry<float> fourthArmorSlotLvl;
 
+        // Seção "Unlocks": libera sem precisar completar o achievement (não mexe no perfil do jogador)
+        public static ConfigEntry<bool> unlockCMSkin;
+        public static ConfigEntry<bool> unlockSecondArmor;
+        public static ConfigEntry<bool> unlockXFire;
+        public static ConfigEntry<bool> unlockGaeaArmor;
+        public static ConfigEntry<bool> unlockBladeArmor;
+        public static ConfigEntry<bool> unlockUltimateArmor;
+        public static ConfigEntry<bool> unlockRathalosArmor;
+        public static ConfigEntry<bool> unlockUltimateArmorCM;
+
 
         public static void Init()
         {
@@ -73,7 +83,30 @@ namespace MegamanXMod.Survivors.X
                 10f,
                 "Lvl required to unlock the fourt armor slot.");
 
+            InitUnlocks();
+        }
 
+        private static void InitUnlocks()
+        {
+            string section = "Unlocks";
+            const string note = " Requires a game restart. In multiplayer, every player should use the same setting.";
+
+            unlockCMSkin = Config.BindAndOptions(section, "Unlock Command Mission Skin", false,
+                "Unlocks the Command Mission skin without completing 'Commanding the Mission'." + note, true);
+            unlockSecondArmor = Config.BindAndOptions(section, "Unlock Giga Armor", false,
+                "Unlocks the Giga (Second) Armor without completing 'Capsule Hunter'." + note, true);
+            unlockXFire = Config.BindAndOptions(section, "Unlock X-Fire", false,
+                "Unlocks X-Fire without completing 'Electric Heat'." + note, true);
+            unlockGaeaArmor = Config.BindAndOptions(section, "Unlock Gaea Armor", false,
+                "Unlocks the Gaea Armor without completing 'Heavy Lifting'." + note, true);
+            unlockBladeArmor = Config.BindAndOptions(section, "Unlock Blade Armor", false,
+                "Unlocks the Blade Armor without completing 'Shadow Hunter'." + note, true);
+            unlockUltimateArmor = Config.BindAndOptions(section, "Unlock Ultimate Armor", false,
+                "Unlocks the Ultimate Armor without completing 'Ultimate Mastery'." + note, true);
+            unlockRathalosArmor = Config.BindAndOptions(section, "Unlock Rathalos Armor", false,
+                "Unlocks the Rathalos Armor without completing 'Wyvern Slayer'." + note, true);
+            unlockUltimateArmorCM = Config.BindAndOptions(section, "Unlock Ultimate Armor CM", false,
+                "Unlocks the Ultimate Armor CM without completing 'Final Mission'." + note, true);
         }
     }
 }

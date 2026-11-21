@@ -4,7 +4,9 @@ using MegamanXMod.Modules.Achievements;
 namespace MegamanXMod.Survivors.X.Achievements
 {
     //automatically creates language tokens "ACHIEVMENT_{identifier.ToUpper()}_NAME" and "ACHIEVMENT_{identifier.ToUpper()}_DESCRIPTION" 
-    [RegisterAchievement(identifier, unlockableIdentifier, null, 10, null)]
+    // Desligado: é o exemplo do template (tokens "Henry: Mastery") e não libera nada no X.
+    // Para usar, crie a skin de mastery, ajuste os tokens e descomente.
+    //[RegisterAchievement(identifier, unlockableIdentifier, null, 10, null)]
     public class HenryMasteryAchievement : BaseMasteryAchievement
     {
         public const string identifier = XSurvivor.MEGAMAN_x_PREFIX + "masteryAchievement";
