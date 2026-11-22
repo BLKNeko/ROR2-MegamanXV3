@@ -72,6 +72,8 @@ namespace MegamanXMod.Survivors.X.SkillStates
                     characterModel.baseRendererInfos[0].defaultMaterial = XAssets.MatRathalos;
                     childLocator.FindChildGameObject("XShadowSaber").SetActive(false);
                     childLocator.FindChildGameObject("XRathalosSaber").SetActive(true);
+                    childLocator.FindChildGameObject("XBladeSaber").SetActive(false);
+                    childLocator.FindChildGameObject("XFireBuster").SetActive(false);
                 }
             }
 

@@ -13,6 +13,17 @@ namespace MegamanXMod.Survivors.X.Components
     public class XArmorVisualsComponent : MonoBehaviour
     {
         public const string GlassObjectName = "XCMULGlass";
+        public const string ShawlObjectName = "XCMShawl";
+
+        // Física da echarpe (Cloth do Unity). Só a volta do pescoço fica presa; o resto do tecido é solto.
+        public static float shawlMaxSwing = 1.5f;          // quanto (em metros) a ponta pode se afastar da pose animada
+        public static float shawlPinnedFraction = 0.1f;   // fração mais perto do pescoço que fica totalmente presa
+        public static float shawlFreedomCurve = 0.8f;      // < 1 solta o tecido mais cedo (mais da capa se mexe)
+
+        // Vento: empurra a capa para trás do X e dá rajadas aleatórias, para ondular mesmo parado (como no jogo original)
+        public static float shawlWindStrength = 4f;
+        public static float shawlWindLift = 2f;
+        public static Vector3 shawlWindGusts = new Vector3(6f, 3f, 6f);
 
         // Onde a lâmina está desenhada no quad do sabre (Blade1), em coordenadas locais do quad.
         // Tirado do alpha da textura Saber_008_FX_000_1 (lâmina na horizontal, u = 0.078 .. 0.912).
@@ -37,6 +48,10 @@ namespace MegamanXMod.Survivors.X.Components
 
         private SkinnedMeshRenderer bodyRenderer;
         private GameObject glassObject;
+        private GameObject shawlObject;
+        private Transform neckBone;
+        private Cloth shawlCloth;
+        private bool shawlClothReady;
 
         private Transform saber;
         private Transform bladeQuad;
@@ -69,6 +84,10 @@ namespace MegamanXMod.Survivors.X.Components
             Transform glass = bodyMesh ? bodyMesh.parent.Find(GlassObjectName) : null;
             glassObject = glass ? glass.gameObject : null;
 
+            Transform shawl = bodyMesh ? bodyMesh.parent.Find(ShawlObjectName) : null;
+            shawlObject = shawl ? shawl.gameObject : null;
+            neckBone = FindBone(bodyRenderer, "Bip Neck") ?? FindBone(bodyRenderer, "Bip Head");
+
             saber = childLocator.FindChild("XBladeSaber");
             bladeQuad = saber ? saber.Find("Blade1") : null;
             return true;
@@ -80,7 +99,99 @@ namespace MegamanXMod.Survivors.X.Components
                 return;
 
             UpdateGlass();
+            UpdateShawl();
             UpdateSaber();
+        }
+
+        private static Transform FindBone(SkinnedMeshRenderer renderer, string name)
+        {
+            if (!renderer || renderer.bones == null)
+                return null;
+            foreach (Transform bone in renderer.bones)
+                if (bone && bone.name == name)
+                    return bone;
+            return null;
+        }
+
+        // Echarpe: só aparece quando o corpo está com o mesh da skin CM (sem armadura)
+        private void UpdateShawl()
+        {
+            if (!shawlObject || !bodyRenderer)
+                return;
+
+            bool show = XAssets.XCMBodyMesh && bodyRenderer.sharedMesh == XAssets.XCMBodyMesh && bodyRenderer.enabled;
+            if (shawlObject.activeSelf != show)
+            {
+                shawlObject.SetActive(show);
+                shawlClothReady = false; // reativar reinicia o Cloth; recalcula as restrições
+            }
+
+            if (show && !shawlClothReady)
+                SetupShawlCloth();
+
+            if (show && shawlCloth)
+                UpdateShawlWind();
+        }
+
+        // Vento vindo da frente do X (a capa voa para trás), mais forte quando ele corre
+        private void UpdateShawlWind()
+        {
+            Vector3 forward = body.characterDirection ? body.characterDirection.forward : transform.forward;
+            forward.y = 0f;
+            forward = forward.sqrMagnitude > 0.0001f ? forward.normalized : Vector3.forward;
+
+            float speedBoost = 1f + Mathf.Clamp01(body.characterMotor ? body.characterMotor.velocity.magnitude / 15f : 0f);
+            shawlCloth.externalAcceleration = (-forward * shawlWindStrength + Vector3.up * shawlWindLift) * speedBoost;
+            shawlCloth.randomAcceleration = shawlWindGusts;
+        }
+
+        private void SetupShawlCloth()
+        {
+            if (!shawlCloth)
+            {
+                shawlCloth = shawlObject.GetComponent<Cloth>();
+                if (!shawlCloth)
+                    shawlCloth = shawlObject.AddComponent<Cloth>();
+                shawlCloth.useGravity = true;
+                shawlCloth.damping = 0.1f;
+                shawlCloth.stretchingStiffness = 0.85f;
+                shawlCloth.bendingStiffness = 0.05f;     // tecido mole, dobra fácil
+                shawlCloth.friction = 0.3f;
+                shawlCloth.worldVelocityScale = 0.6f;     // reage ao movimento do X
+                shawlCloth.worldAccelerationScale = 0.9f;
+                shawlCloth.useTethers = true;
+                shawlCloth.sleepThreshold = 0f;           // nunca "dorme": o vento mantém a capa ondulando
+            }
+
+            Vector3[] vertices = shawlCloth.vertices;
+            if (vertices == null || vertices.Length == 0)
+                return; // o Cloth ainda não inicializou; tenta de novo no próximo frame
+
+            // Distância de cada ponto até o pescoço: perto = preso, longe = solto (as pontas)
+            Transform t = shawlObject.transform;
+            Vector3 neck = neckBone ? neckBone.position : t.position;
+            float[] distances = new float[vertices.Length];
+            float min = float.MaxValue, max = 0f;
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                float d = Vector3.Distance(t.TransformPoint(vertices[i]), neck);
+                distances[i] = d;
+                min = Mathf.Min(min, d);
+                max = Mathf.Max(max, d);
+            }
+
+            float scale = Mathf.Max(0.0001f, t.lossyScale.y);
+            float swing = shawlMaxSwing / scale; // o Cloth trabalha no espaço local do renderer
+            ClothSkinningCoefficient[] coefficients = shawlCloth.coefficients;
+            for (int i = 0; i < coefficients.Length && i < distances.Length; i++)
+            {
+                float f = max > min ? (distances[i] - min) / (max - min) : 0f;
+                float free = Mathf.Clamp01((f - shawlPinnedFraction) / (1f - shawlPinnedFraction));
+                coefficients[i].maxDistance = Mathf.Pow(free, shawlFreedomCurve) * swing;
+                coefficients[i].collisionSphereDistance = 0f;
+            }
+            shawlCloth.coefficients = coefficients;
+            shawlClothReady = true;
         }
 
         private void UpdateGlass()

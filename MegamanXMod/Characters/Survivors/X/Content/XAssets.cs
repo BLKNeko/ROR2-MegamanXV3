@@ -52,6 +52,8 @@ namespace MegamanXMod.Survivors.X
         public static Mesh UltimateCMBodyMesh;
         public static Mesh UltimateCMGlassMesh;          // gerado por MegamanX > Model > Build Ultimate CM Glass
         public static Material MatUltimateCMGlass;
+        public static Mesh XCMShawlMesh;                 // X_CM_Shawl (preparada por MegamanX > Model > Build CM Shawl)
+        public static Material MatCMShawl;
         public static GameObject BladeSaberVFX;          // gerado por MegamanX > VFX > Build Blade Saber VFX
         public static Material MatSaberLightning;        // gerado junto do BladeSaberVFX
         public static GameObject RocketMuzzleFlash;      // flash de foguete do Commando
@@ -210,6 +212,10 @@ namespace MegamanXMod.Survivors.X
             UltimateCMGlassMesh = _assetBundle.LoadAsset<Mesh>("XCMULGlassMesh");
             // Sem LoadMaterial: o shader de vidro é transparente e não pode virar o Hopoo (opaco)
             MatUltimateCMGlass = _assetBundle.LoadAsset<Material>("matCMULGlass");
+            // Echarpe da skin CM. Sem LoadMaterial: o shader é translúcido e não pode virar o Hopoo (opaco)
+            XCMShawlMesh = _assetBundle.LoadAsset<Mesh>("X_CM_Shawl");
+            MatCMShawl = _assetBundle.LoadAsset<Material>("matCMShawl");
+            if (!XCMShawlMesh || !MatCMShawl) Log.Warning("Echarpe da skin CM não encontrada no bundle (X_CM_Shawl / matCMShawl).");
             BladeSaberVFX = _assetBundle.LoadAsset<GameObject>("BladeSaberVFX");
             RocketMuzzleFlash = LoadRocketMuzzleFlash();
             MatSaberLightning = _assetBundle.LoadAsset<Material>("matSaberLightning");

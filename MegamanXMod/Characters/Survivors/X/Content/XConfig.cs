@@ -95,7 +95,7 @@ namespace MegamanXMod.Survivors.X
 
             showItemDisplays = Config.BindAndOptions("Item Displays", "Show Item Displays", false,
                 "Shows the items you pick up on X's model. WARNING: item positions were NOT configured for X; " +
-                "they are borrowed from Commando, so many items will look out of place. Applies the next time X spawns (next stage or run).");
+                "they are borrowed from Commando, so many items will look out of place. Requires a game restart.", true);
         }
 
         private static void InitUnlocks()

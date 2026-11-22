@@ -97,9 +97,8 @@ namespace MegamanXMod.Survivors.X.Components
 
         private void Awake()
         {
-            // "Show Item Displays" desligada: o modelo deste X passa a usar um conjunto de regras vazio,
-            // então nenhum item aparece nele, venha a regra de onde vier (template, .idrsjson, outro mod).
-            // Vale a cada spawn (cada fase recria o corpo), sem precisar reiniciar o jogo.
+            // "Show Item Displays" desligada: segurança extra. O que garante de verdade é o conjunto de regras
+            // original do X ficar vazio (ver XSurvivor), porque o R2API.Skins o devolve ao modelo ao aplicar a skin.
             if (!XConfig.showItemDisplays.Value)
                 HideItemDisplays();
 

@@ -200,11 +200,15 @@ namespace MegamanXMod.Survivors.X
 
             XConfig.Init();
 
-            // Item displays: as posições não foram configuradas para o X, então o conjunto de regras
-            // do X recebe as do Commando presas nos ossos do X. A opção "Show Item Displays" decide,
-            // a cada spawn, se o modelo usa esse conjunto ou um vazio (ver XBaseComponent).
-            RoR2.ContentManagement.ContentManager.onContentPacksAssigned += _ =>
-                XItemDisplayTemplate.Apply(prefabCharacterModel.itemDisplayRuleSet);
+            // Item displays (opcional, desligado por padrão): as posições não foram configuradas para o X,
+            // então, só com a opção ligada, o conjunto de regras do X recebe as do Commando presas nos ossos do X.
+            // Tem que ser no conjunto original: ao aplicar a skin, o R2API.Skins devolve esse conjunto ao modelo,
+            // então trocar só no spawn não basta. Por isso a opção precisa reiniciar o jogo.
+            if (XConfig.showItemDisplays.Value)
+            {
+                RoR2.ContentManagement.ContentManager.onContentPacksAssigned += _ =>
+                    XItemDisplayTemplate.Apply(prefabCharacterModel.itemDisplayRuleSet);
+            }
             XStates.Init();
             XTokens.Init();
 
@@ -2133,12 +2137,23 @@ namespace MegamanXMod.Survivors.X
         }
 
         #region skins
-        // O XCMULBodyMesh tem 2 submeshes (corpo + vidro), mas o CharacterModel só aplica 1 material por renderer.
-        // Então o vidro vira um SkinnedMeshRenderer separado, com os mesmos ossos do XBodyMesh.
-        // Fica desligado; o XArmorVisualsComponent liga enquanto o corpo usa o mesh da Ultimate CM.
+        // Peças extras que usam os mesmos ossos do XBodyMesh, num SkinnedMeshRenderer próprio:
+        //  - Vidro da Ultimate CM: o XCMULBodyMesh tem 2 submeshes, mas o CharacterModel só aplica 1 material por renderer.
+        //  - Echarpe da skin CM (ShawlMesh_e): translúcida e com física de tecido.
+        // Ficam desligadas; o XArmorVisualsComponent liga cada uma quando o corpo está usando o mesh certo.
         private void AddUltimateCMGlassRenderer(ChildLocator childLocator)
         {
-            if (!XAssets.UltimateCMGlassMesh || !XAssets.MatUltimateCMGlass)
+            AddExtraBodyRenderer(childLocator, XArmorVisualsComponent.GlassObjectName, XAssets.UltimateCMGlassMesh, XAssets.MatUltimateCMGlass);
+        }
+
+        private void AddCMShawlRenderer(ChildLocator childLocator)
+        {
+            AddExtraBodyRenderer(childLocator, XArmorVisualsComponent.ShawlObjectName, XAssets.XCMShawlMesh, XAssets.MatCMShawl);
+        }
+
+        private void AddExtraBodyRenderer(ChildLocator childLocator, string objectName, Mesh mesh, Material material)
+        {
+            if (!mesh || !material)
                 return;
 
             Transform bodyMesh = childLocator.FindChild("XBodyMesh");
@@ -2146,27 +2161,27 @@ namespace MegamanXMod.Survivors.X
             if (!bodyRenderer)
                 return;
 
-            GameObject glassObject = new GameObject(XArmorVisualsComponent.GlassObjectName);
-            glassObject.transform.SetParent(bodyMesh.parent, false);
-            glassObject.transform.localPosition = bodyMesh.localPosition;
-            glassObject.transform.localRotation = bodyMesh.localRotation;
-            glassObject.transform.localScale = bodyMesh.localScale;
+            GameObject extraObject = new GameObject(objectName);
+            extraObject.transform.SetParent(bodyMesh.parent, false);
+            extraObject.transform.localPosition = bodyMesh.localPosition;
+            extraObject.transform.localRotation = bodyMesh.localRotation;
+            extraObject.transform.localScale = bodyMesh.localScale;
 
-            SkinnedMeshRenderer glass = glassObject.AddComponent<SkinnedMeshRenderer>();
-            glass.sharedMesh = XAssets.UltimateCMGlassMesh;
-            glass.bones = bodyRenderer.bones;
-            glass.rootBone = bodyRenderer.rootBone;
-            glass.localBounds = bodyRenderer.localBounds;
-            glass.updateWhenOffscreen = bodyRenderer.updateWhenOffscreen;
-            glass.sharedMaterial = XAssets.MatUltimateCMGlass;
-            glass.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-            glassObject.SetActive(false);
+            SkinnedMeshRenderer extra = extraObject.AddComponent<SkinnedMeshRenderer>();
+            extra.sharedMesh = mesh;
+            extra.bones = bodyRenderer.bones;
+            extra.rootBone = bodyRenderer.rootBone;
+            extra.localBounds = bodyRenderer.localBounds;
+            extra.updateWhenOffscreen = bodyRenderer.updateWhenOffscreen;
+            extra.sharedMaterial = material;
+            extra.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+            extraObject.SetActive(false);
 
             List<CharacterModel.RendererInfo> infos = new List<CharacterModel.RendererInfo>(prefabCharacterModel.baseRendererInfos);
             infos.Add(new CharacterModel.RendererInfo
             {
-                renderer = glass,
-                defaultMaterial = XAssets.MatUltimateCMGlass,
+                renderer = extra,
+                defaultMaterial = material,
                 defaultShadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off,
                 ignoreOverlays = true,
             });
@@ -2180,6 +2195,7 @@ namespace MegamanXMod.Survivors.X
 
             // Precisa vir antes de ler os RendererInfos, para o vidro entrar em todas as skins
             AddUltimateCMGlassRenderer(childLocator);
+            AddCMShawlRenderer(childLocator);
 
             CharacterModel.RendererInfo[] defaultRendererinfos = prefabCharacterModel.baseRendererInfos;
 
